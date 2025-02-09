@@ -361,9 +361,9 @@
               -%}
               {{ 'slider-settings.css' | asset_url | stylesheet_tag }}
               <div class="t4s-row t4s-g-0" timeline hdt-reveal="slide-in">
-                <div data-product-single-media-group class="{{ class_main }}t4s-col-12 t4s-col-item t4s-pr d-flex flex-row">
+                <div data-product-single-media-group class="{{ class_main }}t4s-col-12 t4s-col-item t4s-pr" style="display: flex; flex-direction: row;">
 
-                  <div class="col-lg-9 col-12">
+                  <div class="col-lg-10 col-12">
                     <div
                       data-t4s-gallery
                       data-main-media
@@ -401,6 +401,8 @@
                   ></div>
                   {%- render 'product-btns', se_stts: se_stts, product: product -%}
                 </div>
+
+
 
 
                   <div class="col-lg-3 col-12">
@@ -4964,7 +4966,7 @@
           "id": "required",
           "default": false,
           "label": "Required",
-          "info": "If you use "Required" with a checkbox, then the checkbox will need to be checked for the customer to add the item to the cart."
+          "info": "If you use “Required” with a checkbox, then the checkbox will need to be checked for the customer to add the item to the cart."
         },
         {
           "type": "checkbox",
