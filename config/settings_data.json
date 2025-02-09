@@ -10,6 +10,7 @@
 {
   "current": {
     "general_layout": "wide",
+    "cus_w_bd": 1440,
     "use_rtl": "0",
     "header_design": "inline",
     "logo": "shopify://shop_images/kalles.png",
