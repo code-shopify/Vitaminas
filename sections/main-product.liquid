@@ -361,8 +361,8 @@
               -%}
               {{ 'slider-settings.css' | asset_url | stylesheet_tag }}
               <div class="t4s-row t4s-g-0" timeline hdt-reveal="slide-in">
-                <div data-product-single-media-group class="{{ class_main }}t4s-col-12 t4s-col-item t4s-pr">
-                  <div class="row">
+                <div data-product-single-media-group class="{{ class_main }}t4s-col-12 t4s-col-item t4s-pr" style="display: flex; flex-direction: row;">
+
                   <div class="col-lg-10 col-12">
                     <div
                       data-t4s-gallery
@@ -389,7 +389,21 @@
                         </div>
                       {%- endif -%}
                     </div>
-                  </div>
+                 
+                  
+                 
+
+                  <div
+                    data-product-single-badge
+                    data-sort="sale,new,soldout,preOrder,custom"
+                    class="t4s-single-product-badge lazyloadt4s t4s-pa t4s-pe-none t4s-op-0"
+                    data-rendert4s="css:{{ 'single-pr-badge.css' | asset_url }}"
+                  ></div>
+                  {%- render 'product-btns', se_stts: se_stts, product: product -%}
+                </div>
+
+
+
 
                   <div class="col-lg-2 col-12">
                     <div class="d-flex flex-lg-column flex-row justify-content-between">
@@ -413,14 +427,8 @@
                       }
                     </style>
                   </div>
-                </div>
-                  <div
-                    data-product-single-badge
-                    data-sort="sale,new,soldout,preOrder,custom"
-                    class="t4s-single-product-badge lazyloadt4s t4s-pa t4s-pe-none t4s-op-0"
-                    data-rendert4s="css:{{ 'single-pr-badge.css' | asset_url }}"
-                  ></div>
-                  {%- render 'product-btns', se_stts: se_stts, product: product -%}
+
+
                 </div>
 
                 {%- if media_layout != 'without_thumbnails' -%}
