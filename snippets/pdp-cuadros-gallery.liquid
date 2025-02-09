@@ -1,0 +1,40 @@
+ <div class="d-flex flex-lg-column flex-row justify-content-between h-100">
+                      <div class="square">Cuadrado 1.0</div>
+                      <div class="square">Cuadrado 2</div>
+                      <div class="square">Cuadrado3</div>
+                    </div>
+                    <style>
+                      .d-flex {
+                        height: 100%; /* Asegura que el contenedor flex tome toda la altura disponible */
+                        gap: 10px; /* Espacio entre los cuadrados */
+                      }
+
+                      .square {
+                        flex: 1; /* Hace que cada cuadrado tome una parte igual del espacio disponible */
+                        min-height: 0; /* Permite que los elementos se reduzcan si es necesario */
+                        background-color: #ccc;
+                        margin: 0; /* Removemos el margen ya que usamos gap */
+                      }
+
+                      @media (min-width: 992px) {
+                        .square {
+                          width: 100%;
+                          height: calc(33.333% - 7px); /* Calcula el 33.333% de altura menos el espacio del gap */
+                        }
+                        
+                        .d-flex {
+                          min-height: 400px; /* Altura mínima para el contenedor en desktop */
+                        }
+                      }
+
+                      @media (max-width: 991px) {
+                        .square {
+                          width: calc(33.333% - 7px); /* En móvil, los cuadrados se distribuyen horizontalmente */
+                          aspect-ratio: 1; /* Mantiene la forma cuadrada */
+                        }
+                        
+                        .d-flex {
+                          min-height: 100px; /* Altura mínima para el contenedor en móvil */
+                        }
+                      }
+                    </style>
