@@ -53,6 +53,7 @@
     "round_currency": false,
     "notify_currency": true,
     "hover_currency": false,
+    "bootstrap_css": true,
     "share_tumblr": true,
     "share_telegram": true,
     "share_whatsapp": false,
@@ -392,6 +393,7 @@
           "text_cl": "#878787",
           "link_cl": "#878787",
           "link_hover_cl": "#56cfe1",
+          "link_active_cl": "#222222",
           "border_cl": "#e6e6e6",
           "layout": "t4s-container-wrap",
           "cl_bg": "#f6f6f8",
@@ -448,8 +450,12 @@
         ],
         "settings": {
           "show_announcement": true,
+          "design": "slider",
           "effect": "1",
           "au_time": 3.5,
+          "speed": 15,
+          "pause_when_hover": false,
+          "direction": "rtl",
           "height": 45,
           "fontsize": 12,
           "cl": "#ffffff",
@@ -629,7 +635,9 @@
               "lb_cl": "",
               "lazy_mn": true,
               "pos_sub": "bottom",
-              "pos": "left"
+              "pos": "left",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20
             }
           },
           "556a85dc-041d-4d44-8c22-263ed70a8b48": {
@@ -646,7 +654,9 @@
               "lb_cl": "",
               "lazy_mn": true,
               "pos_sub": "bottom",
-              "pos": "left"
+              "pos": "left",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20
             }
           },
           "9a73cf8b-993e-4dbe-9f11-6e990bfb91c0": {
@@ -1058,6 +1068,8 @@
               "url": "",
               "open_link": "_self",
               "menu": "",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20,
               "col": "3"
             }
           },
@@ -1068,6 +1080,8 @@
               "url": "",
               "open_link": "_self",
               "menu": "",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20,
               "col": "3"
             }
           },
@@ -1078,6 +1092,8 @@
               "url": "",
               "open_link": "_self",
               "menu": "",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20,
               "col": "3"
             }
           },
@@ -1088,6 +1104,8 @@
               "url": "",
               "open_link": "_self",
               "menu": "",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20,
               "col": "3"
             }
           },
@@ -1104,6 +1122,8 @@
               "url": "",
               "open_link": "_self",
               "menu": "",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20,
               "col": "2"
             }
           },
@@ -1114,6 +1134,8 @@
               "url": "",
               "open_link": "_self",
               "menu": "",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20,
               "col": "2"
             }
           },
@@ -1184,6 +1206,8 @@
               "url": "",
               "open_link": "_self",
               "menu": "",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20,
               "col": "3"
             }
           },
@@ -1194,6 +1218,8 @@
               "url": "",
               "open_link": "_self",
               "menu": "",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20,
               "col": "3"
             }
           },
@@ -1204,6 +1230,8 @@
               "url": "",
               "open_link": "_self",
               "menu": "",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20,
               "col": "3"
             }
           },
@@ -1214,6 +1242,8 @@
               "url": "",
               "open_link": "_self",
               "menu": "",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20,
               "col": "3"
             }
           },
@@ -1227,7 +1257,9 @@
             "type": "link2",
             "settings": {
               "col": "2",
-              "menu": ""
+              "menu": "",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20
             }
           },
           "41ee689a-9ef7-46ab-a5a6-5fa4776a9af6": {
@@ -1269,6 +1301,8 @@
               "url": "https://demo-kalles-4-1.myshopify.com/blogs/fashion?preview_theme_id=",
               "open_link": "_self",
               "menu": "",
+              "item_fsize": 13,
+              "sp_bettewn_item": 20,
               "col": "4"
             }
           },
