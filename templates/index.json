@@ -1244,8 +1244,9 @@
       ],
       "settings": {
         "custom-class": "",
-        "heading": "+30,000 personas opinan de Vitatú",
-        "review_count": "1450"
+        "section_title": "+30,000 personas opinan de Vitatú",
+        "background_color": "#fffbf2",
+        "videos_per_view": 4
       }
     }
   },
