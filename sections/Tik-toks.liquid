@@ -11,11 +11,7 @@
         </div>
 
         <!-- Video Oculto por Defecto -->
-        <div class="tiktok-video-container" id="video-{{ block.id }}" style="display: none;">
-          <blockquote class="tiktok-embed" cite="{{ block.settings.tiktok_url }}" data-video-id="{{ block.id }}" style="max-width: 100%; min-width: 300px;" >
-            <a href="{{ block.settings.tiktok_url }}"></a>
-          </blockquote>
-        </div>
+        <div class="tiktok-video-container" id="video-{{ block.id }}" style="display: none;"></div>
 
         <h3 class="tiktok-caption">{{ block.settings.caption }}</h3>
       </div>
@@ -166,14 +162,27 @@ document.addEventListener('DOMContentLoaded', function () {
       const videoId = this.getAttribute('data-video-id');
       const cover = document.querySelector(`.tiktok-item[data-video-id="${videoId}"] .tiktok-cover`);
       const videoContainer = document.getElementById(`video-${videoId}`);
+      const tiktokUrl = document.querySelector(`.tiktok-item[data-video-id="${videoId}"]`).getAttribute('data-tiktok-url');
 
       // Ocultar la miniatura y mostrar el video
       cover.style.display = 'none';
       videoContainer.style.display = 'block';
 
-      // Renderizar el embed de TikTok después de hacer clic
-      if (window.tiktokEmbedLoad) {
-        window.tiktokEmbedLoad();
+      // Crear el bloque de TikTok dinámicamente
+      videoContainer.innerHTML = `
+        <blockquote class="tiktok-embed" cite="${tiktokUrl}" data-video-id="${videoId}" style="max-width: 100%; min-width: 300px;">
+          <a href="${tiktokUrl}"></a>
+        </blockquote>
+      `;
+
+      // Forzar la recarga del embed de TikTok
+      if (window.tiktokEmbed) {
+        window.tiktokEmbed.load();
+      } else {
+        const script = document.createElement('script');
+        script.src = 'https://www.tiktok.com/embed.js';
+        script.async = true;
+        document.body.appendChild(script);
       }
     });
   });
@@ -230,7 +239,7 @@ document.addEventListener('DOMContentLoaded', function () {
         {
           "type": "url",
           "id": "tiktok_url",
-          "label": "URL del Video de TikTok",
+          "label": "URL del Video de TikTok"
         },
         {
           "type": "text",
