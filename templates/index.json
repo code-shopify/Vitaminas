@@ -1189,20 +1189,21 @@
     "tik_toks_UbMLMd": {
       "type": "Tik-toks",
       "blocks": {
-        "video_block_pyAJJd": {
-          "type": "video_block",
+        "video_KgeiVG": {
+          "type": "video",
           "settings": {
-            "video_url": "https://vm.tiktok.com/ZMks7rS5W/"
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/e5ad4473f92040e7975f2913a8532840.mp4",
+            "thumbnail": "shopify://shop_images/ksm-66-ashwagandha-600-mg-90-capsulas-vegetales-990558.jpg"
           }
         }
       },
       "block_order": [
-        "video_block_pyAJJd"
+        "video_KgeiVG"
       ],
       "settings": {
         "custom-class": "",
         "heading": "+30,000 personas opinan de Vitatú",
-        "subheading": "¡Descubre lo que opinan nuestros clientes!"
+        "review_count": "1450"
       }
     }
   },
