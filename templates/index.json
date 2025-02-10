@@ -1195,10 +1195,52 @@
             "video_url": "https://cdn.shopify.com/videos/c/o/v/e5ad4473f92040e7975f2913a8532840.mp4",
             "thumbnail": "shopify://shop_images/ksm-66-ashwagandha-600-mg-90-capsulas-vegetales-990558.jpg"
           }
+        },
+        "video_BMTzTY": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_crnUMd": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_pfKyrL": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_D9ULkA": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_CqhEU3": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_LBt3kV": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
         }
       },
       "block_order": [
-        "video_KgeiVG"
+        "video_KgeiVG",
+        "video_BMTzTY",
+        "video_crnUMd",
+        "video_pfKyrL",
+        "video_D9ULkA",
+        "video_CqhEU3",
+        "video_LBt3kV"
       ],
       "settings": {
         "custom-class": "",
