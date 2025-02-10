@@ -1,98 +1,74 @@
 <div class="{{ section.settings.custom-class }} t4s-container vitatu-section py-5 text-center">
-  <h2 class="mb-4">{{ section.settings.heading }}</h2>
-  <p class="mb-5">{{ section.settings.subheading }}</p>
+  <h2 class="mb-2">{{ section.settings.heading }}</h2>
+  <p class="rating">
+    ⭐⭐⭐⭐⭐ <span>{{ section.settings.review_count }} reviews</span>
+  </p>
 
   <div class="slider-containerv8">
+    <button class="nav-button prev-button">❮</button>
     <div class="sliderv8">
       {% for block in section.blocks %}
         <div class="slidev8">
           <div class="with-borderv8">
-            <video class="tiktok-videov8" controls>
+            <video class="tiktok-videov8" controls poster="{{ block.settings.thumbnail }}">
               <source src="{{ block.settings.video_url }}" type="video/mp4">
               Tu navegador no soporta este formato de video.
             </video>
           </div>
-          <div class="pause-buttonv8 hiddenv8">⏸</div>
-          <div class="play-buttonv8">▶</div>
         </div>
       {% endfor %}
     </div>
+    <button class="nav-button next-button">❯</button>
+  </div>
+
+  <div class="pagination-dots">
+    {% for block in section.blocks %}
+      <span class="dot {% if forloop.first %}active{% endif %}"></span>
+    {% endfor %}
   </div>
 </div>
 
 {% style %}
+.vitatu-section {
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.vitatu-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.rating {
+  font-size: 14px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
 .slider-containerv8 {
   position: relative;
-  width: 100%;
-  overflow-x: scroll;
+  overflow: hidden;
   display: flex;
   align-items: center;
-  scroll-snap-type: x mandatory;
   max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 10px;
+  margin: auto;
 }
 
 .sliderv8 {
   display: flex;
   gap: 10px;
+  overflow-x: auto;
   scroll-snap-type: x mandatory;
+  padding: 10px;
 }
 
 .slidev8 {
-  flex: 0 0 60%;
-  max-width: 360px;
+  min-width: 200px;
+  max-width: 240px;
   scroll-snap-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-}
-
-@media (min-width: 769px) {
-  .slidev8 {
-    flex: 0 0 50%;
-    max-width: 260px;
-  }
-}
-
-.tiktok-videov8 {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 9 / 16;
-  border-radius: 10px;
-  display: block;
-}
-
-.play-buttonv8,
-.pause-buttonv8 {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  cursor: pointer;
-  z-index: 10;
-}
-
-.play-buttonv8 {
-  display: flex;
-  margin-left: 2px;
-}
-
-.pause-buttonv8 {
-  display: none;
-  opacity: 1;
-  transition: opacity 0.5s ease;
-}
-
-.pause-buttonv8.hiddenv8 {
-  opacity: 0;
 }
 
 .with-borderv8 {
@@ -100,61 +76,84 @@
   border-radius: 10px;
   background: linear-gradient(0deg, #fe2d52, #28ffff);
 }
+
+.tiktok-videov8 {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  border-radius: 10px;
+}
+
+.nav-button {
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.prev-button {
+  left: 0;
+}
+
+.next-button {
+  right: 0;
+}
+
+.pagination-dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #717171;
+}
 {% endstyle %}
 
 {% javascript %}
 document.addEventListener("DOMContentLoaded", () => {
-  const slides = document.querySelectorAll(".slidev8");
+  const slider = document.querySelector('.sliderv8');
+  const dots = document.querySelectorAll('.dot');
+  const prevButton = document.querySelector('.prev-button');
+  const nextButton = document.querySelector('.next-button');
 
-  slides.forEach(slide => {
-    const playButton = slide.querySelector(".play-buttonv8");
-    const pauseButton = slide.querySelector(".pause-buttonv8");
-    const video = slide.querySelector("video");
+  let index = 0;
 
-    let hidePauseButtonTimeout;
-
-    const showPauseButton = () => {
-      pauseButton.classList.remove("hiddenv8");
-      clearTimeout(hidePauseButtonTimeout);
-      hidePauseButtonTimeout = setTimeout(() => {
-        pauseButton.classList.add("hiddenv8");
-      }, 1000);
-    };
-
-    playButton.addEventListener("click", () => {
-      document.querySelectorAll("video").forEach(v => {
-        if (v !== video) {
-          v.pause();
-          v.classList.remove("playingv8");
-        }
-      });
-
-      video.play();
-      video.classList.add("playingv8");
-      playButton.style.display = "none";
-      pauseButton.style.display = "flex";
-      showPauseButton();
+  const updateDots = () => {
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === index);
     });
+  };
 
-    pauseButton.addEventListener("click", () => {
-      video.pause();
-      video.classList.remove("playingv8");
-      playButton.style.display = "flex";
-      pauseButton.style.display = "none";
-    });
+  const scrollSlider = (direction) => {
+    const slides = document.querySelectorAll('.slidev8');
+    const slideWidth = slides[0].offsetWidth + 10;
+    index = Math.max(0, Math.min(slides.length - 1, index + direction));
+    slider.scrollTo({ left: index * slideWidth, behavior: 'smooth' });
+    updateDots();
+  };
 
-    video.addEventListener("mousemove", showPauseButton);
-    video.addEventListener("click", showPauseButton);
+  prevButton.addEventListener('click', () => scrollSlider(-1));
+  nextButton.addEventListener('click', () => scrollSlider(1));
 
-    video.addEventListener("play", () => {
-      playButton.style.display = "none";
-      pauseButton.style.display = "flex";
-      showPauseButton();
-    });
-
-    video.addEventListener("pause", () => {
-      playButton.style.display = "flex";
-      pauseButton.style.display = "none";
+  dots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      index = idx;
+      scrollSlider(0);
     });
   });
 });
@@ -162,7 +161,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 {% schema %}
 {
-  "name": "Sección Videos TikTok",
+  "name": "Opiniones de Vitatú",
   "settings": [
     {
       "type": "text",
@@ -173,31 +172,36 @@ document.addEventListener("DOMContentLoaded", () => {
       "type": "text",
       "id": "heading",
       "label": "Título Principal",
-      "default": "Descubre Nuestros Videos"
+      "default": "+30,000 personas opinan de Vitatú"
     },
     {
       "type": "text",
-      "id": "subheading",
-      "label": "Subtítulo",
-      "default": "Inspírate con el contenido más reciente."
+      "id": "review_count",
+      "label": "Cantidad de Reseñas",
+      "default": "1450"
     }
   ],
   "blocks": [
     {
-      "type": "video_block",
+      "type": "video",
       "name": "Video",
       "settings": [
         {
           "type": "url",
           "id": "video_url",
           "label": "URL del Video (MP4)"
+        },
+        {
+          "type": "image_picker",
+          "id": "thumbnail",
+          "label": "Miniatura del Video"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Carrusel de Videos TikTok",
+      "name": "Opiniones de Vitatú",
       "category": "Secciones Personalizadas"
     }
   ]
