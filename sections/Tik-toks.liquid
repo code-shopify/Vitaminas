@@ -12,9 +12,9 @@
 
         <!-- Video Oculto por Defecto -->
         <div class="tiktok-video-container" id="video-{{ block.id }}" style="display: none;">
-          <iframe src="{{ block.settings.tiktok_url }}?autoplay=1" 
+          <iframe src="{{ block.settings.tiktok_url }}" 
                   frameborder="0" 
-                  allow="autoplay; fullscreen"
+                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture" 
                   allowfullscreen 
                   class="tiktok-embed">
           </iframe>
@@ -210,7 +210,7 @@ document.addEventListener('DOMContentLoaded', function () {
         {
           "type": "url",
           "id": "tiktok_url",
-          "label": "URL del Video de TikTok"
+          "label": "URL del Video de TikTok",
         },
         {
           "type": "text",
