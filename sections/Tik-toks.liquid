@@ -78,6 +78,7 @@
   position: relative;
   width: 100%;
   height: auto;
+  cursor: pointer;
 }
 
 .tiktok-videov8 {
@@ -86,7 +87,7 @@
   aspect-ratio: 9 / 16;
   border-radius: 10px;
   object-fit: cover;
-  pointer-events: none; /* Desactiva interacción directa */
+  pointer-events: auto; /* Activa interacción directa */
 }
 
 .play-buttonv8 {
@@ -134,18 +135,24 @@
 {% javascript %}
 document.addEventListener("DOMContentLoaded", () => {
   const playButtons = document.querySelectorAll('.play-buttonv8');
+  const videos = document.querySelectorAll('.tiktok-videov8');
 
+  // Función para pausar todos los videos excepto el actual
+  const pauseAllVideos = (currentVideo) => {
+    videos.forEach(video => {
+      if (video !== currentVideo) {
+        video.pause();
+        video.nextElementSibling.style.display = 'flex'; // Muestra el botón de play
+      }
+    });
+  };
+
+  // Evento para el botón de Play
   playButtons.forEach(button => {
     button.addEventListener('click', () => {
       const video = button.previousElementSibling;
 
-      // Pausar otros videos
-      document.querySelectorAll('.tiktok-videov8').forEach(v => {
-        if (v !== video) {
-          v.pause();
-          v.nextElementSibling.style.display = 'flex';
-        }
-      });
+      pauseAllVideos(video);
 
       if (video.paused) {
         video.play();
@@ -161,6 +168,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Evento para pausar/reproducir al hacer clic directamente en el video
+  videos.forEach(video => {
+    video.addEventListener('click', () => {
+      pauseAllVideos(video);
+
+      if (video.paused) {
+        video.play();
+        video.nextElementSibling.style.display = 'none'; // Oculta el botón de play
+      } else {
+        video.pause();
+        video.nextElementSibling.style.display = 'flex'; // Muestra el botón de play
+      }
+
+      video.addEventListener('ended', () => {
+        video.nextElementSibling.style.display = 'flex';
+      });
+    });
+  });
+
+  // Carrusel
   const slider = document.querySelector('.sliderv8');
   const slides = document.querySelectorAll('.slidev8');
   const prevButton = document.querySelector('.prev-button');
