@@ -12,12 +12,9 @@
 
         <!-- Video Oculto por Defecto -->
         <div class="tiktok-video-container" id="video-{{ block.id }}" style="display: none;">
-          <iframe src="{{ block.settings.tiktok_url }}" 
-                  frameborder="0" 
-                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture" 
-                  allowfullscreen 
-                  class="tiktok-embed">
-          </iframe>
+          <blockquote class="tiktok-embed" cite="{{ block.settings.tiktok_url }}" data-video-id="{{ block.id }}" style="max-width: 100%; min-width: 300px;" >
+            <a href="{{ block.settings.tiktok_url }}"></a>
+          </blockquote>
         </div>
 
         <h3 class="tiktok-caption">{{ block.settings.caption }}</h3>
@@ -30,6 +27,9 @@
     <button class="carousel-next">❯</button>
   </div>
 </div>
+
+<!-- TikTok Embed Script Oficial -->
+<script async src="https://www.tiktok.com/embed.js"></script>
 
 {% style %}
 .vitatu-tiktok-section {
@@ -170,6 +170,11 @@ document.addEventListener('DOMContentLoaded', function () {
       // Ocultar la miniatura y mostrar el video
       cover.style.display = 'none';
       videoContainer.style.display = 'block';
+
+      // Renderizar el embed de TikTok después de hacer clic
+      if (window.tiktokEmbedLoad) {
+        window.tiktokEmbedLoad();
+      }
     });
   });
 
