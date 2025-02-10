@@ -1189,19 +1189,18 @@
     "tik_toks_UbMLMd": {
       "type": "Tik-toks",
       "blocks": {
-        "tiktok_CiRcRC": {
-          "type": "tiktok",
+        "video_block_pyAJJd": {
+          "type": "video_block",
           "settings": {
-            "tiktok_url": "https://vm.tiktok.com/ZMks7rS5W/",
-            "caption": ""
+            "video_url": "https://vm.tiktok.com/ZMks7rS5W/"
           }
         }
       },
       "block_order": [
-        "tiktok_CiRcRC"
+        "video_block_pyAJJd"
       ],
       "settings": {
-        "custom_class": "custom-tiktok-carousel",
+        "custom-class": "",
         "heading": "+30,000 personas opinan de Vitatú",
         "subheading": "¡Descubre lo que opinan nuestros clientes!"
       }
