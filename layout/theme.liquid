@@ -62,8 +62,6 @@ t4sp-theme t4s-wrapper__{{ settings.general_layout }}{% if settings.animations_r
     <script src="{{ 'global.min.js' | asset_url }}" defer="defer"></script>
     {{ content_for_header }}
     {%- render 'head_assets', t_name: t_name, isRTL: isRTL -%}
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' data: blob:; script-src * 'self' 'unsafe-inline' 'unsafe-eval'; connect-src *; img-src * data: blob:; frame-src * https://www.tiktok.com https://www.tiktokcdn.com;">
-
   </head>
 
   <body class="template-{{ request.page_type | handle }} {{ class_lazy }}"{% if body_img != blank %} data-bgset="{{ body_img | image_url: width: 1 }}" data-optimumx="2" data-sizes="auto"{% endif -%}>{% if isRTL %}<script type="text/javascript" id="t4s-flicker-fix">// Flicker fix.</script>{% endif -%}
