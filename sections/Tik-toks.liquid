@@ -12,8 +12,9 @@
 
         <!-- Video Oculto por Defecto -->
         <div class="tiktok-video-container" id="video-{{ block.id }}" style="display: none;">
-          <iframe src="{{ block.settings.tiktok_url }}" 
+          <iframe src="{{ block.settings.tiktok_url }}?autoplay=1" 
                   frameborder="0" 
+                  allow="autoplay; fullscreen"
                   allowfullscreen 
                   class="tiktok-embed">
           </iframe>
@@ -82,6 +83,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 /* Botón de Play */
@@ -94,6 +96,7 @@
   font-size: 2rem;
   cursor: pointer;
   transition: background 0.3s ease;
+  z-index: 10;
 }
 
 .play-button:hover {
