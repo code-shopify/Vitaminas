@@ -1,6 +1,167 @@
-{% schema %}
-  {
-    "name": "Section name",
-    "settings": []
+<div class="{{ section.settings.custom_class }} vitatu-tiktok-section t4s-container py-5 text-center">
+  <h2 class="mb-3">{{ section.settings.heading }}</h2>
+  <p class="mb-4">{{ section.settings.subheading }}</p>
+
+  <div class="tiktok-carousel d-flex overflow-auto">
+    {% for block in section.blocks %}
+      <div class="tiktok-item text-center">
+        <div class="tiktok-embed-container">
+          <iframe src="{{ block.settings.tiktok_url }}" 
+                  frameborder="0" 
+                  allowfullscreen 
+                  class="tiktok-embed">
+          </iframe>
+        </div>
+        <h3 class="tiktok-caption">{{ block.settings.caption }}</h3>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="carousel-controls">
+    <button class="carousel-prev">❮</button>
+    <button class="carousel-next">❯</button>
+  </div>
+</div>
+
+{% style %}
+.vitatu-tiktok-section {
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+}
+
+.vitatu-tiktok-section h2 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.vitatu-tiktok-section p {
+  color: #333;
+  font-size: 16px;
+}
+
+.tiktok-carousel {
+  display: flex;
+  gap: 1rem;
+  scroll-snap-type: x mandatory;
+  overflow-x: auto;
+  padding: 1rem 0;
+  scrollbar-width: none; /* Ocultar scrollbar en Firefox */
+  -ms-overflow-style: none; /* Ocultar scrollbar en IE y Edge */
+}
+
+.tiktok-carousel::-webkit-scrollbar {
+  display: none; /* Ocultar scrollbar en Chrome, Safari y Opera */
+}
+
+.tiktok-item {
+  min-width: 300px;
+  max-width: 320px;
+  scroll-snap-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tiktok-embed {
+  width: 100%;
+  height: 500px;
+  border-radius: 10px;
+  border: none;
+}
+
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.carousel-prev,
+.carousel-next {
+  background-color: #f3f3f3;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 1.5rem;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+  background-color: #e0e0e0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .vitatu-tiktok-section h2 {
+    font-size: 22px;
   }
+  
+  .tiktok-item {
+    min-width: 250px;
+  }
+
+  .tiktok-embed {
+    height: 400px;
+  }
+
+  .carousel-prev,
+  .carousel-next {
+    font-size: 1.2rem;
+    padding: 8px 16px;
+  }
+}
+{% endstyle %}
+
+{% schema %}
+{
+  "name": "Carrusel de TikToks",
+  "settings": [
+    {
+      "type": "text",
+      "id": "custom_class",
+      "label": "Clase Personalizada",
+      "default": "custom-tiktok-carousel"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título Principal",
+      "default": "+30,000 personas opinan de Vitatú"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "¡Descubre lo que opinan nuestros clientes!"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tiktok",
+      "name": "Video de TikTok",
+      "settings": [
+        {
+          "type": "url",
+          "id": "tiktok_url",
+          "label": "URL del Video de TikTok",
+        },
+        {
+          "type": "text",
+          "id": "caption",
+          "label": "Descripción del Video",
+          "default": "Opinión del Cliente"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "Carrusel de TikToks",
+      "category": "Secciones Personalizadas"
+    }
+  ]
+}
 {% endschema %}
