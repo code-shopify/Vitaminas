@@ -9,23 +9,20 @@
         {% for block in section.blocks %}
           <div class="slidev8">
             <div class="with-borderv8">
-              <video class="tiktok-videov8" controls 
-                     poster="{% if block.settings.thumbnail != blank %}{{ block.settings.thumbnail | image_url }}{% endif %}">
-                <source src="{{ block.settings.video_url }}" type="video/mp4">
-                Tu navegador no soporta este formato de video.
-              </video>
+              <div class="video-container">
+                <video class="tiktok-videov8" 
+                       poster="{% if block.settings.thumbnail != blank %}{{ block.settings.thumbnail | image_url }}{% endif %}">
+                  <source src="{{ block.settings.video_url }}" type="video/mp4">
+                  Tu navegador no soporta este formato de video.
+                </video>
+                <div class="play-buttonv8">▶</div>
+              </div>
             </div>
           </div>
         {% endfor %}
       </div>
     </div>
     <button class="nav-button next-button">❯</button>
-  </div>
-
-  <div class="pagination-dots">
-    {% for block in section.blocks %}
-      <span class="dot {% if forloop.first %}active{% endif %}" data-index="{{ forloop.index0 }}"></span>
-    {% endfor %}
   </div>
 </div>
 
@@ -77,12 +74,38 @@
   background: linear-gradient(0deg, #fe2d52, #28ffff);
 }
 
+.video-container {
+  position: relative;
+  width: 100%;
+  height: auto;
+}
+
 .tiktok-videov8 {
   width: 100%;
   height: auto;
   aspect-ratio: 9 / 16;
   border-radius: 10px;
   object-fit: cover;
+  pointer-events: none; /* Desactiva interacción directa */
+}
+
+.play-buttonv8 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 2;
 }
 
 .nav-button {
@@ -106,47 +129,48 @@
 .next-button {
   right: -20px;
 }
-
-.pagination-dots {
-  text-align: center;
-  margin-top: 10px;
-}
-
-.dot {
-  height: 10px;
-  width: 10px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  margin: 0 5px;
-  cursor: pointer;
-}
-
-.dot.active {
-  background-color: #717171;
-}
 {% endstyle %}
 
 {% javascript %}
 document.addEventListener("DOMContentLoaded", () => {
+  const playButtons = document.querySelectorAll('.play-buttonv8');
+
+  playButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const video = button.previousElementSibling;
+
+      // Pausar otros videos
+      document.querySelectorAll('.tiktok-videov8').forEach(v => {
+        if (v !== video) {
+          v.pause();
+          v.nextElementSibling.style.display = 'flex';
+        }
+      });
+
+      if (video.paused) {
+        video.play();
+        button.style.display = 'none';
+      } else {
+        video.pause();
+        button.style.display = 'flex';
+      }
+
+      video.addEventListener('ended', () => {
+        button.style.display = 'flex';
+      });
+    });
+  });
+
   const slider = document.querySelector('.sliderv8');
   const slides = document.querySelectorAll('.slidev8');
-  const dots = document.querySelectorAll('.dot');
   const prevButton = document.querySelector('.prev-button');
   const nextButton = document.querySelector('.next-button');
 
   let index = 0;
 
   const updateSlider = () => {
-    const slideWidth = slides[0].offsetWidth + 10; // Incluye el margen
+    const slideWidth = slides[0].offsetWidth + 10;
     slider.style.transform = `translateX(-${index * slideWidth}px)`;
-    updateDots();
-  };
-
-  const updateDots = () => {
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === index);
-    });
   };
 
   prevButton.addEventListener('click', () => {
@@ -157,13 +181,6 @@ document.addEventListener("DOMContentLoaded", () => {
   nextButton.addEventListener('click', () => {
     index = (index < slides.length - 1) ? index + 1 : 0;
     updateSlider();
-  });
-
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', () => {
-      index = i;
-      updateSlider();
-    });
   });
 });
 {% endjavascript %}
