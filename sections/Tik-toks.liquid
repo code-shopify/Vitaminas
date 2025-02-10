@@ -164,19 +164,19 @@ document.addEventListener('DOMContentLoaded', function () {
       const videoContainer = document.getElementById(`video-${videoId}`);
       const tiktokUrl = document.querySelector(`.tiktok-item[data-video-id="${videoId}"]`).getAttribute('data-tiktok-url');
 
-      // Ocultar la miniatura y mostrar el video
+      // Ocultar la miniatura y mostrar el contenedor del video
       cover.style.display = 'none';
       videoContainer.style.display = 'block';
 
-      // Crear el bloque de TikTok dinámicamente
+      // Insertar dinámicamente el bloque de TikTok
       videoContainer.innerHTML = `
-        <blockquote class="tiktok-embed" cite="${tiktokUrl}" data-video-id="${videoId}" style="max-width: 100%; min-width: 300px;">
+        <blockquote class="tiktok-embed" cite="${tiktokUrl}" style="max-width: 100%; min-width: 300px;" data-embed-from="embed_page">
           <a href="${tiktokUrl}"></a>
         </blockquote>
       `;
 
-      // Forzar la recarga del embed de TikTok
-      if (window.tiktokEmbed) {
+      // Forzar la recarga del script de TikTok
+      if (window.tiktokEmbed && typeof window.tiktokEmbed.load === 'function') {
         window.tiktokEmbed.load();
       } else {
         const script = document.createElement('script');
