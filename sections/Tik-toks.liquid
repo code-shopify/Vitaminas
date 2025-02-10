@@ -1,11 +1,14 @@
-<div class="{{ section.settings.custom-class }} t4s-container vitatu-section py-5 text-center">
-  <h2 class="section-title">+30,000 personas opinan de Vitatú</h2>
+<div class="{{ section.settings.custom-class }} t4s-container vitatu-section py-5 text-center" style="background-color: {{ section.settings.background_color }};">
+  {% if section.settings.section_title != blank %}
+    <h2 class="section-title">{{ section.settings.section_title }}</h2>
+  {% endif %}
+
   <div class="slider-wrapper">
     <button class="nav-button prev-button">❮</button>
     <div class="slider-containerv8">
       <div class="sliderv8">
         {% for block in section.blocks %}
-          <div class="slidev8">
+          <div class="slidev8" style="flex: 0 0 calc(100% / {{ section.settings.videos_per_view }} - 10px);">
             <div class="with-borderv8">
               <div class="video-container">
                 <video class="tiktok-videov8" 
@@ -23,11 +26,13 @@
     </div>
     <button class="nav-button next-button">❯</button>
   </div>
+
+  <!-- Dots de Navegación -->
+  <div class="dots-container"></div>
 </div>
 
 {% style %}
 .vitatu-section {
-  background-color: #fff;
   font-family: Arial, sans-serif;
   padding: 20px 0;
 }
@@ -59,8 +64,6 @@
 }
 
 .slidev8 {
-  min-width: 180px;
-  max-width: 180px;
   margin: 0 5px;
   scroll-snap-align: center;
   display: flex;
@@ -98,13 +101,6 @@
   border-radius: 10px;
   pointer-events: auto;
   background: transparent;
-}
-
-/* Ocultar controles nativos */
-.tiktok-videov8::-webkit-media-controls,
-.tiktok-videov8::-moz-media-controls,
-.tiktok-videov8::-ms-media-controls {
-  display: none !important;
 }
 
 .play-buttonv8 {
@@ -154,11 +150,31 @@
   right: -20px;
 }
 
+/* Estilos para los Dots */
+.dots-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+}
+
+.dot.active {
+  background-color: #333;
+}
+
 @media (max-width: 768px) {
   .slidev8 {
-    min-width: 80%;
-    max-width: 80%;
-    margin: 0 auto;
+    flex: 0 0 90%;
   }
 }
 {% endstyle %}
@@ -167,46 +183,39 @@
 document.addEventListener("DOMContentLoaded", () => {
   const playButtons = document.querySelectorAll('.play-buttonv8');
   const videos = document.querySelectorAll('.tiktok-videov8');
-
-  const pauseAllVideos = (currentVideo) => {
-    videos.forEach(video => {
-      if (video !== currentVideo) {
-        video.pause();
-        video.nextElementSibling.style.display = 'flex';
-      }
-    });
-  };
-
-  playButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const video = button.previousElementSibling;
-
-      pauseAllVideos(video);
-
-      if (video.paused) {
-        video.play();
-        button.style.display = 'none';
-      } else {
-        video.pause();
-        button.style.display = 'flex';
-      }
-
-      video.addEventListener('ended', () => {
-        button.style.display = 'flex';
-      });
-    });
-  });
-
   const slider = document.querySelector('.sliderv8');
   const slides = document.querySelectorAll('.slidev8');
   const prevButton = document.querySelector('.prev-button');
   const nextButton = document.querySelector('.next-button');
+  const dotsContainer = document.querySelector('.dots-container');
 
   let index = 0;
+
+  // Crear los dots dinámicamente
+  slides.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    dotsContainer.appendChild(dot);
+
+    dot.addEventListener('click', () => {
+      index = i;
+      updateSlider();
+      updateDots();
+    });
+  });
+
+  const dots = document.querySelectorAll('.dot');
 
   const updateSlider = () => {
     const slideWidth = slides[0].offsetWidth + 10;
     slider.style.transform = `translateX(-${index * slideWidth}px)`;
+    updateDots();
+  };
+
+  const updateDots = () => {
+    dots.forEach(dot => dot.classList.remove('active'));
+    dots[index].classList.add('active');
   };
 
   prevButton.addEventListener('click', () => {
@@ -217,6 +226,15 @@ document.addEventListener("DOMContentLoaded", () => {
   nextButton.addEventListener('click', () => {
     index = (index < slides.length - 1) ? index + 1 : 0;
     updateSlider();
+  });
+
+  playButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const video = button.previousElementSibling;
+      videos.forEach(v => { if (v !== video) v.pause(); });
+      video.paused ? video.play() : video.pause();
+      button.style.display = video.paused ? 'flex' : 'none';
+    });
   });
 });
 {% endjavascript %}
@@ -229,6 +247,27 @@ document.addEventListener("DOMContentLoaded", () => {
       "type": "text",
       "id": "custom-class",
       "label": "Clase Personalizada"
+    },
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Título de la Sección",
+      "default": "+30,000 personas opinan de Vitatú"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de Fondo",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "range",
+      "id": "videos_per_view",
+      "label": "Videos por Vista",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3
     }
   ],
   "blocks": [
