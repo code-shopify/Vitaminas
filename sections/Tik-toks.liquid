@@ -17,7 +17,7 @@
                   <source src="{{ block.settings.video_url }}" type="video/mp4">
                   Tu navegador no soporta este formato de video.
                 </video>
-                <div class="play-buttonv8"></div>
+                <div class="play-buttonv8">▶</div>
               </div>
             </div>
           </div>
@@ -86,49 +86,44 @@
 .video-container {
   position: relative;
   width: 100%;
-  padding-top: 177.78%; /* Proporción 9:16 para videos verticales */
-  background-color: #000;
+  height: 300px;
   overflow: hidden;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .tiktok-videov8 {
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   border-radius: 10px;
   pointer-events: auto;
   background: transparent;
 }
 
-/* Botón de Play */
 .play-buttonv8 {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(255, 255, 255, 0.8);
-  width: 50px;
-  height: 50px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
   border-radius: 50%;
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
   cursor: pointer;
   z-index: 2;
+  transition: all 0.3s ease;
 }
 
-.play-buttonv8::before {
-  content: '▶';
-  color: black;
-  font-size: 20px;
-  margin-left: 4px;
-}
-
-/* Botones de Navegación */
+/* Diseño de Botones de Navegación */
 .nav-button {
   background: #fff;
   color: #000;
@@ -202,21 +197,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const dotsContainer = document.querySelector('.dots-container');
 
   let index = 0;
-  const videosPerView = parseInt("{{ section.settings.videos_per_view }}");
-  const totalDots = Math.ceil(slides.length / videosPerView);
 
   // Crear los dots dinámicamente
-  for (let i = 0; i < totalDots; i++) {
+  slides.forEach((_, i) => {
     const dot = document.createElement('span');
     dot.classList.add('dot');
     if (i === 0) dot.classList.add('active');
     dotsContainer.appendChild(dot);
 
     dot.addEventListener('click', () => {
-      index = i * videosPerView;
+      index = i;
       updateSlider();
+      updateDots();
     });
-  }
+  });
 
   const dots = document.querySelectorAll('.dot');
 
@@ -228,16 +222,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const updateDots = () => {
     dots.forEach(dot => dot.classList.remove('active'));
-    dots[Math.floor(index / videosPerView)].classList.add('active');
+    dots[index].classList.add('active');
   };
 
   prevButton.addEventListener('click', () => {
-    index = (index - videosPerView + slides.length) % slides.length;
+    index = (index > 0) ? index - 1 : slides.length - 1;
     updateSlider();
   });
 
   nextButton.addEventListener('click', () => {
-    index = (index + videosPerView) % slides.length;
+    index = (index < slides.length - 1) ? index + 1 : 0;
     updateSlider();
   });
 
