@@ -4,9 +4,9 @@
 
   <div class="tiktok-carousel d-flex overflow-auto">
     {% for block in section.blocks %}
-      <div class="tiktok-item text-center" data-video-id="{{ block.id }}">
-        <!-- Miniatura del Video -->
-        <div class="tiktok-cover" style="background-image: url('{{ block.settings.thumbnail | image_url }}');">
+      <div class="tiktok-item text-center" data-video-id="{{ block.id }}" data-tiktok-url="{{ block.settings.tiktok_url }}">
+        <!-- Miniatura generada automáticamente -->
+        <div class="tiktok-cover" id="cover-{{ block.id }}">
           <button class="play-button" data-video-id="{{ block.id }}">▶</button>
         </div>
 
@@ -84,6 +84,7 @@
   align-items: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  background-color: #f0f0f0;
 }
 
 /* Botón de Play */
@@ -171,6 +172,25 @@ document.addEventListener('DOMContentLoaded', function () {
       videoContainer.style.display = 'block';
     });
   });
+
+  // Obtener la miniatura automáticamente desde la URL de TikTok
+  const tiktokItems = document.querySelectorAll('.tiktok-item');
+
+  tiktokItems.forEach(item => {
+    const tiktokUrl = item.getAttribute('data-tiktok-url');
+    const coverElement = item.querySelector('.tiktok-cover');
+
+    if (tiktokUrl) {
+      fetch(`https://www.tiktok.com/oembed?url=${tiktokUrl}`)
+        .then(response => response.json())
+        .then(data => {
+          coverElement.style.backgroundImage = `url(${data.thumbnail_url})`;
+        })
+        .catch(error => {
+          console.error('Error al obtener la miniatura:', error);
+        });
+    }
+  });
 });
 {% endjavascript %}
 
@@ -202,11 +222,6 @@ document.addEventListener('DOMContentLoaded', function () {
       "type": "tiktok",
       "name": "Video de TikTok",
       "settings": [
-        {
-          "type": "image_picker",
-          "id": "thumbnail",
-          "label": "Miniatura del Video"
-        },
         {
           "type": "url",
           "id": "tiktok_url",
