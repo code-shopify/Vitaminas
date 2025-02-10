@@ -1,5 +1,5 @@
 <div class="{{ section.settings.custom-class }} t4s-container vitatu-section py-5 text-center">
-
+  <h2 class="section-title">+30,000 personas opinan de Vitatú</h2>
   <div class="slider-wrapper">
     <button class="nav-button prev-button">❮</button>
     <div class="slider-containerv8">
@@ -9,7 +9,8 @@
             <div class="with-borderv8">
               <div class="video-container">
                 <video class="tiktok-videov8" 
-                       poster="{% if block.settings.thumbnail != blank %}{{ block.settings.thumbnail | image_url }}{% endif %}">
+                       poster="{% if block.settings.thumbnail != blank %}{{ block.settings.thumbnail | image_url }}{% endif %}" 
+                       muted playsinline>
                   <source src="{{ block.settings.video_url }}" type="video/mp4">
                   Tu navegador no soporta este formato de video.
                 </video>
@@ -28,11 +29,19 @@
 .vitatu-section {
   background-color: #fff;
   font-family: Arial, sans-serif;
+  padding: 20px 0;
+}
+
+.section-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #000;
 }
 
 .slider-wrapper {
   position: relative;
-  width: 100%; 
+  width: 90%;
   margin: auto;
   display: flex;
   align-items: center;
@@ -50,9 +59,9 @@
 }
 
 .slidev8 {
-  min-width: 320px;  
-  max-width: 320px;
-  margin: 0 10px;
+  min-width: 180px;
+  max-width: 180px;
+  margin: 0 5px;
   scroll-snap-align: center;
   display: flex;
   justify-content: center;
@@ -60,9 +69,9 @@
 }
 
 .with-borderv8 {
-  padding: 4px;
-  border-radius: 10px;
-  background: linear-gradient(0deg, #fe2d52, #28ffff);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -74,7 +83,7 @@
 .video-container {
   position: relative;
   width: 100%;
-  height: auto; 
+  height: 300px;
   overflow: hidden;
   border-radius: 10px;
   display: flex;
@@ -84,22 +93,16 @@
 
 .tiktok-videov8 {
   width: 100%;
-  height: auto; 
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   border-radius: 10px;
   pointer-events: auto;
   background: transparent;
 }
 
 /* Ocultar controles nativos */
-.tiktok-videov8::-webkit-media-controls {
-  display: none !important;
-}
-
-.tiktok-videov8::-moz-media-controls {
-  display: none !important;
-}
-
+.tiktok-videov8::-webkit-media-controls,
+.tiktok-videov8::-moz-media-controls,
 .tiktok-videov8::-ms-media-controls {
   display: none !important;
 }
@@ -113,42 +116,48 @@
   color: white;
   border: none;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: 20px;
   cursor: pointer;
   z-index: 2;
+  transition: all 0.3s ease;
 }
 
 .nav-button {
   background: rgba(0, 0, 0, 0.6);
   color: white;
   border: none;
-  padding: 10px 15px;
+  padding: 10px;
   cursor: pointer;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;
-  font-size: 20px;
+  font-size: 18px;
   border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.nav-button:hover {
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .prev-button {
-  left: 10px;
+  left: -20px;
 }
 
 .next-button {
-  right: 10px;
+  right: -20px;
 }
 
 @media (max-width: 768px) {
   .slidev8 {
-    min-width: 90%;
-    max-width: 90%;
+    min-width: 80%;
+    max-width: 80%;
     margin: 0 auto;
   }
 }
@@ -188,24 +197,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  videos.forEach(video => {
-    video.addEventListener('click', () => {
-      pauseAllVideos(video);
-
-      if (video.paused) {
-        video.play();
-        video.nextElementSibling.style.display = 'none'; 
-      } else {
-        video.pause();
-        video.nextElementSibling.style.display = 'flex'; 
-      }
-
-      video.addEventListener('ended', () => {
-        video.nextElementSibling.style.display = 'flex';
-      });
-    });
-  });
-
   const slider = document.querySelector('.sliderv8');
   const slides = document.querySelectorAll('.slidev8');
   const prevButton = document.querySelector('.prev-button');
@@ -214,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let index = 0;
 
   const updateSlider = () => {
-    const slideWidth = slides[0].offsetWidth + 20;
+    const slideWidth = slides[0].offsetWidth + 10;
     slider.style.transform = `translateX(-${index * slideWidth}px)`;
   };
 
