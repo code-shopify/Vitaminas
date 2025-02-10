@@ -9,7 +9,7 @@
             <div class="with-borderv8">
               <div class="video-container">
                 <video class="tiktok-videov8" 
-                       poster="{% if block.settings.thumbnail != blank %}{{ block.settings.thumbnail | image_url }}{% endif %}" controls>
+                       poster="{% if block.settings.thumbnail != blank %}{{ block.settings.thumbnail | image_url }}{% endif %}">
                   <source src="{{ block.settings.video_url }}" type="video/mp4">
                   Tu navegador no soporta este formato de video.
                 </video>
@@ -74,7 +74,7 @@
 .video-container {
   position: relative;
   width: 100%;
-  height: auto; /* Ajuste automático de la altura */
+  height: auto; 
   overflow: hidden;
   border-radius: 10px;
   display: flex;
@@ -84,11 +84,24 @@
 
 .tiktok-videov8 {
   width: 100%;
-  height: auto; /* Mantiene la proporción natural del video */
-  object-fit: contain;  /* Mantiene el tamaño del video sin recortes */
+  height: auto; 
+  object-fit: contain;
   border-radius: 10px;
   pointer-events: auto;
-  background: transparent; /* Elimina cualquier fondo negro */
+  background: transparent;
+}
+
+/* Ocultar controles nativos */
+.tiktok-videov8::-webkit-media-controls {
+  display: none !important;
+}
+
+.tiktok-videov8::-moz-media-controls {
+  display: none !important;
+}
+
+.tiktok-videov8::-ms-media-controls {
+  display: none !important;
 }
 
 .play-buttonv8 {
