@@ -1,259 +1,203 @@
-<div class="{{ section.settings.custom_class }} vitatu-tiktok-section t4s-container py-5 text-center">
-  <h2 class="mb-3">{{ section.settings.heading }}</h2>
-  <p class="mb-4">{{ section.settings.subheading }}</p>
+<div class="{{ section.settings.custom-class }} t4s-container vitatu-section py-5 text-center">
+  <h2 class="mb-4">{{ section.settings.heading }}</h2>
+  <p class="mb-5">{{ section.settings.subheading }}</p>
 
-  <div class="tiktok-carousel d-flex overflow-auto">
-    {% for block in section.blocks %}
-      <div class="tiktok-item text-center" data-video-id="{{ block.id }}" data-tiktok-url="{{ block.settings.tiktok_url }}">
-        <!-- Miniatura generada automáticamente -->
-        <div class="tiktok-cover" id="cover-{{ block.id }}">
-          <button class="play-button" data-video-id="{{ block.id }}">▶</button>
+  <div class="slider-containerv8">
+    <div class="sliderv8">
+      {% for block in section.blocks %}
+        <div class="slidev8">
+          <div class="with-borderv8">
+            <video class="tiktok-videov8" controls>
+              <source src="{{ block.settings.video_url }}" type="video/mp4">
+              Tu navegador no soporta este formato de video.
+            </video>
+          </div>
+          <div class="pause-buttonv8 hiddenv8">⏸</div>
+          <div class="play-buttonv8">▶</div>
         </div>
-
-        <!-- Video Oculto por Defecto -->
-        <div class="tiktok-video-container" id="video-{{ block.id }}" style="display: none;"></div>
-
-        <h3 class="tiktok-caption">{{ block.settings.caption }}</h3>
-      </div>
-    {% endfor %}
-  </div>
-
-  <div class="carousel-controls">
-    <button class="carousel-prev">❮</button>
-    <button class="carousel-next">❯</button>
+      {% endfor %}
+    </div>
   </div>
 </div>
 
-<!-- TikTok Embed Script Oficial -->
-<script async src="https://www.tiktok.com/embed.js"></script>
-
 {% style %}
-.vitatu-tiktok-section {
-  background-color: #fff;
-  font-family: Arial, sans-serif;
-}
-
-.vitatu-tiktok-section h2 {
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.vitatu-tiktok-section p {
-  color: #333;
-  font-size: 16px;
-}
-
-.tiktok-carousel {
-  display: flex;
-  gap: 1rem;
-  scroll-snap-type: x mandatory;
-  overflow-x: auto;
-  padding: 1rem 0;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-}
-
-.tiktok-carousel::-webkit-scrollbar {
-  display: none;
-}
-
-.tiktok-item {
-  min-width: 300px;
-  max-width: 320px;
-  scroll-snap-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.slider-containerv8 {
   position: relative;
-}
-
-/* Miniatura del Video */
-.tiktok-cover {
   width: 100%;
-  height: 500px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 10px;
-  position: relative;
+  overflow-x: scroll;
+  display: flex;
+  align-items: center;
+  scroll-snap-type: x mandatory;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+.sliderv8 {
+  display: flex;
+  gap: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.slidev8 {
+  flex: 0 0 60%;
+  max-width: 360px;
+  scroll-snap-align: center;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  background-color: #f0f0f0;
+  position: relative;
 }
 
-/* Botón de Play */
-.play-button {
+@media (min-width: 769px) {
+  .slidev8 {
+    flex: 0 0 50%;
+    max-width: 260px;
+  }
+}
+
+.tiktok-videov8 {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  border-radius: 10px;
+  display: block;
+}
+
+.play-buttonv8,
+.pause-buttonv8 {
+  position: absolute;
+  width: 50px;
+  height: 50px;
   background: rgba(0, 0, 0, 0.6);
   color: white;
-  border: none;
   border-radius: 50%;
-  padding: 20px;
-  font-size: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
   cursor: pointer;
-  transition: background 0.3s ease;
   z-index: 10;
 }
 
-.play-button:hover {
-  background: rgba(0, 0, 0, 0.8);
-}
-
-/* Video */
-.tiktok-embed {
-  width: 100%;
-  height: 500px;
-  border-radius: 10px;
-  border: none;
-}
-
-.carousel-controls {
+.play-buttonv8 {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
+  margin-left: 2px;
 }
 
-.carousel-prev,
-.carousel-next {
-  background-color: #f3f3f3;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 1.5rem;
-  border-radius: 5px;
-  transition: background 0.3s ease;
+.pause-buttonv8 {
+  display: none;
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
-.carousel-prev:hover,
-.carousel-next:hover {
-  background-color: #e0e0e0;
+.pause-buttonv8.hiddenv8 {
+  opacity: 0;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .vitatu-tiktok-section h2 {
-    font-size: 22px;
-  }
-  
-  .tiktok-item {
-    min-width: 250px;
-  }
-
-  .tiktok-cover, .tiktok-embed {
-    height: 400px;
-  }
-
-  .play-button {
-    font-size: 1.5rem;
-    padding: 15px;
-  }
+.with-borderv8 {
+  padding: 4px;
+  border-radius: 10px;
+  background: linear-gradient(0deg, #fe2d52, #28ffff);
 }
 {% endstyle %}
 
 {% javascript %}
-// Mostrar video al hacer clic en el botón de Play
-document.addEventListener('DOMContentLoaded', function () {
-  const playButtons = document.querySelectorAll('.play-button');
+document.addEventListener("DOMContentLoaded", () => {
+  const slides = document.querySelectorAll(".slidev8");
 
-  playButtons.forEach(button => {
-    button.addEventListener('click', function () {
-      const videoId = this.getAttribute('data-video-id');
-      const cover = document.querySelector(`.tiktok-item[data-video-id="${videoId}"] .tiktok-cover`);
-      const videoContainer = document.getElementById(`video-${videoId}`);
-      const tiktokUrl = document.querySelector(`.tiktok-item[data-video-id="${videoId}"]`).getAttribute('data-tiktok-url');
+  slides.forEach(slide => {
+    const playButton = slide.querySelector(".play-buttonv8");
+    const pauseButton = slide.querySelector(".pause-buttonv8");
+    const video = slide.querySelector("video");
 
-      // Ocultar la miniatura y mostrar el contenedor del video
-      cover.style.display = 'none';
-      videoContainer.style.display = 'block';
+    let hidePauseButtonTimeout;
 
-      // Insertar dinámicamente el bloque de TikTok
-      videoContainer.innerHTML = `
-        <blockquote class="tiktok-embed" cite="${tiktokUrl}" style="max-width: 100%; min-width: 300px;" data-embed-from="embed_page">
-          <a href="${tiktokUrl}"></a>
-        </blockquote>
-      `;
+    const showPauseButton = () => {
+      pauseButton.classList.remove("hiddenv8");
+      clearTimeout(hidePauseButtonTimeout);
+      hidePauseButtonTimeout = setTimeout(() => {
+        pauseButton.classList.add("hiddenv8");
+      }, 1000);
+    };
 
-      // Forzar la recarga del script de TikTok
-      if (window.tiktokEmbed && typeof window.tiktokEmbed.load === 'function') {
-        window.tiktokEmbed.load();
-      } else {
-        const script = document.createElement('script');
-        script.src = 'https://www.tiktok.com/embed.js';
-        script.async = true;
-        document.body.appendChild(script);
-      }
+    playButton.addEventListener("click", () => {
+      document.querySelectorAll("video").forEach(v => {
+        if (v !== video) {
+          v.pause();
+          v.classList.remove("playingv8");
+        }
+      });
+
+      video.play();
+      video.classList.add("playingv8");
+      playButton.style.display = "none";
+      pauseButton.style.display = "flex";
+      showPauseButton();
     });
-  });
 
-  // Obtener la miniatura automáticamente desde la URL de TikTok
-  const tiktokItems = document.querySelectorAll('.tiktok-item');
+    pauseButton.addEventListener("click", () => {
+      video.pause();
+      video.classList.remove("playingv8");
+      playButton.style.display = "flex";
+      pauseButton.style.display = "none";
+    });
 
-  tiktokItems.forEach(item => {
-    const tiktokUrl = item.getAttribute('data-tiktok-url');
-    const coverElement = item.querySelector('.tiktok-cover');
+    video.addEventListener("mousemove", showPauseButton);
+    video.addEventListener("click", showPauseButton);
 
-    if (tiktokUrl) {
-      fetch(`https://www.tiktok.com/oembed?url=${tiktokUrl}`)
-        .then(response => response.json())
-        .then(data => {
-          coverElement.style.backgroundImage = `url(${data.thumbnail_url})`;
-        })
-        .catch(error => {
-          console.error('Error al obtener la miniatura:', error);
-        });
-    }
+    video.addEventListener("play", () => {
+      playButton.style.display = "none";
+      pauseButton.style.display = "flex";
+      showPauseButton();
+    });
+
+    video.addEventListener("pause", () => {
+      playButton.style.display = "flex";
+      pauseButton.style.display = "none";
+    });
   });
 });
 {% endjavascript %}
 
 {% schema %}
 {
-  "name": "Carrusel de TikToks",
+  "name": "Sección Videos TikTok",
   "settings": [
     {
       "type": "text",
-      "id": "custom_class",
-      "label": "Clase Personalizada",
-      "default": "custom-tiktok-carousel"
+      "id": "custom-class",
+      "label": "Clase Personalizada"
     },
     {
       "type": "text",
       "id": "heading",
       "label": "Título Principal",
-      "default": "+30,000 personas opinan de Vitatú"
+      "default": "Descubre Nuestros Videos"
     },
     {
       "type": "text",
       "id": "subheading",
       "label": "Subtítulo",
-      "default": "¡Descubre lo que opinan nuestros clientes!"
+      "default": "Inspírate con el contenido más reciente."
     }
   ],
   "blocks": [
     {
-      "type": "tiktok",
-      "name": "Video de TikTok",
+      "type": "video_block",
+      "name": "Video",
       "settings": [
         {
           "type": "url",
-          "id": "tiktok_url",
-          "label": "URL del Video de TikTok"
-        },
-        {
-          "type": "text",
-          "id": "caption",
-          "label": "Descripción del Video",
-          "default": "Opinión del Cliente"
+          "id": "video_url",
+          "label": "URL del Video (MP4)"
         }
       ]
     }
   ],
-  "max_blocks": 10,
   "presets": [
     {
-      "name": "Carrusel de TikToks",
+      "name": "Carrusel de Videos TikTok",
       "category": "Secciones Personalizadas"
     }
   ]
