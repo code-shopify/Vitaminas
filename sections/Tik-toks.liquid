@@ -8,7 +8,7 @@
     <div class="slider-containerv8">
       <div class="sliderv8">
         {% for block in section.blocks %}
-          <div class="slidev8" style="flex: 0 0 calc(100% / {{ section.settings.videos_per_view }} - 10px);">
+          <div class="slidev8" style="flex: 0 0 calc(100% / 4 - 10px);"> <!-- 4 videos por vista -->
             <div class="with-borderv8">
               <div class="video-container">
                 <video class="tiktok-videov8" 
@@ -27,7 +27,6 @@
     <button class="nav-button next-button">❯</button>
   </div>
 
-  <!-- Dots de Navegación -->
   <div class="dots-container"></div>
 </div>
 
@@ -36,8 +35,8 @@
   font-family: Arial, sans-serif;
   padding: 20px 0;
   max-width: 100%;
-  overflow: hidden; /* Evita el desplazamiento horizontal */
-  box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .section-title {
@@ -54,7 +53,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden; /* Evita desbordamiento */
+  overflow: hidden;
 }
 
 .slider-containerv8 {
@@ -66,7 +65,7 @@
   display: flex;
   transition: transform 0.5s ease;
   max-width: 100%;
-  box-sizing: border-box; /* Corrige el ancho para evitar desbordamiento */
+  box-sizing: border-box;
 }
 
 .slidev8 {
@@ -130,7 +129,7 @@
   transition: all 0.3s ease;
 }
 
-/* Diseño de Botones de Navegación */
+/* Botones de Navegación */
 .nav-button {
   background: #fff;
   color: #000;
@@ -156,15 +155,10 @@
   transform: translateY(-50%) scale(1.1);
 }
 
-.prev-button {
-  left: 10px; /* Corrige el margen negativo */
-}
+.prev-button { left: 10px; }
+.next-button { right: 10px; }
 
-.next-button {
-  right: 10px; /* Corrige el margen negativo */
-}
-
-/* Estilos para los Dots */
+/* Dots de Navegación */
 .dots-container {
   display: flex;
   justify-content: center;
@@ -186,9 +180,16 @@
   background-color: #333;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .slidev8 {
-    flex: 0 0 90%;
+    flex: 0 0 calc(100% / 2 - 10px); /* 2 videos por vista en móvil */
+  }
+}
+
+@media (min-width: 769px) {
+  .slidev8 {
+    flex: 0 0 calc(100% / 4 - 10px); /* 4 videos por vista en escritorio */
   }
 }
 {% endstyle %}
@@ -204,9 +205,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const dotsContainer = document.querySelector('.dots-container');
 
   let index = 0;
+  const videosPerView = window.innerWidth < 769 ? 2 : 4;
+  const totalDots = Math.ceil(slides.length / videosPerView);
 
   // Crear los dots dinámicamente
-  slides.forEach((_, i) => {
+  for (let i = 0; i < totalDots; i++) {
     const dot = document.createElement('span');
     dot.classList.add('dot');
     if (i === 0) dot.classList.add('active');
@@ -215,15 +218,14 @@ document.addEventListener("DOMContentLoaded", () => {
     dot.addEventListener('click', () => {
       index = i;
       updateSlider();
-      updateDots();
     });
-  });
+  }
 
   const dots = document.querySelectorAll('.dot');
 
   const updateSlider = () => {
-    const slideWidth = slides[0].offsetWidth;
-    slider.style.transform = `translateX(-${index * (slideWidth + 5)}px)`; /* Ajuste del margen */
+    const slideWidth = slides[0].offsetWidth + 10; // Considerar el margen
+    slider.style.transform = `translateX(-${index * videosPerView * slideWidth}px)`;
     updateDots();
   };
 
@@ -233,12 +235,12 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   prevButton.addEventListener('click', () => {
-    index = (index > 0) ? index - 1 : slides.length - 1;
+    index = (index > 0) ? index - 1 : totalDots - 1;
     updateSlider();
   });
 
   nextButton.addEventListener('click', () => {
-    index = (index < slides.length - 1) ? index + 1 : 0;
+    index = (index < totalDots - 1) ? index + 1 : 0;
     updateSlider();
   });
 
@@ -273,15 +275,6 @@ document.addEventListener("DOMContentLoaded", () => {
       "id": "background_color",
       "label": "Color de Fondo",
       "default": "#FFFFFF"
-    },
-    {
-      "type": "range",
-      "id": "videos_per_view",
-      "label": "Videos por Vista",
-      "min": 1,
-      "max": 4,
-      "step": 1,
-      "default": 3
     }
   ],
   "blocks": [
