@@ -31,11 +31,17 @@
 </div>
 
 {% style %}
+/* Correcciones generales */
+body {
+  overflow-x: visible !important; /* Evita que se oculte el contenido desbordado */
+  margin-top: 80px; /* Ajuste para evitar que el header tape el contenido */
+}
+
 .vitatu-section {
   font-family: Arial, sans-serif;
   padding: 20px 0;
   max-width: 100%;
-  overflow: hidden;
+  overflow: visible; /* Permitimos ver cualquier contenido que se desborde */
   box-sizing: border-box;
 }
 
@@ -53,11 +59,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  overflow: visible !important; /* Permitimos ver el contenido desbordado */
 }
 
 .slider-containerv8 {
-  overflow: hidden;
+  overflow: visible !important;
   width: 100%;
 }
 
