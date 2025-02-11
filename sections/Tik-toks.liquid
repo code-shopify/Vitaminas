@@ -107,6 +107,7 @@
   border-radius: 10px;
   pointer-events: auto;
   background: transparent;
+  cursor: pointer;
 }
 
 .play-buttonv8 {
@@ -127,6 +128,7 @@
   cursor: pointer;
   z-index: 2;
   transition: all 0.3s ease;
+  display: none; /* Oculto por defecto */
 }
 
 /* Botones de Navegación */
@@ -244,12 +246,34 @@ document.addEventListener("DOMContentLoaded", () => {
     updateSlider();
   });
 
-  playButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const video = button.previousElementSibling;
+  // Reproducir/Pausar videos al hacer clic en el botón de play
+  videos.forEach(video => {
+    const playButton = video.nextElementSibling;
+
+    video.addEventListener('click', () => {
+      if (video.paused) {
+        videos.forEach(v => { if (v !== video) v.pause(); });
+        video.play();
+        playButton.style.display = 'none';
+      } else {
+        video.pause();
+        playButton.style.display = 'flex';
+      }
+    });
+
+    playButton.addEventListener('click', () => {
       videos.forEach(v => { if (v !== video) v.pause(); });
-      video.paused ? video.play() : video.pause();
-      button.style.display = video.paused ? 'flex' : 'none';
+      video.play();
+      playButton.style.display = 'none';
+    });
+
+    video.addEventListener('pause', () => {
+      playButton.style.display = 'flex';
+    });
+
+    video.addEventListener('ended', () => {
+      playButton.style.display = 'flex';
+      video.currentTime = 0; // Reinicia el video después de terminar
     });
   });
 });
