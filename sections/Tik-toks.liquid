@@ -17,7 +17,7 @@
                   <source src="{{ block.settings.video_url }}" type="video/mp4">
                   Tu navegador no soporta este formato de video.
                 </video>
-                <div class="play-buttonv8">▶</div>
+                <div class="play-buttonv8">▶</div> <!-- Botón de Play actualizado -->
               </div>
             </div>
           </div>
@@ -109,24 +109,31 @@
   background: transparent;
 }
 
+/* 🎯 Nuevo Estilo para el Botón de Play */
 .play-buttonv8 {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  background: rgba(0, 0, 0, 0.4); /* Fondo semitransparente */
+  color: white; /* Ícono de play en blanco */
+  border: 2px solid white; /* Borde blanco */
+  border-radius: 50%; /* Botón redondo */
+  width: 50px; /* Tamaño del botón */
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px;
+  font-size: 20px; /* Tamaño del ícono */
   cursor: pointer;
   z-index: 2;
   transition: all 0.3s ease;
+  opacity: 0.8; /* Opacidad reducida */
+}
+
+.play-buttonv8:hover {
+  background: rgba(0, 0, 0, 0.6); /* Fondo más oscuro al pasar el mouse */
+  transform: translate(-50%, -50%) scale(1.1); /* Efecto de aumento */
 }
 
 /* Botones de Navegación */
