@@ -49,7 +49,7 @@
         "custom_liquid_nqk3Kp": {
           "type": "custom_liquid",
           "settings": {
-            "custom_liquid": "{% render 'metacampo-capsula' %}\n\n{{ product.metafields.custom.c_psulas_por_envase }}"
+            "custom_liquid": "{% render 'metacampo-capsula' %}"
           }
         },
         "description": {
