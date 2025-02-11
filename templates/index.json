@@ -46,11 +46,23 @@
             "thumbnail": "shopify://shop_images/ksm-66-ashwagandha-600-mg-90-capsulas-vegetales-990558.jpg"
           }
         },
+        "video_VkaCjV": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
         "video_zgmVJd": {
           "type": "video",
           "settings": {
             "video_url": "https://cdn.shopify.com/videos/c/o/v/e5ad4473f92040e7975f2913a8532840.mp4",
             "thumbnail": "shopify://shop_images/ksm-66-ashwagandha-600-mg-90-capsulas-vegetales-990558.jpg"
+          }
+        },
+        "video_LcNGUk": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
           }
         },
         "video_WVY3qP": {
@@ -73,22 +85,72 @@
             "video_url": "https://cdn.shopify.com/videos/c/o/v/e5ad4473f92040e7975f2913a8532840.mp4",
             "thumbnail": "shopify://shop_images/ksm-66-ashwagandha-600-mg-90-capsulas-vegetales-990558.jpg"
           }
+        },
+        "video_MArfzi": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_t6HMBe": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_cHBPFm": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_DCeWHW": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_w97Gky": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_UNLRjL": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
+        },
+        "video_7QAXmg": {
+          "type": "video",
+          "settings": {
+            "video_url": ""
+          }
         }
       },
       "block_order": [
         "video_x4M8Pa",
         "video_KgeiVG",
         "video_G4QyyT",
+        "video_VkaCjV",
         "video_zgmVJd",
+        "video_LcNGUk",
         "video_WVY3qP",
         "video_mGRJQw",
-        "video_kPTEYT"
+        "video_kPTEYT",
+        "video_MArfzi",
+        "video_t6HMBe",
+        "video_cHBPFm",
+        "video_DCeWHW",
+        "video_w97Gky",
+        "video_UNLRjL",
+        "video_7QAXmg"
       ],
       "settings": {
         "custom-class": "",
         "section_title": "+30,000 personas opinan de Vitatú",
-        "background_color": "#fffbf2",
-        "videos_per_view": 4
+        "background_color": "#fffbf2"
       }
     }
   },
