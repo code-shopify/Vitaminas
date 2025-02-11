@@ -84,63 +84,16 @@
         "video_mGRJQw",
         "video_kPTEYT"
       ],
-      "disabled": true,
       "settings": {
         "custom-class": "",
         "section_title": "+30,000 personas opinan de Vitatú",
         "background_color": "#fffbf2",
         "videos_per_view": 4
       }
-    },
-    "video_reviews_G87miC": {
-      "type": "video-reviews",
-      "blocks": {
-        "video_block_QGVkDf": {
-          "type": "video_block",
-          "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/49f49e5ff92f404b89bdedd6fc371077.mp4"
-          }
-        },
-        "video_block_JkbJAq": {
-          "type": "video_block",
-          "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/49f49e5ff92f404b89bdedd6fc371077.mp4"
-          }
-        },
-        "video_block_b6UkqL": {
-          "type": "video_block",
-          "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/49f49e5ff92f404b89bdedd6fc371077.mp4"
-          }
-        },
-        "video_block_Def8g9": {
-          "type": "video_block",
-          "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/49f49e5ff92f404b89bdedd6fc371077.mp4"
-          }
-        },
-        "video_block_9Ard7e": {
-          "type": "video_block",
-          "settings": {
-            "video_url": "https://cdn.shopify.com/videos/c/o/v/49f49e5ff92f404b89bdedd6fc371077.mp4"
-          }
-        }
-      },
-      "block_order": [
-        "video_block_QGVkDf",
-        "video_block_JkbJAq",
-        "video_block_b6UkqL",
-        "video_block_Def8g9",
-        "video_block_9Ard7e"
-      ],
-      "settings": {
-        "section_title": "TikTok Video Viewer"
-      }
     }
   },
   "order": [
     "mosaico_image_text_pLyM7P",
-    "tik_toks_UbMLMd",
-    "video_reviews_G87miC"
+    "tik_toks_UbMLMd"
   ]
 }
