@@ -17,7 +17,9 @@
                   <source src="{{ block.settings.video_url }}" type="video/mp4">
                   Tu navegador no soporta este formato de video.
                 </video>
-                <div class="play-buttonv8">▶</div> <!-- Botón de Play actualizado -->
+                <div class="play-buttonv8">
+                  <span class="play-icon">▶</span> <!-- Ícono de Play independiente -->
+                </div>
               </div>
             </div>
           </div>
@@ -109,31 +111,37 @@
   background: transparent;
 }
 
-/* 🎯 Nuevo Estilo para el Botón de Play */
+/* Botón de Play */
 .play-buttonv8 {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.4); /* Fondo semitransparente */
-  color: white; /* Ícono de play en blanco */
-  border: 2px solid white; /* Borde blanco */
-  border-radius: 50%; /* Botón redondo */
-  width: 50px; /* Tamaño del botón */
+  border: 2px solid white; /* Borde blanco delgado */
+  border-radius: 50%;
+  width: 50px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 20px; /* Tamaño del ícono */
   cursor: pointer;
   z-index: 2;
   transition: all 0.3s ease;
-  opacity: 0.8; /* Opacidad reducida */
+  opacity: 0.8; /* Solo afecta al círculo */
 }
 
 .play-buttonv8:hover {
-  background: rgba(0, 0, 0, 0.6); /* Fondo más oscuro al pasar el mouse */
-  transform: translate(-50%, -50%) scale(1.1); /* Efecto de aumento */
+  background: rgba(0, 0, 0, 0.6);
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Ícono de Play independiente */
+.play-icon {
+  color: white; /* Ícono siempre visible en blanco */
+  font-size: 20px;
+  opacity: 1; /* Ícono no se ve afectado por la opacidad del botón */
+  pointer-events: none; /* Evita interferencia al hacer clic */
 }
 
 /* Botones de Navegación */
@@ -190,13 +198,13 @@
 /* Responsive */
 @media (max-width: 768px) {
   .slidev8 {
-    flex: 0 0 calc(100% / 2 - 10px); /* 2 videos por vista en móvil */
+    flex: 0 0 calc(100% / 2 - 10px);
   }
 }
 
 @media (min-width: 769px) {
   .slidev8 {
-    flex: 0 0 calc(100% / 4 - 10px); /* 4 videos por vista en escritorio */
+    flex: 0 0 calc(100% / 4 - 10px);
   }
 }
 {% endstyle %}
@@ -231,7 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const dots = document.querySelectorAll('.dot');
 
   const updateSlider = () => {
-    const slideWidth = slides[0].offsetWidth + 10; // Considerar el margen
+    const slideWidth = slides[0].offsetWidth + 10;
     slider.style.transform = `translateX(-${index * videosPerView * slideWidth}px)`;
     updateDots();
   };
