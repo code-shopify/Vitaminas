@@ -46,6 +46,12 @@
             "price_sale_color": "#ec0101"
           }
         },
+        "custom_liquid_nqk3Kp": {
+          "type": "custom_liquid",
+          "settings": {
+            "custom_liquid": "Hola"
+          }
+        },
         "description": {
           "type": "description",
           "settings": {
@@ -192,6 +198,7 @@
       "block_order": [
         "title",
         "price_review",
+        "custom_liquid_nqk3Kp",
         "description",
         "form",
         "23551ebc-3be1-40d6-81b2-30f03478cccb",
