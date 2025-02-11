@@ -15,11 +15,14 @@
   <div class="text-capsula">
     <div style="font-weight: 500;">
       {% assign price = product.compare_at_price | default: product.price %}
-      {{ price | divided_by: product.metafields.custom.c_psulas_por_porci_n | money }}
+      {% assign total_porciones = product.metafields.custom.c_psulas_por_envase | divided_by: product.metafields.custom.c_psulas_por_porci_n %}
+      
+      {{ price | divided_by: total_porciones | money }}
     </div>
     <div>(Por porción)</div>
   </div>
 </div>
+
   
 </div>
 
