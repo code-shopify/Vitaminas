@@ -17,8 +17,9 @@
                   <source src="{{ block.settings.video_url }}" type="video/mp4">
                   Tu navegador no soporta este formato de video.
                 </video>
+                <!-- Botón de Play separado en fondo e ícono -->
                 <div class="play-buttonv8">
-                  <span class="play-icon">▶</span> <!-- Ícono de Play independiente -->
+                  <span class="play-icon">▶</span>
                 </div>
               </div>
             </div>
@@ -111,15 +112,15 @@
   background: transparent;
 }
 
-/* Botón de Play */
+/* Botón de Play - Fondo */
 .play-buttonv8 {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.4); /* Fondo semitransparente */
-  border: 2px solid white; /* Borde blanco delgado */
-  border-radius: 50%;
+  border: 2px solid white;        /* Borde blanco */
+  border-radius: 50%;             /* Forma circular */
   width: 50px;
   height: 50px;
   display: flex;
@@ -128,20 +129,20 @@
   cursor: pointer;
   z-index: 2;
   transition: all 0.3s ease;
-  opacity: 0.8; /* Solo afecta al círculo */
+  opacity: 0.8;                   /* Solo afecta al fondo */
 }
 
-.play-buttonv8:hover {
-  background: rgba(0, 0, 0, 0.6);
-  transform: translate(-50%, -50%) scale(1.1);
-}
-
-/* Ícono de Play independiente */
+/* Ícono de Play */
 .play-icon {
-  color: white; /* Ícono siempre visible en blanco */
-  font-size: 20px;
-  opacity: 1; /* Ícono no se ve afectado por la opacidad del botón */
-  pointer-events: none; /* Evita interferencia al hacer clic */
+  color: white;                  /* Ícono en blanco */
+  font-size: 20px;               /* Tamaño del ícono */
+  pointer-events: none;          /* No interferir con el clic */
+}
+
+/* Hover solo para el fondo */
+.play-buttonv8:hover {
+  background: rgba(0, 0, 0, 0.6); /* Mayor opacidad al pasar el mouse */
+  transform: translate(-50%, -50%) scale(1.1); /* Efecto de aumento */
 }
 
 /* Botones de Navegación */
@@ -198,13 +199,13 @@
 /* Responsive */
 @media (max-width: 768px) {
   .slidev8 {
-    flex: 0 0 calc(100% / 2 - 10px);
+    flex: 0 0 calc(100% / 2 - 10px); /* 2 videos por vista en móvil */
   }
 }
 
 @media (min-width: 769px) {
   .slidev8 {
-    flex: 0 0 calc(100% / 4 - 10px);
+    flex: 0 0 calc(100% / 4 - 10px); /* 4 videos por vista en escritorio */
   }
 }
 {% endstyle %}
@@ -239,7 +240,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const dots = document.querySelectorAll('.dot');
 
   const updateSlider = () => {
-    const slideWidth = slides[0].offsetWidth + 10;
+    const slideWidth = slides[0].offsetWidth + 10; // Considerar el margen
     slider.style.transform = `translateX(-${index * videosPerView * slideWidth}px)`;
     updateDots();
   };
