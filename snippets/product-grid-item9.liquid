@@ -100,7 +100,7 @@ endif -%}
     {% render "top-product-card" %}
 
     
-    <div class="t4s-product-inner p-2 t4s-pr t4s-oh bg-pri rounded-bottom-left" >
+    <div class="t4s-product-inner p-2 t4s-pr t4s-oh bg-pri" style="border-bottom-left-radius: 3rem; border-bottom-right-radius: 3rem;" >
       {%- if image.media_type == 'video' -%}
             {% render 'product-img-with-video', video: image, imgatt: imgatt %}
          {%- else -%}
