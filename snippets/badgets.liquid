@@ -1,12 +1,9 @@
-
-  <div class="product-badges">
-    {% if product.tags contains 'best' %}
-      <span class="badge bg-success me-1">🔥 Más Vendido</span>
-    {% endif %}
-    
-    {% if product.tags contains 'new' %}
-      <span class="badge bg-primary">🆕 Nuevo</span>
-    {% endif %}
-  </div>
-
-asdas
+<div class="product-badges d-flex flex-column align-items-end">
+  {% if product.tags contains 'best' %}
+    <span class="badge bg-success rounded-pill mb-1 px-3 py-2">🔥 Más Vendido</span>
+  {% endif %}
+  
+  {% if product.tags contains 'new' %}
+    <span class="badge bg-primary rounded-pill px-3 py-2">🆕 Nuevo</span>
+  {% endif %}
+</div>
