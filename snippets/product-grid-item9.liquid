@@ -101,13 +101,15 @@ endif -%}
 
     
     <div class="t4s-product-inner p-2 t4s-pr t4s-oh bg-pri rounded-5" style="border-top-left-radius: 0rem !important; border-top-right-radius: 0rem !important;" >
+
+         {% render "badgets" product:product %}
       {%- if image.media_type == 'video' -%}
             {% render 'product-img-with-video', video: image, imgatt: imgatt %}
          {%- else -%}
             {% render 'product-img', image: image, imgatt: imgatt %}
          {%- endif -%}
       <div data-product-badge data-sort="sale,new,soldout,preOrder,custom" class="t4s-product-badge"></div>
-        {% render "badgets" product:product %}
+     
       <div class="t4s-product-btns2">
          {%- if isGrowaveWishlist -%}
             {%- capture the_snippet_fave_icon %}{% render 'ssw-widget-faveicon' with pid %}{% endcapture -%}
