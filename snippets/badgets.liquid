@@ -1,0 +1,11 @@
+{% if product.tags contains 'Más Vendido' or product.tags contains 'Nuevo' %}
+  <div class="product-badges">
+    {% if product.tags contains 'Más Vendido' %}
+      <span class="badge bg-success me-1">🔥 Más Vendido</span>
+    {% endif %}
+    
+    {% if product.tags contains 'Nuevo' %}
+      <span class="badge bg-primary">🆕 Nuevo</span>
+    {% endif %}
+  </div>
+{% endif %}
