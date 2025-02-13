@@ -215,7 +215,7 @@
         "pd": "",
         "mg_tb": "",
         "pd_tb": "",
-        "mg_mb": "50px,50px,50px,50px",
+        "mg_mb": "30px,20px,40px,20px",
         "pd_mb": "",
         "use_cus_css": false,
         "code_cus_css": ".SectionID {\nbackground-color:red\n}"
