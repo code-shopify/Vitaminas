@@ -89,7 +89,7 @@
 .t4s-tab-wrapper.t4s-active .t4s-accor-title .t4s-accor-item-nav:before {
 	-webkit-transform: translate(-50%,-50%) rotate(90deg);
     transform: translate(-50%,-50%) rotate(90deg);
-    background-color: var(--bg-title-active-cl);
+    background-color: black;
 }
 .t4s-type-accordion.t4s-text-center .t4s-accor-title .t4s-accor-item-nav {
 	display: inline-block;
