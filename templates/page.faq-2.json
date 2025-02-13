@@ -111,7 +111,7 @@
           "type": "accor_item",
           "settings": {
             "icon": "none",
-            "title": "¿Una vez hecho mi pedido cuando se envia?",
+            "title": "¿Una vez hecho mi pedido cuando se envía?",
             "content": "<p>nose</p>"
           }
         },
