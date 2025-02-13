@@ -58,7 +58,7 @@
 	vertical-align: top;
 }
 .t4s-tab-wrapper.t4s-active .t4s-accor-title .t4s-accor-item-nav {
-	background-color: var(--title-active-cl);
+	background-color: #fff;
 }
 .t4s-accor-title .t4s-accor-item-nav::before,
 .t4s-accor-title .t4s-accor-item-nav::after {
