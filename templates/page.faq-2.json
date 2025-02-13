@@ -193,7 +193,7 @@
       ],
       "custom_css": [
         ".t4s-tabs.t4s-type-accordion.t4s-text-start.t4s-tabs-enabled.t4s-tabs-accordion-enabled {border: 1px solid;}",
-        ".t4s-tab-wrapper {border-bottom: .5px solid;}"
+        ".t4s-tab-wrapper {border-bottom: 0.5px solid;}"
       ],
       "settings": {
         "design_heading": "7",
@@ -215,6 +215,7 @@
         "custom_width": 780,
         "cl_bg": "",
         "cl_bg_gradient": "",
+        "image_bg": "shopify://shop_images/WhatsApp_Image_2025-02-13_at_12.31.46_PM.jpg",
         "mg": "80px,px,80px,px",
         "pd": "",
         "mg_tb": "",
