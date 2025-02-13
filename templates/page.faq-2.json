@@ -192,7 +192,7 @@
         "accor_item_Gm9qC8"
       ],
       "settings": {
-        "design_heading": "1",
+        "design_heading": "7",
         "heading_align": "t4s-text-center",
         "top_heading": "",
         "icon_heading": "las la-gem",
@@ -201,9 +201,9 @@
         "accor_des": "1",
         "title_cl": "#222222",
         "bg_title_cl": "#fff",
-        "title_active_cl": "#000000",
-        "bg_title_active_cl": "#fff",
-        "content_cl": "#878787",
+        "title_active_cl": "#fff",
+        "bg_title_active_cl": "#222222",
+        "content_cl": "#222222",
         "bg_content_cl": "#ffffff",
         "content_align": "t4s-text-start",
         "auto_active": true,
