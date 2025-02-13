@@ -70,7 +70,7 @@
     transform: translate(-50%,-50%) rotate(-90deg);
     background-color: currentColor;
     transition: transform .35s ease-in-out,opacity .35s ease-in-out,-webkit-transform .35s ease-in-out;
-    background-color: #fff;
+    background-color: black;
 }
 .t4s-accor-title .t4s-accor-item-nav::before {
 	width: 15px;
