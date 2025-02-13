@@ -112,7 +112,7 @@
           "settings": {
             "icon": "none",
             "title": "¿Una vez hecho mi pedido cuando se envía?",
-            "content": "<p>nose</p>"
+            "content": "<p>Tu pedido se procesa en un plazo de 24 a 48 horas hábiles después de la confirmación de pago. Una vez enviado, recibirás un correo con la información de rastreo.</p>"
           }
         },
         "1652148258305a99c1-1": {
@@ -120,7 +120,7 @@
           "settings": {
             "icon": "none",
             "title": "¿Cuales son los tiempos de entrega que manejan?",
-            "content": "<p>nose</p>"
+            "content": "<p>Los tiempos de entrega varían según la ubicación y el método de envío seleccionado. Generalmente, los envíos nacionales tardan entre 2 y 7 días hábiles.</p>"
           }
         },
         "1652148258305a99c1-2": {
@@ -128,7 +128,7 @@
           "settings": {
             "icon": "none",
             "title": "¿Una vez hecha mi compra, como puedo hacer seguimiento de mi pedido?",
-            "content": "<p>Shop for the items you want and add it to your shopping cart. When you have finished, you can proceed to your shopping cart and check out. Check and ensure that all information is correct before confirming your purchases and payment.</p>"
+            "content": "<p>Recibirás un correo con el número de rastreo y un enlace para seguir tu pedido en tiempo real.</p>"
           }
         },
         "0c4e86da-f870-4d3c-abce-b988cae18d6c": {
@@ -136,15 +136,15 @@
           "settings": {
             "icon": "none",
             "title": "Si me suscribo, ¿Puedo cancelar cuando yo quiera la suscripción?",
-            "content": "<p>nose</p>"
+            "content": "<p>Sí, puedes cancelar tu suscripción en cualquier momento desde tu cuenta o contactando a nuestro equipo de atención al cliente.</p>"
           }
         },
         "cb973ab0-b192-4c97-b7ba-6b8acbf93e5f": {
           "type": "accor_item",
           "settings": {
             "icon": "none",
-            "title": "¿En que otra tienda puedo adquirir los prodcutos?",
-            "content": "<p>nose</p>"
+            "title": "¿En que otra tienda puedo adquirir los productos?",
+            "content": "<p>Nuestros productos están disponibles exclusivamente en nuestra tienda en línea. Para más información, consulta nuestras redes sociales.</p>"
           }
         },
         "f9fbcebb-a809-4cca-8806-c102d1de1c0b": {
@@ -152,7 +152,7 @@
           "settings": {
             "icon": "none",
             "title": "¿Hacen envíos internacionales?",
-            "content": "<p>nose</p>"
+            "content": "<p>Por el momento, solo realizamos envíos dentro de [país]. Estamos trabajando para expandir nuestras opciones de envío.</p>"
           }
         },
         "9aa601e3-a39f-431e-aaa9-de35ae6945fb": {
@@ -160,7 +160,7 @@
           "settings": {
             "icon": "none",
             "title": "¿Qué métodos de pago manejean?",
-            "content": "<p>nose</p>"
+            "content": "<p>Aceptamos tarjetas de crédito y débito (Visa, Mastercard, American Express), PayPal, Mercado Pago y pagos en efectivo a través de Oxxo.</p>"
           }
         },
         "15f6d610-63c6-4503-8a7f-4a1774dcf9ed": {
@@ -168,7 +168,7 @@
           "settings": {
             "icon": "none",
             "title": "¿Qué certificaciones tiene la planta de producción?",
-            "content": "<p>nose</p>"
+            "content": "<p>Nuestra planta de producción cuenta con certificaciones como [GMP, ISO, FDA, u otras certificaciones relevantes].</p>"
           }
         },
         "accor_item_Gm9qC8": {
@@ -176,7 +176,7 @@
           "settings": {
             "icon": "none",
             "title": "¿Qué quiere decir que los ingredientes son con patente y no con genéricos?",
-            "content": "<p>nose</p>"
+            "content": "<p>Los ingredientes patentados han sido investigados y desarrollados con respaldo científico, garantizando su calidad y efectividad en comparación con los genéricos.</p>"
           }
         }
       },
