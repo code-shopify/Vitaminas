@@ -211,7 +211,7 @@
         "custom_width": 780,
         "cl_bg": "",
         "cl_bg_gradient": "",
-        "mg": ",,80px,",
+        "mg": "80px,px,80px,px",
         "pd": "",
         "mg_tb": "",
         "pd_tb": "",
