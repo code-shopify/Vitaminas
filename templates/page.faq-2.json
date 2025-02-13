@@ -11,6 +11,7 @@
   "sections": {
     "main": {
       "type": "main-page",
+      "disabled": true,
       "settings": {
         "layout": "t4s-se-container",
         "cl_bg": "",
@@ -196,7 +197,7 @@
         ".t4s-tab-wrapper {border-bottom: 0.5px solid;}"
       ],
       "settings": {
-        "design_heading": "7",
+        "design_heading": "1",
         "heading_align": "t4s-text-center",
         "top_heading": "",
         "icon_heading": "las la-gem",
@@ -211,8 +212,8 @@
         "bg_content_cl": "#ffffff",
         "content_align": "t4s-text-start",
         "auto_active": true,
-        "layout": "t4s-container-wrap",
-        "custom_width": 780,
+        "layout": "t4s-cus-width",
+        "custom_width": 820,
         "cl_bg": "",
         "cl_bg_gradient": "",
         "image_bg": "shopify://shop_images/WhatsApp_Image_2025-02-13_at_12.31.46_PM.jpg",
