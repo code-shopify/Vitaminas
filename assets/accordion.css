@@ -47,7 +47,7 @@
 .t4s-accor-title .t4s-accor-item-nav {
 	width: 44px;
     height: 44px;
-    background-color: var(--title-cl);
+    background-color: #fff;
     position: absolute;
     z-index: 2;
     right: 0;
