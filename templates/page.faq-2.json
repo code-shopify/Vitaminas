@@ -191,6 +191,9 @@
         "15f6d610-63c6-4503-8a7f-4a1774dcf9ed",
         "accor_item_Gm9qC8"
       ],
+      "custom_css": [
+        ".t4s-tabs.t4s-type-accordion.t4s-text-start.t4s-tabs-enabled.t4s-tabs-accordion-enabled {border: 1px solid;}"
+      ],
       "settings": {
         "design_heading": "7",
         "heading_align": "t4s-text-center",
@@ -217,7 +220,7 @@
         "pd_tb": "",
         "mg_mb": "30px,20px,40px,20px",
         "pd_mb": "",
-        "use_cus_css": false,
+        "use_cus_css": true,
         "code_cus_css": ".SectionID {\nbackground-color:red\n}"
       }
     }
