@@ -5,7 +5,7 @@
 .t4s-type-accordion > .t4s-tab-wrapper {
 	position: relative;
 	margin-bottom: 10px;
-  border-block-color:black;
+  border-block-color:black !important ;
    
 }
 .t4s-type-accordion .t4s-accor-title {
