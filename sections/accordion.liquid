@@ -40,7 +40,8 @@
                 <span class="t4s-accor-icon">{%- render 'icon_accordion',icon: bk_stts.icon -%} </span>
                 <span itemprop="name">{{ bk_stts.title }}</span>
               </span>
-              <span class="t4s-accor-item-nav"></span>
+              <span class="t4s-accor-item-nav">&#x2193;</span> <!-- Flecha hacia abajo -->
+
             </a>
             <div id="t4s-{{ blockid }}" class="t4s-tab-content t4s-rte" data-t4s-tab-content {% if se_stts.auto_active == false %} style="display: none;"{%- endif -%} itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
               <div itemprop="text">
