@@ -33,16 +33,14 @@
         {%- for block in se_blocks -%}
           {%- assign bk_stts = block.settings -%} 
           {%- assign blockid = block.id -%}
-          {%- if bk_stts.title == blank or bk_stts.content == blank -%}{% continue %}{%- endif %}
-
+          {%- if bk_stts.title == blank or bk_stts.content == blank -%}{% continue %}{%- endif -%}
           <div class="t4s-tab-wrapper {% if forloop_first and se_stts.auto_active %} t4s-active {% endif %}" data-t4s-tab-wrapper {{ block.shopify_attributes }} itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
             <a id="b_{{ block.id }}" class="t4s-accor-title" href="#t4s-{{ blockid }}" rel="nofollow" data-t4s-tab-item data-no-instant>
               <span class="t4s-accor-text">
-                <span class="t4s-accor-icon">{%- render 'icon_accordion',icon: bk_stts.icon -%}</span>
+                <span class="t4s-accor-icon">{%- render 'icon_accordion',icon: bk_stts.icon -%} </span>
                 <span itemprop="name">{{ bk_stts.title }}</span>
               </span>
               <span class="t4s-accor-item-nav"></span>
-              <span class="t4s-accor-arrow">&#x2191;</span> <!-- Flecha hacia arriba -->
             </a>
             <div id="t4s-{{ blockid }}" class="t4s-tab-content t4s-rte" data-t4s-tab-content {% if se_stts.auto_active == false %} style="display: none;"{%- endif -%} itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
               <div itemprop="text">
@@ -56,7 +54,6 @@
     </div>
     {{- html_layout[1] -}}
 </div>
-
 {% schema %}
 {
   "name": "Accordion",
