@@ -211,7 +211,7 @@
         "bg_content_cl": "#ffffff",
         "content_align": "t4s-text-start",
         "auto_active": true,
-        "layout": "t4s-cus-width",
+        "layout": "t4s-container-wrap",
         "custom_width": 780,
         "cl_bg": "",
         "cl_bg_gradient": "",
@@ -222,7 +222,7 @@
         "pd_tb": "",
         "mg_mb": "30px,20px,40px,20px",
         "pd_mb": "",
-        "use_cus_css": true,
+        "use_cus_css": false,
         "code_cus_css": ".SectionID {\nbackground-color:red\n}"
       }
     }
