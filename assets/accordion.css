@@ -1,5 +1,6 @@
 .t4s-cus-width .t4s-container {
 	max-width: var(--width);
+  border:black;
 }
 .t4s-type-accordion > .t4s-tab-wrapper {
 	position: relative;
