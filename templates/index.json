@@ -23,6 +23,13 @@
         "feature_description_3": "Recibe tips exclusivos, ofertas especiales y las últimas novedades al formar parte."
       }
     },
+    "suscripcion_bVKBg6": {
+      "type": "suscripcion",
+      "settings": {
+        "bg_color": "#fffbe6",
+        "btn_color": "#8e2b7b"
+      }
+    },
     "tik_toks_UbMLMd": {
       "type": "Tik-toks",
       "blocks": {
@@ -163,6 +170,7 @@
   },
   "order": [
     "mosaico_image_text_pLyM7P",
+    "suscripcion_bVKBg6",
     "tik_toks_UbMLMd",
     "ejemplo_crAfXx"
   ]
