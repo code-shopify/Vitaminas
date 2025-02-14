@@ -1,32 +1,7 @@
-{% style %}
-/ Custom Theme CSS
-/-----------------------------------------------------------------------------*/
-/*---------------- Global Custom CSS -------------------*/
-{{ settings.global_css }}
 
-/*---------------- Custom CSS for only desktop -------------------*/
-@media (min-width: 1025px) {
-  {{ settings.desktop_css }}
-}
-
-/*---------------- Custom CSS for tablet, mobile -------------------*/
-@media (max-width: 1024px) {
-  {{ settings.tablet_mobile_css }}
-}
-
-/*---------------- Custom CSS for only tablet -------------------*/
-@media (min-width: 768px) and (max-width: 1024px) {
-  {{ settings.tablet_css }}
-}
-
-/*---------------- Custom CSS for only mobile -------------------*/
-@media (max-width: 767px){
-  {{ settings.mobile_css }}
-}
-{% endstyle %}
 {% schema %}
 {
-  "name": "Sección Personalizable",
+  "name": "Subscripcion de shopify",
   "settings": [
     {
       "type": "color",
@@ -49,18 +24,24 @@
       "type": "image_picker",
       "id": "image_2",
       "label": "Imagen derecha"
+    },
+    {
+      "type": "text",
+      "id": "klaviyo_list_id",
+      "label": "ID de lista de Klaviyo",
+      "default": "TU_LISTA_ID"
     }
   ],
   "presets": [
     {
-      "name": "Sección Personalizable",
+      "name": "Sección Personalizable Klaviyo",
       "category": "Custom"
     }
   ]
 }
 {% endschema %}
 
-<div class=" t4s-container vitatu-section py-5 text-center" style="background-color: {{ section.settings.bg_color }}; padding: 50px 20px;">
+<div class="container text-center" style="background-color: {{ section.settings.bg_color }}; padding: 50px 20px;">
   <div class="row align-items-center">
     <div class="col-md-3 text-center">
       {% if section.settings.image_1 %}
@@ -70,12 +51,12 @@
     <div class="col-md-6">
       <h1 class="fw-bold">¡SUSCRÍBETE Y RECIBE UN 10% OFF!</h1>
       <p>Disfruta de promociones, acceso preferencial a nuevos productos, noticias y ¡mucho más!</p>
-      <form data-t4s-klaviyo-form id="t4s-form-33" action="//manage.kmail-lists.com/subscriptions/subscribe" method="GET" {% if settings.ajax_klaviyo and settings.klaviyo_list_id != blank %} data-t4s-klaviyo-ajax{% endif %}>
+      <form data-t4s-klaviyo-form id="t4s-form-33" action="//manage.kmail-lists.com/subscriptions/subscribe" method="GET" {% if settings.ajax_klaviyo and section.settings.klaviyo_list_id != blank %} data-t4s-klaviyo-ajax{% endif %}>
         <div class="p-4">
-          <input type="email" class="form-control" placeholder="Correo electrónico" required="required">
+          <input type="email" name="email" class="form-control" placeholder="Correo electrónico" required="required">
         </div>
         <button data-t4s-klaviyo-submit type="submit" class="btn btn-lg" style="background-color: {{ section.settings.btn_color }}; color: #fff;">Suscribirme</button>
-        <input type="hidden" name="g" value="5">
+        <input type="hidden" name="g" value="{{ section.settings.klaviyo_list_id }}">
       </form>
     </div>
     <div class="col-md-3 text-center">
