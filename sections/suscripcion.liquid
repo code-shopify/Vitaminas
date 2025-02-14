@@ -52,10 +52,7 @@
       <p>Disfruta de promociones, acceso preferencial a nuevos productos, noticias y ¡mucho más!</p>
       <form id="t4s-form-newsletter_4WxKrc" class="t4s-pr t4s-z-100 t4s-newsletter__form" method="post" action="/contact#t4s-form-newsletter_4WxKrc">
         <div class="p-4">
-          <input type="email" name="email" class="form-control" placeholder="Correo electrónico" required="required">
-        </div>
-        <button data-t4s-klaviyo-submit type="submit" class="btn btn-lg" style="background-color: {{ section.settings.btn_color }}; color: #fff;">Suscribirme</button>
-        <input  <input
+           <input
     type="email"
     id="{{ field_id }}"
     class="{% if input_group %}{% else %}field{% endif %}"
@@ -72,7 +69,10 @@
     {% elsif form.posted_successfully? %}
       aria-describedby="Newsletter-success--{{ unique }}"
     {% endif %}
-    required>>
+    required>
+        </div>
+        <button data-t4s-klaviyo-submit type="submit" class="btn btn-lg" style="background-color: {{ section.settings.btn_color }}; color: #fff;">Suscribirme</button>
+        <input type="hidden" name="g" value="{{ section.settings.klaviyo_list_id }}>
       </form>
     </div>
     <div class="col-md-3 text-center">
