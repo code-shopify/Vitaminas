@@ -1,25 +1,58 @@
-<div class="container custom-section text-center">
+{% schema %}
+{
+  "name": "Sección Personalizable",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color de fondo",
+      "default": "#fffbe6"
+    },
+    {
+      "type": "color",
+      "id": "btn_color",
+      "label": "Color del botón",
+      "default": "#8e2b7b"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Imagen izquierda"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Imagen derecha"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sección Personalizable",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
+
+<div class="container text-center" style="background-color: {{ section.settings.bg_color }}; padding: 50px 20px;">
   <h1 class="fw-bold">¡SUSCRÍBETE Y RECIBE UN 10% OFF!</h1>
   <p>Disfruta de promociones, acceso preferencial a nuevos productos, noticias y ¡mucho más!</p>
   <form class="my-4">
     <div class="mb-3">
-      <input type="email" class="form-control" placeholder="Correo electrónico">
+      <input type="email" class="form-control" placeholder="Correo electrónico" required>
     </div>
-    <button type="submit" class="btn custom-btn btn-lg">Suscribirme</button>
+    <button type="submit" class="btn btn-lg" style="background-color: {{ section.settings.btn_color }}; color: #fff;">Suscribirme</button>
   </form>
   <div class="d-flex justify-content-around align-items-center flex-wrap">
-    <img src="imagen1.png" alt="Producto 1" class="img-fluid" style="max-width: 200px;">
-    <img src="imagen2.png" alt="Producto 2" class="img-fluid" style="max-width: 200px;">
+    {% if section.settings.image_1 %}
+      <img src="{{ section.settings.image_1 | image_url }}" alt="Producto 1" class="img-fluid" style="max-width: 200px;">
+    {% endif %}
+    {% if section.settings.image_2 %}
+      <img src="{{ section.settings.image_2 | image_url }}" alt="Producto 2" class="img-fluid" style="max-width: 200px;">
+    {% endif %}
   </div>
 </div>
-
-{% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
-{% endschema %}
-/*-----------------------------------------------------------------------------/
+---------------------------------------------------------------/
 / Custom Theme CSS
 /-----------------------------------------------------------------------------*/
 /*---------------- Global Custom CSS -------------------*/
