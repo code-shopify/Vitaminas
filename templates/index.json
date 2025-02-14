@@ -23,11 +23,20 @@
         "feature_description_3": "Recibe tips exclusivos, ofertas especiales y las últimas novedades al formar parte."
       }
     },
-    "suscripcion_bVKBg6": {
+    "suscripcion_RcYxej": {
       "type": "suscripcion",
       "settings": {
         "bg_color": "#fffbe6",
-        "btn_color": "#8e2b7b"
+        "btn_color": "#8e2b7b",
+        "klaviyo_list_id": "TU_LISTA_ID"
+      }
+    },
+    "suscripcion_3xEY6W": {
+      "type": "suscripcion",
+      "settings": {
+        "bg_color": "#fffbe6",
+        "btn_color": "#8e2b7b",
+        "klaviyo_list_id": "TU_LISTA_ID"
       }
     },
     "tik_toks_UbMLMd": {
@@ -224,11 +233,11 @@
             "newl_size": "small",
             "btn_icon": false,
             "input_cl": "#878787",
-            "border_cl": "#000",
+            "border_cl": "#000000",
             "btn_cl": "#ffffff",
             "btn_bg_cl": "#222222",
             "btn_hover_cl": "#ffffff",
-            "btn_hover_bg_cl": "#56CFE1",
+            "btn_hover_bg_cl": "#56cfe1",
             "hidden_mobile": false,
             "mgb": 15,
             "mgb_mb": 10
@@ -267,7 +276,8 @@
   },
   "order": [
     "mosaico_image_text_pLyM7P",
-    "suscripcion_bVKBg6",
+    "suscripcion_RcYxej",
+    "suscripcion_3xEY6W",
     "tik_toks_UbMLMd",
     "ejemplo_crAfXx",
     "newsletter_9DxkhY"
