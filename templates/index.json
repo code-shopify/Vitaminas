@@ -156,7 +156,7 @@
     "ejemplo_crAfXx": {
       "type": "ejemplo",
       "settings": {
-        "texto": "Productos elaborados en instalaciones con las siguientes certificaciones",
+        "texto": "Productos elaborados en instalaciones con las siguientes certificaciones y registros:",
         "background_color": "#f0e6ff"
       }
     }
