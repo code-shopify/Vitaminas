@@ -55,7 +55,24 @@
           <input type="email" name="email" class="form-control" placeholder="Correo electrónico" required="required">
         </div>
         <button data-t4s-klaviyo-submit type="submit" class="btn btn-lg" style="background-color: {{ section.settings.btn_color }}; color: #fff;">Suscribirme</button>
-        <input type="hidden" name="g" value="{{ section.settings.klaviyo_list_id }}">
+        <input  <input
+    type="email"
+    id="{{ field_id }}"
+    class="{% if input_group %}{% else %}field{% endif %}"
+    placeholder="{{ placeholder_field }}"
+    aria-label="{{ placeholder_field }}"
+    autocorrect="off"
+    autocapitalize="off"
+    name="contact[email]"
+    data-newsletter-field
+    {% if form.errors %}
+      autofocus
+      aria-invalid="true"
+      aria-describedby="Newsletter-error--{{ unique }}"
+    {% elsif form.posted_successfully? %}
+      aria-describedby="Newsletter-success--{{ unique }}"
+    {% endif %}
+    required>>
       </form>
     </div>
     <div class="col-md-3 text-center">
