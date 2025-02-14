@@ -23,14 +23,6 @@
         "feature_description_3": "Recibe tips exclusivos, ofertas especiales y las últimas novedades al formar parte."
       }
     },
-    "suscripcion_RcYxej": {
-      "type": "suscripcion",
-      "settings": {
-        "bg_color": "#fffbe6",
-        "btn_color": "#8e2b7b",
-        "klaviyo_list_id": "TU_LISTA_ID"
-      }
-    },
     "suscripcion_3xEY6W": {
       "type": "suscripcion",
       "settings": {
@@ -276,7 +268,6 @@
   },
   "order": [
     "mosaico_image_text_pLyM7P",
-    "suscripcion_RcYxej",
     "suscripcion_3xEY6W",
     "tik_toks_UbMLMd",
     "ejemplo_crAfXx",
