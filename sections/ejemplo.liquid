@@ -11,30 +11,35 @@
   </div>
 </div>
 
+
 {% style %}
 
+/*---------------- Custom CSS for only desktop -------------------*/
+@media (min-width: 1025px) {
+}
+
+/*---------------- Custom CSS for tablet, mobile -------------------*/
+@media (max-width: 1024px) {
+}
+
+/*---------------- Custom CSS for only tablet -------------------*/
+@media (min-width: 768px) and (max-width: 1024px) {
+}
+
 /*---------------- Custom CSS for only mobile -------------------*/
-@media (max-width: 767px) {
-  .d-flex {
-    flex-direction: column; /* Cambia a columna en móviles */
-    text-align: center;      /* Centra el texto */
-  }
-
-  .mx-5 {
-    margin: 0;               /* Elimina márgenes */
-  }
-
+@media (max-width: 767px){
   img {
-    width: 40px;             /* Reduce el tamaño de las imágenes */
-    margin: 5px;             /* Añade margen entre imágenes */
+    width: 40px;
+    margin: 5px;
   }
 
   h1 {
-    font-size: 16px;         /* Reduce el tamaño del texto */
+    font-size: 16px;
   }
 }
-{% endstyle %}
 
+  
+{% endstyle %}
 
 {% javascript %}
   
