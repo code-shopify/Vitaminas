@@ -1,3 +1,31 @@
+{% style %}
+  
+---------------------------------------------------------------/
+/ Custom Theme CSS
+/-----------------------------------------------------------------------------*/
+/*---------------- Global Custom CSS -------------------*/
+{{ settings.global_css }}
+
+/*---------------- Custom CSS for only desktop -------------------*/
+@media (min-width: 1025px) {
+  {{ settings.desktop_css }}
+}
+
+/*---------------- Custom CSS for tablet, mobile -------------------*/
+@media (max-width: 1024px) {
+  {{ settings.tablet_mobile_css }}
+}
+
+/*---------------- Custom CSS for only tablet -------------------*/
+@media (min-width: 768px) and (max-width: 1024px) {
+  {{ settings.tablet_css }}
+}
+
+/*---------------- Custom CSS for only mobile -------------------*/
+@media (max-width: 767px){
+  {{ settings.mobile_css }}
+}
+{% endstyle %}
 {% schema %}
 {
   "name": "Suscripcion",
@@ -52,28 +80,3 @@
     {% endif %}
   </div>
 </div>
----------------------------------------------------------------/
-/ Custom Theme CSS
-/-----------------------------------------------------------------------------*/
-/*---------------- Global Custom CSS -------------------*/
-{{ settings.global_css }}
-
-/*---------------- Custom CSS for only desktop -------------------*/
-@media (min-width: 1025px) {
-  {{ settings.desktop_css }}
-}
-
-/*---------------- Custom CSS for tablet, mobile -------------------*/
-@media (max-width: 1024px) {
-  {{ settings.tablet_mobile_css }}
-}
-
-/*---------------- Custom CSS for only tablet -------------------*/
-@media (min-width: 768px) and (max-width: 1024px) {
-  {{ settings.tablet_css }}
-}
-
-/*---------------- Custom CSS for only mobile -------------------*/
-@media (max-width: 767px){
-  {{ settings.mobile_css }}
-}
