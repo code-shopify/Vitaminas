@@ -1,52 +1,50 @@
-<div class="p-3" style="background-color: {{ section.settings.background_color }}; height: 55px;">
+<div class="p-3 contenedor" style="background-color: {{ section.settings.background_color }}; height: 55px;">
   <div class="d-flex justify-content-between align-items-center mx-5">
-    <div class="text-left ml-1">
-      <h1 style="font-size: 18px;">{{ section.settings.texto }}</h1>
+    <div class="text-left ml-1 h1 texto-final">
+      {{ section.settings.texto }}
     </div>
-    <div class="mx-5">
-      <img src="https://google.com/favicon.ico" alt="Imagen 1"/>
-      <img src="https://google.com/favicon.ico" alt="Imagen 2"/>
-      <img src="https://google.com/favicon.ico" alt="Imagen 3"/>
+    <div class="mx-5 imagenes">
+      <img width="20" height="20" alt="Imagen 1">
+      <img width="20" height="20" alt="Imagen 2">
+      <img width="20" height="20" alt="Imagen 3">
     </div>
   </div>
 </div>
 
-
 {% style %}
-
-/*---------------- Custom CSS for only desktop -------------------*/
-@media (min-width: 1025px) {
-}
-
-/*---------------- Custom CSS for tablet, mobile -------------------*/
-@media (max-width: 1024px) {
-}
-
-/*---------------- Custom CSS for only tablet -------------------*/
-@media (min-width: 768px) and (max-width: 1024px) {
-}
-
-/*---------------- Custom CSS for only mobile -------------------*/
-@media (max-width: 767px){
-  img {
-    width: 20px;
-    margin: 20px;
+  /*---------------- Custom CSS for only desktop -------------------*/
+  @media (min-width: 1025px) {
   }
 
-  h1 {
-    font-size: 16px;
+  /*---------------- Custom CSS for tablet, mobile -------------------*/
+  @media (max-width: 1024px) {
   }
-}
 
-  
+  /*---------------- Custom CSS for only tablet -------------------*/
+  @media (min-width: 768px) and (max-width: 1024px) {
+  }
+
+  /*---------------- Custom CSS for only mobile -------------------*/
+  @media (max-width: 767px) {
+    .imagenes {
+      margin: 0;
+    }
+
+    .texto-final {
+      font-size: 12px;
+    }
+
+    .contenedor {
+      height: 30px;
+    }
+  }
 {% endstyle %}
 
 {% javascript %}
-  
 {% endjavascript %}
 
 {% schema %}
-  {
+{
   "name": "Sección Texto e Imágenes",
   "settings": [
     {
@@ -67,17 +65,15 @@
     },
     {
       "type": "color",
-       "id": "background_color",
+      "id": "background_color",
       "label": "Color de fondo",
       "default": "#f0e6ff"
     }
   ],
   "presets": [
     {
-      "name": "Hola shopify",
-      "category": "Imagenes"
+      "name": "Hola shopify"
     }
   ]
 }
-
 {% endschema %}
