@@ -1,12 +1,12 @@
-<div class="p-3 contenedor" style="background-color: {{ section.settings.background_color }}; height: 55px;">
+<div class="p-3 contenedor" style="background-color: {{ section.settings.background_color }};">
   <div class="d-flex justify-content-between align-items-center mx-5">
-    <div class="text-left ml-1 h1 texto-final">
+    <div class="text-left ml-1 h2 texto-final">
       {{ section.settings.texto }}
     </div>
     <div class="mx-5 imagenes">
-      <img width="20" height="20" alt="Imagen 1">
-      <img width="20" height="20" alt="Imagen 2">
-      <img width="20" height="20" alt="Imagen 3">
+      <img src="https://google.com/favicon.ico" width="20" height="20" alt="Imagen 1">
+      <img src="https://google.com/favicon.ico" width="20" height="20" alt="Imagen 2">
+      <img src="https://google.com/favicon.ico" width="20" height="20" alt="Imagen 3">
     </div>
   </div>
 </div>
@@ -14,6 +14,9 @@
 {% style %}
   /*---------------- Custom CSS for only desktop -------------------*/
   @media (min-width: 1025px) {
+    .contenedor {
+      height: 55px;
+    }
   }
 
   /*---------------- Custom CSS for tablet, mobile -------------------*/
@@ -28,6 +31,7 @@
   @media (max-width: 767px) {
     .imagenes {
       margin: 0;
+      padding: 0;
     }
 
     .texto-final {
@@ -35,7 +39,7 @@
     }
 
     .contenedor {
-      height: 30px;
+      height: 100px;
     }
   }
 {% endstyle %}
