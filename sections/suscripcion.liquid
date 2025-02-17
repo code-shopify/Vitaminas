@@ -1,6 +1,6 @@
 {% schema %}
 {
-  "name": "Sección Suscripción",
+  "name": "Suscripción",
   "settings": [
     {
       "type": "image_picker",
@@ -45,7 +45,7 @@
   ],
   "presets": [
     {
-      "name": "Sección Suscripción",
+      "name": "Suscripción",
       "category": "Marketing"
     }
   ]
@@ -63,12 +63,31 @@
     <div class="subscription-content">
       <h2>{{ section.settings.title }}</h2>
       <p>{{ section.settings.description }}</p>
-      <form method="post" action="#">
-        <input type="email" placeholder="{{ section.settings.placeholder }}" required>
+
+      {%- form 'customer', class: 'newsletter-form' -%}
+        <input 
+          type="email" 
+          name="contact[email]" 
+          placeholder="{{ section.settings.placeholder }}" 
+          required 
+          aria-label="{{ section.settings.placeholder }}">
+        
+        <input type="hidden" name="contact[accepts_marketing]" value="true">
+
         <button type="submit" style="background-color: {{ section.settings.button_color }};">
           {{ section.settings.button_text }}
         </button>
-      </form>
+
+        <!-- Mensajes de éxito y error -->
+        {%- if form.posted_successfully? -%}
+          <p class="success-message">¡Gracias por suscribirte!</p>
+        {%- endif -%}
+
+        {%- if form.errors -%}
+          <p class="error-message">{{ form.errors.messages.email }}</p>
+        {%- endif -%}
+      {%- endform -%}
+
     </div>
 
     <div class="subscription-image">
@@ -140,5 +159,14 @@
   border-radius: 5px;
   cursor: pointer;
 }
-</style>
 
+.success-message {
+  color: green;
+  margin-top: 10px;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}
+</style>
