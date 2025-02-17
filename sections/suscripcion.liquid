@@ -52,60 +52,151 @@
 }
 {% endschema %}
 
-<div class="t4s-section-inner t4s_nt_se_footer t4s_se_footer t4s-container-wrap" style="--bg-color: #f6f6f8;--pd-top: 75px;--pd-bottom: 75px;">
-  <div class="t4s-container">
-    <div class="t4s-footer-wrap t4s-row is--footer-sticky-false is--footer-collapse-true">
+<div class="t4s-container vitatu-section py-5 text-center subscription-section">
+  <div class="subscription-container">
+    <div class="subscription-image">
+      {% if section.settings.left_image != blank %}
+        <img src="{{ section.settings.left_image | img_url: 'large' }}" alt="Imagen izquierda">
+      {% endif %}
+    </div>
+    
+    <div class="subscription-content">
+      <h2>{{ section.settings.title }}</h2>
+      <p>{{ section.settings.description }}</p>
 
-      <div class="t4s-custom-col t4s-col-border-none t4s-col-item t4s-col-lg-3 t4s-col-md-6 t4s-col-12">
-        <div class="t4s-col-inner t4s-text-md-start t4s-text-start">
-          <h3 class="t4s-col-heading">Newsletter Signup</h3>
-          <p class="t4s-text-bl">Suscríbete a nuestro boletín y obtén un 10% de descuento en tu primera compra.</p>
+      {%- form 'customer', class: 'newsletter-form' -%}
+        <input 
+          type="email" 
+          id="newsletter-email"
+          name="contact[email]" 
+          placeholder="{{ section.settings.placeholder }}" 
+          required 
+          aria-label="{{ section.settings.placeholder }}"
+          autocorrect="off"
+          autocapitalize="off">
+        
+        <input type="hidden" name="contact[accepts_marketing]" value="true">
 
-          {%- form 'customer', id: 't4s-form-footer', class: 't4s-newsletter__form' -%}
-            <input type="email"
-              id="newsletter-email"
-              name="contact[email]"
-              placeholder="{{ section.settings.placeholder }}"
-              required
-              aria-label="{{ section.settings.placeholder }}"
-              class="t4s-newsletter__email">
+        <button type="submit" style="background-color: {{ section.settings.button_color }};">
+          {{ section.settings.button_text }}
+        </button>
 
-            <input type="hidden" name="contact[accepts_marketing]" value="true">
+        <!-- Mensajes de éxito y error -->
+        {%- if form.posted_successfully? -%}
+          <p class="success-message" id="newsletter-success">¡Gracias por suscribirte!</p>
+        {%- endif -%}
 
-            <button type="submit" class="t4s-newsletter__submit" style="background-color: {{ section.settings.button_color }};">
-              {{ section.settings.button_text }}
-            </button>
+        {%- if form.errors -%}
+          <p class="error-message" id="newsletter-error">
+            {{ form.errors.translated_fields.email | capitalize }}: {{ form.errors.messages.email }}
+          </p>
+        {%- endif -%}
+      {%- endform -%}
 
-            <!-- Mensajes de éxito y error -->
-            {%- if form.posted_successfully? -%}
-              <p class="success-message">¡Gracias por suscribirte!</p>
-            {%- endif -%}
+    </div>
 
-            {%- if form.errors -%}
-              <p class="error-message">{{ form.errors.translated_fields.email | capitalize }}: {{ form.errors.messages.email }}</p>
-            {%- endif -%}
-          {%- endform -%}
-
-        </div>
-      </div>
-
+    <div class="subscription-image">
+      {% if section.settings.right_image != blank %}
+        <img src="{{ section.settings.right_image | img_url: 'large' }}" alt="Imagen derecha">
+      {% endif %}
     </div>
   </div>
 </div>
 
 <style>
-/* Estilos del contenedor */
-.t4s-section-inner {
-  background: #f6f6f8;
-  padding: 75px 0;
-}
-
-/* Contenedor de la suscripción */
-.t4s-col-inner {
+.subscription-section {
+  background: #fefaf4;
+  padding: 50px 0;
   text-align: center;
-  max-width: 500px;
-  margin: 0 auto;
 }
 
-/* Título */
-.t
+.subscription-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.subscription-image img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+.subscription-content {
+  flex: 1;
+  max-width: 500px;
+  text-align: center;
+}
+
+.subscription-content h2 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.subscription-content p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.subscription-content form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subscription-content input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.subscription-content button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.success-message {
+  color: green;
+  margin-top: 10px;
+  display: none;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+  display: none;
+}
+
+/* Mostrar mensajes solo cuando correspondan */
+#newsletter-success:target {
+  display: block;
+}
+
+#newsletter-error:target {
+  display: block;
+}
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var successMessage = document.getElementById('newsletter-success');
+    var errorMessage = document.getElementById('newsletter-error');
+
+    if (successMessage) {
+      successMessage.style.display = 'block';
+    }
+    if (errorMessage) {
+      errorMessage.style.display = 'block';
+    }
+  });
+</script>
