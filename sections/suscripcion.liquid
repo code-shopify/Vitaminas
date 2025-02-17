@@ -1,113 +1,144 @@
 {% schema %}
 {
-  "name": "Subscripcion",
+  "name": "Sección Suscripción",
   "settings": [
     {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Color de fondo",
-      "default": "#fffbe6"
-    },
-    {
-      "type": "color",
-      "id": "btn_color",
-      "label": "Color del botón",
-      "default": "#8e2b7b"
-    },
-    {
       "type": "image_picker",
-      "id": "image_1",
+      "id": "left_image",
       "label": "Imagen izquierda"
     },
     {
       "type": "image_picker",
-      "id": "image_2",
+      "id": "right_image",
       "label": "Imagen derecha"
     },
     {
       "type": "text",
-      "id": "klaviyo_list_id",
-      "label": "ID de lista de Klaviyo",
-      "default": "TU_LISTA_ID"
+      "id": "title",
+      "label": "Título",
+      "default": "¡SUSCRÍBETE Y RECIBE UN 10% OFF!"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción",
+      "default": "Disfruta de promociones, acceso preferencial a nuevos productos, noticias y mucho más."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Texto del campo de correo",
+      "default": "Correo electrónico"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Texto del botón",
+      "default": "Suscribirme"
+    },
+    {
+      "type": "color",
+      "id": "button_color",
+      "label": "Color del botón",
+      "default": "#A02D76"
     }
   ],
   "presets": [
     {
-      "name": "Suscripcion",
-      "category": "Custom"
+      "name": "Sección Suscripción",
+      "category": "Marketing"
     }
   ]
 }
 {% endschema %}
 
-<div class=" t4s-container vitatu-section py-5 text-center" style="background-color: {{ section.settings.bg_color }}; padding: 50px 20px;">
-  <div class="row align-items-center">
-    <div class="col-md-3 text-center">
-      {% if section.settings.image_1 %}
-        <img src="{{ section.settings.image_1 | image_url }}" alt="Producto 1" class="img-fluid" style="max-width: 200px;">
+<div class="subscription-section">
+  <div class="subscription-container">
+    <div class="subscription-image">
+      {% if section.settings.left_image != blank %}
+        <img src="{{ section.settings.left_image | img_url: 'large' }}" alt="Imagen izquierda">
       {% endif %}
     </div>
-    <div class="col-md-6">
-      <h1 class="fw-bold">¡SUSCRÍBETE Y RECIBE UN 10% OFF!</h1>
-      <p>Disfruta de promociones, acceso preferencial a nuevos productos, noticias y ¡mucho más!</p>
-{%- form 'customer', class: form_class, id: form_id, data-newsletter-form: '', style: style -%}
-  {%- liquid
-    assign success_message = 'general.newsletter_form.thank_you' | t
-    assign success_message_discount = 'general.newsletter_form.thank_you_with_code_html' | t
-
-    if success_text != blank
-      assign success_message_discount = success_text | remove: '<p>' | remove: '</p>'
-    endif
-  -%}
-
-  {%- if form.posted_successfully? -%}
-    <p class="newsletter__message newsletter__message--success" id="Newsletter-success--{{ unique }}" tabindex="-1" autofocus>
-      {%- if show_discount_message and success_message_discount != blank -%}
-        {{ success_message_discount }}
-      {%- else -%}
-        {{ success_message }}
-      {%- endif -%}
-    </p>
-  {%- endif -%}
-
-  <div class="newsletter__message newsletter__message--error errors" id="Newsletter-error--{{ unique }}">
-    {%- if form.errors -%}
-      {{ form.errors.translated_fields.email | capitalize }}
-      {{ form.errors.messages.email }}
-    {%- else -%}
-      <em>{{ 'general.newsletter_form.error_message' | t }}</em>
-    {%- endif -%}
-  </div>
-
-  <input type="hidden" name="contact[accepts_marketing]" value="true">
-
-  {%- if show_name -%}
-    <div class="input-row">{{ name_field }}</div>
-    <div class="input-row">{{ email_field }}</div>
-    <div class="input-row">{{ submit_button }}</div>
-  {%- endif -%}
-
-  {%- unless show_name -%}
-    <div class="input-group">
-      {{ email_field }}
-      {{ submit_button }}
+    
+    <div class="subscription-content">
+      <h2>{{ section.settings.title }}</h2>
+      <p>{{ section.settings.description }}</p>
+      <form method="post" action="#">
+        <input type="email" placeholder="{{ section.settings.placeholder }}" required>
+        <button type="submit" style="background-color: {{ section.settings.button_color }};">
+          {{ section.settings.button_text }}
+        </button>
+      </form>
     </div>
-  {%- else -%}
 
-  {%- endunless -%}
-
-
-  {%- if block.settings.terms -%}
-    <div class="form__legal">
-      {{ 'shopify.online_store.spam_detection.disclaimer_html' | t }}
-    </div>
-  {%- endif -%}
-{%- endform -%}
-    </div>
-    <div class="col-md-3 text-center">
-      {% if section.settings.image_2 %}
-        <img src="{{ section.settings.image_2 | image_url }}" alt="Producto 2" class="img-fluid" style="max-width: 200px;">
+    <div class="subscription-image">
+      {% if section.settings.right_image != blank %}
+        <img src="{{ section.settings.right_image | img_url: 'large' }}" alt="Imagen derecha">
       {% endif %}
     </div>
   </div>
 </div>
+
+<style>
+.subscription-section {
+  background: #fefaf4;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.subscription-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+.subscription-image img {
+  width: 100%;
+  max-width: 300px;
+  border-radius: 10px;
+}
+
+.subscription-content {
+  flex: 1;
+  max-width: 500px;
+  text-align: center;
+}
+
+.subscription-content h2 {
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.subscription-content p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.subscription-content form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subscription-content input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.subscription-content button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+</style>
+
