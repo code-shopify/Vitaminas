@@ -13,7 +13,7 @@
         {% assign image = section.settings[image_key] %}
         {% assign text = section.settings[text_key] %}
 
-        <!-- Verificar si el texto está vacío y asignar un valor por defecto -->
+        <!-- Si el usuario no ha editado el texto, usamos valores predeterminados -->
         {% if text == blank %}
           {% case i %}
             {% when 1 %} {% assign text = "Sin Saborizantes Artificiales" %}
@@ -31,7 +31,7 @@
             {% if image != blank %}
               <img src="{{ image | img_url: 'auto' }}" class="img-fluid mb-2 icon-img" alt="{{ text }}">
             {% endif %}
-            <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">{{ text }}</p>
+            <p class="fw-bold icon-text text-center" style="color: {{ section.settings.text_color }};">{{ text }}</p>
           </div>
         {% endif %}
       {% endfor %}
@@ -45,6 +45,7 @@
 </div>
 
 {% style %}
+  /* Asegurar que el contenido no se salga de la sección */
   .contenedor {
     max-width: 100%;
     overflow: hidden;
@@ -52,6 +53,7 @@
     text-align: center;
   }
 
+  /* Asegurar que los iconos y textos estén bien alineados */
   .icon-block {
     display: flex;
     flex-direction: column;
@@ -61,17 +63,20 @@
     width: 100%;
   }
 
+  /* Tamaño adaptable de iconos */
   .icon-img {
-    max-width: 80px;
+    max-width: 80px; /* Ajuste automático */
     height: auto;
   }
 
+  /* Corregir alineación del texto y hacer editable */
   .icon-text {
-    font-size: clamp(12px, 1.5vw, 18px);
+    font-size: clamp(12px, 1.5vw, 18px); /* Escalado según tamaño de pantalla */
     text-align: center;
     margin-top: 5px;
-    word-wrap: break-word;
-    max-width: 90%;
+    word-wrap: normal; /* Evita el texto en vertical */
+    max-width: 100%;
+    display: block;
   }
 
   @media (max-width: 767px) {
@@ -109,7 +114,8 @@
     {
       "type": "text",
       "id": "icon_1_text",
-      "label": "Texto 1"
+      "label": "Texto 1",
+      "default": "Sin Saborizantes Artificiales"
     },
     {
       "type": "image_picker",
@@ -119,7 +125,8 @@
     {
       "type": "text",
       "id": "icon_2_text",
-      "label": "Texto 2"
+      "label": "Texto 2",
+      "default": "Sin Lácteos"
     },
     {
       "type": "image_picker",
@@ -129,7 +136,8 @@
     {
       "type": "text",
       "id": "icon_3_text",
-      "label": "Texto 3"
+      "label": "Texto 3",
+      "default": "Sin Soya"
     },
     {
       "type": "image_picker",
@@ -139,7 +147,8 @@
     {
       "type": "text",
       "id": "icon_4_text",
-      "label": "Texto 4"
+      "label": "Texto 4",
+      "default": "Sin Gluten"
     },
     {
       "type": "image_picker",
@@ -149,7 +158,8 @@
     {
       "type": "text",
       "id": "icon_5_text",
-      "label": "Texto 5"
+      "label": "Texto 5",
+      "default": "Sin Colorantes"
     },
     {
       "type": "image_picker",
@@ -159,21 +169,14 @@
     {
       "type": "text",
       "id": "icon_6_text",
-      "label": "Texto 6"
+      "label": "Texto 6",
+      "default": "Sin Endulzantes Artificiales"
     }
   ],
   "presets": [
     {
       "name": "Sección de Iconos",
-      "category": "Custom",
-      "settings": {
-        "icon_1_text": "Sin Saborizantes Artificiales",
-        "icon_2_text": "Sin Lácteos",
-        "icon_3_text": "Sin Soya",
-        "icon_4_text": "Sin Gluten",
-        "icon_5_text": "Sin Colorantes",
-        "icon_6_text": "Sin Endulzantes Artificiales"
-      }
+      "category": "Custom"
     }
   ]
 }
