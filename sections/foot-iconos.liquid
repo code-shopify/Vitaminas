@@ -54,7 +54,7 @@
           {% assign text = section.settings[text_key] %}
 
           {% if image != blank or text != blank %}
-            <div class="d-flex align-items-center icon-block">
+            <div class="d-flex align-items-center icon-block version-movil">
               {% if image != blank %}
                 <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
               {% endif %}
@@ -73,6 +73,12 @@
 {% style %}
     /*---------------- Custom CSS for only desktop -------------------*/
   @media (min-width: 1025px) {
+      /* Versión de escritorio: los iconos y textos se muestran de forma estática */
+  .marquee-desktop {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
   }
 
   /*---------------- Custom CSS for tablet, mobile -------------------*/
@@ -85,16 +91,7 @@
 
   /*---------------- Custom CSS for only mobile -------------------*/
   @media (max-width: 767px) {
-  }
-
-  /* Versión de escritorio: los iconos y textos se muestran de forma estática */
-  .marquee-desktop {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  /* Marquee solo en móviles */
+      /* Marquee solo en móviles */
   .marquee-mobile {
     display: none;
     overflow: hidden;
@@ -102,6 +99,11 @@
     position: relative;
     width: 100%;
   }
+  }
+
+
+
+
 
   .marquee-content {
     display: flex;
