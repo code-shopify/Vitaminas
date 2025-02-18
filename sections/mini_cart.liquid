@@ -255,9 +255,9 @@
     <div class="container my-4">
       <div class="row g-3">
         <div class="col-md-6">
-          <div class="d-flex align-items-center bg-warning bg-opacity-25 p-3 rounded icon_flex" style="width: 100%; min-height: 80px">
+          <div class="d-flex align-items-center bg-warning bg-opacity-25 p-3 rounded icon_flex" style="width: 100%; min-height: 80px background-color: {{ section.settings.background_color }}">
             {% if section.settings.icono_izq != blank %}
-              <img src="{{ section.settings.icono_izq | img_url: '30x30' }}" alt="icono" class="me-2" style="flex: 0 0 30px;">
+              <img src="{{ section.settings.icono_izq | image_url: '30x30' }}" alt="icono" class="me-2" style="flex: 0 0 30px;">
             {% endif %}
             <p class="mb-0 font-weight-bold">
               <span class="fw-bold">{{ section.settings.texto_izq }}</span>
@@ -265,12 +265,13 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="d-flex align-items-center bg-warning bg-opacity-25 p-3 rounded icon_flex" style="width: 100%; min-height: 80px">
+          <div class="d-flex align-items-center bg-warning bg-opacity-25 p-3 rounded icon_flex" style="width: 100%; min-height: 80px background-color: {{ section.settings.background_color }}">
             {% if section.settings.icono_der != blank %}
-              <img src="{{ section.settings.icono_der | img_url: '30x30' }}" alt="icono" class="me-2" style="flex: 0 0 30px;">
+              <img src="{{ section.settings.icono_der | image_url: '30x30' }}" alt="icono" class="me-2" style="flex: 0 0 30px;">
             {% endif %}
             <p class="mb-0 fw-bold">
-              <span class="fw-bold">{{ section.settings.texto_der }}</span>
+              <span class="fw-bold fs-5">{{ section.settings.texto_der }}</span>
+              {{ section.settings.texto_abajo }}
             </p>
           </div>
         </div>
@@ -751,6 +752,12 @@
       "default": "United States"
     },
     {
+        "type": "color",
+        "id":"background_color",
+        "label":"Color del fondo",
+        "default":"#f2b55a"
+    },
+    {
       "type":"image_picker",
       "id":"icono_izq",
       "label": "Icono izquierdo"
@@ -759,6 +766,16 @@
       "type":"text",
       "id":"texto_izq",
       "label":"Texto Izquierdo"
+    },
+    {
+      "type":"text",
+      "id":"texto_abajo_izq",
+      "label": "Texto icono izquierdo"
+    },
+    {
+      "type":"text",
+      "id":"texto_abajo_der",
+      "label": "Texto icono derecho"
     },
     {
       "type":"image_picker",
