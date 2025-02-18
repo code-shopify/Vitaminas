@@ -261,9 +261,9 @@
             {% endif %}
             <p class="mb-0 font-weight-bold">
               <span class="fw-bold">{{ section.settings.texto_izq }}</span>
-            </p>
-            <p style="fs-20px"> 
-              {{section.settings.texto_abajo_izq}}
+              <p style="font-size:20px;">
+                {{section.settings.texto_abajo_izq}}
+              </p>
             </p>
           </div>
         </div>
@@ -272,11 +272,9 @@
             {% if section.settings.icono_der != blank %}
               <img src="{{ section.settings.icono_der | image_url: '30x30' }}" alt="icono" class="me-2" style="flex: 0 0 30px;">
             {% endif %}
-            <p class="mb-0 fw-bold">
+            <p class="mb-0">
               <span class="fw-bold fs-5">{{ section.settings.texto_der }}</span>
-            </p>
-            <p> 
-              {{section.settings.texto_abajo_izq}}
+              {{ section.settings.texto_abajo_der}}
             </p>
           </div>
         </div>
@@ -778,11 +776,6 @@
       "label": "Texto icono izquierdo"
     },
     {
-      "type":"text",
-      "id":"texto_abajo_der",
-      "label": "Texto icono derecho"
-    },
-    {
       "type":"image_picker",
       "id":"icono_der",
       "label": "Icono Derecho"
@@ -791,6 +784,11 @@
       "type":"text",
       "id":"texto_der",
       "label":"Texto derecho"
+    },
+    {
+      "type":"text",
+      "id":"texto_abajo_der",
+      "label": "Texto icono derecho"
     },
     {
       "type": "paragraph",
