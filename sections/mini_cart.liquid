@@ -260,7 +260,7 @@
               <img src="{{ section.settings.icono_izq | img_url: '30x30' }}" alt="icono" class="me-2">
             {% endif %}
             <p class="mb-0 fw-bold">
-              <span class="fw-bold">{{ section.settings.texto_izq_negrita }}</span>
+              <span class="fw-bold">{{ section.settings.texto_izq }}</span>
               {{ section.settings.texto_izq }}
             </p>
           </div>
@@ -268,10 +268,10 @@
         <div class="col-md-6">
           <div class="d-flex align-items-center bg-info bg-opacity-25 p-3 rounded border border-info">
             {% if section.settings.icono_der != blank %}
-              <img src="{{ section.settings.icon_der | img_url: '30x30' }}" alt="icono" class="me-2">
+              <img src="{{ section.settings.icono_der | img_url: '30x30' }}" alt="icono" class="me-2">
             {% endif %}
             <p class="mb-0 fw-bold">
-              <span class="fw-bold">{{ section.settings.texto_der_negrita }}</span>
+              <span class="fw-bold">{{ section.settings.texto_der }}</span>
               {{ section.settings.texto_der }}
             </p>
           </div>
@@ -754,13 +754,23 @@
     },
     {
       "type":"image_picker",
-      "id":"icon_1",
+      "id":"icono_izq",
       "label": "Icono izquierdo"
     },
     {
+      "type":"text",
+      "id":"texto_izq",
+      "label":"Texto Izquierdo"
+    },
+    {
       "type":"image_picker",
-      "id":"icon_2",
+      "id":"icono_der",
       "label": "Icono Derecho"
+    },
+    {
+      "type":"text",
+      "id":"texto_der",
+      "label":"Texto derecho"
     },
     {
       "type": "paragraph",
