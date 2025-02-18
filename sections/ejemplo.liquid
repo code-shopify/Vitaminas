@@ -1,13 +1,15 @@
 <div
-  class="t4s-section-inner contenedor vitatu-section"
+  class="t4s-section-inner contenedor vitatu-section shadow mb-3"
   style="background-color: {{ section.settings.background_color }};"
 >
-  <div class="p-3 t4s-container-inner">
+  <div class="p-3 mx-5 t4s-container-inner">
     <div class="d-flex justify-content-between align-items-center">
-      <div class="text-left mx-2 h2 texto-final">
-        {{ section.settings.texto }}
+      <div class="text-left mx-2">
+        <h1 class="texto-final">
+          {{ section.settings.texto }}
+        </h1>
       </div>
-      <div class="imagenes mx-2">
+      <div class="imagenes mx-5">
         <img src="{{section.settings.imagen_1}}" width="20" height="20" alt="Imagen 1">
         <img src="{{section.settings.imagen_2}}" width="20" height="20" alt="Imagen 2">
         <img src="{{section.settings.imagen_3}}" width="20" height="20" alt="Imagen 3">
@@ -21,6 +23,10 @@
   @media (min-width: 1025px) {
     .contenedor {
       height: 5rem;
+    }
+
+    .texto-final {
+      font-size: 16px;
     }
   }
 
