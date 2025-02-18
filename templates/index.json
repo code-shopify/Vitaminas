@@ -36,7 +36,7 @@
     "foot_iconos_UNYBEx": {
       "type": "foot-iconos",
       "settings": {
-        "background_color": "#DDE066"
+        "background_color": "#dde066"
       }
     },
     "tik_toks_UbMLMd": {
@@ -205,6 +205,12 @@
         "use_cus_css": false,
         "code_cus_css": ""
       }
+    },
+    "foot_iconos_dNmnYU": {
+      "type": "foot-iconos",
+      "settings": {
+        "background_color": "#DDE066"
+      }
     }
   },
   "order": [
@@ -213,6 +219,7 @@
     "foot_iconos_UNYBEx",
     "tik_toks_UbMLMd",
     "ejemplo_crAfXx",
-    "video_featured_ab8iGh"
+    "video_featured_ab8iGh",
+    "foot_iconos_dNmnYU"
   ]
 }
