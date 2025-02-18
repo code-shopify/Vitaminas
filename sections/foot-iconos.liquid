@@ -5,50 +5,44 @@
   <div class="container">
     <div class="row justify-content-center align-items-center text-center">
       
-      {% assign empty_section = true %}  <!-- Variable para comprobar si hay contenido -->
-
       {% for i in (1..6) %}
         {% assign image_key = 'icon_' | append: i | append: '_image' %}
         {% assign text_key = 'icon_' | append: i | append: '_text' %}
         {% assign image = section.settings[image_key] %}
         {% assign text = section.settings[text_key] %}
 
-        {% if image != blank %}
-          {% assign empty_section = false %}
-          <div class="col-6 col-md-2 d-flex flex-column align-items-center justify-content-center icon-block">
+        <div class="col-6 col-md-2 d-flex flex-column align-items-center justify-content-center icon-block">
+          {% if image != blank %}
             <img src="{{ image | img_url: '150x150' }}" class="img-fluid mb-2 icon-img" alt="{{ text }}">
-            <p class="fw-bold text-white icon-text">{{ text }}</p>
-          </div>
-        {% endif %}
+          {% endif %}
+          <p class="fw-bold text-white icon-text">{{ text }}</p>
+        </div>
       {% endfor %}
-
-      {% if empty_section %}
-        <p class="text-center text-white">🔔 Agrega iconos desde el editor de temas.</p>
-      {% endif %}
 
     </div>
   </div>
 </div>
 
 {% style %}
+  /* Evitar que el contenido se salga de la sección */
   .contenedor {
     max-width: 100%;
-    overflow: hidden;
+    overflow: hidden; /* Previene el desbordamiento */
     padding: 20px 0;
-    text-align: center;
   }
 
+  /* Asegurar que los iconos y textos estén centrados */
   .icon-block {
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: center;
     align-items: center;
-    min-height: 120px;
+    min-height: 120px; /* Garantiza que cada bloque tenga espacio */
   }
 
   .icon-img {
-    max-width: 80px;
+    max-width: 80px; /* Tamaño controlado de iconos */
     height: auto;
     display: block;
   }
@@ -57,10 +51,11 @@
     font-size: 14px;
     text-align: center;
     margin-top: 5px;
-    word-wrap: break-word;
+    word-wrap: break-word; /* Asegura que el texto no se salga */
     max-width: 90%;
   }
 
+  /* Asegurar contraste y visibilidad en fondos oscuros */
   .contenedor {
     color: #ffffff;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
@@ -97,4 +92,3 @@
   ]
 }
 {% endschema %}
-
