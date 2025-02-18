@@ -1,135 +1,92 @@
-<section class="container my-4">
-  <div class="row justify-content-center p-3 rounded" 
-       style="background-color: {{ section.settings.bg_color }}; 
-              background-image: url({{ section.settings.bg_image | img_url: 'master' }}); 
-              background-size: cover; background-position: center;">
-    
-    <!-- Texto principal de la sección -->
-    {% if section.settings.title != blank %}
-      <div class="col-12 text-center mb-3">
-        <h2 style="color: {{ section.settings.text_color }};">{{ section.settings.title }}</h2>
-      </div>
-    {% endif %}
+{% comment %}
+  SECCIÓN: Foot (iconos + texto con efecto marquee en móvil)
+{% endcomment %}
 
-    <!-- Bloques de iconos -->
-    {% for icono in section.blocks %}
-      <div class="col-6 col-md-2 text-center">
-        <img src="{{ icono.settings.icono | img_url: icono.settings.icon_size }}" 
-             alt="{{ icono.settings.texto }}" 
-             class="img-fluid mb-2">
-        <p class="mb-0" style="color: {{ section.settings.text_color }};">{{ icono.settings.texto }}</p>
-      </div>
-    {% endfor %}
+<div class="foot-section container">
+  {% if section.settings.section_title != blank %}
+    <h2 class="text-center mb-4">{{ section.settings.section_title }}</h2>
+  {% endif %}
+
+  <div class="row">
+    <div class="col-12 marquee">
+      {% for block in section.blocks %}
+        <div class="icon-text-block d-flex align-items-center">
+          {% if block.settings.icon != blank %}
+            <img 
+              src="{{ block.settings.icon | img_url: '100x' }}" 
+              alt="{{ block.settings.text | escape }}" 
+              class="icon me-2"
+              style="max-width: 40px;"
+            />
+          {% endif %}
+          <span class="text">{{ block.settings.text }}</span>
+        </div>
+      {% endfor %}
+    </div>
   </div>
-</section>
+</div>
+
+<style>
+  /* Contenedor general */
+  .foot-section .marquee {
+    display: flex;
+    gap: 2rem;
+    overflow: hidden; /* Importante para el efecto en móvil */
+    white-space: nowrap;
+  }
+
+  .foot-section .icon-text-block {
+    flex-shrink: 0; /* Para que no se reduzcan */
+  }
+
+  /* Efecto "marquee" solo en móviles */
+  @media (max-width: 767px) {
+    .foot-section .marquee {
+      animation: marquee-scroll 15s linear infinite;
+    }
+
+    @keyframes marquee-scroll {
+      0%   { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  }
+</style>
 
 {% schema %}
 {
-  "name": "Foot",
+  "name": "foot",
   "settings": [
     {
       "type": "text",
-      "id": "title",
+      "id": "section_title",
       "label": "Título de la sección",
-      "default": "Nuestros Productos Son:"
-    },
-    {
-      "type": "image_picker",
-      "id": "bg_image",
-      "label": "Imagen de fondo"
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": "Color de fondo",
-      "default": "#E5E868"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Color del texto",
-      "default": "#000000"
+      "default": "Nuestras ventajas"
     }
   ],
   "blocks": [
     {
-      "type": "icono",
-      "name": "Icono",
+      "type": "icon_text_block",
+      "name": "Bloque icono + texto",
       "settings": [
         {
           "type": "image_picker",
-          "id": "icono",
+          "id": "icon",
           "label": "Icono"
         },
         {
           "type": "text",
-          "id": "texto",
-          "label": "Texto",
-          "default": "Sin Saborizantes Artificiales"
-        },
-        {
-          "type": "select",
-          "id": "icon_size",
-          "label": "Tamaño del icono",
-          "options": [
-            { "value": "32x32", "label": "Pequeño (32px)" },
-            { "value": "50x50", "label": "Mediano (50px)" },
-            { "value": "75x75", "label": "Grande (75px)" }
-          ],
-          "default": "50x50"
+          "id": "text",
+          "label": "Texto"
         }
       ]
     }
   ],
+  "max_blocks": 999,
   "presets": [
     {
-      "name": "Foot",
-      "category": "Custom",
-      "settings": {
-        "title": "Nuestros Productos Son:",
-        "bg_color": "#E5E868",
-        "text_color": "#000000"
-      },
-      "blocks": [
-        {
-          "type": "icono",
-          "settings": {
-            "texto": "Sin Saborizantes Artificiales"
-          }
-        },
-        {
-          "type": "icono",
-          "settings": {
-            "texto": "Sin Lácteos"
-          }
-        },
-        {
-          "type": "icono",
-          "settings": {
-            "texto": "Sin Soya"
-          }
-        },
-        {
-          "type": "icono",
-          "settings": {
-            "texto": "Sin Gluten"
-          }
-        },
-        {
-          "type": "icono",
-          "settings": {
-            "texto": "Sin Colorantes"
-          }
-        },
-        {
-          "type": "icono",
-          "settings": {
-            "texto": "Sin Endulzantes Artificiales"
-          }
-        }
-      ]
+      "name": "foot",
+      "category": "Custom"
     }
   ]
 }
 {% endschema %}
-
