@@ -1,8 +1,10 @@
 <section class="container my-4">
-  <div class="row justify-content-center bg-light p-3 rounded">
+  <div class="row justify-content-center p-3 rounded" style="background-color: {{ section.settings.bg_color }};">
     {% for icono in section.blocks %}
       <div class="col-6 col-md-2 text-center">
-        <img src="{{ icono.settings.icono | img_url: '50x50' }}" alt="{{ icono.settings.texto }}" class="img-fluid mb-2">
+        <img src="{{ icono.settings.icono | img_url: icono.settings.icon_size }}" 
+             alt="{{ icono.settings.texto }}" 
+             class="img-fluid mb-2">
         <p class="mb-0">{{ icono.settings.texto }}</p>
       </div>
     {% endfor %}
@@ -11,8 +13,15 @@
 
 {% schema %}
 {
-  "name": "foot",
-  "settings": [],
+  "name": "Sección de Iconos",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color de fondo",
+      "default": "#E5E868"
+    }
+  ],
   "blocks": [
     {
       "type": "icono",
@@ -26,20 +35,62 @@
         {
           "type": "text",
           "id": "texto",
-          "label": "Texto"
+          "label": "Texto",
+          "default": "Sin Saborizantes Artificiales"
+        },
+        {
+          "type": "select",
+          "id": "icon_size",
+          "label": "Tamaño del icono",
+          "options": [
+            { "value": "32x32", "label": "Pequeño (32px)" },
+            { "value": "50x50", "label": "Mediano (50px)" },
+            { "value": "75x75", "label": "Grande (75px)" }
+          ],
+          "default": "50x50"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "foot",
+      "name": "Sección de Iconos",
       "category": "Custom",
       "blocks": [
         {
           "type": "icono",
           "settings": {
-            "texto": "Ejemplo"
+            "texto": "Sin Saborizantes Artificiales"
+          }
+        },
+        {
+          "type": "icono",
+          "settings": {
+            "texto": "Sin Lácteos"
+          }
+        },
+        {
+          "type": "icono",
+          "settings": {
+            "texto": "Sin Soya"
+          }
+        },
+        {
+          "type": "icono",
+          "settings": {
+            "texto": "Sin Gluten"
+          }
+        },
+        {
+          "type": "icono",
+          "settings": {
+            "texto": "Sin Colorantes"
+          }
+        },
+        {
+          "type": "icono",
+          "settings": {
+            "texto": "Sin Endulzantes Artificiales"
           }
         }
       ]
