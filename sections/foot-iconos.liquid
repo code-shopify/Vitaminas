@@ -13,21 +13,38 @@
         {% assign image = section.settings[image_key] %}
         {% assign text = section.settings[text_key] %}
 
-        {% if image != blank %}
+        <!-- Verificar si el texto está vacío y asignar un valor por defecto -->
+        {% if text == blank %}
+          {% case i %}
+            {% when 1 %} {% assign text = "Sin Saborizantes Artificiales" %}
+            {% when 2 %} {% assign text = "Sin Lácteos" %}
+            {% when 3 %} {% assign text = "Sin Soya" %}
+            {% when 4 %} {% assign text = "Sin Gluten" %}
+            {% when 5 %} {% assign text = "Sin Colorantes" %}
+            {% when 6 %} {% assign text = "Sin Endulzantes Artificiales" %}
+          {% endcase %}
+        {% endif %}
+
+        {% if image != blank or text != blank %}
           {% assign has_content = true %}
           <div class="col-6 col-md-2 d-flex flex-column align-items-center justify-content-center icon-block">
-            <img src="{{ image | img_url: 'auto' }}" class="img-fluid mb-2 icon-img" alt="{{ text }}">
+            {% if image != blank %}
+              <img src="{{ image | img_url: 'auto' }}" class="img-fluid mb-2 icon-img" alt="{{ text }}">
+            {% endif %}
             <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">{{ text }}</p>
           </div>
         {% endif %}
       {% endfor %}
+
+      {% unless has_content %}
+        <p class="text-center fw-bold" style="color: {{ section.settings.text_color }};">🔔 Agrega iconos desde el editor de temas.</p>
+      {% endunless %}
 
     </div>
   </div>
 </div>
 
 {% style %}
-  /* Evitar que la sección desborde */
   .contenedor {
     max-width: 100%;
     overflow: hidden;
@@ -35,7 +52,6 @@
     text-align: center;
   }
 
-  /* Asegurar que los iconos y textos estén bien alineados */
   .icon-block {
     display: flex;
     flex-direction: column;
@@ -45,15 +61,13 @@
     width: 100%;
   }
 
-  /* Tamaño adaptable de iconos */
   .icon-img {
-    max-width: 80px; /* Se ajusta automáticamente */
+    max-width: 80px;
     height: auto;
   }
 
-  /* Tamaño adaptable de texto */
   .icon-text {
-    font-size: clamp(12px, 1.5vw, 18px); /* Escalado según tamaño de pantalla */
+    font-size: clamp(12px, 1.5vw, 18px);
     text-align: center;
     margin-top: 5px;
     word-wrap: break-word;
@@ -62,7 +76,7 @@
 
   @media (max-width: 767px) {
     .icon-img {
-      max-width: 60px; /* Se reduce en móviles */
+      max-width: 60px;
     }
 
     .icon-text {
@@ -95,8 +109,7 @@
     {
       "type": "text",
       "id": "icon_1_text",
-      "label": "Texto 1",
-      "default": "Sin Saborizantes Artificiales"
+      "label": "Texto 1"
     },
     {
       "type": "image_picker",
@@ -106,8 +119,7 @@
     {
       "type": "text",
       "id": "icon_2_text",
-      "label": "Texto 2",
-      "default": "Sin Lácteos"
+      "label": "Texto 2"
     },
     {
       "type": "image_picker",
@@ -117,8 +129,7 @@
     {
       "type": "text",
       "id": "icon_3_text",
-      "label": "Texto 3",
-      "default": "Sin Soya"
+      "label": "Texto 3"
     },
     {
       "type": "image_picker",
@@ -128,8 +139,7 @@
     {
       "type": "text",
       "id": "icon_4_text",
-      "label": "Texto 4",
-      "default": "Sin Gluten"
+      "label": "Texto 4"
     },
     {
       "type": "image_picker",
@@ -139,8 +149,7 @@
     {
       "type": "text",
       "id": "icon_5_text",
-      "label": "Texto 5",
-      "default": "Sin Colorantes"
+      "label": "Texto 5"
     },
     {
       "type": "image_picker",
@@ -150,14 +159,21 @@
     {
       "type": "text",
       "id": "icon_6_text",
-      "label": "Texto 6",
-      "default": "Sin Endulzantes Artificiales"
+      "label": "Texto 6"
     }
   ],
   "presets": [
     {
       "name": "Sección de Iconos",
-      "category": "Custom"
+      "category": "Custom",
+      "settings": {
+        "icon_1_text": "Sin Saborizantes Artificiales",
+        "icon_2_text": "Sin Lácteos",
+        "icon_3_text": "Sin Soya",
+        "icon_4_text": "Sin Gluten",
+        "icon_5_text": "Sin Colorantes",
+        "icon_6_text": "Sin Endulzantes Artificiales"
+      }
     }
   ]
 }
