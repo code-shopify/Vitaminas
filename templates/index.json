@@ -33,19 +33,6 @@
         "button_color": "#a02d76"
       }
     },
-    "foot_iconos_UNYBEx": {
-      "type": "foot-iconos",
-      "settings": {
-        "background_color": "#dde066",
-        "text_color": "#000000",
-        "icon_1_text": "Sin Saborizantes Artificiales",
-        "icon_2_text": "Sin Lácteos",
-        "icon_3_text": "Sin Soya",
-        "icon_4_text": "Sin Gluten",
-        "icon_5_text": "Sin Colorantes",
-        "icon_6_text": "Sin Endulzantes Artificiales"
-      }
-    },
     "tik_toks_UbMLMd": {
       "type": "Tik-toks",
       "blocks": {
@@ -217,7 +204,6 @@
   "order": [
     "mosaico_image_text_pLyM7P",
     "suscripcion_3Uinhx",
-    "foot_iconos_UNYBEx",
     "tik_toks_UbMLMd",
     "ejemplo_crAfXx",
     "video_featured_ab8iGh"
