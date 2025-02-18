@@ -13,11 +13,11 @@
         {% assign text = section.settings[text_key] %}
 
         {% if image != blank or text != blank %}
-          <div class="d-flex flex-column align-items-center icon-block text-center">
+          <div class="d-flex align-items-center icon-block text-center">
             {% if image != blank %}
-              <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img" alt="{{ text }}">
+              <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
             {% endif %}
-            <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">
+            <p class="fw-bold icon-text mb-0" style="color: {{ section.settings.text_color }};">
               {{ text }}
             </p>
           </div>
@@ -35,41 +35,28 @@
     text-align: center;
   }
 
-  /* Asegurar que los iconos y textos estén en una sola línea */
-  .d-flex.flex-wrap {
-    flex-wrap: nowrap;
-    justify-content: center;
-    gap: 20px;
-  }
-
+  /* Contenedor de cada icono y texto */
   .icon-block {
     display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
+    flex-direction: row; /* Asegura que el icono esté a la izquierda del texto */
     align-items: center;
+    justify-content: center;
   }
 
   .icon-img {
-    max-width: 40px; /* Tamaño de los iconos */
+    max-width: 20px; /* Tamaño más pequeño para alineación horizontal */
     height: auto;
   }
 
   .icon-text {
     font-size: 12px;
-    max-width: 100%;
-    margin-top: 5px;
-    text-align: center;
+    text-align: left; /* Mantiene alineación horizontal */
     white-space: nowrap; /* Evita que el texto se divida en dos líneas */
   }
 
   @media (max-width: 767px) {
-    .d-flex.flex-wrap {
-      flex-wrap: wrap; /* Permite que los iconos bajen de línea en pantallas pequeñas */
-    }
-
     .icon-img {
-      max-width: 35px;
+      max-width: 18px;
     }
 
     .icon-text {
