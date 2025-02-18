@@ -46,8 +46,8 @@
 }
 {% endschema %}
 
-<style>
-  .icon-section {
+{% style %}
+    .icon-section {
     background-color: {{ section.settings.background_color }};
     padding: 10px 0;
     display: flex;
@@ -67,7 +67,7 @@
     width: {{ section.settings.icon_size }}px;
     height: auto;
   }
-</style>
+{% endstyle %}
 
 <div class="icon-section">
   {% for block in section.blocks %}
