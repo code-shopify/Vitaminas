@@ -257,7 +257,7 @@
         <div class="col-md-6">
           <div class="d-flex align-items-center bg-warning bg-opacity-25 p-3 rounded icon_flex" style="width: 100%; min-height: 150px">
             {% if section.settings.icono_izq != blank %}
-              <img src="{{ section.settings.icono_izq | image_url: '30x30' }}" alt="icono" class="me-2" style="flex: 0 0 30px;">
+              <img src="{{ section.settings.icono_izq | img_url: '30x30' }}" alt="icono" class="me-2" style="flex: 0 0 30px;">
             {% endif %}
             <p class="mb-0 font-weight-bold">
               <span class="fw-bold" style="font-size: 11px;">{{ section.settings.texto_izq }}</span>
@@ -270,7 +270,7 @@
         <div class="col-md-6">
           <div class="d-flex align-items-center bg-warning bg-opacity-25 p-3 rounded icon_flex" style="width: 100%; min-height: 150px">
             {% if section.settings.icono_der != blank %}
-              <img src="{{ section.settings.icono_der | image_url: '30x30' }}" alt="icono" class="me-2" style="flex: 0 0 30px;">
+              <img src="{{ section.settings.icono_der | img_url: '30x30' }}" alt="icono" class="me-2" style="flex: 0 0 30px;">
             {% endif %}
             <p class="mb-0">
               <span class="fw-bold" style="font-size: 11px;">{{ section.settings.texto_der }}</span>
