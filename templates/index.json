@@ -171,7 +171,7 @@
       }
     },
     "video_featured_ab8iGh": {
-      "type": "video_featured",
+      "type": "video_principal",
       "settings": {
         "se_height": "t4s_ratio16_9",
         "custom_dk": true,
