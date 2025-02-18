@@ -26,9 +26,11 @@
     "suscripcion_3Uinhx": {
       "type": "suscripcion",
       "settings": {
-        "bg_color": "#fffbe6",
-        "btn_color": "#8e2b7b",
-        "klaviyo_list_id": "TU_LISTA_ID"
+        "title": "¡SUSCRÍBETE Y RECIBE UN 10% OFF!",
+        "description": "Disfruta de promociones, acceso preferencial a nuevos productos, noticias y mucho más.",
+        "placeholder": "Correo electrónico",
+        "button_text": "Suscribirme",
+        "button_color": "#A02D76"
       }
     },
     "tik_toks_UbMLMd": {
@@ -167,12 +169,42 @@
         "texto": "Productos elaborados en instalaciones con las siguientes certificaciones y registros:",
         "background_color": "#f0e6ff"
       }
+    },
+    "video_featured_ab8iGh": {
+      "type": "video_featured",
+      "settings": {
+        "se_height": "t4s_ratio16_9",
+        "custom_dk": true,
+        "height_dk": 600,
+        "custom_tb": true,
+        "height_tb": 400,
+        "custom_mb": true,
+        "height_mb": 250,
+        "source": "2",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "au_video": false,
+        "loop_video": true,
+        "bg_overlay": "#000",
+        "bg_opacity": 0,
+        "layout": "t4s-container-fluid",
+        "cl_bg": "",
+        "cl_bg_gradient": "",
+        "mg": ",,50px,",
+        "pd": "",
+        "mg_tb": "",
+        "pd_tb": "",
+        "mg_mb": ",,30px,",
+        "pd_mb": "",
+        "use_cus_css": false,
+        "code_cus_css": ""
+      }
     }
   },
   "order": [
     "mosaico_image_text_pLyM7P",
     "suscripcion_3Uinhx",
     "tik_toks_UbMLMd",
-    "ejemplo_crAfXx"
+    "ejemplo_crAfXx",
+    "video_featured_ab8iGh"
   ]
 }
