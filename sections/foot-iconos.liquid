@@ -1,3 +1,76 @@
+<div class="icon-section">
+  {% for block in section.blocks %}
+    <div class="icon-container">
+      {% if block.settings.icon_image != blank %}
+        <img src="{{ block.settings.icon_image | img_url: '100x' }}" alt="{{ block.settings.icon_text }}">
+      {% endif %}
+      <p>{{ block.settings.icon_text }}</p>
+    </div>
+  {% endfor %}
+</div>
+
+{% style %}
+  /*---------------- Custom CSS for only desktop -------------------*/
+  @media (min-width: 1025px) {
+    .contenedor {
+      height: 5rem;
+    }
+
+    .texto-final {
+      font-size: 16px;
+    }
+  }
+
+  /*---------------- Custom CSS for tablet, mobile -------------------*/
+  @media (max-width: 1024px) {
+    .texto-final {
+      font-size: 16px;
+    }
+  }
+
+  /*---------------- Custom CSS for only tablet -------------------*/
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .texto-final {
+      font-size: 16px;
+    }
+  }
+
+  /*---------------- Custom CSS for only mobile -------------------*/
+  @media (max-width: 767px) {
+    .imagenes {
+      margin: 0;
+      padding: 0;
+    }
+
+    .texto-final {
+      font-size: 12px;
+    }
+
+    .contenedor {
+      height: 100px;
+    }
+  }
+    .icon-section {
+    background-color: {{ section.settings.background_color }};
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+  .icon-container {
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .icon-container img {
+    width: {{ section.settings.icon_size }}px;
+    height: auto;
+  }
+{% endstyle %}
 {% schema %}
 {
   "name": "Sección de Iconos",
@@ -46,37 +119,4 @@
 }
 {% endschema %}
 
-{% style %}
-    .icon-section {
-    background-color: {{ section.settings.background_color }};
-    padding: 10px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-  }
-  .icon-container {
-    text-align: center;
-    font-size: 14px;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .icon-container img {
-    width: {{ section.settings.icon_size }}px;
-    height: auto;
-  }
-{% endstyle %}
-
-<div class="icon-section">
-  {% for block in section.blocks %}
-    <div class="icon-container">
-      {% if block.settings.icon_image != blank %}
-        <img src="{{ block.settings.icon_image | img_url: '100x' }}" alt="{{ block.settings.icon_text }}">
-      {% endif %}
-      <p>{{ block.settings.icon_text }}</p>
-    </div>
-  {% endfor %}
-</div>
 
