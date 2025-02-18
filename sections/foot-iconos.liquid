@@ -3,50 +3,75 @@
   style="background-color: {{ section.settings.background_color }}; padding: 30px 0;"
 >
   <div class="container">
-    <div class="row justify-content-center text-center">
+    <div class="row justify-content-center align-items-center text-center">
       
+      {% assign empty_section = true %}  <!-- Variable para comprobar si hay contenido -->
+
       {% for i in (1..6) %}
         {% assign image_key = 'icon_' | append: i | append: '_image' %}
         {% assign text_key = 'icon_' | append: i | append: '_text' %}
         {% assign image = section.settings[image_key] %}
         {% assign text = section.settings[text_key] %}
 
-        <div class="col-6 col-md-2 d-flex flex-column align-items-center">
-          {% if image != blank %}
-            <img src="{{ image | img_url: '150x150' }}" class="img-fluid mb-2 icon-img" alt="{{ text }}">
-          {% endif %}
-          <p class="fw-bold text-white icon-text">{{ text }}</p>
-        </div>
+        {% if image != blank %}
+          {% assign empty_section = false %}
+          <div class="col-6 col-md-2 d-flex flex-column align-items-center justify-content-center icon-block">
+            <img src="{{ image | img_url: 'auto' }}" class="img-fluid mb-2 icon-img" alt="{{ text }}">
+            <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">{{ text }}</p>
+          </div>
+        {% endif %}
       {% endfor %}
+
+      {% if empty_section %}
+        <p class="text-center fw-bold" style="color: {{ section.settings.text_color }};">🔔 Agrega iconos desde el editor de temas.</p>
+      {% endif %}
 
     </div>
   </div>
 </div>
 
 {% style %}
-  .icon-img {
-    max-width: 80px;
-    height: auto;
+  /* Asegurar que la sección se mantenga dentro de los límites */
+  .contenedor {
+    max-width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+    text-align: center;
   }
 
+  /* Bloques de iconos con texto alineado */
+  .icon-block {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Ajusta automáticamente el tamaño */
+  }
+
+  /* Tamaño del icono adaptable */
+  .icon-img {
+    max-width: 15%; /* Se adapta al tamaño de la sección */
+    height: auto;
+    display: block;
+  }
+
+  /* Tamaño del texto adaptable */
   .icon-text {
-    font-size: 14px;
+    font-size: clamp(12px, 1.5vw, 18px); /* Tamaño dinámico entre 12px y 18px */
     text-align: center;
     margin-top: 5px;
-  }
-
-  .contenedor {
-    color: #ffffff;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    word-wrap: break-word;
+    max-width: 90%;
   }
 
   @media (max-width: 767px) {
     .icon-img {
-      max-width: 60px;
+      max-width: 20%; /* Se ajusta mejor en móviles */
     }
 
     .icon-text {
-      font-size: 12px;
+      font-size: clamp(10px, 3vw, 16px); /* Texto más adaptable en móviles */
     }
   }
 {% endstyle %}
@@ -62,70 +87,10 @@
       "default": "#DDE066"
     },
     {
-      "type": "image_picker",
-      "id": "icon_1_image",
-      "label": "Primera Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_1_text",
-      "label": "Texto 1",
-      "default": "Sin Saborizantes Artificiales"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_2_image",
-      "label": "Segunda Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_2_text",
-      "label": "Texto 2",
-      "default": "Sin Lácteos"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_3_image",
-      "label": "Tercera Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_3_text",
-      "label": "Texto 3",
-      "default": "Sin Soya"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_4_image",
-      "label": "Cuarta Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_4_text",
-      "label": "Texto 4",
-      "default": "Sin Gluten"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_5_image",
-      "label": "Quinta Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_5_text",
-      "label": "Texto 5",
-      "default": "Sin Colorantes"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_6_image",
-      "label": "Sexta Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_6_text",
-      "label": "Texto 6",
-      "default": "Sin Endulzantes Artificiales"
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#000000"
     }
   ],
   "presets": [
@@ -136,3 +101,4 @@
   ]
 }
 {% endschema %}
+
