@@ -3,7 +3,7 @@
   style="background-color: {{ section.settings.background_color }}; padding: 10px 0;"
 >
   <div class="container">
-    <div class="d-flex flex-wrap justify-content-center align-items-center gap-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-4">
 
       <!-- Iconos Personalizables -->
       {% for i in (1..6) %}
@@ -13,7 +13,7 @@
         {% assign text = section.settings[text_key] %}
 
         {% if image != blank or text != blank %}
-          <div class="d-flex align-items-center icon-block text-center">
+          <div class="d-flex align-items-center icon-block">
             {% if image != blank %}
               <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
             {% endif %}
@@ -35,32 +35,44 @@
     text-align: center;
   }
 
-  /* Contenedor de cada icono y texto */
+  /* Contenedor de icono y texto, distribuidos mejor */
   .icon-block {
     display: flex;
-    flex-direction: row; /* Asegura que el icono esté a la izquierda del texto */
     align-items: center;
     justify-content: center;
+    flex: 1 1 auto; /* Permite que cada bloque se distribuya mejor */
+    min-width: 120px;
+  }
+
+  /* Espaciado entre iconos y textos */
+  .d-flex.justify-content-between {
+    gap: 20px; /* Espaciado entre elementos */
+    flex-wrap: wrap;
   }
 
   .icon-img {
-    max-width: 20px; /* Tamaño más pequeño para alineación horizontal */
+    max-width: 24px; /* Tamaño más uniforme */
     height: auto;
   }
 
   .icon-text {
-    font-size: 12px;
-    text-align: left; /* Mantiene alineación horizontal */
-    white-space: nowrap; /* Evita que el texto se divida en dos líneas */
+    font-size: 14px;
+    text-align: left;
+    white-space: nowrap; /* Mantiene los textos en una sola línea */
   }
 
   @media (max-width: 767px) {
     .icon-img {
-      max-width: 18px;
+      max-width: 20px;
     }
 
     .icon-text {
-      font-size: 10px;
+      font-size: 12px;
+    }
+
+    .d-flex.justify-content-between {
+      justify-content-center;
+      gap: 15px; /* Reduce el espacio en pantallas pequeñas */
     }
   }
 {% endstyle %}
