@@ -3,9 +3,9 @@
   style="background-color: {{ section.settings.background_color }}; padding: 10px 0; overflow: hidden;"
 >
   <div class="container">
+
     <!-- Contenedor normal para escritorio -->
-    <div class="d-flex justify-content-between align-items-center flex-wrap gap-4 marquee-desktop">
-      
+    <div class="d-flex justify-content-between align-items-center gap-4 marquee-desktop">
       {% for i in (1..6) %}
         {% assign image_key = 'icon_' | append: i | append: '_image' %}
         {% assign text_key = 'icon_' | append: i | append: '_text' %}
@@ -23,13 +23,11 @@
           </div>
         {% endif %}
       {% endfor %}
-
     </div>
 
     <!-- Marquee solo para móviles -->
     <div class="marquee-mobile">
-      <div class="marquee-content d-flex align-items-center gap-4">
-        
+      <div class="marquee-content d-flex align-items-center">
         {% for i in (1..6) %}
           {% assign image_key = 'icon_' | append: i | append: '_image' %}
           {% assign text_key = 'icon_' | append: i | append: '_text' %}
@@ -48,7 +46,7 @@
           {% endif %}
         {% endfor %}
 
-        <!-- Duplicamos los elementos para un efecto de bucle -->
+        <!-- Se repite el contenido para efecto continuo -->
         {% for i in (1..6) %}
           {% assign image_key = 'icon_' | append: i | append: '_image' %}
           {% assign text_key = 'icon_' | append: i | append: '_text' %}
@@ -66,7 +64,6 @@
             </div>
           {% endif %}
         {% endfor %}
-
       </div>
     </div>
 
@@ -79,12 +76,14 @@
     text-align: center;
   }
 
-  /* Contenedor de escritorio: visible en pantallas grandes */
+  /* Versión de escritorio: los iconos y textos se muestran de forma estática */
   .marquee-desktop {
     display: flex;
+    justify-content: center;
+    gap: 20px;
   }
 
-  /* Contenedor marquee: oculto en escritorio */
+  /* Marquee solo en móviles */
   .marquee-mobile {
     display: none;
     overflow: hidden;
@@ -95,9 +94,9 @@
 
   .marquee-content {
     display: flex;
-    gap: 20px;
+    gap: 30px;
     flex-wrap: nowrap;
-    animation: marquee-scroll 15s linear infinite;
+    animation: marquee-scroll 12s linear infinite;
     min-width: 200%;
   }
 
@@ -146,7 +145,7 @@
     }
 
     .marquee-content {
-      animation-duration: 20s;
+      animation-duration: 15s; /* Más lenta en móviles */
     }
   }
 {% endstyle %}
@@ -242,4 +241,3 @@
   ]
 }
 {% endschema %}
-
