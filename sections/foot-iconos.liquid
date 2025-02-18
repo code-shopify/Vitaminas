@@ -1,105 +1,79 @@
 <div
   class="t4s-section-inner contenedor vitatu-section shadow mb-3 d-flex align-items-center justify-content-center"
-  style="background-color: {{ section.settings.background_color }}; padding: 30px 0;"
+  style="background-color: {{ section.settings.background_color }}; padding: 10px 0;"
 >
   <div class="container">
-    <div class="row justify-content-center align-items-center text-center">
+    <div class="d-flex flex-wrap justify-content-center align-items-center gap-4">
 
-      {% assign has_content = false %}
-
+      <!-- Iconos Personalizables -->
       {% for i in (1..6) %}
         {% assign image_key = 'icon_' | append: i | append: '_image' %}
         {% assign text_key = 'icon_' | append: i | append: '_text' %}
         {% assign image = section.settings[image_key] %}
         {% assign text = section.settings[text_key] %}
 
-        <!-- Si el usuario no ha editado el texto, usamos valores predeterminados -->
-        {% if text == blank %}
-          {% case i %}
-            {% when 1 %} {% assign text = "Sin Saborizantes Artificiales" %}
-            {% when 2 %} {% assign text = "Sin Lácteos" %}
-            {% when 3 %} {% assign text = "Sin Soya" %}
-            {% when 4 %} {% assign text = "Sin Gluten" %}
-            {% when 5 %} {% assign text = "Sin Colorantes" %}
-            {% when 6 %} {% assign text = "Sin Endulzantes Artificiales" %}
-          {% endcase %}
-        {% endif %}
-
         {% if image != blank or text != blank %}
-          {% assign has_content = true %}
-          <div class="col-6 col-md-2 d-flex flex-column align-items-center icon-block">
-            <div class="icon-wrapper">
-              {% if image != blank %}
-                <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img" alt="{{ text }}">
-              {% endif %}
-              <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">{{ text }}</p>
-            </div>
+          <div class="d-flex flex-column align-items-center icon-block text-center">
+            {% if image != blank %}
+              <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img" alt="{{ text }}">
+            {% endif %}
+            <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">
+              {{ text }}
+            </p>
           </div>
         {% endif %}
       {% endfor %}
-
-      {% unless has_content %}
-        <p class="text-center fw-bold" style="color: {{ section.settings.text_color }};">🔔 Agrega iconos desde el editor de temas.</p>
-      {% endunless %}
 
     </div>
   </div>
 </div>
 
 {% style %}
-  /* Asegurar que el contenido no se salga de la sección */
   .contenedor {
     max-width: 100%;
     overflow: hidden;
-    padding: 20px 0;
     text-align: center;
   }
 
-  /* Asegurar que los iconos y textos estén bien alineados */
+  /* Asegurar que los iconos y textos estén en una sola línea */
+  .d-flex.flex-wrap {
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
   .icon-block {
     display: flex;
     flex-direction: column;
     text-align: center;
     justify-content: center;
     align-items: center;
-    width: 100%;
   }
 
-  /* Contenedor de icono y texto */
-  .icon-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-  }
-
-  /* Tamaño adaptable de iconos */
   .icon-img {
-    max-width: 80px; /* Ajuste automático */
+    max-width: 40px; /* Tamaño de los iconos */
     height: auto;
-    display: block;
   }
 
-  /* Corregir alineación del texto */
   .icon-text {
-    font-size: clamp(12px, 1.5vw, 18px); /* Escalado según tamaño de pantalla */
+    font-size: 12px;
+    max-width: 100%;
+    margin-top: 5px;
     text-align: center;
-    max-width: 90%;
-    display: flex;
-    align-items: center; /* Centrado verticalmente */
-    justify-content: center; /* Centrado horizontalmente */
-    height: 50px; /* Espacio fijo para centrar los textos */
+    white-space: nowrap; /* Evita que el texto se divida en dos líneas */
   }
 
   @media (max-width: 767px) {
+    .d-flex.flex-wrap {
+      flex-wrap: wrap; /* Permite que los iconos bajen de línea en pantallas pequeñas */
+    }
+
     .icon-img {
-      max-width: 60px;
+      max-width: 35px;
     }
 
     .icon-text {
-      font-size: clamp(10px, 3vw, 16px);
-      height: auto;
+      font-size: 10px;
     }
   }
 {% endstyle %}
@@ -195,3 +169,4 @@
   ]
 }
 {% endschema %}
+
