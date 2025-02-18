@@ -204,6 +204,10 @@
       </div>
       </div>
       <div class="t4s-drawer__bottom">
+        <div style="text-align:center">
+          <img class="p-2" src="" alt="icono_1" height="100" width="100">
+          <img class="p-2" src="" alt="icono_2" height="100" width="100">
+        </div>
          <div data-cart-discounts>
          {%- if cart.cart_level_discount_applications != blank -%}
             <ul class="t4s-cart_discounts">
@@ -489,6 +493,16 @@
       "id": "ship_df_country",
       "label": "Default country selection",
       "default": "United States"
+    },
+    {
+      "type":"image_picker",
+      "id":"icon_1",
+      "label": "Icono izquierdo"
+    },
+    {
+      "type":"image_picker",
+      "id":"icon_2",
+      "label": "Icono Derecho"
     },
     {
       "type": "paragraph",
@@ -915,6 +929,6 @@
         "type": "btn"
       }
     ]
-  }
+  },
 }
 {% endschema %}
