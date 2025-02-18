@@ -54,7 +54,7 @@
           {% assign text = section.settings[text_key] %}
 
           {% if image != blank or text != blank %}
-            <div class="d-flex align-items-center icon-block version-movil">
+            <div class="d-flex align-items-center icon-block marquee-mobile">
               {% if image != blank %}
                 <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
               {% endif %}
