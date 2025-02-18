@@ -1,76 +1,56 @@
-<div class="icon-section">
-  {% for block in section.blocks %}
-    <div class="icon-container">
-      {% if block.settings.icon_image != blank %}
-        <img src="{{ block.settings.icon_image | img_url: '100x' }}" alt="{{ block.settings.icon_text }}">
-      {% endif %}
-      <p>{{ block.settings.icon_text }}</p>
+<div
+  class="t4s-section-inner contenedor vitatu-section shadow mb-3"
+  style="background-color: {{ section.settings.background_color }};"
+>
+  <div class="container py-3">
+    <div class="row justify-content-center text-center">
+      
+      <div class="col-6 col-md-2">
+        {% if section.settings.icon_1_image != blank %}
+          <img src="{{ section.settings.icon_1_image | img_url: '100x' }}" class="img-fluid mb-2" alt="{{ section.settings.icon_1_text }}">
+        {% endif %}
+        <p class="fw-bold">{{ section.settings.icon_1_text }}</p>
+      </div>
+
+      <div class="col-6 col-md-2">
+        {% if section.settings.icon_2_image != blank %}
+          <img src="{{ section.settings.icon_2_image | img_url: '100x' }}" class="img-fluid mb-2" alt="{{ section.settings.icon_2_text }}">
+        {% endif %}
+        <p class="fw-bold">{{ section.settings.icon_2_text }}</p>
+      </div>
+
+      <div class="col-6 col-md-2">
+        {% if section.settings.icon_3_image != blank %}
+          <img src="{{ section.settings.icon_3_image | img_url: '100x' }}" class="img-fluid mb-2" alt="{{ section.settings.icon_3_text }}">
+        {% endif %}
+        <p class="fw-bold">{{ section.settings.icon_3_text }}</p>
+      </div>
+
+      <div class="col-6 col-md-2">
+        {% if section.settings.icon_4_image != blank %}
+          <img src="{{ section.settings.icon_4_image | img_url: '100x' }}" class="img-fluid mb-2" alt="{{ section.settings.icon_4_text }}">
+        {% endif %}
+        <p class="fw-bold">{{ section.settings.icon_4_text }}</p>
+      </div>
+
+      <div class="col-6 col-md-2">
+        {% if section.settings.icon_5_image != blank %}
+          <img src="{{ section.settings.icon_5_image | img_url: '100x' }}" class="img-fluid mb-2" alt="{{ section.settings.icon_5_text }}">
+        {% endif %}
+        <p class="fw-bold">{{ section.settings.icon_5_text }}</p>
+      </div>
+
+      <div class="col-6 col-md-2">
+        {% if section.settings.icon_6_image != blank %}
+          <img src="{{ section.settings.icon_6_image | img_url: '100x' }}" class="img-fluid mb-2" alt="{{ section.settings.icon_6_text }}">
+        {% endif %}
+        <p class="fw-bold">{{ section.settings.icon_6_text }}</p>
+      </div>
+
     </div>
-  {% endfor %}
+  </div>
 </div>
 
-{% style %}
-  /*---------------- Custom CSS for only desktop -------------------*/
-  @media (min-width: 1025px) {
-    .contenedor {
-      height: 5rem;
-    }
-
-    .texto-final {
-      font-size: 16px;
-    }
-  }
-
-  /*---------------- Custom CSS for tablet, mobile -------------------*/
-  @media (max-width: 1024px) {
-    .texto-final {
-      font-size: 16px;
-    }
-  }
-
-  /*---------------- Custom CSS for only tablet -------------------*/
-  @media (min-width: 768px) and (max-width: 1024px) {
-    .texto-final {
-      font-size: 16px;
-    }
-  }
-
-  /*---------------- Custom CSS for only mobile -------------------*/
-  @media (max-width: 767px) {
-    .imagenes {
-      margin: 0;
-      padding: 0;
-    }
-
-    .texto-final {
-      font-size: 12px;
-    }
-
-    .contenedor {
-      height: 100px;
-    }
-  }
-    .icon-section {
-    background-color: {{ section.settings.background_color }};
-    padding: 10px 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-  }
-  .icon-container {
-    text-align: center;
-    font-size: 14px;
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .icon-container img {
-    width: {{ section.settings.icon_size }}px;
-    height: auto;
-  }
-{% endstyle %}
 {% schema %}
 {
   "name": "Sección de Iconos",
@@ -82,32 +62,70 @@
       "default": "#DDE066"
     },
     {
-      "type": "range",
-      "id": "icon_size",
-      "label": "Tamaño de iconos (px)",
-      "min": 30,
-      "max": 100,
-      "step": 5,
-      "default": 50
-    }
-  ],
-  "blocks": [
+      "type": "image_picker",
+      "id": "icon_1_image",
+      "label": "Primera Imagen"
+    },
     {
-      "type": "icon",
-      "name": "Icono",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "icon_image",
-          "label": "Imagen del icono"
-        },
-        {
-          "type": "text",
-          "id": "icon_text",
-          "label": "Texto del icono",
-          "default": "Sin gluten"
-        }
-      ]
+      "type": "text",
+      "id": "icon_1_text",
+      "label": "Texto 1",
+      "default": "Sin Saborizantes Artificiales"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2_image",
+      "label": "Segunda Imagen"
+    },
+    {
+      "type": "text",
+      "id": "icon_2_text",
+      "label": "Texto 2",
+      "default": "Sin Lácteos"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3_image",
+      "label": "Tercera Imagen"
+    },
+    {
+      "type": "text",
+      "id": "icon_3_text",
+      "label": "Texto 3",
+      "default": "Sin Soya"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_4_image",
+      "label": "Cuarta Imagen"
+    },
+    {
+      "type": "text",
+      "id": "icon_4_text",
+      "label": "Texto 4",
+      "default": "Sin Gluten"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_5_image",
+      "label": "Quinta Imagen"
+    },
+    {
+      "type": "text",
+      "id": "icon_5_text",
+      "label": "Texto 5",
+      "default": "Sin Colorantes"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_6_image",
+      "label": "Sexta Imagen"
+    },
+    {
+      "type": "text",
+      "id": "icon_6_text",
+      "label": "Texto 6",
+      "default": "Sin Endulzantes Artificiales"
     }
   ],
   "presets": [
@@ -118,5 +136,3 @@
   ]
 }
 {% endschema %}
-
-
