@@ -27,11 +27,11 @@
 
         {% if image != blank or text != blank %}
           {% assign has_content = true %}
-          <div class="col-6 col-md-2 d-flex flex-column justify-content-center align-items-center icon-block">
-            {% if image != blank %}
-              <img src="{{ image | img_url: 'auto' }}" class="img-fluid mb-2 icon-img" alt="{{ text }}">
-            {% endif %}
-            <div class="d-flex align-items-center text-center icon-text-container">
+          <div class="col-6 col-md-2 d-flex flex-column align-items-center icon-block">
+            <div class="icon-wrapper">
+              {% if image != blank %}
+                <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img" alt="{{ text }}">
+              {% endif %}
               <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">{{ text }}</p>
             </div>
           </div>
@@ -65,28 +65,31 @@
     width: 100%;
   }
 
-  /* Contenedor que mantiene el texto centrado verticalmente */
-  .icon-text-container {
+  /* Contenedor de icono y texto */
+  .icon-wrapper {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%; /* Se asegura de que ocupe toda la altura disponible */
+    height: 100%;
   }
 
   /* Tamaño adaptable de iconos */
   .icon-img {
     max-width: 80px; /* Ajuste automático */
     height: auto;
+    display: block;
   }
 
-  /* Corregir alineación del texto y hacer editable */
+  /* Corregir alineación del texto */
   .icon-text {
     font-size: clamp(12px, 1.5vw, 18px); /* Escalado según tamaño de pantalla */
     text-align: center;
-    margin-top: 5px;
-    word-wrap: normal; /* Evita el texto en vertical */
-    max-width: 100%;
-    display: inline-block;
+    max-width: 90%;
+    display: flex;
+    align-items: center; /* Centrado verticalmente */
+    justify-content: center; /* Centrado horizontalmente */
+    height: 50px; /* Espacio fijo para centrar los textos */
   }
 
   @media (max-width: 767px) {
@@ -96,6 +99,7 @@
 
     .icon-text {
       font-size: clamp(10px, 3vw, 16px);
+      height: auto;
     }
   }
 {% endstyle %}
@@ -191,4 +195,3 @@
   ]
 }
 {% endschema %}
-
