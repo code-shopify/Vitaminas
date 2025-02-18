@@ -30,7 +30,7 @@
         "description": "Disfruta de promociones, acceso preferencial a nuevos productos, noticias y mucho más.",
         "placeholder": "Correo electrónico",
         "button_text": "Suscribirme",
-        "button_color": "#A02D76"
+        "button_color": "#a02d76"
       }
     },
     "tik_toks_UbMLMd": {
@@ -182,9 +182,10 @@
         "height_mb": 250,
         "source": "2",
         "video_url": "https://www.youtube.com/watch?v=GHRrd6w3pso&pp=ygUJdml0YW1pbmFz",
+        "image_thumbnail": "shopify://shop_images/Frame_48102457_1.png",
         "au_video": false,
         "loop_video": true,
-        "bg_overlay": "#000",
+        "bg_overlay": "#000000",
         "bg_opacity": 0,
         "layout": "t4s-container-fluid",
         "cl_bg": "",
