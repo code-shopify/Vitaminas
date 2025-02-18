@@ -1,6 +1,49 @@
+<section class="container my-4">
+  <div class="row justify-content-center bg-light p-3 rounded">
+    {% for icono in section.blocks %}
+      <div class="col-6 col-md-2 text-center">
+        <img src="{{ icono.settings.icono | img_url: '50x50' }}" alt="{{ icono.settings.texto }}" class="img-fluid mb-2">
+        <p class="mb-0">{{ icono.settings.texto }}</p>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Sección de Iconos",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "icono",
+      "name": "Icono",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icono",
+          "label": "Icono"
+        },
+        {
+          "type": "text",
+          "id": "texto",
+          "label": "Texto"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sección de Iconos",
+      "category": "Custom",
+      "blocks": [
+        {
+          "type": "icono",
+          "settings": {
+            "texto": "Ejemplo"
+          }
+        }
+      ]
+    }
+  ]
+}
 {% endschema %}
