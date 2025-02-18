@@ -3,7 +3,31 @@
   style="background-color: {{ section.settings.background_color }}; padding: 10px 0; overflow: hidden;"
 >
   <div class="container">
-    <div class="marquee">
+    <!-- Contenedor normal para escritorio -->
+    <div class="d-flex justify-content-between align-items-center flex-wrap gap-4 marquee-desktop">
+      
+      {% for i in (1..6) %}
+        {% assign image_key = 'icon_' | append: i | append: '_image' %}
+        {% assign text_key = 'icon_' | append: i | append: '_text' %}
+        {% assign image = section.settings[image_key] %}
+        {% assign text = section.settings[text_key] %}
+
+        {% if image != blank or text != blank %}
+          <div class="d-flex align-items-center icon-block">
+            {% if image != blank %}
+              <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
+            {% endif %}
+            <p class="fw-bold icon-text mb-0" style="color: {{ section.settings.text_color }};">
+              {{ text }}
+            </p>
+          </div>
+        {% endif %}
+      {% endfor %}
+
+    </div>
+
+    <!-- Marquee solo para móviles -->
+    <div class="marquee-mobile">
       <div class="marquee-content d-flex align-items-center gap-4">
         
         {% for i in (1..6) %}
@@ -45,6 +69,7 @@
 
       </div>
     </div>
+
   </div>
 </div>
 
@@ -54,8 +79,14 @@
     text-align: center;
   }
 
-  /* MARQUEE - Animación infinita */
-  .marquee {
+  /* Contenedor de escritorio: visible en pantallas grandes */
+  .marquee-desktop {
+    display: flex;
+  }
+
+  /* Contenedor marquee: oculto en escritorio */
+  .marquee-mobile {
+    display: none;
     overflow: hidden;
     white-space: nowrap;
     position: relative;
@@ -96,7 +127,16 @@
     text-align: left;
   }
 
+  /* En móviles: esconder la versión de escritorio y activar marquee */
   @media (max-width: 767px) {
+    .marquee-desktop {
+      display: none;
+    }
+
+    .marquee-mobile {
+      display: block;
+    }
+
     .icon-img {
       max-width: 20px;
     }
