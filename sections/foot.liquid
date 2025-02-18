@@ -1,11 +1,23 @@
 <section class="container my-4">
-  <div class="row justify-content-center p-3 rounded" style="background-color: {{ section.settings.bg_color }};">
+  <div class="row justify-content-center p-3 rounded" 
+       style="background-color: {{ section.settings.bg_color }}; 
+              background-image: url({{ section.settings.bg_image | img_url: 'master' }}); 
+              background-size: cover; background-position: center;">
+    
+    <!-- Texto principal de la sección -->
+    {% if section.settings.title != blank %}
+      <div class="col-12 text-center mb-3">
+        <h2 style="color: {{ section.settings.text_color }};">{{ section.settings.title }}</h2>
+      </div>
+    {% endif %}
+
+    <!-- Bloques de iconos -->
     {% for icono in section.blocks %}
       <div class="col-6 col-md-2 text-center">
         <img src="{{ icono.settings.icono | img_url: icono.settings.icon_size }}" 
              alt="{{ icono.settings.texto }}" 
              class="img-fluid mb-2">
-        <p class="mb-0">{{ icono.settings.texto }}</p>
+        <p class="mb-0" style="color: {{ section.settings.text_color }};">{{ icono.settings.texto }}</p>
       </div>
     {% endfor %}
   </div>
@@ -16,10 +28,27 @@
   "name": "Foot",
   "settings": [
     {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección",
+      "default": "Nuestros Productos Son:"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Imagen de fondo"
+    },
+    {
       "type": "color",
       "id": "bg_color",
       "label": "Color de fondo",
       "default": "#E5E868"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#000000"
     }
   ],
   "blocks": [
@@ -56,6 +85,11 @@
     {
       "name": "Foot",
       "category": "Custom",
+      "settings": {
+        "title": "Nuestros Productos Son:",
+        "bg_color": "#E5E868",
+        "text_color": "#000000"
+      },
       "blocks": [
         {
           "type": "icono",
