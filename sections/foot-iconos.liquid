@@ -1,9 +1,11 @@
-<div class="t4s-section-inner contenedor vitatu-section align-items-center d-flex" 
-     style="background-color: {{ section.settings.background_color }}; overflow: hidden; height:77px;">
-  
+<div
+  class="t4s-section-inner contenedor vitatu-section align-items-center d-flex"
+  style="background-color: {{ section.settings.background_color }}; overflow: hidden; height:77px;"
+>
   <div class="container">
-    
-    <div class="marquee-desktop d-flex justify-content-center gap-4">
+
+    <!-- Contenedor normal para escritorio -->
+    <div class="d-flex justify-content-between align-items-center gap-4 marquee-desktop">
       {% for i in (1..6) %}
         {% assign image_key = 'icon_' | append: i | append: '_image' %}
         {% assign text_key = 'icon_' | append: i | append: '_text' %}
@@ -23,145 +25,137 @@
       {% endfor %}
     </div>
 
+    <!-- Marquee solo para móviles -->
     <div class="marquee-mobile">
-      <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-          
-          {% for i in (1..6) %}
-            {% assign image_key = 'icon_' | append: i | append: '_image' %}
-            {% assign text_key = 'icon_' | append: i | append: '_text' %}
-            {% assign image = section.settings[image_key] %}
-            {% assign text = section.settings[text_key] %}
+      <div class="marquee-content d-flex align-items-center">
+        {% for i in (1..6) %}
+          {% assign image_key = 'icon_' | append: i | append: '_image' %}
+          {% assign text_key = 'icon_' | append: i | append: '_text' %}
+          {% assign image = section.settings[image_key] %}
+          {% assign text = section.settings[text_key] %}
 
-            {% if image != blank or text != blank %}
-              <div class="swiper-slide d-flex align-items-center icon-block">
-                {% if image != blank %}
-                  <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
-                {% endif %}
-                <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">
-                  {{ text }}
-                </p>
-              </div>
-            {% endif %}
-          {% endfor %}
+          {% if image != blank or text != blank %}
+            <div class="d-flex align-items-center icon-block">
+              {% if image != blank %}
+                <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
+              {% endif %}
+              <p class="fw-bold icon-text align-items-center" style="color: {{ section.settings.text_color }};">
+                {{ text }}
+              </p>
+            </div>
+          {% endif %}
+        {% endfor %}
 
-          {% for i in (1..6) %}
-            {% assign image_key = 'icon_' | append: i | append: '_image' %}
-            {% assign text_key = 'icon_' | append: i | append: '_text' %}
-            {% assign image = section.settings[image_key] %}
-            {% assign text = section.settings[text_key] %}
+        <!-- Se repite el contenido para efecto continuo -->
+        {% for i in (1..6) %}
+          {% assign image_key = 'icon_' | append: i | append: '_image' %}
+          {% assign text_key = 'icon_' | append: i | append: '_text' %}
+          {% assign image = section.settings[image_key] %}
+          {% assign text = section.settings[text_key] %}
 
-            {% if image != blank or text != blank %}
-              <div class="swiper-slide d-flex align-items-center icon-block">
-                {% if image != blank %}
-                  <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
-                {% endif %}
-                <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">
-                  {{ text }}
-                </p>
-              </div>
-            {% endif %}
-          {% endfor %}
-
-        </div>
+          {% if image != blank or text != blank %}
+            <div class="d-flex align-items-center icon-block marquee-mobile">
+              {% if image != blank %}
+                <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
+              {% endif %}
+              <p class="fw-bold icon-text mb-0" style="color: {{ section.settings.text_color }};">
+                {{ text }}
+              </p>
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
 
   </div>
 </div>
 
+
 {% style %}
-  .t4s-section-inner {
-      width: 100%;
-      max-width: 100%;
-  }
+  /* Asegurar que el contenedor ocupe todo el ancho */
+.t4s-section-inner {
+    width: 100%;
+    max-width: 100%;
+}
 
-  .icon-block {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-  }
+/* Asegurar que los iconos y textos estén alineados correctamente */
+.icon-block {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    flex-wrap: nowrap;
+    gap: 6cpx; /* Espacio entre el icono y el texto */
+}
 
-  .icon-img {
-      max-width: 30px;
-      height: auto;
-  }
+/* Ajustar tamaño de iconos y texto */
+.icon-img {
+    max-width: 30px; /* Ajusta el tamaño de los iconos */
+    height: auto;
+}
 
-  .icon-text {
-      font-size: 16px;
-      text-align: center;
-      margin: 0;
-      white-space: nowrap;
-  }
+.icon-text {
+    font-size: 16px; /* Ajusta el tamaño del texto */
+    text-align: center; /* Asegurar que el texto esté alineado */
+    margin: 0;
+    white-space: nowrap; 
+}
 
-  .swiper {
-      width: 100%;
-      height: 100%;
-  }
-
-  .swiper-wrapper {
-      display: flex;
-      align-items: center;
-  }
-
-  .swiper-slide {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-      width: auto;
-  }
-
+    /*---------------- Custom CSS for only desktop -------------------*/
   @media (min-width: 1025px) {
-      .marquee-desktop {
-          display: flex;
-          justify-content: center;
-          gap: 20px;
-      }
-      .marquee-mobile {
-          display: none;
-      }
+      /* Versión de escritorio: los iconos y textos se muestran de forma estática */
+  .marquee-desktop {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+     .marquee-mobile {
+    display: none;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+  }
   }
 
+  /*---------------- Custom CSS for tablet, mobile -------------------*/
   @media (max-width: 1024px) {
       .marquee-desktop {
-          display: none !important;
+        display: none !important;
       }
   }
 
+  /*---------------- Custom CSS for only tablet -------------------*/
+  @media (min-width: 768px) and (max-width: 1024px) {
+  }
+
+  /*---------------- Custom CSS for only mobile -------------------*/
   @media (max-width: 767px) {
-      .contenedor {
-          height: 30px;
-      }
-
-      .marquee-mobile {
-          font-size: 5px;
-      }
-  }
-{% endstyle %}
-
-<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    if (window.innerWidth <= 1024) {
-      var swiper = new Swiper(".mySwiper", {
-        slidesPerView: "auto",
-        spaceBetween: 20,
-        loop: true,
-        speed: 5000, // Aumenta la velocidad para que se mueva constantemente
-        autoplay: {
-          delay: 0, // Sin pausas entre movimientos
-          disableOnInteraction: false, // No se detiene si el usuario toca el slider
-        },
-        allowTouchMove: false, // Evita que el usuario frene la animación
-        freeMode: {
-          enabled: true, // Desplazamiento suave y continuo
-          momentum: false, // Elimina la desaceleración automática
-        },
-      });
+    .contenedor {
+      height: 30px;
     }
-  });
-</script>
+
+    .marquee-mobile{
+      font-size: 5px;
+    }
+  }
+  .marquee-content {
+    display: flex;
+    gap: 30px;
+    flex-wrap: nowrap;
+    animation: marquee-scroll 12s linear infinite;
+    min-width: 200%;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+  
+{% endstyle %}
 
 {% schema %}
 {
@@ -233,6 +227,17 @@
       "id": "icon_5_text",
       "label": "Texto 5",
       "default": "Sin Colorantes"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_6_image",
+      "label": "Sexta Imagen"
+    },
+    {
+      "type": "text",
+      "id": "icon_6_text",
+      "label": "Texto 6",
+      "default": "Sin Endulzantes Artificiales"
     }
   ],
   "presets": [
@@ -243,5 +248,3 @@
   ]
 }
 {% endschema %}
-
-
