@@ -1,13 +1,14 @@
-<!-- Contenedor principal -->
+<!-- 📌 Contenedor principal -->
 <div class="t4s-section-inner contenedor vitatu-section align-items-center d-flex" 
      style="background-color: {{ section.settings.background_color }}; overflow: hidden; height:77px;">
   
   <div class="container">
     
-    <!-- Swiper Slider -->
+    <!-- 📌 Swiper Slider -->
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
         
+        <!-- 📌 Generamos dinámicamente los iconos y textos configurados en Shopify -->
         {% for i in (1..6) %}
           {% assign image_key = 'icon_' | append: i | append: '_image' %}
           {% assign text_key = 'icon_' | append: i | append: '_text' %}
@@ -15,6 +16,7 @@
           {% assign text = section.settings[text_key] %}
 
           {% if image != blank or text != blank %}
+            <!-- 📌 Slide con ícono y texto -->
             <div class="swiper-slide d-flex align-items-center icon-block">
               {% if image != blank %}
                 <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
@@ -26,7 +28,7 @@
           {% endif %}
         {% endfor %}
 
-        <!-- Se duplica el contenido para un desplazamiento continuo sin cortes -->
+        <!-- 📌 Se duplica el contenido para efecto continuo sin cortes -->
         {% for i in (1..6) %}
           {% assign image_key = 'icon_' | append: i | append: '_image' %}
           {% assign text_key = 'icon_' | append: i | append: '_text' %}
@@ -51,18 +53,21 @@
   </div>
 </div>
 
-<!-- Swiper.js Styles -->
+<!-- 📌 Estilos Swiper -->
 {% style %}
+  /* 📌 Configuración general del Swiper */
   .swiper {
       width: 100%;
       height: 100%;
   }
 
+  /* 📌 Asegurar que los slides estén alineados horizontalmente */
   .swiper-wrapper {
       display: flex;
       align-items: center;
   }
 
+  /* 📌 Configuración del slide */
   .swiper-slide {
       display: flex;
       align-items: center;
@@ -71,44 +76,48 @@
       width: auto;
   }
 
+  /* 📌 Configuración del ícono y texto */
   .icon-block {
       display: flex;
       align-items: center;
       gap: 8px;
   }
 
+  /* 📌 Tamaño de los iconos */
   .icon-img {
       max-width: 30px;
       height: auto;
   }
 
+  /* 📌 Asegurar que el texto no haga saltos de línea */
   .icon-text {
       font-size: 16px;
       text-align: center;
       margin: 0;
-      white-space: nowrap; /* Evita que el texto haga saltos de línea */
+      white-space: nowrap;
   }
 {% endstyle %}
 
-<!-- Swiper.js Script -->
+<!-- 📌 Swiper.js Script -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     var swiper = new Swiper(".mySwiper", {
-      slidesPerView: "auto", // Ajuste dinámico de slides visibles
-      spaceBetween: 20, // Espaciado entre slides
-      loop: true, // Loop infinito
-      freeMode: true, // Desplazamiento libre sin interrupciones
-      speed: 5000, // Velocidad de transición más suave
+      slidesPerView: "auto", // 📌 Distribución fluida de slides
+      spaceBetween: 20, // 📌 Espacio entre elementos
+      loop: true, // 📌 Habilita el desplazamiento infinito
+      speed: 20000, // 📌 Velocidad de la animación (ajusta según prefieras)
       autoplay: {
-        delay: 0, // No hay pausas entre desplazamientos
-        disableOnInteraction: false, // Sigue moviéndose incluso después de interacción
-      }
+        delay: 0, // 📌 Sin pausas entre desplazamientos
+        disableOnInteraction: false, // 📌 Permite seguir moviéndose tras interacción
+      },
+      allowTouchMove: false, // 📌 Evita que el usuario frene el desplazamiento
+      freeMode: true, // 📌 Movimiento continuo como marquee
     });
   });
 </script>
 
-<!-- Shopify Section Schema -->
+<!-- 📌 Shopify Section Schema -->
 {% schema %}
 {
   "name": "Sección de Iconos",
