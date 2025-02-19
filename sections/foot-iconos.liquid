@@ -27,7 +27,7 @@
 
     <!-- Marquee solo para móviles -->
     <div class="marquee-mobile">
-      <div class="marquee-content d-flex align-items-center">
+      <div class="marquee-content">
         <div class="marquee-inner">
           {% for i in (1..6) %}
             {% assign image_key = 'icon_' | append: i | append: '_image' %}
@@ -78,12 +78,14 @@
   .t4s-section-inner {
       width: 100%;
       max-width: 100%;
+      overflow: hidden;
   }
 
   .icon-block {
       display: flex;
       align-items: center;
-      gap: 5px;
+      flex: 1; /* Hace que los ítems ocupen el espacio disponible */
+      gap: 8px;
   }
 
   .icon-img {
@@ -98,38 +100,33 @@
       white-space: nowrap;
   }
 
-  /* Animación solo en móviles y tabletas */
+  /* ✅ Animación solo en móviles y tabletas y ocupa todo el ancho */
   @media (max-width: 1024px) {
       .marquee-desktop {
           display: none !important;
       }
 
       .marquee-mobile {
-          width: 100%;
-          max-width: 100%;
           display: flex;
           overflow: hidden;
-          white-space: nowrap;
           position: relative;
           width: 100%;
       }
 
       .marquee-content {
-          width: 100%;
-          max-width: 100%;
           display: flex;
-          gap: 30px;
+          width: 200%; /* Ocupa todo el ancho y se repite */
           flex-wrap: nowrap;
-          min-width: 200%;
+          align-items: center;
       }
 
       .marquee-inner {
-          width: 100%;
-          max-width: 100%;
           display: flex;
           align-items: center;
-          gap: 20px;
+          justify-content: space-around;
+          flex: 1; /* Se expande para ocupar todo el espacio */
           animation: marquee-scroll 8s linear infinite;
+          min-width: 100%;
       }
 
       @keyframes marquee-scroll {
@@ -142,7 +139,7 @@
       }
   }
 
-  /* Diseño en escritorio: los iconos son estáticos */
+  /* ✅ Diseño en escritorio: los íconos son estáticos */
   @media (min-width: 1025px) {
       .marquee-desktop {
           display: flex;
@@ -154,96 +151,3 @@
       }
   }
 {% endstyle %}
-
-
-{% schema %}
-{
-  "name": "Sección de Iconos",
-  "settings": [
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Color de fondo",
-      "default": "#DDE066"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Color del texto",
-      "default": "#000000"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_1_image",
-      "label": "Primera Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_1_text",
-      "label": "Texto 1",
-      "default": "Sin Saborizantes Artificiales"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_2_image",
-      "label": "Segunda Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_2_text",
-      "label": "Texto 2",
-      "default": "Sin Lácteos"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_3_image",
-      "label": "Tercera Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_3_text",
-      "label": "Texto 3",
-      "default": "Sin Soya"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_4_image",
-      "label": "Cuarta Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_4_text",
-      "label": "Texto 4",
-      "default": "Sin Gluten"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_5_image",
-      "label": "Quinta Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_5_text",
-      "label": "Texto 5",
-      "default": "Sin Colorantes"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_6_image",
-      "label": "Sexta Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_6_text",
-      "label": "Texto 6",
-      "default": "Sin Endulzantes Artificiales"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Sección de Iconos",
-      "category": "Custom"
-    }
-  ]
-}
-{% endschema %}
