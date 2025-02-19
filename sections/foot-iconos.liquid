@@ -148,13 +148,16 @@
         slidesPerView: "auto",
         spaceBetween: 20,
         loop: true,
-        speed: 10000, // Aumento de velocidad
+        speed: 5000, // Aumenta la velocidad para que se mueva constantemente
         autoplay: {
-          delay: 0,
-          disableOnInteraction: false,
+          delay: 0, // Sin pausas entre movimientos
+          disableOnInteraction: false, // No se detiene si el usuario toca el slider
         },
-        allowTouchMove: false,
-        freeMode: true,
+        allowTouchMove: false, // Evita que el usuario frene la animación
+        freeMode: {
+          enabled: true, // Desplazamiento suave y continuo
+          momentum: false, // Elimina la desaceleración automática
+        },
       });
     }
   });
@@ -230,17 +233,6 @@
       "id": "icon_5_text",
       "label": "Texto 5",
       "default": "Sin Colorantes"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_6_image",
-      "label": "Sexta Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_6_text",
-      "label": "Texto 6",
-      "default": "Sin Endulzantes Artificiales"
     }
   ],
   "presets": [
