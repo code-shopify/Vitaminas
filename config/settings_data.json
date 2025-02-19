@@ -1661,7 +1661,7 @@
           "enable_discount": true,
           "enable_gift_wrap": true,
           "ship_df_country": "United States",
-          "background_color": "#ffd2a6",
+          "background_color": "#fff5ec",
           "icono_izq": "shopify://shop_images/Star_1.png",
           "titulo_izq": "Menos del 1%",
           "texto_abajo_izq": "Regresan nuestros productos",
