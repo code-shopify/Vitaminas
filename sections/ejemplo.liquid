@@ -2,38 +2,39 @@
   class="t4s-section-inner contenedor-ejemplo vitatu-section shadow mb-1"
   style="background-color: {{ section.settings.background_color }};"
 >
-  <div class="t4s-container d-flex align-items-center">
-    <h1 class="texto-final">
-      {{ section.settings.texto }}
-    </h1>
-    <div class="d-flex imagenes align-self-center">
-      <img
-        class="imagenes_individual"
-        src="{{section.settings.imagen_1}}"
-        style="width: 54px; height: 55px;"
-        alt="Imagen 1"
-      >
-      <img
-        class="imagenes_individual"
-        src="{{section.settings.imagen_2}}"
-        style="width: 54px; height: 55px;"
-        alt="Imagen 2"
-      >
-      <img
-        class="imagenes_individual"
-        src="{{section.settings.imagen_3}}"
-        style="width: 54px; height: 55px;"
-        alt="Imagen 3"
-      >
+  <div class="t4s-container h-100">
+    <div class="d-flex align-items-center h-100 justify-content-around">
+      <div class="clase-texto">
+        <h1 class="texto-final">
+          {{ section.settings.texto }}
+        </h1>
+      </div>
+
+      <div class="w-25 d-flex imagenes justify-content-between">
+        <img
+          class="imagenes_individual"
+          src="{{section.settings.imagen_1}}"
+          style="width: 54px; height: 55px;"
+          alt="Imagen 1"
+        >
+        <img
+          class="imagenes_individual"
+          src="{{section.settings.imagen_2}}"
+          style="width: 54px; height: 55px;"
+          alt="Imagen 2"
+        >
+        <img
+          class="imagenes_individual"
+          src="{{section.settings.imagen_3}}"
+          style="width: 54px; height: 55px;"
+          alt="Imagen 3"
+        >
+      </div>
     </div>
   </div>
 </div>
 
 {% style %}
-  .contenedor-ejemplo {
-    display: flex;
-  }
-
   /*---------------- Custom CSS for only desktop -------------------*/
   @media (min-width: 1025px) {
     .contenedor-ejemplo {
@@ -41,11 +42,7 @@
     }
 
     .texto-final {
-      font-size: 20px;
-    }
-
-    .imagenes {
-      margin-left: 20rem;
+      font-size: 20px !important;
     }
   }
 
@@ -56,12 +53,7 @@
     }
 
     .texto-final {
-      font-size: 20px;
-      margin-left: 5rem;
-    }
-
-    .imagenes {
-      margin-left: 5rem;
+      font-size: 15px !important;
     }
   }
 
@@ -70,21 +62,38 @@
     .contenedor-ejemplo {
       height: 100px;
     }
+
+    .imagenes {
+      width: 50%;
+    }
+
+    .clase-texto {
+      width: 50%;
+    }
   }
 
   /*---------------- Custom CSS for only mobile -------------------*/
   @media (max-width: 767px) {
-    .imagenes {
-      margin-left: 2.5rem;
+    .texto-final {
+      font-size: 13px !important;
     }
 
-    .texto-final {
-      font-size: 13px;
-      margin: 0px;
+    .clase-texto {
+      width: 50%;
     }
 
     .contenedor-ejemplo {
-      height: 150px;
+      height: 170px;
+    }
+
+    .imagenes {
+      width: 50%;
+      justify-content: center !important;
+    }
+
+    .imagenes_individual {
+      width: 38.7px !important;
+      height: 38.7px !important;
     }
   }
 {% endstyle %}
