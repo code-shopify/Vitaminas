@@ -1663,10 +1663,10 @@
           "ship_df_country": "United States",
           "background_color": "#ffd2a6",
           "icono_izq": "shopify://shop_images/ashwagandha-450-mg-100-capsulas-swanson-358207.webp",
-          "texto_izq": "Menos del 1%",
+          "titulo_izq": "Menos del 1%",
           "texto_abajo_izq": "Regresan nuestros productos",
           "icono_der": "shopify://shop_images/ashwagandha-450-mg-100-capsulas-swanson-358207.webp",
-          "texto_der": "+500,000 enviados",
+          "titulo_der": "+500,000 enviados",
           "texto_abajo_der": "Estás en buenas manos"
         }
       },
