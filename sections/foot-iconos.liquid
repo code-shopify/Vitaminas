@@ -69,91 +69,9 @@
 
   </div>
 </div>
+
+
 {% style %}
-  /* Asegurar que el contenedor ocupe todo el ancho */
-  .t4s-section-inner {
-      width: 100%;
-      max-width: 100%;
-      overflow: hidden;
-  }
-
-  .container {
-      width: 100%;
-      max-width: 100%;
-      padding: 0 20px; /* Agregar un pequeño padding lateral */
-  }
-
-  /* Asegurar alineación correcta de iconos y texto */
-  .icon-block {
-      display: flex;
-      align-items: center;
-      justify-content: center; /* Centra los iconos y textos */
-      gap: 8px; /* Espacio entre icono y texto */
-      white-space: nowrap;
-  }
-
-  .icon-img {
-      max-width: 24px;
-      height: auto;
-  }
-
-  .icon-text {
-      font-size: 14px;
-      text-align: left;
-      margin: 0;
-      white-space: nowrap; /* Evita cortes en los textos */
-  }
-
-  /* Estilos específicos para escritorio */
-  @media (min-width: 1025px) {
-      .marquee-desktop {
-          display: flex;
-          justify-content: space-around; /* Distribución uniforme */
-          width: 100%;
-      }
-      .marquee-mobile {
-          display: none; /* Oculta marquee en escritorio */
-      }
-  }
-
-  /* Estilos para móviles y tablets */
-  @media (max-width: 1024px) {
-      .marquee-desktop {
-          display: none !important;
-      }
-
-      .marquee-mobile {
-          display: flex;
-          width: 100%;
-          overflow: hidden;
-          white-space: nowrap;
-          position: relative;
-      }
-
-      .marquee-content {
-          display: flex;
-          align-items: center;
-          justify-content: space-around;
-          gap: 20px; /* Asegura espacio suficiente entre elementos */
-          width: 200%;
-          animation: marquee-scroll 10s linear infinite;
-      }
-
-      /* Asegurar que el texto no se corte en móviles */
-      .icon-block {
-          flex-shrink: 0; /* Evita que los elementos se compriman */
-      }
-  }
-
-  /* Animación optimizada para evitar reinicios abruptos */
-  @keyframes marquee-scroll {
-      from {
-          transform: translateX(0%);
-      }
-      to {
-          transform: translateX(-100%);
-      }
-  }
   /* Asegurar que el contenedor ocupe todo el ancho */
 .t4s-section-inner {
     width: 100%;
