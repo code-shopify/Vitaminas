@@ -72,78 +72,83 @@
 
 
 {% style %}
-  /* Asegurar que el contenedor ocupe todo el ancho */
-.t4s-section-inner {
-    width: 100%;
-    max-width: 100%;
-}
+{% style %}
+    /* Asegurar que el contenedor ocupe todo el ancho */
+    .t4s-section-inner {
+        width: 100%;
+        max-width: 100%;
+    }
 
-/* Asegurar que los iconos y textos estén alineados correctamente */
-.icon-block {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centra el contenido horizontalmente */
-    flex-wrap: nowrap;
-    gap: 8px; /* Espacio entre el icono y el texto */
-}
-
-/* Ajuste del contenedor para ocupar todo el ancho */
-.container {
-    width: 100%;
-    max-width: 100%;
-    padding: 0 20px; /* Agregar un pequeño padding lateral */
-}
-
-/* Ajustar tamaño de iconos y texto */
-.icon-img {
-    max-width: 30px; /* Ajusta el tamaño de los iconos */
-    height: auto;
-}
-
-.icon-text {
-    font-size: 16px; /* Ajusta el tamaño del texto */
-    text-align: center; /* Asegurar que el texto esté alineado */
-    margin: 0;
-}
-
-
-    /*---------------- Custom CSS for only desktop -------------------*/
-@media (min-width: 1025px) {
-    
-}
-
-  /*---------------- Custom CSS for tablet, mobile -------------------*/
-  @media (max-width: 1024px) {
-      .marquee-desktop {
-        display: none !important;
-      }
-  }
-      .marquee-mobile {
-          display: flex;
-          width: 100%;
-          overflow: hidden;
-          white-space: nowrap;
-          position: relative;
-      }
-    .marquee-content {
+    /* Asegurar que los iconos y textos estén alineados correctamente */
+    .icon-block {
         display: flex;
-        justify-content: space-around;
-        width: 200%;
-        animation: marquee-scroll 12s linear infinite;
+        align-items: center;
+        justify-content: center; /* Centra el contenido horizontalmente */
+        flex-wrap: nowrap;
+        gap: 8px; /* Espacio entre el icono y el texto */
     }
 
-
-
-  @keyframes marquee-scroll {
-    from {
-      transform: translateX(0%);
+    /* Ajuste del contenedor para ocupar todo el ancho */
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 20px; /* Agregar un pequeño padding lateral */
     }
-    to {
-      transform: translateX(-50%);
-    }
-  }
 
-  /* Ajuste de iconos y textos */
+    /* Ajustar tamaño de iconos y texto */
+    .icon-img {
+        max-width: 30px; /* Ajusta el tamaño de los iconos */
+        height: auto;
+    }
+
+    .icon-text {
+        font-size: 16px; /* Ajusta el tamaño del texto */
+        text-align: center; /* Asegurar que el texto esté alineado */
+        margin: 0;
+    }
+
+    /* Asegurar que en escritorio se vea correctamente */
+    @media (min-width: 1025px) {
+        .marquee-desktop {
+            display: flex;
+            justify-content: space-around; /* Espacia los elementos uniformemente */
+            width: 100%;
+        }
+    }
+
+    /* Ajuste en móviles para que los elementos ocupen todo el ancho */
+    @media (max-width: 1024px) {
+        .marquee-desktop {
+            display: none !important;
+        }
+
+        .marquee-mobile {
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .marquee-content {
+            display: flex;
+            justify-content: space-around;
+            width: 200%;
+            animation: marquee-scroll 12s linear infinite;
+        }
+    }
+
+    /* Ajuste para el efecto de desplazamiento en móviles */
+    @keyframes marquee-scroll {
+        from {
+            transform: translateX(0%);
+        }
+        to {
+            transform: translateX(-50%);
+        }
+    }
+{% endstyle %}
+
   .icon-block {
     display: flex;
     align-items: center;
