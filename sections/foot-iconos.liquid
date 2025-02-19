@@ -119,11 +119,16 @@
 
   /*---------------- Custom CSS for tablet, mobile -------------------*/
   @media (max-width: 1024px) {
+      .marquee-desktop {
+        display: none !important;
+      }
+  }
       .marquee-mobile {
           display: flex;
           width: 100%;
           overflow: hidden;
-
+          white-space: nowrap;
+          position: relative;
       }
     .marquee-content {
         display: flex;
@@ -131,8 +136,6 @@
         width: 200%;
         animation: marquee-scroll 12s linear infinite;
     }
-  }
-
 
 
 
