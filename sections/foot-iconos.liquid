@@ -2,9 +2,9 @@
   class="t4s-section-inner contenedor vitatu-section align-items-center d-flex"
   style="background-color: {{ section.settings.background_color }}; overflow: hidden; height:77px;"
 >
-  <div class="container">
+
     <!-- Contenedor normal para escritorio -->
-    <div class="d-flex justify-content-between align-items-center gap-4 marquee-desktop">
+    <div class="container d-flex justify-content-between align-items-center gap-4 marquee-desktop">
       {% for i in (1..6) %}
         {% assign image_key = 'icon_' | append: i | append: '_image' %}
         {% assign text_key = 'icon_' | append: i | append: '_text' %}
@@ -70,7 +70,6 @@
       </div>
     </div>
 
-  </div>
 </div>
 
 {% style %}
