@@ -115,24 +115,6 @@
     }
 }
 
-/* Ajuste en móviles para que los elementos ocupen todo el ancho */
-@media (max-width: 1024px) {
-    .marquee-mobile {
-        display: flex;
-        width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-        position: relative;
-    }
-/*
-    .marquee-content {
-        display: flex;
-        justify-content: space-around;
-        width: 200%;
-        animation: marquee-scroll 12s linear infinite;*/
-    }
-}
-
     /*---------------- Custom CSS for only desktop -------------------*/
   @media (min-width: 1025px) {
       /* Versión de escritorio: los iconos y textos se muestran de forma estática */
@@ -152,10 +134,13 @@
 
   /*---------------- Custom CSS for tablet, mobile -------------------*/
   @media (max-width: 1024px) {
-      .marquee-desktop {
-        display: none !important;
-      }
-  }
+    .marquee-mobile {
+        display: flex;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
+    }
 
   /*---------------- Custom CSS for only tablet -------------------*/
   @media (min-width: 768px) and (max-width: 1024px) {
@@ -172,17 +157,13 @@
     }
   }
 
-
-
-
-
-  .marquee-content {
-    display: flex;
-    gap: 30px;
-    flex-wrap: nowrap;
-    animation: marquee-scroll linear infinite;*/
-    min-width: 200%;
-  }
+      .marquee-content {
+        display: flex;
+        justify-content: space-around;
+        width: 200%;
+        animation: marquee-scroll 12s linear infinite;
+    }
+}
 
   @keyframes marquee-scroll {
     from {
