@@ -1,3 +1,76 @@
+<div
+  class="t4s-section-inner contenedor vitatu-section align-items-center d-flex"
+  style="background-color: {{ section.settings.background_color }}; overflow: hidden; height:77px;"
+>
+  <div class="container">
+
+    <!-- Contenedor normal para escritorio -->
+    <div class="d-flex justify-content-between align-items-center gap-4 marquee-desktop">
+      {% for i in (1..6) %}
+        {% assign image_key = 'icon_' | append: i | append: '_image' %}
+        {% assign text_key = 'icon_' | append: i | append: '_text' %}
+        {% assign image = section.settings[image_key] %}
+        {% assign text = section.settings[text_key] %}
+
+        {% if image != blank or text != blank %}
+          <div class="d-flex align-items-center icon-block">
+            {% if image != blank %}
+              <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
+            {% endif %}
+            <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">
+              {{ text }}
+            </p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Marquee solo para móviles -->
+    <div class="marquee-mobile">
+      <div class="marquee-content d-flex align-items-center">
+        {% for i in (1..6) %}
+          {% assign image_key = 'icon_' | append: i | append: '_image' %}
+          {% assign text_key = 'icon_' | append: i | append: '_text' %}
+          {% assign image = section.settings[image_key] %}
+          {% assign text = section.settings[text_key] %}
+
+          {% if image != blank or text != blank %}
+            <div class="d-flex align-items-center icon-block">
+              {% if image != blank %}
+                <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
+              {% endif %}
+              <p class="fw-bold icon-text align-items-center" style="color: {{ section.settings.text_color }};">
+                {{ text }}
+              </p>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+        <!-- Se repite el contenido para efecto continuo -->
+        {% for i in (1..6) %}
+          {% assign image_key = 'icon_' | append: i | append: '_image' %}
+          {% assign text_key = 'icon_' | append: i | append: '_text' %}
+          {% assign image = section.settings[image_key] %}
+          {% assign text = section.settings[text_key] %}
+
+          {% if image != blank or text != blank %}
+            <div class="d-flex align-items-center icon-block marquee-mobile">
+              {% if image != blank %}
+                <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
+              {% endif %}
+              <p class="fw-bold icon-text mb-0" style="color: {{ section.settings.text_color }};">
+                {{ text }}
+              </p>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
 {% style %}
   /* Asegurar que el contenedor ocupe todo el ancho */
 .t4s-section-inner {
@@ -27,16 +100,13 @@
     height: auto;
 }
 
-/* Ajuste para que el texto no se expanda a todo el ancho */
 .icon-text {
-    font-size: 16px;
-    text-align: center;
+    font-size: 16px; /* Ajusta el tamaño del texto */
+    text-align: center; /* Asegurar que el texto esté alineado */
     margin: 0;
-    max-width: fit-content; /* Evita que el texto se expanda en full-width */
-    display: inline-block; /* Asegura que el texto respete su tamaño natural */
 }
 
-  /*---------------- Custom CSS for only desktop -------------------*/
+    /*---------------- Custom CSS for only desktop -------------------*/
   @media (min-width: 1025px) {
       /* Versión de escritorio: los iconos y textos se muestran de forma estática */
   .marquee-desktop {
@@ -75,6 +145,10 @@
     }
   }
 
+
+
+
+
   .marquee-content {
     display: flex;
     gap: 30px;
@@ -94,4 +168,94 @@
   
 {% endstyle %}
 
-
+{% schema %}
+{
+  "name": "Sección de Iconos",
+  "settings": [
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#DDE066"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#000000"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_1_image",
+      "label": "Primera Imagen"
+    },
+    {
+      "type": "text",
+      "id": "icon_1_text",
+      "label": "Texto 1",
+      "default": "Sin Saborizantes Artificiales"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_2_image",
+      "label": "Segunda Imagen"
+    },
+    {
+      "type": "text",
+      "id": "icon_2_text",
+      "label": "Texto 2",
+      "default": "Sin Lácteos"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_3_image",
+      "label": "Tercera Imagen"
+    },
+    {
+      "type": "text",
+      "id": "icon_3_text",
+      "label": "Texto 3",
+      "default": "Sin Soya"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_4_image",
+      "label": "Cuarta Imagen"
+    },
+    {
+      "type": "text",
+      "id": "icon_4_text",
+      "label": "Texto 4",
+      "default": "Sin Gluten"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_5_image",
+      "label": "Quinta Imagen"
+    },
+    {
+      "type": "text",
+      "id": "icon_5_text",
+      "label": "Texto 5",
+      "default": "Sin Colorantes"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_6_image",
+      "label": "Sexta Imagen"
+    },
+    {
+      "type": "text",
+      "id": "icon_6_text",
+      "label": "Texto 6",
+      "default": "Sin Endulzantes Artificiales"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Sección de Iconos",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
