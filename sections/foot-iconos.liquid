@@ -72,6 +72,40 @@
 
 
 {% style %}
+  /* Asegurar que el contenedor ocupe todo el ancho */
+.t4s-section-inner {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Asegurar que los iconos y textos estén alineados correctamente */
+.icon-block {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centra el contenido horizontalmente */
+    flex-wrap: nowrap;
+    gap: 8px; /* Espacio entre el icono y el texto */
+}
+
+/* Ajuste del contenedor para ocupar todo el ancho */
+.container {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 20px; /* Agregar un pequeño padding lateral */
+}
+
+/* Ajustar tamaño de iconos y texto */
+.icon-img {
+    max-width: 30px; /* Ajusta el tamaño de los iconos */
+    height: auto;
+}
+
+.icon-text {
+    font-size: 16px; /* Ajusta el tamaño del texto */
+    text-align: center; /* Asegurar que el texto esté alineado */
+    margin: 0;
+}
+
     /*---------------- Custom CSS for only desktop -------------------*/
   @media (min-width: 1025px) {
       /* Versión de escritorio: los iconos y textos se muestran de forma estática */
@@ -131,40 +165,7 @@
       transform: translateX(-50%);
     }
   }
-
-  /* Ajuste de iconos y textos */
-  .icon-block {
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-  }
-
-  .icon-img {
-    max-width: 24px;
-    height: auto;
-  }
-
-  .icon-text {
-    font-size: 14px;
-    text-align: left;
-  }
-
-  .icon-block {
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-  }
-
-  .icon-img {
-    max-width: 24px;
-    height: auto;
-  }
-
-  .icon-text {
-    font-size: 14px;
-    text-align: left;
-  }
-
+  
 {% endstyle %}
 
 {% schema %}
