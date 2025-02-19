@@ -114,16 +114,19 @@
 
       .marquee-content {
           display: flex;
-          gap: 30px;
+          width: 200%;
           flex-wrap: nowrap;
-          min-width: 200%;
+          align-items: center;
       }
+
 
       .marquee-inner {
           display: flex;
           align-items: center;
-          gap: 20px;
+          justify-content: space-around;
+          flex: 1;
           animation: marquee-scroll 8s linear infinite;
+          min-width: 100%;
       }
 
       @keyframes marquee-scroll {
