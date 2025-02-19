@@ -147,8 +147,12 @@
     display: flex;
     gap: 30px;
     flex-wrap: nowrap;
-    animation: marquee-scroll 10s linear infinite;
-    min-width: 200%;
+    gap: 20px; /* Mantiene separación uniforme */
+    white-space: nowrap; /* Mantiene los elementos en una sola línea */
+    overflow: hidden; /* Evita que elementos se desborden */
+    flex-wrap: nowrap; /* Evita que los textos pasen a otra línea */
+    min-width: 200%; /* Doble del ancho para el loop infinito */
+    animation: marquee-scroll 10s linear infinite; /* Loop sin reinicio 
   }
 
   @keyframes marquee-scroll {
