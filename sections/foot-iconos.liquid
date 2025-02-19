@@ -3,27 +3,67 @@
   
   <div class="container">
     
-    <div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-        
-        {% for i in (1..6) %}
-          {% assign image_key = 'icon_' | append: i | append: '_image' %}
-          {% assign text_key = 'icon_' | append: i | append: '_text' %}
-          {% assign image = section.settings[image_key] %}
-          {% assign text = section.settings[text_key] %}
+    <div class="marquee-desktop d-flex justify-content-center gap-4">
+      {% for i in (1..6) %}
+        {% assign image_key = 'icon_' | append: i | append: '_image' %}
+        {% assign text_key = 'icon_' | append: i | append: '_text' %}
+        {% assign image = section.settings[image_key] %}
+        {% assign text = section.settings[text_key] %}
 
-          {% if image != blank or text != blank %}
-            <div class="swiper-slide d-flex align-items-center icon-block">
-              {% if image != blank %}
-                <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
-              {% endif %}
-              <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">
-                {{ text }}
-              </p>
-            </div>
-          {% endif %}
-        {% endfor %}
+        {% if image != blank or text != blank %}
+          <div class="d-flex align-items-center icon-block">
+            {% if image != blank %}
+              <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
+            {% endif %}
+            <p class="icon-text" style="color: {{ section.settings.text_color }};">
+              {{ text }}
+            </p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
 
+    <div class="marquee-mobile">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          
+          {% for i in (1..6) %}
+            {% assign image_key = 'icon_' | append: i | append: '_image' %}
+            {% assign text_key = 'icon_' | append: i | append: '_text' %}
+            {% assign image = section.settings[image_key] %}
+            {% assign text = section.settings[text_key] %}
+
+            {% if image != blank or text != blank %}
+              <div class="swiper-slide d-flex align-items-center icon-block">
+                {% if image != blank %}
+                  <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
+                {% endif %}
+                <p class="icon-text" style="color: {{ section.settings.text_color }};">
+                  {{ text }}
+                </p>
+              </div>
+            {% endif %}
+          {% endfor %}
+
+          {% for i in (1..6) %}
+            {% assign image_key = 'icon_' | append: i | append: '_image' %}
+            {% assign text_key = 'icon_' | append: i | append: '_text' %}
+            {% assign image = section.settings[image_key] %}
+            {% assign text = section.settings[text_key] %}
+
+            {% if image != blank or text != blank %}
+              <div class="swiper-slide d-flex align-items-center icon-block">
+                {% if image != blank %}
+                  <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
+                {% endif %}
+                <p class="icon-text" style="color: {{ section.settings.text_color }};">
+                  {{ text }}
+                </p>
+              </div>
+            {% endif %}
+          {% endfor %}
+
+        </div>
       </div>
     </div>
 
@@ -66,32 +106,65 @@
       height: auto;
   }
 
+  /* ✅ El texto se adapta a la pantalla y no es negrita */
   .icon-text {
-      font-size: 16px;
+      font-size: clamp(12px, 2vw, 16px);
       text-align: center;
       margin: 0;
       white-space: nowrap;
+      font-weight: normal;
+  }
+
+  /* ✅ Diseño para escritorio: los íconos son estáticos */
+  @media (min-width: 1025px) {
+      .marquee-desktop {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+      }
+      .marquee-mobile {
+          display: none;
+      }
+  }
+
+  /* ✅ Diseño para tablets y móviles: activa Swiper */
+  @media (max-width: 1024px) {
+      .marquee-desktop {
+          display: none !important;
+      }
+  }
+
+  @media (max-width: 767px) {
+      .contenedor {
+          height: 30px;
+      }
+
+      .marquee-mobile {
+          font-size: 5px;
+      }
   }
 {% endstyle %}
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    var swiper = new Swiper(".mySwiper", {
-      slidesPerView: "auto",
-      spaceBetween: 20,
-      loop: true,
-      speed: 5000,
-      autoplay: {
-        delay: 0,
-        disableOnInteraction: true,
-      },
-      allowTouchMove: false,
-      freeMode: {
-        enabled: true,
-        momentum: false,
-      },
-    });
+    if (window.innerWidth <= 1024) {
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: "auto",
+        spaceBetween: 20,
+        loop: true,
+        speed: 5000,
+        autoplay: {
+          delay: 0,
+          disableOnInteraction: false,
+        },
+        allowTouchMove: false,
+        freeMode: {
+          enabled: true,
+          momentum: false,
+        },
+      });
+    }
   });
 </script>
 
@@ -165,17 +238,6 @@
       "id": "icon_5_text",
       "label": "Texto 5",
       "default": "Sin Colorantes"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_6_image",
-      "label": "Sexta Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_6_text",
-      "label": "Texto 6",
-      "default": "Sin Endulzantes Artificiales"
     }
   ],
   "presets": [
