@@ -27,7 +27,7 @@
 
     <!-- Marquee solo para móviles -->
     <div class="marquee-mobile">
-      <div class="marquee-content">
+      <div class="marquee-content d-flex align-items-center">
         <div class="marquee-inner">
           {% for i in (1..6) %}
             {% assign image_key = 'icon_' | append: i | append: '_image' %}
@@ -78,14 +78,12 @@
   .t4s-section-inner {
       width: 100%;
       max-width: 100%;
-      overflow: hidden;
   }
 
   .icon-block {
       display: flex;
       align-items: center;
-      flex: 1; /* Hace que los ítems ocupen el espacio disponible */
-      gap: 8px;
+      gap: px;
   }
 
   .icon-img {
@@ -100,7 +98,7 @@
       white-space: nowrap;
   }
 
-  /* ✅ Animación solo en móviles y tabletas y ocupa todo el ancho */
+  /* Animación solo en móviles y tabletas */
   @media (max-width: 1024px) {
       .marquee-desktop {
           display: none !important;
@@ -109,24 +107,22 @@
       .marquee-mobile {
           display: flex;
           overflow: hidden;
+          white-space: nowrap;
           position: relative;
           width: 100%;
       }
 
       .marquee-content {
           display: flex;
-          width: 200%; /* Ocupa todo el ancho y se repite */
+          width: 200%;
           flex-wrap: nowrap;
-          align-items: center;
+          min-width: 200%;
       }
 
       .marquee-inner {
           display: flex;
           align-items: center;
-          justify-content: space-around;
-          flex: 1; /* Se expande para ocupar todo el espacio */
           animation: marquee-scroll 8s linear infinite;
-          min-width: 100%;
       }
 
       @keyframes marquee-scroll {
@@ -139,7 +135,7 @@
       }
   }
 
-  /* ✅ Diseño en escritorio: los íconos son estáticos */
+  /* Diseño en escritorio: los iconos son estáticos */
   @media (min-width: 1025px) {
       .marquee-desktop {
           display: flex;
