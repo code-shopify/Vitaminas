@@ -70,85 +70,86 @@
   </div>
 </div>
 
+
 {% style %}
-    /* Asegurar que el contenedor principal ocupe todo el ancho */
-    .t4s-section-inner {
-        width: 100%;
-        max-width: 100%;
+    /*---------------- Custom CSS for only desktop -------------------*/
+  @media (min-width: 1025px) {
+      /* Versión de escritorio: los iconos y textos se muestran de forma estática */
+  .marquee-desktop {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+     .marquee-mobile {
+    display: none;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+  }
+  }
+
+  /*---------------- Custom CSS for tablet, mobile -------------------*/
+  @media (max-width: 1024px) {
+      .marquee-desktop {
+        display: none !important;
+      }
+  }
+
+  /*---------------- Custom CSS for only tablet -------------------*/
+  @media (min-width: 768px) and (max-width: 1024px) {
+  }
+
+  /*---------------- Custom CSS for only mobile -------------------*/
+  @media (max-width: 767px) {
+    .contenedor {
+      height: 30px;
     }
 
-    /* Contenedor que asegura la alineación y distribución correcta */
-    .container {
-        width: 100%;
-        max-width: 100%;
-        padding: 0 20px; /* Agrega un pequeño padding lateral */
+    .marquee-mobile{
+      font-size: 5px;
     }
+  }
 
-    /* Asegurar que los iconos y textos estén alineados correctamente */
-    .icon-block {
-        display: flex;
-        align-items: center;
-        justify-content: center; /* Centra horizontalmente */
-        gap: 8px; /* Espacio entre el icono y el texto */
-        white-space: nowrap;
+
+
+
+
+  .marquee-content {
+    display: flex;
+    gap: 30px;
+    flex-wrap: nowrap;
+    animation: marquee-scroll 12s linear infinite;
+    min-width: 200%;
+  }
+
+  @keyframes marquee-scroll {
+    from {
+      transform: translateX(0%);
     }
-
-    /* Ajustar tamaño de iconos y texto */
-    .icon-img {
-        max-width: 24px; /* Ajusta el tamaño del icono */
-        height: auto;
+    to {
+      transform: translateX(-50%);
     }
+  }
 
-    .icon-text {
-        font-size: 14px; /* Ajusta el tamaño del texto */
-        text-align: left; /* Mantiene el texto alineado con el icono */
-        margin: 0;
-    }
+  /* Ajuste de iconos y textos */
+  .icon-block {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
 
-    /* Diseño para escritorio */
-    @media (min-width: 1025px) {
-        .marquee-desktop {
-            display: flex;
-            justify-content: space-evenly; /* Distribuir uniformemente los elementos */
-            align-items: center;
-            width: 100%;
-        }
-    }
+  .icon-img {
+    max-width: 24px;
+    height: auto;
+  }
 
-    /* Ajuste en móviles para que los elementos se distribuyan correctamente */
-    @media (max-width: 1024px) {
-        .marquee-desktop {
-            display: none !important;
-        }
+  .icon-text {
+    font-size: 14px;
+    text-align: left;
+  }
 
-        .marquee-mobile {
-            display: flex;
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-            position: relative;
-        }
-
-        .marquee-content {
-            display: flex;
-            justify-content: space-evenly;
-            align-items: center;
-            width: 200%;
-            animation: marquee-scroll 12s linear infinite;
-        }
-    }
-
-    /* Animación del marquee en móviles */
-    @keyframes marquee-scroll {
-        from {
-            transform: translateX(0%);
-        }
-        to {
-            transform: translateX(-50%);
-        }
-    }
 {% endstyle %}
-
 {% schema %}
 {
   "name": "Sección de Iconos",
