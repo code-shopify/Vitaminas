@@ -1,23 +1,43 @@
 <div
-  class="t4s-section-inner contenedor vitatu-section shadow mb-1 d-flex align-items-center justify-content-between"
+  class="t4s-section-inner contenedor-ejemplo vitatu-section shadow mb-1"
   style="background-color: {{ section.settings.background_color }};"
 >
-  <div class="t4s-container">
-    <h1 class="texto-final">
-      {{ section.settings.texto }}
-    </h1>
-  </div>
-  <div class="d-flex imagenes">
-    <img src="https://google.com/favicon.ico" width="30" height="30" alt="Imagen 1">
-    <img src="https://google.com/favicon.ico" width="30" height="30" alt="Imagen 2">
-    <img src="https://google.com/favicon.ico" width="30" height="30" alt="Imagen 3">
+  <div class="t4s-container d-flex align-items-center justify-content-center flex-md-row">
+    <div class="px-5 align-self-center">
+      <h1 class="texto-final px-5">
+        {{ section.settings.texto }}
+      </h1>
+    </div>
+    <div class="d-flex imagenes gap-5 align-self-center">
+      <img
+        class="imagenes_individual"
+        src="{{section.settings.imagen_1}}"
+        style="width: 54px; height: 55px;"
+        alt="Imagen 1"
+      >
+      <img
+        class="imagenes_individual"
+        src="{{section.settings.imagen_2}}"
+        style="width: 54px; height: 55px;"
+        alt="Imagen 2"
+      >
+      <img
+        class="imagenes_individual"
+        src="{{section.settings.imagen_3}}"
+        style="width: 54px; height: 55px;"
+        alt="Imagen 3"
+      >
+    </div>
   </div>
 </div>
 
 {% style %}
+  .contenedor-ejemplo {
+    display: flex;
+  }
   /*---------------- Custom CSS for only desktop -------------------*/
   @media (min-width: 1025px) {
-    .contenedor {
+    .contenedor-ejemplo {
       height: 84px;
     }
 
@@ -33,25 +53,40 @@
 
   /*---------------- Custom CSS for tablet, mobile -------------------*/
   @media (max-width: 1024px) {
+    .contenedor-ejemplo {
+      height: 100px;
+    }
+
+    .texto-final {
+      font-size: 20px;
+      margin-left: 5rem;
+    }
+
+    .imagenes {
+      margin-right: 10rem;
+    }
   }
 
   /*---------------- Custom CSS for only tablet -------------------*/
   @media (min-width: 768px) and (max-width: 1024px) {
+    .contenedor-ejemplo {
+      height: 100px;
+    }
   }
 
   /*---------------- Custom CSS for only mobile -------------------*/
   @media (max-width: 767px) {
     .imagenes {
-      margin: 0;
-      padding: 0;
+      margin-right: 5rem;
     }
 
     .texto-final {
-      font-size: 12px;
+      font-size: 13px;
+      margin: 0px;
     }
 
-    .contenedor {
-      height: 100px;
+    .contenedor-ejemplo {
+      height: 150px;
     }
   }
 {% endstyle %}
