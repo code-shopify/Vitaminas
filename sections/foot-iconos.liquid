@@ -71,50 +71,51 @@
 </div>
 
 {% style %}
-    /* Asegurar que el contenedor ocupe todo el ancho */
+    /* Asegurar que el contenedor principal ocupe todo el ancho */
     .t4s-section-inner {
         width: 100%;
         max-width: 100%;
+    }
+
+    /* Contenedor que asegura la alineación y distribución correcta */
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 20px; /* Agrega un pequeño padding lateral */
     }
 
     /* Asegurar que los iconos y textos estén alineados correctamente */
     .icon-block {
         display: flex;
         align-items: center;
-        justify-content: center; /* Centra el contenido horizontalmente */
-        flex-wrap: nowrap;
+        justify-content: center; /* Centra horizontalmente */
         gap: 8px; /* Espacio entre el icono y el texto */
-    }
-
-    /* Ajuste del contenedor para ocupar todo el ancho */
-    .container {
-        width: 100%;
-        max-width: 100%;
-        padding: 0 20px; /* Agregar un pequeño padding lateral */
+        white-space: nowrap;
     }
 
     /* Ajustar tamaño de iconos y texto */
     .icon-img {
-        max-width: 30px; /* Ajusta el tamaño de los iconos */
+        max-width: 24px; /* Ajusta el tamaño del icono */
         height: auto;
     }
 
     .icon-text {
-        font-size: 16px; /* Ajusta el tamaño del texto */
-        text-align: center; /* Asegurar que el texto esté alineado */
+        font-size: 14px; /* Ajusta el tamaño del texto */
+        text-align: left; /* Mantiene el texto alineado con el icono */
         margin: 0;
     }
 
-    /* Asegurar que en escritorio se vea correctamente */
+    /* Diseño para escritorio */
     @media (min-width: 1025px) {
         .marquee-desktop {
             display: flex;
-            justify-content: space-around; /* Espacia los elementos uniformemente */
+            justify-content: space-evenly; /* Distribuir uniformemente los elementos */
+            align-items: center;
             width: 100%;
         }
     }
 
-    /* Ajuste en móviles para que los elementos ocupen todo el ancho */
+    /* Ajuste en móviles para que los elementos se distribuyan correctamente */
     @media (max-width: 1024px) {
         .marquee-desktop {
             display: none !important;
@@ -130,13 +131,14 @@
 
         .marquee-content {
             display: flex;
-            justify-content: space-around;
+            justify-content: space-evenly;
+            align-items: center;
             width: 200%;
             animation: marquee-scroll 12s linear infinite;
         }
     }
 
-    /* Ajuste para el efecto de desplazamiento en móviles */
+    /* Animación del marquee en móviles */
     @keyframes marquee-scroll {
         from {
             transform: translateX(0%);
