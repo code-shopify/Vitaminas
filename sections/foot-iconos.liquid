@@ -82,7 +82,7 @@
 .icon-block {
     display: flex;
     align-items: center;
-
+    justify-content: center; /* Centra el contenido horizontalmente */
     flex-wrap: nowrap;
     gap: 6cpx; /* Espacio entre el icono y el texto */
 }
@@ -94,11 +94,14 @@
 }
 
 .icon-text {
-    font-size: 16px; /* Ajusta el tamaño del texto */
-    text-align: left; /* Asegurar que el texto esté alineado */
+    font-size: 16px;
+    text-align: center;
     margin: 0;
+    white-space: nowrap; /* Evita saltos de línea */
+    overflow: hidden; /* Evita que el texto se desborde */
+    text-overflow: ellipsis; /* Añade puntos suspensivos si es necesario */
+    display: inline-block; /* Mantiene el comportamiento en línea */
 }
-
     /*---------------- Custom CSS for only desktop -------------------*/
   @media (min-width: 1025px) {
       /* Versión de escritorio: los iconos y textos se muestran de forma estática */
@@ -138,18 +141,16 @@
     }
   }
 
-
-
-
-
-  .marquee-content {
+.marquee-content {
     display: flex;
-    gap: 30px;
-    flex-wrap: nowrap;
-    animation: marquee-scroll 12s linear infinite;
-    min-width: 200%;
-  }
-
+    align-items: center;
+    justify-content: space-around;
+    gap: 20px; /* Mantiene separación uniforme */
+    white-space: nowrap; /* Mantiene los elementos en una sola línea */
+    overflow: hidden; /* Evita que elementos se desborden */
+    flex-wrap: nowrap; /* Evita que los textos pasen a otra línea */
+}
+  
   @keyframes marquee-scroll {
     from {
       transform: translateX(0%);
