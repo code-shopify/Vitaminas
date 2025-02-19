@@ -48,7 +48,7 @@
             {% endif %}
           {% endfor %}
 
-          <!-- 📌 Se duplica el contenido para un efecto continuo -->
+          <!-- 📌 Se duplica el contenido para un desplazamiento sin cortes -->
           {% for i in (1..6) %}
             {% assign image_key = 'icon_' | append: i | append: '_image' %}
             {% assign text_key = 'icon_' | append: i | append: '_text' %}
@@ -242,17 +242,6 @@
       "id": "icon_5_text",
       "label": "Texto 5",
       "default": "Sin Colorantes"
-    },
-    {
-      "type": "image_picker",
-      "id": "icon_6_image",
-      "label": "Sexta Imagen"
-    },
-    {
-      "type": "text",
-      "id": "icon_6_text",
-      "label": "Texto 6",
-      "default": "Sin Endulzantes Artificiales"
     }
   ],
   "presets": [
