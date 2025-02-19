@@ -134,12 +134,7 @@
 
   /*---------------- Custom CSS for tablet, mobile -------------------*/
   @media (max-width: 1024px) {
-    .marquee-mobile {
-        display: flex;
-        width: 100%;
-        overflow: hidden;
-        white-space: nowrap;
-        position: relative;
+
     }
 
   /*---------------- Custom CSS for only tablet -------------------*/
@@ -149,7 +144,19 @@
 
   /*---------------- Custom CSS for only mobile -------------------*/
   @media (max-width: 767px) {
+    .contenedor {
+      height: 30px;
+    }
 
+    .marquee-mobile{
+      font-size: 5px;
+    }
+      .marquee-mobile {
+        display: flex;
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        position: relative;
 }
 
   @keyframes marquee-scroll {
