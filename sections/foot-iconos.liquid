@@ -94,28 +94,24 @@
       width: auto;
       padding: 10px;
   }
-
+  /* Ajuste de iconos y textos */
   .icon-block {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
   }
 
   .icon-img {
-      max-width: 30px;
-      height: auto;
+    max-width: 24px;
+    height: auto;
   }
 
-  /* ✅ El texto se adapta a la pantalla y no es negrita */
   .icon-text {
-      font-size: clamp(12px, 2vw, 16px);
-      text-align: center;
-      margin: 0;
-      white-space: nowrap;
-      font-weight: normal;
+    font-size: 14px;
+    text-align: left;
   }
 
-  /* ✅ Diseño para escritorio: los íconos son estáticos */
+  /* Diseño para escritorio: los íconos son estáticos */
   @media (min-width: 1025px) {
       .marquee-desktop {
           display: flex;
@@ -127,7 +123,7 @@
       }
   }
 
-  /* ✅ Diseño para tablets y móviles: activa Swiper */
+  /* Diseño para tablets y móviles: activa Swiper */
   @media (max-width: 1024px) {
       .marquee-desktop {
           display: none !important;
