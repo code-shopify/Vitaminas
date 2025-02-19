@@ -25,6 +25,25 @@
             </div>
           {% endif %}
         {% endfor %}
+
+        <!-- Se duplica el contenido para un desplazamiento continuo sin cortes -->
+        {% for i in (1..6) %}
+          {% assign image_key = 'icon_' | append: i | append: '_image' %}
+          {% assign text_key = 'icon_' | append: i | append: '_text' %}
+          {% assign image = section.settings[image_key] %}
+          {% assign text = section.settings[text_key] %}
+
+          {% if image != blank or text != blank %}
+            <div class="swiper-slide d-flex align-items-center icon-block">
+              {% if image != blank %}
+                <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
+              {% endif %}
+              <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">
+                {{ text }}
+              </p>
+            </div>
+          {% endif %}
+        {% endfor %}
         
       </div>
     </div>
@@ -49,6 +68,7 @@
       align-items: center;
       justify-content: center;
       white-space: nowrap;
+      width: auto;
   }
 
   .icon-block {
@@ -75,14 +95,15 @@
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     var swiper = new Swiper(".mySwiper", {
-      slidesPerView: "auto",
-      spaceBetween: 20,
+      slidesPerView: "auto", // Ajuste dinámico de slides visibles
+      spaceBetween: 20, // Espaciado entre slides
       loop: true, // Loop infinito
+      freeMode: true, // Desplazamiento libre sin interrupciones
+      speed: 5000, // Velocidad de transición más suave
       autoplay: {
-        delay: 2000, // Velocidad de desplazamiento
-        disableOnInteraction: false, // Sigue deslizando después de interactuar
-      },
-      speed: 3000, // Velocidad de transición
+        delay: 0, // No hay pausas entre desplazamientos
+        disableOnInteraction: false, // Sigue moviéndose incluso después de interacción
+      }
     });
   });
 </script>
@@ -179,3 +200,4 @@
   ]
 }
 {% endschema %}
+
