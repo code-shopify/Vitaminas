@@ -4,70 +4,114 @@
   
   <div class="container">
     
-    <!-- 📌 Swiper Slider -->
-    <div class="swiper mySwiper">
-      <div class="swiper-wrapper">
-        
-        <!-- 📌 Generamos dinámicamente los iconos y textos configurados en Shopify -->
-        {% for i in (1..6) %}
-          {% assign image_key = 'icon_' | append: i | append: '_image' %}
-          {% assign text_key = 'icon_' | append: i | append: '_text' %}
-          {% assign image = section.settings[image_key] %}
-          {% assign text = section.settings[text_key] %}
+    <!-- 📌 Versión estática para escritorio -->
+    <div class="marquee-desktop d-flex justify-content-center gap-4">
+      {% for i in (1..6) %}
+        {% assign image_key = 'icon_' | append: i | append: '_image' %}
+        {% assign text_key = 'icon_' | append: i | append: '_text' %}
+        {% assign image = section.settings[image_key] %}
+        {% assign text = section.settings[text_key] %}
 
-          {% if image != blank or text != blank %}
-            <!-- 📌 Slide con ícono y texto -->
-            <div class="swiper-slide d-flex align-items-center icon-block">
-              {% if image != blank %}
-                <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
-              {% endif %}
-              <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">
-                {{ text }}
-              </p>
-            </div>
-          {% endif %}
-        {% endfor %}
+        {% if image != blank or text != blank %}
+          <div class="d-flex align-items-center icon-block">
+            {% if image != blank %}
+              <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
+            {% endif %}
+            <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">
+              {{ text }}
+            </p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
 
-        <!-- 📌 Se duplica el contenido para efecto continuo sin cortes -->
-        {% for i in (1..6) %}
-          {% assign image_key = 'icon_' | append: i | append: '_image' %}
-          {% assign text_key = 'icon_' | append: i | append: '_text' %}
-          {% assign image = section.settings[image_key] %}
-          {% assign text = section.settings[text_key] %}
+    <!-- 📌 Swiper para tablets y móviles -->
+    <div class="marquee-mobile">
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          
+          {% for i in (1..6) %}
+            {% assign image_key = 'icon_' | append: i | append: '_image' %}
+            {% assign text_key = 'icon_' | append: i | append: '_text' %}
+            {% assign image = section.settings[image_key] %}
+            {% assign text = section.settings[text_key] %}
 
-          {% if image != blank or text != blank %}
-            <div class="swiper-slide d-flex align-items-center icon-block">
-              {% if image != blank %}
-                <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
-              {% endif %}
-              <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">
-                {{ text }}
-              </p>
-            </div>
-          {% endif %}
-        {% endfor %}
-        
+            {% if image != blank or text != blank %}
+              <div class="swiper-slide d-flex align-items-center icon-block">
+                {% if image != blank %}
+                  <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
+                {% endif %}
+                <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">
+                  {{ text }}
+                </p>
+              </div>
+            {% endif %}
+          {% endfor %}
+
+          <!-- 📌 Se duplica el contenido para un efecto continuo -->
+          {% for i in (1..6) %}
+            {% assign image_key = 'icon_' | append: i | append: '_image' %}
+            {% assign text_key = 'icon_' | append: i | append: '_text' %}
+            {% assign image = section.settings[image_key] %}
+            {% assign text = section.settings[text_key] %}
+
+            {% if image != blank or text != blank %}
+              <div class="swiper-slide d-flex align-items-center icon-block">
+                {% if image != blank %}
+                  <img src="{{ image | img_url: 'auto' }}" class="img-fluid icon-img me-2" alt="{{ text }}">
+                {% endif %}
+                <p class="fw-bold icon-text" style="color: {{ section.settings.text_color }};">
+                  {{ text }}
+                </p>
+              </div>
+            {% endif %}
+          {% endfor %}
+
+        </div>
       </div>
     </div>
 
   </div>
 </div>
 
-<!-- 📌 Estilos Swiper -->
+<!-- 📌 Estilos CSS -->
 {% style %}
-  /* 📌 Configuración general del Swiper */
+  /* 📌 Asegurar que el contenedor ocupe todo el ancho */
+  .t4s-section-inner {
+      width: 100%;
+      max-width: 100%;
+  }
+
+  /* 📌 Estilos para los íconos */
+  .icon-block {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+  }
+
+  .icon-img {
+      max-width: 30px;
+      height: auto;
+  }
+
+  .icon-text {
+      font-size: 16px;
+      text-align: center;
+      margin: 0;
+      white-space: nowrap;
+  }
+
+  /* 📌 Configuración del Swiper */
   .swiper {
       width: 100%;
       height: 100%;
   }
 
-  /* 📌 Asegurar que los slides estén alineados horizontalmente */
   .swiper-wrapper {
       display: flex;
       align-items: center;
   }
 
-  /* 📌 Configuración del slide */
   .swiper-slide {
       display: flex;
       align-items: center;
@@ -76,25 +120,33 @@
       width: auto;
   }
 
-  /* 📌 Configuración del ícono y texto */
-  .icon-block {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+  /* 📌 Diseño para escritorio */
+  @media (min-width: 1025px) {
+      .marquee-desktop {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+      }
+      .marquee-mobile {
+          display: none;
+      }
   }
 
-  /* 📌 Tamaño de los iconos */
-  .icon-img {
-      max-width: 30px;
-      height: auto;
+  /* 📌 Diseño para tablets y móviles */
+  @media (max-width: 1024px) {
+      .marquee-desktop {
+          display: none !important;
+      }
   }
 
-  /* 📌 Asegurar que el texto no haga saltos de línea */
-  .icon-text {
-      font-size: 16px;
-      text-align: center;
-      margin: 0;
-      white-space: nowrap;
+  @media (max-width: 767px) {
+      .contenedor {
+          height: 30px;
+      }
+
+      .marquee-mobile {
+          font-size: 5px;
+      }
   }
 {% endstyle %}
 
@@ -102,18 +154,20 @@
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    var swiper = new Swiper(".mySwiper", {
-      slidesPerView: "auto", // 📌 Distribución fluida de slides
-      spaceBetween: 20, // 📌 Espacio entre elementos
-      loop: true, // 📌 Habilita el desplazamiento infinito
-      speed: 20000, // 📌 Velocidad de la animación (ajusta según prefieras)
-      autoplay: {
-        delay: 0, // 📌 Sin pausas entre desplazamientos
-        disableOnInteraction: false, // 📌 Permite seguir moviéndose tras interacción
-      },
-      allowTouchMove: false, // 📌 Evita que el usuario frene el desplazamiento
-      freeMode: true, // 📌 Movimiento continuo como marquee
-    });
+    if (window.innerWidth <= 1024) {
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: "auto",
+        spaceBetween: 20,
+        loop: true,
+        speed: 20000,
+        autoplay: {
+          delay: 0,
+          disableOnInteraction: false,
+        },
+        allowTouchMove: false,
+        freeMode: true,
+      });
+    }
   });
 </script>
 
@@ -209,4 +263,5 @@
   ]
 }
 {% endschema %}
+
 
