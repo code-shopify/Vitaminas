@@ -1665,6 +1665,7 @@
           "icono_izq": "shopify://shop_images/Star_1.png",
           "titulo_izq": "Menos del 1%",
           "texto_abajo_izq": "Regresan nuestros productos",
+          "icono_der": "shopify://shop_images/Star_1.png",
           "titulo_der": "+500,000 enviados",
           "texto_abajo_der": "Estás en buenas manos"
         }
