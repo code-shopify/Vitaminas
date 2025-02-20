@@ -37,20 +37,46 @@
       "id": "text_color",
       "label": "Color del texto",
       "default": "#333333"
-    }
-  ],
-  "blocks": [
+    },
     {
-      "type": "video",
-      "name": "TikTok Video",
-      "limit": 8,
-      "settings": [
-        {
-          "type": "url",
-          "id": "video_url",
-          "label": "URL del Video de TikTok"
-        }
-      ]
+      "type": "url",
+      "id": "video_1",
+      "label": "TikTok Video 1"
+    },
+    {
+      "type": "url",
+      "id": "video_2",
+      "label": "TikTok Video 2"
+    },
+    {
+      "type": "url",
+      "id": "video_3",
+      "label": "TikTok Video 3"
+    },
+    {
+      "type": "url",
+      "id": "video_4",
+      "label": "TikTok Video 4"
+    },
+    {
+      "type": "url",
+      "id": "video_5",
+      "label": "TikTok Video 5"
+    },
+    {
+      "type": "url",
+      "id": "video_6",
+      "label": "TikTok Video 6"
+    },
+    {
+      "type": "url",
+      "id": "video_7",
+      "label": "TikTok Video 7"
+    },
+    {
+      "type": "url",
+      "id": "video_8",
+      "label": "TikTok Video 8"
     }
   ],
   "presets": [
@@ -77,9 +103,11 @@
   <!-- Carrusel de TikToks -->
   <div class="tiktok-carousel">
     <div class="tiktok-slider">
-      {% for block in section.blocks limit: 8 %}
-        {% if block.settings.video_url contains "/video/" %}
-          {% assign video_id = block.settings.video_url | split: "/video/" | last | split: "?" | first %}
+      {% for i in (1..8) %}
+        {% capture video_var %}video_{{ i }}{% endcapture %}
+        {% assign video_url = section.settings[video_var] %}
+        {% if video_url contains "/video/" %}
+          {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
           <div class="tiktok-slide">
             <div class="with-border">
               <iframe class="tiktok-embed"
@@ -236,5 +264,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
 
 
