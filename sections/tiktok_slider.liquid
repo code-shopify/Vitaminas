@@ -194,6 +194,18 @@
   position: relative;
 }
 
+/* Estilos del Marco */
+.with-border {
+  padding: 6px;
+  border-radius: 15px;
+  border: 3px solid transparent;
+  background: linear-gradient(to bottom, #00ffff, #ff2d55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
 /* Ajuste del TikTok al cuadro */
 .tiktok-embed {
   width: 100%;
@@ -217,18 +229,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     iframes.forEach((iframe) => {
         iframe.addEventListener("mouseenter", () => {
-            pauseOtherVideos(iframe);
+            iframes.forEach((v) => {
+                if (v !== iframe) {
+                    let src = v.src;
+                    v.src = "";
+                    v.src = src;
+                }
+            });
         });
     });
-
-    function pauseOtherVideos(activeIframe) {
-        iframes.forEach((iframe) => {
-            if (iframe !== activeIframe) {
-                iframe.contentWindow.postMessage({ method: "pause" }, "*");
-            }
-        });
-    }
 });
 </script>
-
 
