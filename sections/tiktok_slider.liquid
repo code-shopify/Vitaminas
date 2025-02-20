@@ -39,6 +39,12 @@
       "default": "#333333"
     },
     {
+      "type": "text",
+      "id": "font_size",
+      "label": "Tamaño de la fuente (ej. 16px)",
+      "default": "16px"
+    },
+    {
       "type": "url",
       "id": "video_1",
       "label": "TikTok Video 1"
@@ -88,7 +94,7 @@
 }
 {% endschema %}
 
-<div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
+<div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }}; font-size: {{ section.settings.font_size }};">
   
   <!-- Contenido Superior -->
   <div class="tiktok-slider-header">
@@ -156,6 +162,14 @@
   display: flex;
   gap: 8px;
   transition: transform 0.3s ease-in-out;
+}
+
+/* Espaciado entre elementos */
+.tiktok-slider-header {
+  margin-bottom: 30px;
+}
+.bottom-message {
+  margin-top: 30px;
 }
 
 /* Botones de navegación */
@@ -232,7 +246,6 @@ document.addEventListener("DOMContentLoaded", function () {
   
   videoContainers.forEach((container) => {
     container.addEventListener("click", function(e) {
-      // Evitar que el clic se duplique si se ha activado algún enlace interno
       e.preventDefault();
       
       const iframe = container.querySelector(".tiktok-embed");
@@ -253,4 +266,5 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+
 
