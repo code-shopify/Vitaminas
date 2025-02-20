@@ -1,102 +1,109 @@
-<style>
-  .shipping-info-section {
-    background-color: #f9f3eb; /* Color de fondo similar a la imagen */
-    padding: 15px 20px;
-    border-radius: 8px;
-    max-width: 600px; /* Ancho limitado para parecerse a la imagen */
-    margin: auto;
-  }
-
-  .shipping-info-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .shipping-info-list li {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    color: #635d57; /* Color de texto similar */
-    margin-bottom: 8px;
-  }
-
-  .shipping-info-list img {
-    width: 24px; /* Tamaño ajustado para los íconos */
-    height: 24px;
-    margin-right: 10px;
-    object-fit: contain;
-  }
-</style>
-
-<section class="shipping-info-section">
-  <ul class="shipping-info-list">
-    <li>
-      {% if section.settings.icon1 != blank %}
-        <img src="{{ section.settings.icon1 | image_url }}" alt="Ícono 1">
-      {% endif %}
-      <span>{{ section.settings.text1 }}</span>
-    </li>
-    <li>
-      {% if section.settings.icon2 != blank %}
-        <img src="{{ section.settings.icon2 | image_url }}" alt="Ícono 2">
-      {% endif %}
-      <span>{{ section.settings.text2 }}</span>
-    </li>
-    <li>
-      {% if section.settings.icon3 != blank %}
-        <img src="{{ section.settings.icon3 | image_url }}" alt="Ícono 3">
-      {% endif %}
-      <span>{{ section.settings.text3 }}</span>
-    </li>
-  </ul>
-</section>
-
 {% schema %}
 {
-  "name": "Información de Envío",
+  "name": "Beneficios",
   "settings": [
     {
-      "type": "image_picker",
-      "id": "icon1",
-      "label": "Ícono 1"
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#FEF8F0"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#333333"
     },
     {
       "type": "text",
-      "id": "text1",
+      "id": "icon_1",
+      "label": "Ícono 1 (Emoji o HTML)",
+      "default": "🚚"
+    },
+    {
+      "type": "text",
+      "id": "text_1",
       "label": "Texto 1",
       "default": "Envío gratis en compras arriba de $1,299"
     },
     {
-      "type": "image_picker",
-      "id": "icon2",
-      "label": "Ícono 2"
+      "type": "text",
+      "id": "icon_2",
+      "label": "Ícono 2 (Emoji o HTML)",
+      "default": "🔒"
     },
     {
       "type": "text",
-      "id": "text2",
+      "id": "text_2",
       "label": "Texto 2",
       "default": "Compra cifrada y segura"
     },
     {
-      "type": "image_picker",
-      "id": "icon3",
-      "label": "Ícono 3"
+      "type": "text",
+      "id": "icon_3",
+      "label": "Ícono 3 (Emoji o HTML)",
+      "default": "📦"
     },
     {
       "type": "text",
-      "id": "text3",
+      "id": "text_3",
       "label": "Texto 3",
       "default": "Entrega garantizada de 3 a 6 días hábiles"
     }
   ],
   "presets": [
     {
-      "name": "Información de Envío",
-      "category": "Texto"
+      "name": "Beneficios",
+      "category": "Información"
     }
   ]
 }
 {% endschema %}
+
+<div class="benefits-section" style="background-color: {{ section.settings.background_color }};">
+  <div class="benefits-container">
+    <div class="benefit-item">
+      <span class="benefit-icon">{{ section.settings.icon_1 }}</span>
+      <p class="benefit-text" style="color: {{ section.settings.text_color }};">{{ section.settings.text_1 }}</p>
+    </div>
+
+    <div class="benefit-item">
+      <span class="benefit-icon">{{ section.settings.icon_2 }}</span>
+      <p class="benefit-text" style="color: {{ section.settings.text_color }};">{{ section.settings.text_2 }}</p>
+    </div>
+
+    <div class="benefit-item">
+      <span class="benefit-icon">{{ section.settings.icon_3 }}</span>
+      <p class="benefit-text" style="color: {{ section.settings.text_color }};">{{ section.settings.text_3 }}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+.benefits-section {
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.benefits-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 900px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0;
+}
+
+.benefit-icon {
+  font-size: 20px;
+}
+</style>
 
 
