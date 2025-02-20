@@ -112,7 +112,8 @@
         {% if video_url contains "/video/" %}
           {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
           <div class="tiktok-slide">
-            <div class="with-border">
+            <!-- Se agrega la clase 'video-container' para capturar el clic -->
+            <div class="with-border video-container">
               <iframe class="tiktok-embed video-{{ i }}"
                 src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
                 frameborder="0"
@@ -219,26 +220,34 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const slider = document.querySelector(".tiktok-slider");
-  let scrollAmount = slider.offsetWidth / 4.5;
-
-  // Se hace la función de scroll accesible globalmente para los botones
+  const scrollAmount = slider.offsetWidth / 4.5;
+  
+  // Función de scroll accesible globalmente
   window.scrollSlider = function(direction) {
     slider.scrollBy({ left: scrollAmount * direction, behavior: "smooth" });
   };
 
-  const iframes = document.querySelectorAll(".tiktok-embed");
+  const videoContainers = document.querySelectorAll(".video-container");
   let currentPlaying = null;
-
-  iframes.forEach((iframe) => {
-    iframe.addEventListener("click", () => {
-      // Si hay un video reproduciéndose y es diferente al clicado, se "pausa" reiniciando su src
+  
+  videoContainers.forEach((container) => {
+    container.addEventListener("click", function(e) {
+      // Evitar que el clic se duplique si se ha activado algún enlace interno
+      e.preventDefault();
+      
+      const iframe = container.querySelector(".tiktok-embed");
+      
+      // Si hay otro video reproduciéndose, reiniciarlo para pausarlo
       if (currentPlaying && currentPlaying !== iframe) {
-        currentPlaying.src = currentPlaying.src.replace("autoplay=1", "autoplay=0");
+        let prevSrc = currentPlaying.getAttribute("src");
+        currentPlaying.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
       }
-      // Se activa el autoplay para el video clicado, si aún no lo tiene
-      if (iframe.src.indexOf("autoplay=1") === -1) {
-        iframe.src = iframe.src.replace("autoplay=0", "autoplay=1");
+      
+      // Activar autoplay en el iframe clicado si aún no lo tiene
+      if (iframe.getAttribute("src").indexOf("autoplay=1") === -1) {
+        iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
       }
+      
       currentPlaying = iframe;
     });
   });
