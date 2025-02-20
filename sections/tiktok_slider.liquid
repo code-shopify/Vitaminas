@@ -101,7 +101,6 @@
           {% assign fraction = rating_val | minus: full_stars %}
           {% assign partial_percent = fraction | times: 100 %}
           {% assign next_star = full_stars | plus: 1 %}
-
           {% for star in (1..5) %}
             {% if star <= full_stars %}
               <span class="star full">&#9733;</span>
@@ -301,7 +300,6 @@
   color: #ccc;
 }
 
-/* Estrella parcial */
 .star.partial {
   position: relative;
   display: inline-block;
@@ -327,12 +325,15 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const slider = document.querySelector(".tiktok-slider");
-  
-  // Recalcula el scrollAmount en cada clic para que la vista sea de 4.5 slides
+  // Se usa el ancho de una slide para calcular el scroll
   window.scrollSlider = function(direction) {
-    const scrollAmount = slider.offsetWidth / 4.5;
-    slider.scrollBy({ left: scrollAmount * direction, behavior: "smooth" });
+    const slider = document.querySelector(".tiktok-slider");
+    const slide = slider.querySelector(".tiktok-slide");
+    if (slide) {
+      // Calcula el ancho de la slide (offsetWidth incluye padding/margen según el layout)
+      const slideWidth = slide.offsetWidth;
+      slider.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
+    }
   };
 
   const videoContainers = document.querySelectorAll(".video-container");
@@ -354,4 +355,5 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+
 
