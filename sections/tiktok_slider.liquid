@@ -107,11 +107,13 @@
             {% if star <= full_stars %}
               <!-- Estrella completa -->
               <span class="star full">&#9733;</span>
-            {% elsif star == next_star and fraction > 0 %}
-              <!-- Estrella parcial (si el rating tiene parte decimal) -->
-              <span class="star partial" style="--fill: {{ partial_percent }}%;">
-                &#9733;
-              </span>
+            {% elsif star == next_star %}
+              {% if fraction > 0 %}
+                <!-- Estrella parcial -->
+                <span class="star partial" style="--fill: {{ partial_percent }}%;">&#9733;</span>
+              {% else %}
+                <span class="star empty">&#9733;</span>
+              {% endif %}
             {% else %}
               <!-- Estrella vacía -->
               <span class="star empty">&#9733;</span>
@@ -171,8 +173,8 @@
   padding: 60px 20px; /* Mayor espacio vertical */
   border-radius: 10px;
   position: relative;
-  max-width: 1200px; /* Para no estirar demasiado */
-  margin: 0 auto;    /* Centrado horizontal */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Sección superior (rating + título) */
@@ -190,7 +192,7 @@
   margin-bottom: 10px;
 }
 
-/* Agrupa estrellas y número (4.8) */
+/* Agrupa estrellas y número (ej. 4.8) */
 .star-rating {
   display: flex;
   align-items: center;
@@ -312,7 +314,7 @@
 .star.partial {
   position: relative;
   display: inline-block;
-  color: #ccc; /* color base (vacío) */
+  color: #ccc;
 }
 .star.partial::before {
   content: "★";
@@ -337,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const slider = document.querySelector(".tiktok-slider");
   const scrollAmount = slider.offsetWidth / 4.5;
   
-  // Función de scroll accesible globalmente
+  // Función de scroll global
   window.scrollSlider = function(direction) {
     slider.scrollBy({ left: scrollAmount * direction, behavior: "smooth" });
   };
@@ -348,25 +350,16 @@ document.addEventListener("DOMContentLoaded", function () {
   videoContainers.forEach((container) => {
     container.addEventListener("click", function(e) {
       e.preventDefault();
-      
       const iframe = container.querySelector(".tiktok-embed");
-      
-      // Si hay otro video reproduciéndose, reiniciarlo para pausarlo
       if (currentPlaying && currentPlaying !== iframe) {
         let prevSrc = currentPlaying.getAttribute("src");
         currentPlaying.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
       }
-      
-      // Activar autoplay en el iframe clicado si aún no lo tiene
       if (iframe.getAttribute("src").indexOf("autoplay=1") === -1) {
         iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
       }
-      
       currentPlaying = iframe;
     });
   });
 });
 </script>
-
-
-
