@@ -105,29 +105,23 @@
 
           {% for star in (1..5) %}
             {% if star <= full_stars %}
-              <!-- Estrella completa -->
               <span class="star full">&#9733;</span>
             {% elsif star == next_star %}
               {% if fraction > 0 %}
-                <!-- Estrella parcial -->
                 <span class="star partial" style="--fill: {{ partial_percent }}%;">&#9733;</span>
               {% else %}
                 <span class="star empty">&#9733;</span>
               {% endif %}
             {% else %}
-              <!-- Estrella vacía -->
               <span class="star empty">&#9733;</span>
             {% endif %}
           {% endfor %}
         </div>
-        <!-- Valor numérico de la calificación -->
         <span class="rating-value">{{ rating_val }}</span>
       </div>
-      <!-- Número de reseñas -->
       <span class="reviews">{{ section.settings.reviews }}</span>
     </div>
     
-    <!-- Título principal -->
     <h2 class="slider-title">{{ section.settings.title }}</h2>
   </div>
 
@@ -170,19 +164,19 @@
 /* Contenedor principal */
 .tiktok-slider-container {
   text-align: center;
-  padding: 60px 20px; /* Mayor espacio vertical */
+  padding: 60px 20px;
   border-radius: 10px;
   position: relative;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-/* Sección superior (rating + título) */
+/* Sección superior */
 .tiktok-slider-header {
   margin-bottom: 40px;
 }
 
-/* Calificación y reseñas en la misma línea */
+/* Rating y reseñas */
 .rating-reviews {
   display: flex;
   align-items: center;
@@ -192,26 +186,26 @@
   margin-bottom: 10px;
 }
 
-/* Agrupa estrellas y número (ej. 4.8) */
+/* Agrupa estrellas y calificación numérica */
 .star-rating {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-/* Contenedor de las estrellas */
+/* Contenedor de estrellas */
 .stars {
   display: flex;
   gap: 2px;
 }
 
-/* Texto de la calificación */
+/* Calificación numérica */
 .rating-value {
   font-weight: bold;
   color: #333;
 }
 
-/* Texto de reseñas */
+/* Reseñas */
 .reviews {
   color: #999;
 }
@@ -285,7 +279,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Ajuste del TikTok al cuadro */
+/* Ajuste del TikTok */
 .tiktok-embed {
   width: 100%;
   height: 100%;
@@ -310,7 +304,7 @@
   color: #ccc;
 }
 
-/* Estrella parcial (relleno dinámico) */
+/* Estrella parcial: se muestra la estrella en color base (#ccc) y se recorta con el pseudo-elemento */
 .star.partial {
   position: relative;
   display: inline-block;
@@ -319,9 +313,9 @@
 .star.partial::before {
   content: "★";
   position: absolute;
-  left: 0;
   top: 0;
-  width: calc(var(--fill) * 1%);
+  left: 0;
+  width: var(--fill);
   overflow: hidden;
   color: gold;
 }
@@ -339,7 +333,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const slider = document.querySelector(".tiktok-slider");
   const scrollAmount = slider.offsetWidth / 4.5;
   
-  // Función de scroll global
   window.scrollSlider = function(direction) {
     slider.scrollBy({ left: scrollAmount * direction, behavior: "smooth" });
   };
