@@ -39,29 +39,25 @@
       "default": "#333333"
     },
     {
-      "type": "url",
-      "id": "video_1",
-      "label": "TikTok Video 1"
-    },
+      "type": "range",
+      "id": "num_videos",
+      "label": "Número de TikToks",
+      "min": 1,
+      "max": 10,
+      "default": 5
+    }
+  ],
+  "blocks": [
     {
-      "type": "url",
-      "id": "video_2",
-      "label": "TikTok Video 2"
-    },
-    {
-      "type": "url",
-      "id": "video_3",
-      "label": "TikTok Video 3"
-    },
-    {
-      "type": "url",
-      "id": "video_4",
-      "label": "TikTok Video 4"
-    },
-    {
-      "type": "url",
-      "id": "video_5",
-      "label": "TikTok Video 5"
+      "type": "video",
+      "name": "TikTok Video",
+      "settings": [
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "URL del Video de TikTok"
+        }
+      ]
     }
   ],
   "presets": [
@@ -85,37 +81,27 @@
     <h2 class="slider-title">{{ section.settings.title }}</h2>
   </div>
 
-  <!-- Botón Izquierdo -->
-  <button class="nav-button left-button" onclick="scrollSlider(-1)">&#10094;</button>
-
-  <!-- Slider -->
-  <div class="tiktok-slider">
-    {% for i in (1..5) %}
-      {% capture video_var %}video_{{ i }}{% endcapture %}
-      {% assign video_url = section.settings[video_var] %}
-
-      {% if video_url != blank %}
-        <div class="tiktok-slide">
-          <div class="with-border">
-            {% if video_url contains "/video/" %}
-              {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
+  <!-- Carrusel de TikToks -->
+  <div class="tiktok-carousel">
+    <div class="tiktok-slider">
+      {% for block in section.blocks limit: section.settings.num_videos %}
+        {% if block.settings.video_url contains "/video/" %}
+          {% assign video_id = block.settings.video_url | split: "/video/" | last | split: "?" | first %}
+          <div class="tiktok-slide">
+            <div class="with-border">
               <iframe class="tiktok-embed" 
                 src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0" 
                 frameborder="0" 
                 allow="autoplay; fullscreen; picture-in-picture" 
-                scrolling="no">
+                scrolling="no"
+                data-video>
               </iframe>
-            {% else %}
-              <p style="color: red;">URL inválida. Asegúrate de ingresar un enlace correcto.</p>
-            {% endif %}
+            </div>
           </div>
-        </div>
-      {% endif %}
-    {% endfor %}
+        {% endif %}
+      {% endfor %}
+    </div>
   </div>
-
-  <!-- Botón Derecho -->
-  <button class="nav-button right-button" onclick="scrollSlider(1)">&#10095;</button>
 
   <!-- Contenido Inferior -->
   <p class="bottom-message">{{ section.settings.bottom_message }}</p>
@@ -161,47 +147,21 @@
   font-weight: bold;
 }
 
-/* Slider con 4.5 videos visibles */
+/* Carrusel */
+.tiktok-carousel {
+  overflow: hidden;
+  position: relative;
+}
+
 .tiktok-slider {
   display: flex;
-  gap: 10px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  max-width: 1200px;
-  margin: auto;
-  padding: 10px;
-}
-
-/* Botones de navegación */
-.nav-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.left-button {
-  left: 0;
-}
-
-.right-button {
-  right: 0;
+  transition: transform 0.5s ease-in-out;
 }
 
 /* Slides */
 .tiktok-slide {
-  flex: 0 0 calc(100% / 4.5);
-  max-width: calc(100% / 4.5);
+  flex: 0 0 20%;
+  max-width: 20%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -210,9 +170,9 @@
 
 /* Estilos del Marco */
 .with-border {
-    padding: 3px;
+    padding: 6px;
     border-radius: 15px;
-    border: 1px solid transparent;
+    border: 3px solid transparent;
     background: linear-gradient(to bottom, #00ffff, #ff2d55);
     display: flex;
     justify-content: center;
@@ -238,10 +198,41 @@
 </style>
 
 <script>
-function scrollSlider(direction) {
-  let slider = document.querySelector(".tiktok-slider");
-  let scrollAmount = slider.offsetWidth / 4.5;
-  slider.scrollBy({ left: scrollAmount * direction, behavior: "smooth" });
-}
-</script>
+document.addEventListener("DOMContentLoaded", function () {
+    const videos = document.querySelectorAll(".tiktok-embed");
+  
+    videos.forEach(video => {
+        video.addEventListener("mouseenter", () => {
+            videos.forEach(v => {
+                if (v !== video) {
+                    v.src = v.src; // Reinicia los demás videos para detener su reproducción
+                }
+            });
+        });
+    });
 
+    let currentIndex = 0;
+    const slides = document.querySelectorAll(".tiktok-slide");
+    const totalSlides = slides.length;
+    const slider = document.querySelector(".tiktok-slider");
+
+    function moveSlider(direction) {
+        currentIndex += direction;
+        if (currentIndex < 0) {
+            currentIndex = totalSlides - 1;
+        } else if (currentIndex >= totalSlides) {
+            currentIndex = 0;
+        }
+        updateSlider();
+    }
+
+    function updateSlider() {
+        const offset = -currentIndex * (100 / totalSlides);
+        slider.style.transform = `translateX(${offset}%)`;
+    }
+
+    setInterval(() => {
+        moveSlider(1);
+    }, 4000); // Mueve el carrusel automáticamente cada 4 segundos
+});
+</script>
