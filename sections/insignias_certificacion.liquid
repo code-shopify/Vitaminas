@@ -7,11 +7,11 @@
     <div>
       <img 
     srcset="
-    {{ section.settings.banner | img_url: '400x400' }} 400w,
-    {{ section.settings.banner | img_url: '800x800' }} 800w,
-    {{ section.settings.banner | img_url: '1200x1200' }} 1200w"
-  sizes="(max-width: 576px) 400px, (max-width: 992px) 800px, 1200px"
-  src="{{ section.settings.banner | img_url: '1200x1200' }}"
+    {{ section.settings.banner | img_url: '800x400' }} 400w,
+    {{ section.settings.banner | img_url: '1200x600' }} 800w,
+    {{ section.settings.banner | img_url: '1600x800' }} 1200w"
+  sizes="(max-width: 576px) 100vw, (max-width: 992px) 100vw, 100vw"
+  src="{{ section.settings.banner | img_url: '1600x800' }}"
   class="rounded float-end image_banner"
   alt="banner">
     </div>
