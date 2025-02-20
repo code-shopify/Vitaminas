@@ -170,13 +170,6 @@
         "background_color": "#f0e6ff"
       }
     },
-    "insignias_certificacion_q4QKmk": {
-      "type": "insignias_certificacion",
-      "settings": {
-        "header": "Calidad en cada ingrediente, diseñados pensando en ti.",
-        "background": "#f3f5d7"
-      }
-    },
     "foot_iconos_XrxNFp": {
       "type": "foot-iconos",
       "settings": {
@@ -194,6 +187,13 @@
         "icon_5_text": "Sin Colorantes",
         "icon_6_image": "shopify://shop_images/Group_1283.png",
         "icon_6_text": "Sin Endulzantes Artificiales"
+      }
+    },
+    "insignias_certificacion_y68P3L": {
+      "type": "insignias_certificacion",
+      "settings": {
+        "header": "Calidad en cada ingrediente, diseñados pensando en ti.",
+        "background": "#E5D4C9"
       }
     },
     "video_featured_ab8iGh": {
@@ -232,8 +232,8 @@
     "suscripcion_3Uinhx",
     "tik_toks_UbMLMd",
     "ejemplo_crAfXx",
-    "insignias_certificacion_q4QKmk",
     "foot_iconos_XrxNFp",
+    "insignias_certificacion_y68P3L",
     "video_featured_ab8iGh"
   ]
 }
