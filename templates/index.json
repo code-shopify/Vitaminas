@@ -25,7 +25,13 @@
     },
     "suscripcion_3Uinhx": {
       "type": "suscripcion",
-      "settings": {}
+      "settings": {
+        "title": "¡SUSCRÍBETE Y RECIBE UN 10% OFF!",
+        "description": "Disfruta de promociones, acceso preferencial a nuevos productos, noticias y mucho más.",
+        "placeholder": "Correo electrónico",
+        "button_text": "Suscribirme",
+        "button_color": "#A02D76"
+      }
     },
     "tik_toks_UbMLMd": {
       "type": "Tik-toks",
@@ -183,12 +189,28 @@
         "icon_6_text": "Sin Endulzantes Artificiales"
       }
     },
+    "tiktok_slider_hnmKHL": {
+      "type": "tiktok_slider",
+      "settings": {
+        "rating": "4.8",
+        "reviews": "1,450 reviews",
+        "title": "Opinan de Vitatú",
+        "bottom_message": "*EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIÉN LO RECOMIENDA Y DE QUIÉN LO USA, ESTE PRODUCTO NO ES UN MEDICAMENTO*",
+        "background_color": "#FEF8F0",
+        "text_color": "#333333",
+        "video_1": "",
+        "video_2": "",
+        "video_3": "",
+        "video_4": "",
+        "video_5": ""
+      }
+    },
     "insignias_certificacion_y68P3L": {
       "type": "insignias_certificacion",
       "settings": {
         "header": "Calidad en cada ingrediente, diseñados pensando en ti.",
         "banner": "shopify://shop_images/Sin_titulo-3_1.png",
-        "background": "#E5D4C9"
+        "background": "#e5d4c9"
       }
     },
     "video_featured_ab8iGh": {
@@ -228,6 +250,7 @@
     "tik_toks_UbMLMd",
     "ejemplo_crAfXx",
     "foot_iconos_XrxNFp",
+    "tiktok_slider_hnmKHL",
     "insignias_certificacion_y68P3L",
     "video_featured_ab8iGh"
   ]
