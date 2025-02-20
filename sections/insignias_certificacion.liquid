@@ -5,14 +5,7 @@
       <header class="fw-bold text-start" style="font-size: 45px; max-width: 665px; height:auto">{{ section.settings.header }}</header>
     </div>
     <div>
-      <img 
-    srcset="
-    {{ section.settings.banner | img_url: '289x348' }} 400w,
-    {{ section.settings.banner | img_url: '1441x688' }} 1200w"
-  sizes="(max-width: 576px) 100vw, (max-width: 992px)"
-  src="{{ section.settings.banner | img_url: '1441x688' }}"
-  class="rounded float-end banner-img"
-  alt="banner">
+      <img src="{{ section.settings.banner | img_url: '1441x688' }}" class="rounded float-end banner-img" alt="banner">
     </div>
   </div>
 </div>
