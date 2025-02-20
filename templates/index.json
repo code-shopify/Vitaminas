@@ -194,19 +194,16 @@
       "settings": {
         "header": "Calidad en cada ingrediente, diseñados pensando en ti.",
         "banner": "shopify://shop_images/5986c8f1a17c584df3afc44725981a64.png",
+        "background_box": "#FFBF80",
         "background_section": "#e5d4c9",
         "box_1": "Ingredientes con patentes",
         "box_content": "patente Quatrefolic (de folato)",
-        "background_box_1": "#ffbf80",
-        "box_2": "",
-        "box_content_2": "",
-        "background_box_2": "#ffbf80",
-        "box_3": "",
-        "box_content_3": "",
-        "background_box_3": "#ffbf80",
-        "box_4": "",
-        "box_content_4": "",
-        "background_box_4": "#ffbf80"
+        "box_2": "Acompañamiento después de tu compra",
+        "box_content_2": "Tips, consejos, respuestas a tus dudas y acompañamiento después de tu compra.",
+        "box_3": "Formulario por especialistas por especialistas en nutrición.",
+        "box_content_3": "Equipo de especialistas en nutrición detrás de la formulación de nuestros productos.",
+        "box_4": "transparencia e integridad en nuestras formulas",
+        "box_content_4": "Lo que ves en la etiqueta es lo que tiene el producto, lo cumplidos. Trazabilidad de los ingredientes"
       }
     },
     "tiktok_slider_wHCVUD": {
