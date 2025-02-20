@@ -2,8 +2,10 @@
   ============================
   SECCIÓN: Beneficios Post-Compra
   ============================
-  - Muestra íconos y textos informativos (ej. "Envío gratis", "Compra segura", etc.)
-  - Usa blocks para mayor flexibilidad.
+  Instrucciones:
+  - Esta sección te permite mostrar íconos y textos informativos (ej. "Envío gratis", "Compra segura", etc.)
+  - Puedes agregar tantos bloques como desees para mostrar distintas características.
+  - Ajusta el estilo (CSS) a tu gusto, o integra los estilos de tu tema.
 {% endcomment %}
 
 <section id="post-purchase-benefits" class="post-purchase-benefits">
@@ -35,7 +37,7 @@
 
 {% schema %}
 {
-  "name": "sellos",
+  "name": "Beneficios Post-Compra",
   "settings": [
     {
       "type": "text",
@@ -56,18 +58,21 @@
           "default": "Envío gratis en compras arriba de $1,299"
         },
         {
-          "type": "image_picker",
+          "type": "url",
           "id": "icon_image",
           "label": "Ícono o imagen",
+
         }
       ]
     }
   ],
+  "max_blocks": 8,
   "presets": [
     {
-      "name": "sellos",
+      "name": "Beneficios Post-Compra",
       "category": "Product"
     }
   ]
 }
 {% endschema %}
+
