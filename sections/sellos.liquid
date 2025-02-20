@@ -1,73 +1,59 @@
-<section class="shipping-info-section py-4">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-8 text-center">
-        <!-- Título -->
-        <h2>{{ section.settings.title }}</h2>
-        <!-- Descripción -->
-        <p>{{ section.settings.description }}</p>
+<style>
+  .shipping-info-section {
+    background-color: #f9f3eb; /* Color de fondo similar al de la imagen */
+    padding: 15px 20px;
+    border-radius: 8px;
+    max-width: 600px; /* Limita el ancho para que se parezca a la imagen */
+    margin: auto;
+  }
 
-        <!-- Características -->
-        <ul class="list-unstyled d-flex flex-column gap-3">
-          {% for block in section.blocks %}
-            <li class="d-flex align-items-center">
-              <span class="me-2" style="font-size: 1.5em;">{{ block.settings.icon }}</span> 
-              <span>{{ block.settings.text }}</span>
-            </li>
-          {% endfor %}
-        </ul>
+  .shipping-info-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 
-        <!-- Imagenes Opcionales -->
-        <div class="d-flex justify-content-between mt-4">
-          {% if section.settings.left_image != blank %}
-            <img src="{{ section.settings.left_image | image_url }}" alt="Imagen izquierda" class="img-fluid" style="max-width: 150px;">
-          {% endif %}
-          {% if section.settings.right_image != blank %}
-            <img src="{{ section.settings.right_image | image_url }}" alt="Imagen derecha" class="img-fluid" style="max-width: 150px;">
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
+  .shipping-info-list li {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    color: #635d57; /* Color de texto similar al de la imagen */
+    margin-bottom: 8px;
+  }
+
+  .shipping-info-list img {
+    width: 20px; /* Tamaño ajustado para los íconos */
+    height: 20px;
+    margin-right: 8px;
+  }
+</style>
+
+<section class="shipping-info-section">
+  <ul class="shipping-info-list">
+    {% for block in section.blocks %}
+      <li>
+        {% if block.settings.image != blank %}
+          <img src="{{ block.settings.image | image_url }}" alt="Ícono">
+        {% endif %}
+        <span>{{ block.settings.text }}</span>
+      </li>
+    {% endfor %}
+  </ul>
 </section>
 
 {% schema %}
 {
   "name": "Información de Envío",
-  "settings": [
-    {
-      "type": "image_picker",
-      "id": "left_image",
-      "label": "Imagen izquierda"
-    },
-    {
-      "type": "image_picker",
-      "id": "right_image",
-      "label": "Imagen derecha"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Título",
-      "default": "Beneficios de tu compra"
-    },
-    {
-      "type": "textarea",
-      "id": "description",
-      "label": "Descripción",
-      "default": "Aprovecha nuestras ofertas y beneficios exclusivos al comprar con nosotros."
-    }
-  ],
+  "settings": [],
   "blocks": [
     {
       "type": "feature",
       "name": "Característica",
       "settings": [
         {
-          "type": "text",
-          "id": "icon",
-          "label": "Ícono (emoji o HTML)",
-          "default": "🚚"
+          "type": "image_picker",
+          "id": "image",
+          "label": "Ícono de la característica"
         },
         {
           "type": "text",
@@ -82,26 +68,23 @@
   "presets": [
     {
       "name": "Información de Envío",
-      "category": "Marketing",
+      "category": "Texto",
       "blocks": [
         {
           "type": "feature",
           "settings": {
-            "icon": "🚚",
             "text": "Envío gratis en compras arriba de $1,299"
           }
         },
         {
           "type": "feature",
           "settings": {
-            "icon": "🔒",
             "text": "Compra cifrada y segura"
           }
         },
         {
           "type": "feature",
           "settings": {
-            "icon": "📦",
             "text": "Entrega garantizada de 3 a 6 días hábiles"
           }
         }
