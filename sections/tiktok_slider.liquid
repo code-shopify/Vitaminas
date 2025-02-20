@@ -24,12 +24,12 @@
           "type": "url",
           "id": "video_url",
           "label": "TikTok Video URL",
-          "info": "Ingresa la URL completa del video de TikTok."
+          "info": "Pega la URL completa del video de TikTok"
         },
         {
           "type": "product",
           "id": "featured_product",
-          "label": "Seleccionar producto"
+          "label": "Producto relacionado"
         }
       ]
     }
@@ -53,7 +53,7 @@
             {% assign video_id = block.settings.video_url | split: "/video/" | last | split: "?" | first %}
             <iframe class="tiktok-embed" src="https://www.tiktok.com/embed/{{ video_id }}" frameborder="0" allowfullscreen scrolling="no"></iframe>
           {% else %}
-            <p>URL no válida. Asegúrate de ingresar una URL de TikTok correcta.</p>
+            <p style="color: red;">URL inválida. Asegúrate de ingresar un enlace correcto.</p>
           {% endif %}
         </div>
 
@@ -62,7 +62,7 @@
           <a href="{{ block.settings.featured_product.url }}" class="product-link">
             <img src="{{ block.settings.featured_product.featured_image | img_url: '150x150' }}" alt="{{ block.settings.featured_product.title }}">
             <div class="product-info">
-              <span class="product-title">{{ block.settings.featured_product.title }}</span>
+              <span class="product-title" style="color: {{ section.settings.text_color }};">{{ block.settings.featured_product.title }}</span>
               <span class="product-price">
                 {{ block.settings.featured_product.price | money }}
                 {% if block.settings.featured_product.compare_at_price > block.settings.featured_product.price %}
@@ -83,13 +83,14 @@
 .tiktok-slider-container {
   padding: 20px;
   border-radius: 10px;
+  overflow-x: auto;
 }
 
-/* Slider */
+/* Slider con 4.5 videos visibles */
 .tiktok-slider {
   display: flex;
   gap: 10px;
-  overflow-x: auto;
+  overflow-x: scroll;
   scroll-snap-type: x mandatory;
   max-width: 1200px;
   margin: auto;
@@ -106,7 +107,7 @@
   align-items: center;
 }
 
-/* Video */
+/* Videos */
 .tiktok-embed {
   width: 100%;
   aspect-ratio: 9 / 16;
@@ -114,7 +115,7 @@
   display: block;
 }
 
-/* Producto */
+/* Estilos del Producto */
 .product-box {
   display: flex;
   align-items: center;
@@ -170,7 +171,7 @@
 
 /* Scrollbar */
 .tiktok-slider::-webkit-scrollbar {
-  height: 10px;
+  height: 8px;
 }
 
 .tiktok-slider::-webkit-scrollbar-thumb {
