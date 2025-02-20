@@ -12,52 +12,53 @@
     {{ section.settings.banner | img_url: '1600x800' }} 1200w"
   sizes="(max-width: 576px) 100vw, (max-width: 992px) 100vw, 100vw"
   src="{{ section.settings.banner | img_url: '1600x800' }}"
-  class="rounded float-end image_banner"
+  class="rounded float-end banner-img"
   alt="banner">
     </div>
   </div>
 </div>
 {% style %}
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
+  .t4s-section-inner {
+    width: 100vw;
+    min-height: 688px; 
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .banner-img {
+    width: 100%; 
+    max-height: 500px; 
+    object-fit: cover;
   }
 
   @media (max-width: 1200px) {
-    .container {
-      max-width: 960px;
+    .banner-img {
+      max-height: 400px;
     }
   }
 
   @media (max-width: 992px) {
-    .container {
-      max-width: 720px;
-    }
-    .feature-card {
-      padding: 20px;
+    .banner-img {
+      max-height: 350px;
     }
   }
 
   @media (max-width: 768px) {
-    .container {
-      max-width: 540px;
-    }
-    .feature-card {
-      padding: 15px;
+    .banner-img {
+      max-height: 300px;
     }
   }
 
   @media (max-width: 576px) {
-    .container {
-      max-width: 100%;
-      padding: 0 10px;
-    }
-    .feature-card {
-      padding: 10px;
+    .banner-img {
+      max-height: 250px;
     }
   }
 {% endstyle %}
-
 {% schema %}
   {
     "name": "Insignias",
