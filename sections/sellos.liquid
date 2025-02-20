@@ -1,6 +1,76 @@
+{% comment %}
+  ============================
+  SECCIÓN: Beneficios Post-Compra
+  ============================
+  - Muestra íconos y textos informativos (ej. "Envío gratis", "Compra segura", etc.)
+  - Usa blocks para mayor flexibilidad.
+{% endcomment %}
+
+<section id="post-purchase-benefits" class="post-purchase-benefits">
+  <div class="container">
+    {% if section.settings.section_title != blank %}
+      <h2 class="benefits-title">{{ section.settings.section_title }}</h2>
+    {% endif %}
+
+    <div class="benefits-wrapper">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'benefit_item' %}
+            <div class="benefit-item">
+              {% if block.settings.icon_image != blank %}
+                <div class="benefit-icon">
+                  <img 
+                    src="{{ block.settings.icon_image | img_url: '100x' }}" 
+                    alt="{{ block.settings.benefit_text | escape }}"
+                  >
+                </div>
+              {% endif %}
+              <p class="benefit-text">{{ block.settings.benefit_text }}</p>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
 {% schema %}
-  {
-    "name": "Section name",
-    "settings": []
-  }
+{
+  "name": "Beneficios Post-Compra",
+  "settings": [
+    {
+      "type": "text",
+      "id": "section_title",
+      "label": "Título de la sección",
+      "default": "Beneficios de tu compra"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit_item",
+      "name": "Beneficio",
+      "settings": [
+        {
+          "type": "text",
+          "id": "benefit_text",
+          "label": "Texto del beneficio",
+          "default": "Envío gratis en compras arriba de $1,299"
+        },
+        {
+          "type": "url",
+          "id": "icon_image",
+          "label": "Ícono o imagen",
+          
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "Beneficios Post-Compra",
+      "category": "Product"
+    }
+  ]
+}
 {% endschema %}
+
