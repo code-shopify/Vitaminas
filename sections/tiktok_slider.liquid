@@ -18,7 +18,7 @@
       "type": "text",
       "id": "title",
       "label": "Título principal",
-      "default": "Opiniones de Vitaminas"
+      "default": "Opinan de Vitatú"
     },
     {
       "type": "textarea",
@@ -37,12 +37,6 @@
       "id": "text_color",
       "label": "Color del texto",
       "default": "#333333"
-    },
-    {
-      "type": "text",
-      "id": "font_size",
-      "label": "Tamaño de la fuente (ej. 16px)",
-      "default": "16px"
     },
     {
       "type": "url",
@@ -94,15 +88,44 @@
 }
 {% endschema %}
 
-<div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }}; font-size: {{ section.settings.font_size }};">
+<div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
   
-  <!-- Contenido Superior -->
+  <!-- Sección Superior -->
   <div class="tiktok-slider-header">
-    <div class="rating-container">
-      <span class="rating-value">{{ section.settings.rating }}</span>
-      <span class="stars">★★★★★</span>
-      <span class="reviews"><a href="#">{{ section.settings.reviews }}</a></span>
+    <!-- Calificación y Reseñas -->
+    <div class="rating-reviews">
+      <div class="star-rating">
+        <!-- Estrellas dinámicas según la calificación -->
+        <div class="stars">
+          {% assign rating_val = section.settings.rating | plus: 0 %}
+          {% assign full_stars = rating_val | floor %}
+          {% assign fraction = rating_val | minus: full_stars %}
+          {% assign partial_percent = fraction | times: 100 %}
+          {% assign next_star = full_stars | plus: 1 %}
+
+          {% for star in (1..5) %}
+            {% if star <= full_stars %}
+              <!-- Estrella completa -->
+              <span class="star full">&#9733;</span>
+            {% elsif star == next_star and fraction > 0 %}
+              <!-- Estrella parcial (si el rating tiene parte decimal) -->
+              <span class="star partial" style="--fill: {{ partial_percent }}%;">
+                &#9733;
+              </span>
+            {% else %}
+              <!-- Estrella vacía -->
+              <span class="star empty">&#9733;</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <!-- Valor numérico de la calificación -->
+        <span class="rating-value">{{ rating_val }}</span>
+      </div>
+      <!-- Número de reseñas -->
+      <span class="reviews">{{ section.settings.reviews }}</span>
     </div>
+    
+    <!-- Título principal -->
     <h2 class="slider-title">{{ section.settings.title }}</h2>
   </div>
 
@@ -118,7 +141,6 @@
         {% if video_url contains "/video/" %}
           {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
           <div class="tiktok-slide">
-            <!-- Se agrega la clase 'video-container' para capturar el clic -->
             <div class="with-border video-container">
               <iframe class="tiktok-embed video-{{ i }}"
                 src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
@@ -137,7 +159,7 @@
   <!-- Botón Derecho -->
   <button class="nav-button right-button" onclick="scrollSlider(1)">&#10095;</button>
 
-  <!-- Contenido Inferior -->
+  <!-- Mensaje Inferior -->
   <p class="bottom-message">{{ section.settings.bottom_message }}</p>
 
 </div>
@@ -146,9 +168,57 @@
 /* Contenedor principal */
 .tiktok-slider-container {
   text-align: center;
-  padding: 20px;
+  padding: 60px 20px; /* Mayor espacio vertical */
   border-radius: 10px;
   position: relative;
+  max-width: 1200px; /* Para no estirar demasiado */
+  margin: 0 auto;    /* Centrado horizontal */
+}
+
+/* Sección superior (rating + título) */
+.tiktok-slider-header {
+  margin-bottom: 40px;
+}
+
+/* Calificación y reseñas en la misma línea */
+.rating-reviews {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* Agrupa estrellas y número (4.8) */
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Contenedor de las estrellas */
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+/* Texto de la calificación */
+.rating-value {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Texto de reseñas */
+.reviews {
+  color: #999;
+}
+
+/* Título principal */
+.slider-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
 }
 
 /* Carrusel */
@@ -162,14 +232,6 @@
   display: flex;
   gap: 8px;
   transition: transform 0.3s ease-in-out;
-}
-
-/* Espaciado entre elementos */
-.tiktok-slider-header {
-  margin-bottom: 30px;
-}
-.bottom-message {
-  margin-top: 30px;
 }
 
 /* Botones de navegación */
@@ -209,7 +271,7 @@
   position: relative;
 }
 
-/* Estilos del Marco */
+/* Marco con borde degradado */
 .with-border {
   padding: 2px;
   border-radius: 6px;
@@ -228,6 +290,45 @@
   border-radius: 12px;
   aspect-ratio: 9 / 16;
   object-fit: cover;
+}
+
+/* Estrellas */
+.star {
+  font-size: 16px;
+  line-height: 1;
+}
+
+/* Estrella completa */
+.star.full {
+  color: gold;
+}
+
+/* Estrella vacía */
+.star.empty {
+  color: #ccc;
+}
+
+/* Estrella parcial (relleno dinámico) */
+.star.partial {
+  position: relative;
+  display: inline-block;
+  color: #ccc; /* color base (vacío) */
+}
+.star.partial::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(var(--fill) * 1%);
+  overflow: hidden;
+  color: gold;
+}
+
+/* Mensaje inferior */
+.bottom-message {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #666;
 }
 </style>
 
