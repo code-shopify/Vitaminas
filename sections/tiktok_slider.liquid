@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const iframes = document.querySelectorAll(".tiktok-embed");
 
     iframes.forEach((iframe) => {
-        iframe.addEventListener("mouseclic", () => {
+        iframe.addEventListener("click", () => {
             iframes.forEach((v) => {
                 if (v !== iframe) {
                     let src = v.src;
