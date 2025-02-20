@@ -8,19 +8,13 @@
         {{ section.settings.header }}
       </header>
     </div>
-    <div class="container text-dark text-center">
+    <div class="container text-dark">
       <div class="row">
         <div class="col-6 col-sm-3" style="background-color:{{ section.settings.background_box_1}}">
-          <header class="fw-bold">{{ section.settings.box_1 }}</header>
-          {% if settings.type_text == 'list' %}
-            <ul class="list-group mt-3">
-              {% for block in section.blocks %}
-                <li class="list-group-item">{{ block.settings.list_text }}</li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p class="mt-3">{{ settings.box_content }}</p>
-          {% endif %}
+          <flex>
+            <header class="fw-bold">{{ section.settings.box_1 }}</header>
+            <p>{{ section.settings.box_content }}</p>
+          </flex>
         </div>
         <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
 
@@ -71,117 +65,157 @@
     {
       "type": "text",
       "id": "header",
-      "label": "Titulo"
+      "label": "Título principal"
     },
     {
-      "type":"image_picker",
-      "id":"banner",
-      "label":"Imagen del banner"
+      "type": "image_picker",
+      "id": "banner",
+      "label": "Imagen del banner"
     },
     {
-      "type":"color",
-      "id":"background_section",
-      "label":"Color del Fondo:",
+      "type": "color",
+      "id": "background_section",
+      "label": "Color del Fondo",
       "default": "#E5D4C9"
     },
+
     {
       "type": "text",
       "id": "box_1",
-      "label": "Titulo de texto:"
+      "label": "Título de la primera columna"
     },
     {
       "type": "select",
-      "id": "type_text",
-      "label": "Selecciona el contenido",
+      "id": "type_text_1",
+      "label": "Selecciona el tipo de contenido",
       "options": [
-        {
-        "value": "list",
-        "label": "Lista"
-        },
-        {
-          "value": "text",
-          "label": "Contenito del texto:"
-        }
+        { "value": "list", "label": "Lista dinámica" },
+        { "value": "text", "label": "Texto único" }
       ],
-      "default":"list"
+      "default": "text"
     },
     {
-      "type": "text",
-      "id": "box_content",
-      "label": "Contenido del texto:"
+      "type": "textarea",
+      "id": "box_content_1",
+      "label": "Contenido del texto"
     },
     {
       "type": "color",
       "id": "background_box_1",
-      "label": "Color del Fondo:",
-      "default":"#FFBF80"
+      "label": "Color del Fondo",
+      "default": "#FFBF80"
     },
+
     {
       "type": "text",
       "id": "box_2",
-      "label": "Titulo de texto:"
+      "label": "Título de la segunda columna"
     },
     {
-      "type": "text",
+      "type": "select",
+      "id": "type_text_2",
+      "label": "Selecciona el tipo de contenido",
+      "options": [
+        { "value": "list", "label": "Lista dinámica" },
+        { "value": "text", "label": "Texto único" }
+      ],
+      "default": "text"
+    },
+    {
+      "type": "textarea",
       "id": "box_content_2",
-      "label": "Contenido del texto:"
+      "label": "Contenido del texto"
     },
     {
       "type": "color",
       "id": "background_box_2",
-      "label": "Color del Fondo:",
-      "default":"#FFBF80"
+      "label": "Color del Fondo",
+      "default": "#FFBF80"
     },
+
     {
       "type": "text",
       "id": "box_3",
-      "label": "Titulo de texto:"
+      "label": "Título de la tercera columna"
     },
     {
-      "type": "text",
+      "type": "select",
+      "id": "type_text_3",
+      "label": "Selecciona el tipo de contenido",
+      "options": [
+        { "value": "list", "label": "Lista dinámica" },
+        { "value": "text", "label": "Texto único" }
+      ],
+      "default": "text"
+    },
+    {
+      "type": "textarea",
       "id": "box_content_3",
-      "label": "Contenido del texto:"
+      "label": "Contenido del texto"
     },
     {
       "type": "color",
       "id": "background_box_3",
-      "label": "Color del Fondo:",
-      "default":"#FFBF80"
+      "label": "Color del Fondo",
+      "default": "#FFBF80"
     },
+
     {
       "type": "text",
       "id": "box_4",
-      "label": "Titulo de texto:"
+      "label": "Título de la cuarta columna"
     },
     {
-      "type": "text",
+      "type": "select",
+      "id": "type_text_4",
+      "label": "Selecciona el tipo de contenido",
+      "options": [
+        { "value": "list", "label": "Lista dinámica" },
+        { "value": "text", "label": "Texto único" }
+      ],
+      "default": "text"
+    },
+    {
+      "type": "textarea",
       "id": "box_content_4",
-      "label": "Contenido del texto:"
+      "label": "Contenido del texto"
     },
     {
       "type": "color",
       "id": "background_box_4",
-      "label": "Color del Fondo:",
-      "default":"#FFBF80"
+      "label": "Color del Fondo",
+      "default": "#FFBF80"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "list_item",
+      "name": "Elemento de lista",
+      "settings": [
+        {
+          "type": "select",
+          "id": "list_column",
+          "label": "¿A qué columna pertenece?",
+          "options": [
+            { "value": "1", "label": "Columna 1" },
+            { "value": "2", "label": "Columna 2" },
+            { "value": "3", "label": "Columna 3" },
+            { "value": "4", "label": "Columna 4" }
+          ],
+          "default": "1"
+        },
+        {
+          "type": "text",
+          "id": "list_text",
+          "label": "Texto del ítem"
+        }
+      ]
     }
   ],
   "presets": [
     {
       "name": "Insignias"
     }
-  ],
-  "blocks": [
-            {
-                "type": "list_item",
-                "name": "Elemento de la lista",
-                "settings": [
-                    {
-                        "type": "text",
-                        "id": "list_text",
-                        "label": "Texto del ítem"
-                    }
-                ]
-            }
-        ]
+  ]
 }
 {% endschema %}
