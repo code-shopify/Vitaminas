@@ -30,7 +30,7 @@
         "description": "Disfruta de promociones, acceso preferencial a nuevos productos, noticias y mucho más.",
         "placeholder": "Correo electrónico",
         "button_text": "Suscribirme",
-        "button_color": "#A02D76"
+        "button_color": "#a02d76"
       }
     },
     "tik_toks_UbMLMd": {
@@ -196,13 +196,16 @@
         "reviews": "1,450 reviews",
         "title": "Opinan de Vitatú",
         "bottom_message": "*EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIÉN LO RECOMIENDA Y DE QUIÉN LO USA, ESTE PRODUCTO NO ES UN MEDICAMENTO*",
-        "background_color": "#FEF8F0",
+        "background_color": "#fef8f0",
         "text_color": "#333333",
-        "video_1": "",
+        "video_1": "https://www.tiktok.com/@luisitocomunica/video/7470637884727414021?is_from_webapp=1&sender_device=pc&web_id=7473579874578794039",
         "video_2": "",
         "video_3": "",
         "video_4": "",
-        "video_5": ""
+        "video_5": "",
+        "video_6": "",
+        "video_7": "",
+        "video_8": ""
       }
     },
     "insignias_certificacion_y68P3L": {
@@ -210,7 +213,19 @@
       "settings": {
         "header": "Calidad en cada ingrediente, diseñados pensando en ti.",
         "banner": "shopify://shop_images/Sin_titulo-3_1.png",
-        "background": "#e5d4c9"
+        "background_section": "#E5D4C9",
+        "box_1": "",
+        "box_content": "",
+        "background_box_1": "#FFBF80",
+        "box_2": "",
+        "box_content_2": "",
+        "background_box_2": "#FFBF80",
+        "box_3": "",
+        "box_content_3": "",
+        "background_box_3": "#FFBF80",
+        "box_4": "",
+        "box_content_4": "",
+        "background_box_4": "#FFBF80"
       }
     },
     "video_featured_ab8iGh": {
