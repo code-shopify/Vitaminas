@@ -7,7 +7,7 @@
     <div>
       <img 
     srcset="
-    {{ section.settings.banner | img_url: '289x348' }} 400w,
+    {{ section.settings.banner | img_url: '289x348' }},
     {{ section.settings.banner | img_url: '1441x688' }} 1200w"
   sizes="(max-width: 576px) 100vw, (max-width: 992px) 100vw, 100vw"
   src="{{ section.settings.banner | img_url: '1600x800' }}"
