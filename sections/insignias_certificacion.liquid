@@ -1,18 +1,31 @@
 <div
-  class="t4s-section-inner vitatu-section;" style="width: 100vw; min-height:688px; background-color:{{ section.settings.background}};">
+  class="t4s-section-inner vitatu-section;"
+  style="width: 100vw; min-height:688px; background-color:{{ section.settings.background}};"
+>
   <div class="t4s-container h-100">
     <div class="text-dark">
-      <header class="fw-bold text-start" style="font-size: 45px; max-width: 665px; height:auto">{{ section.settings.header }}</header>
+      <header class="fw-bold text-start" style="font-size: 45px; max-width: 665px; height:auto">
+        {{ section.settings.header }}
+      </header>
     </div>
-      <img src="{{ section.settings.banner | img_url: '1000x600' }}" class="rounded float-end banner-img" alt="banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+        <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+
+        <!-- Force next columns to break to new line -->
+        <div class="w-100"></div>
+
+        <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+        <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+      </div>
+    </div>
   </div>
 </div>
 {% style %}
-
-
   .banner-img {
-    width: 10%; 
-    max-height: 300px; 
+    width: 10%;
+    max-height: 300px;
     object-fit: cover;
   }
 
@@ -41,30 +54,30 @@
   }
 {% endstyle %}
 {% schema %}
-  {
-    "name": "Insignias",
-    "settings": [
-      {
-        "type": "text",
-        "id": "header",
-        "label": "Titulo"
-      },
-      {
-        "type":"image_picker",
-        "id":"banner",
-        "label":"Imagen del banner"
-      },
-      {
-        "type":"color",
-        "id":"background",
-        "label":"Color del Fondo:",
-        "default": "#E5D4C9"
-      }
-    ],
-    "presets": [
-      {
-        "name": "Insignias"
-      }
-    ]
-  }
+{
+  "name": "Insignias",
+  "settings": [
+    {
+      "type": "text",
+      "id": "header",
+      "label": "Titulo"
+    },
+    {
+      "type":"image_picker",
+      "id":"banner",
+      "label":"Imagen del banner"
+    },
+    {
+      "type":"color",
+      "id":"background",
+      "label":"Color del Fondo:",
+      "default": "#E5D4C9"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Insignias"
+    }
+  ]
+}
 {% endschema %}
