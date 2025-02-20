@@ -215,47 +215,24 @@
   margin: 0;
 }
 
-/* Carrusel */
+/* Carrusel: ahora es el contenedor scrollable */
 .tiktok-carousel {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.tiktok-carousel::-webkit-scrollbar {
+  display: none;
 }
 
+/* Contenedor interno de slides */
 .tiktok-slider {
   display: flex;
   gap: 8px;
-  transition: transform 0.3s ease-in-out;
 }
 
-/* Botones de navegación */
-.nav-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
-
-.left-button {
-  left: 10px;
-}
-
-.right-button {
-  right: 10px;
-}
-
-/* Cada slide: 4.5 tiktoks visibles */
+/* Cada slide: se muestran 4.5 en pantalla */
 .tiktok-slide {
   flex: 0 0 calc(100% / 4.5);
   max-width: calc(100% / 4.5);
@@ -315,6 +292,31 @@
   color: gold;
 }
 
+/* Botones de navegación */
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.left-button {
+  left: 10px;
+}
+.right-button {
+  right: 10px;
+}
+
 /* Mensaje inferior */
 .bottom-message {
   margin-top: 40px;
@@ -325,14 +327,14 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Se usa el ancho de una slide para calcular el scroll
+  // Selecciona el contenedor scrollable (.tiktok-carousel)
   window.scrollSlider = function(direction) {
-    const slider = document.querySelector(".tiktok-slider");
-    const slide = slider.querySelector(".tiktok-slide");
+    const container = document.querySelector(".tiktok-carousel");
+    const slide = container.querySelector(".tiktok-slide");
     if (slide) {
-      // Calcula el ancho de la slide (offsetWidth incluye padding/margen según el layout)
-      const slideWidth = slide.offsetWidth;
-      slider.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
+      // Se suma el gap (8px) al ancho de la slide
+      const slideWidth = slide.offsetWidth + 8;
+      container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
     }
   };
 
@@ -355,5 +357,4 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
-
 
