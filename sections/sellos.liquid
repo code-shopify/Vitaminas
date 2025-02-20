@@ -1,18 +1,5 @@
-<section class="shipping-info-section">
-  <ul class="shipping-info-list">
-    {% for block in section.blocks %}
-      <li>
-        {% if block.settings.icon_image != blank %}
-          <img src="{{ block.settings.icon_image | image_url }}" alt="Ícono">
-        {% endif %}
-        <span>{{ block.settings.feature_text }}</span>
-      </li>
-    {% endfor %}
-  </ul>
-</section>
-
-{% style %}
-    .shipping-info-section {
+<style>
+  .shipping-info-section {
     background-color: #f9f3eb; /* Color de fondo similar a la imagen */
     padding: 15px 20px;
     border-radius: 8px;
@@ -40,58 +27,76 @@
     margin-right: 10px;
     object-fit: contain;
   }
-{% endstyle %}
+</style>
+
+<section class="shipping-info-section">
+  <ul class="shipping-info-list">
+    <li>
+      {% if section.settings.icon1 != blank %}
+        <img src="{{ section.settings.icon1 | image_url }}" alt="Ícono 1">
+      {% endif %}
+      <span>{{ section.settings.text1 }}</span>
+    </li>
+    <li>
+      {% if section.settings.icon2 != blank %}
+        <img src="{{ section.settings.icon2 | image_url }}" alt="Ícono 2">
+      {% endif %}
+      <span>{{ section.settings.text2 }}</span>
+    </li>
+    <li>
+      {% if section.settings.icon3 != blank %}
+        <img src="{{ section.settings.icon3 | image_url }}" alt="Ícono 3">
+      {% endif %}
+      <span>{{ section.settings.text3 }}</span>
+    </li>
+  </ul>
+</section>
 
 {% schema %}
 {
   "name": "Información de Envío",
-  "settings": [],
-  "blocks": [
+  "settings": [
     {
-      "type": "feature",
-      "name": "Característica",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "icon_image",
-          "label": "Ícono de la característica"
-        },
-        {
-          "type": "text",
-          "id": "feature_text",
-          "label": "Texto de la característica",
-          "default": "Envío gratis en compras arriba de $1,299"
-        }
-      ]
+      "type": "image_picker",
+      "id": "icon1",
+      "label": "Ícono 1"
+    },
+    {
+      "type": "text",
+      "id": "text1",
+      "label": "Texto 1",
+      "default": "Envío gratis en compras arriba de $1,299"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon2",
+      "label": "Ícono 2"
+    },
+    {
+      "type": "text",
+      "id": "text2",
+      "label": "Texto 2",
+      "default": "Compra cifrada y segura"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon3",
+      "label": "Ícono 3"
+    },
+    {
+      "type": "text",
+      "id": "text3",
+      "label": "Texto 3",
+      "default": "Entrega garantizada de 3 a 6 días hábiles"
     }
   ],
-  "max_blocks": 10,
   "presets": [
     {
       "name": "Información de Envío",
-      "category": "Texto",
-      "blocks": [
-        {
-          "type": "feature",
-          "settings": {
-            "feature_text": "Envío gratis en compras arriba de $1,299"
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "feature_text": "Compra cifrada y segura"
-          }
-        },
-        {
-          "type": "feature",
-          "settings": {
-            "feature_text": "Entrega garantizada de 3 a 6 días hábiles"
-          }
-        }
-      ]
+      "category": "Texto"
     }
   ]
 }
 {% endschema %}
+
 
