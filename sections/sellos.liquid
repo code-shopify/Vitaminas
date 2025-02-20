@@ -1,76 +1,72 @@
-{% comment %}
-  ============================
-  SECCIÓN: Beneficios Post-Compra
-  ============================
-  Instrucciones:
-  - Esta sección te permite mostrar íconos y textos informativos (ej. "Envío gratis", "Compra segura", etc.)
-  - Puedes agregar tantos bloques como desees para mostrar distintas características.
-  - Ajusta el estilo (CSS) a tu gusto, o integra los estilos de tu tema.
-{% endcomment %}
-
-<section id="post-purchase-benefits" class="post-purchase-benefits">
+<section class="shipping-info-section py-4">
   <div class="container">
-    {% if section.settings.section_title != blank %}
-      <h2 class="benefits-title">{{ section.settings.section_title }}</h2>
-    {% endif %}
-
-    <div class="benefits-wrapper">
-      {% for block in section.blocks %}
-        {% case block.type %}
-          {% when 'benefit_item' %}
-            <div class="benefit-item">
-              {% if block.settings.icon_image != blank %}
-                <div class="benefit-icon">
-                  <img 
-                    src="{{ block.settings.icon_image | img_url: '100x' }}" 
-                    alt="{{ block.settings.benefit_text | escape }}"
-                  >
-                </div>
-              {% endif %}
-              <p class="benefit-text">{{ block.settings.benefit_text }}</p>
-            </div>
-        {% endcase %}
-      {% endfor %}
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <ul class="list-unstyled d-flex flex-column gap-2">
+          {% for block in section.blocks %}
+            <li class="d-flex align-items-center">
+              <span class="me-2">{{ block.settings.icon }}</span> 
+              <span>{{ block.settings.text }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "sellos",
-  "settings": [
-    {
-      "type": "text",
-      "id": "section_title",
-      "label": "Título de la sección",
-      "default": "Beneficios de tu compra"
-    }
-  ],
+  "name": "Información de Envío",
+  "settings": [],
   "blocks": [
     {
-      "type": "benefit_item",
-      "name": "Beneficio",
+      "type": "feature",
+      "name": "Característica",
       "settings": [
         {
           "type": "text",
-          "id": "benefit_text",
-          "label": "Texto del beneficio",
-          "default": "Envío gratis en compras arriba de $1,299"
+          "id": "icon",
+          "label": "Ícono (puede ser emoji o HTML)",
+          "default": "🚚"
         },
         {
-          "type": "url",
-          "id": "icon_image",
-          "label": "Ícono o imagen",
-
+          "type": "text",
+          "id": "text",
+          "label": "Texto de la característica",
+          "default": "Envío gratis en compras arriba de $1,299"
         }
       ]
     }
   ],
-  "max_blocks": 8,
+  "max_blocks": 10,
   "presets": [
     {
-      "name": "sellos",
-      "category": "Product"
+      "name": "Información de Envío",
+      "category": "Texto",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "🚚",
+            "text": "Envío gratis en compras arriba de $1,299"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "🔒",
+            "text": "Compra cifrada y segura"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "icon": "📦",
+            "text": "Entrega garantizada de 3 a 6 días hábiles"
+          }
+        }
+      ]
     }
   ]
 }
