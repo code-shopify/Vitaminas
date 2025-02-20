@@ -25,13 +25,7 @@
     },
     "suscripcion_3Uinhx": {
       "type": "suscripcion",
-      "settings": {
-        "title": "¡SUSCRÍBETE Y RECIBE UN 10% OFF!",
-        "description": "Disfruta de promociones, acceso preferencial a nuevos productos, noticias y mucho más.",
-        "placeholder": "Correo electrónico",
-        "button_text": "Suscribirme",
-        "button_color": "#a02d76"
-      }
+      "settings": {}
     },
     "tik_toks_UbMLMd": {
       "type": "Tik-toks",
@@ -193,6 +187,7 @@
       "type": "insignias_certificacion",
       "settings": {
         "header": "Calidad en cada ingrediente, diseñados pensando en ti.",
+        "banner": "shopify://shop_images/Sin_titulo-3_1.png",
         "background": "#E5D4C9"
       }
     },
