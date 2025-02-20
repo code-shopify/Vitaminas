@@ -3,6 +3,46 @@
   <div class="t4s-container h-100">
   </div>
 </div>
+{% style %}
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 1200px) {
+    .container {
+      max-width: 960px;
+    }
+  }
+
+  @media (max-width: 992px) {
+    .container {
+      max-width: 720px;
+    }
+    .feature-card {
+      padding: 20px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .container {
+      max-width: 540px;
+    }
+    .feature-card {
+      padding: 15px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .container {
+      max-width: 100%;
+      padding: 0 10px;
+    }
+    .feature-card {
+      padding: 10px;
+    }
+  }
+{% endstyle %}
 
 {% schema %}
   {
