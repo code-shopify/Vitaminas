@@ -218,25 +218,30 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    const slider = document.querySelector(".tiktok-slider");
-    let scrollAmount = slider.offsetWidth / 4.5;
+  const slider = document.querySelector(".tiktok-slider");
+  let scrollAmount = slider.offsetWidth / 4.5;
 
-    function scrollSlider(direction) {
-        slider.scrollBy({ left: scrollAmount * direction, behavior: "smooth" });
-    }
+  // Se hace la función de scroll accesible globalmente para los botones
+  window.scrollSlider = function(direction) {
+    slider.scrollBy({ left: scrollAmount * direction, behavior: "smooth" });
+  };
 
-    const iframes = document.querySelectorAll(".tiktok-embed");
+  const iframes = document.querySelectorAll(".tiktok-embed");
+  let currentPlaying = null;
 
-    iframes.forEach((iframe, index) => {
-        iframe.addEventListener("click", () => {
-            iframes.forEach((otherIframe, otherIndex) => {
-                if (index !== otherIndex) {
-                    let src = otherIframe.src;
-                    otherIframe.src = src; // Reinicia el iframe para detener la reproducción
-                }
-            });
-        });
+  iframes.forEach((iframe) => {
+    iframe.addEventListener("click", () => {
+      // Si hay un video reproduciéndose y es diferente al clicado, se "pausa" reiniciando su src
+      if (currentPlaying && currentPlaying !== iframe) {
+        currentPlaying.src = currentPlaying.src.replace("autoplay=1", "autoplay=0");
+      }
+      // Se activa el autoplay para el video clicado, si aún no lo tiene
+      if (iframe.src.indexOf("autoplay=1") === -1) {
+        iframe.src = iframe.src.replace("autoplay=0", "autoplay=1");
+      }
+      currentPlaying = iframe;
     });
+  });
 });
 </script>
 
