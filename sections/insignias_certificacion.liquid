@@ -9,7 +9,7 @@
     srcset="
     {{ section.settings.banner | img_url: '800x400' }} 400w,
     {{ section.settings.banner | img_url: '1200x600' }} 800w,
-    {{ section.settings.banner | img_url: '1600x800' }} 1200w"
+    {{ section.settings.banner | img_url: '1200x800' }} 1200w"
   sizes="(max-width: 576px) 100vw, (max-width: 992px) 100vw, 100vw"
   src="{{ section.settings.banner | img_url: '1600x800' }}"
   class="rounded float-end banner-img"
@@ -18,6 +18,7 @@
   </div>
 </div>
 {% style %}
+
 
   .banner-img {
     width: 100%; 
