@@ -99,7 +99,10 @@
           <div class="video-container">
             {% if video_url contains "/video/" %}
               {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
-              <iframe class="tiktok-embed" src="https://www.tiktok.com/embed/{{ video_id }}" frameborder="0" allowfullscreen scrolling="no"></iframe>
+              <video class="tiktok-video" playsinline loop muted>
+                <source src="https://www.tiktok.com/@username/video/{{ video_id }}" type="video/mp4">
+              </video>
+              <div class="play-button" onclick="toggleVideo(this)">▶</div>
             {% else %}
               <p style="color: red;">URL inválida. Asegúrate de ingresar un enlace correcto.</p>
             {% endif %}
@@ -200,14 +203,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 }
 
 /* Videos */
-.tiktok-embed {
+.tiktok-video {
   width: 100%;
+  height: 100%;
   aspect-ratio: 9 / 16;
   border-radius: 10px;
   display: block;
+  object-fit: cover;
+}
+
+/* Botón de reproducción */
+.play-button {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  cursor: pointer;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /* Contenido inferior */
@@ -221,8 +245,18 @@
 <script>
 function scrollSlider(direction) {
   let slider = document.querySelector(".tiktok-slider");
-  let scrollAmount = slider.offsetWidth / 4.5; // Ajuste basado en el número de videos visibles
+  let scrollAmount = slider.offsetWidth / 4.5;
   slider.scrollBy({ left: scrollAmount * direction, behavior: "smooth" });
 }
-</script>
 
+function toggleVideo(button) {
+  let video = button.previousElementSibling;
+  if (video.paused) {
+    video.play();
+    button.style.display = "none";
+  } else {
+    video.pause();
+    button.style.display = "flex";
+  }
+}
+</script>
