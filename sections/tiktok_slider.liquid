@@ -39,6 +39,18 @@
       "default": "#333333"
     },
     {
+      "type": "color",
+      "id": "border_start_color",
+      "label": "Color de inicio del marco",
+      "default": "#00ffff"
+    },
+    {
+      "type": "color",
+      "id": "border_end_color",
+      "label": "Color de fin del marco",
+      "default": "#ff2d55"
+    },
+    {
       "type": "url",
       "id": "video_1",
       "label": "TikTok Video 1"
@@ -96,7 +108,7 @@
 
       {% if video_url != blank %}
         <div class="tiktok-slide">
-          <div class="video-container">
+          <div class="with-border" style="background: linear-gradient(0deg, {{ section.settings.border_start_color }}, {{ section.settings.border_end_color }});">
             {% if video_url contains "/video/" %}
               {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
               <iframe class="tiktok-embed" 
@@ -208,23 +220,22 @@
   position: relative;
 }
 
-/* Ajuste del TikTok al cuadro */
-.video-container {
-  width: 100%;
-  height: 100%;
-  aspect-ratio: 9 / 16;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Estilos del Marco */
+.with-border {
+    padding: 5px;
+    border-radius: 15px;
+    border: 3px solid transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+/* Ajuste del TikTok al cuadro */
 .tiktok-embed {
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    object-fit: cover;
 }
 
 /* Contenido inferior */
