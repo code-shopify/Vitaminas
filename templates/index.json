@@ -209,6 +209,25 @@
         "background_box_4": "#ffbf80"
       }
     },
+    "tiktok_slider_wHCVUD": {
+      "type": "tiktok_slider",
+      "settings": {
+        "rating": "4.8",
+        "reviews": "1,450 reviews",
+        "title": "Opiniones de Vitaminas",
+        "bottom_message": "*EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIÉN LO RECOMIENDA Y DE QUIÉN LO USA, ESTE PRODUCTO NO ES UN MEDICAMENTO*",
+        "background_color": "#FEF8F0",
+        "text_color": "#333333",
+        "video_1": "https://www.tiktok.com/@ayharchive/video/7435638325232307498?is_from_webapp=1&sender_device=pc&web_id=7473579874578794039",
+        "video_2": "https://www.tiktok.com/@ayharchive/video/7435638325232307498?is_from_webapp=1&sender_device=pc&web_id=7473579874578794039",
+        "video_3": "",
+        "video_4": "",
+        "video_5": "",
+        "video_6": "",
+        "video_7": "",
+        "video_8": ""
+      }
+    },
     "video_featured_ab8iGh": {
       "type": "video_principal",
       "settings": {
@@ -247,6 +266,7 @@
     "ejemplo_crAfXx",
     "foot_iconos_XrxNFp",
     "insignias_certificacion_y68P3L",
+    "tiktok_slider_wHCVUD",
     "video_featured_ab8iGh"
   ]
 }
