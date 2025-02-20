@@ -1,15 +1,31 @@
 <section class="shipping-info-section py-4">
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-8">
-        <ul class="list-unstyled d-flex flex-column gap-2">
+      <div class="col-md-8 text-center">
+        <!-- Título -->
+        <h2>{{ section.settings.title }}</h2>
+        <!-- Descripción -->
+        <p>{{ section.settings.description }}</p>
+
+        <!-- Características -->
+        <ul class="list-unstyled d-flex flex-column gap-3">
           {% for block in section.blocks %}
             <li class="d-flex align-items-center">
-              <span class="me-2">{{ block.settings.icon }}</span> 
+              <span class="me-2" style="font-size: 1.5em;">{{ block.settings.icon }}</span> 
               <span>{{ block.settings.text }}</span>
             </li>
           {% endfor %}
         </ul>
+
+        <!-- Imagenes Opcionales -->
+        <div class="d-flex justify-content-between mt-4">
+          {% if section.settings.left_image != blank %}
+            <img src="{{ section.settings.left_image | image_url }}" alt="Imagen izquierda" class="img-fluid" style="max-width: 150px;">
+          {% endif %}
+          {% if section.settings.right_image != blank %}
+            <img src="{{ section.settings.right_image | image_url }}" alt="Imagen derecha" class="img-fluid" style="max-width: 150px;">
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
@@ -17,8 +33,31 @@
 
 {% schema %}
 {
-  "name": "sellos",
-  "settings": [],
+  "name": "Información de Envío",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "left_image",
+      "label": "Imagen izquierda"
+    },
+    {
+      "type": "image_picker",
+      "id": "right_image",
+      "label": "Imagen derecha"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título",
+      "default": "Beneficios de tu compra"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Descripción",
+      "default": "Aprovecha nuestras ofertas y beneficios exclusivos al comprar con nosotros."
+    }
+  ],
   "blocks": [
     {
       "type": "feature",
@@ -27,7 +66,7 @@
         {
           "type": "text",
           "id": "icon",
-          "label": "Ícono (puede ser emoji o HTML)",
+          "label": "Ícono (emoji o HTML)",
           "default": "🚚"
         },
         {
@@ -42,8 +81,8 @@
   "max_blocks": 10,
   "presets": [
     {
-      "name": "sellos",
-      "category": "Texto",
+      "name": "Información de Envío",
+      "category": "Marketing",
       "blocks": [
         {
           "type": "feature",
@@ -71,4 +110,3 @@
   ]
 }
 {% endschema %}
-
