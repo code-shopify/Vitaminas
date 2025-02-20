@@ -1,9 +1,22 @@
-<style>
-  .shipping-info-section {
+<section class="shipping-info-section">
+  <ul class="shipping-info-list">
+    {% for block in section.blocks %}
+      <li>
+        {% if block.settings.icon_image != blank %}
+          <img src="{{ block.settings.icon_image | image_url }}" alt="Ícono">
+        {% endif %}
+        <span>{{ block.settings.feature_text }}</span>
+      </li>
+    {% endfor %}
+  </ul>
+</section>
+
+{% style %}
+    .shipping-info-section {
     background-color: #f9f3eb; /* Color de fondo similar a la imagen */
     padding: 15px 20px;
     border-radius: 8px;
-    max-width: 600px; /* Limita el ancho para que se parezca a la imagen */
+    max-width: 600px; /* Ancho limitado para parecerse a la imagen */
     margin: auto;
   }
 
@@ -27,20 +40,7 @@
     margin-right: 10px;
     object-fit: contain;
   }
-</style>
-
-<section class="shipping-info-section">
-  <ul class="shipping-info-list">
-    {% for block in section.blocks %}
-      <li>
-        {% if block.settings.image != blank %}
-          <img src="{{ block.settings.image | image_url }}" alt="Ícono">
-        {% endif %}
-        <span>{{ block.settings.text }}</span>
-      </li>
-    {% endfor %}
-  </ul>
-</section>
+{% endstyle %}
 
 {% schema %}
 {
@@ -53,12 +53,12 @@
       "settings": [
         {
           "type": "image_picker",
-          "id": "image",
+          "id": "icon_image",
           "label": "Ícono de la característica"
         },
         {
           "type": "text",
-          "id": "text",
+          "id": "feature_text",
           "label": "Texto de la característica",
           "default": "Envío gratis en compras arriba de $1,299"
         }
@@ -74,22 +74,19 @@
         {
           "type": "feature",
           "settings": {
-            "image": "",
-            "text": "Envío gratis en compras arriba de $1,299"
+            "feature_text": "Envío gratis en compras arriba de $1,299"
           }
         },
         {
           "type": "feature",
           "settings": {
-            "image": "",
-            "text": "Compra cifrada y segura"
+            "feature_text": "Compra cifrada y segura"
           }
         },
         {
           "type": "feature",
           "settings": {
-            "image": "",
-            "text": "Entrega garantizada de 3 a 6 días hábiles"
+            "feature_text": "Entrega garantizada de 3 a 6 días hábiles"
           }
         }
       ]
@@ -97,3 +94,4 @@
   ]
 }
 {% endschema %}
+
