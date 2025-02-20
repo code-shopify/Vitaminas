@@ -8,13 +8,19 @@
         {{ section.settings.header }}
       </header>
     </div>
-    <div class="container text-dark">
+    <div class="container text-dark text-center">
       <div class="row">
         <div class="col-6 col-sm-3" style="background-color:{{ section.settings.background_box_1}}">
-          <flex>
-            <header class="fw-bold">{{ section.settings.box_1 }}</header>
-            <p>{{ section.settings.box_content }}</p>
-          </flex>
+          <header class="fw-bold">{{ section.settings.box_1 }}</header>
+          {% if settings.type_text == 'list' %}
+            <ul class="list-group mt-3">
+              {% for block in section.blocks %}
+                <li class="list-group-item">{{ block.settings.list_text }}</li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="mt-3">{{ settings.text_content }}</p>
+          {% endif %}
         </div>
         <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
 
