@@ -226,9 +226,9 @@
 
 /* Estilos del Marco */
 .with-border {
-  padding: 3px;
-  border-radius: 5px;
-  border: 1px solid transparent;
+  padding: 6px;
+  border-radius: 15px;
+  border: 3px solid transparent;
   background: linear-gradient(to bottom, #00ffff, #ff2d55);
   display: flex;
   justify-content: center;
@@ -255,25 +255,24 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+    const videos = document.querySelectorAll(".tiktok-embed");
+
+    videos.forEach(video => {
+        video.addEventListener("mouseenter", () => {
+            videos.forEach(v => {
+                if (v !== video) {
+                    v.contentWindow.postMessage('pause', '*'); // Envía el mensaje para pausar el video
+                }
+            });
+        });
+    });
+
     const slider = document.querySelector(".tiktok-slider");
     let scrollAmount = slider.offsetWidth / 4.5;
 
     function scrollSlider(direction) {
         slider.scrollBy({ left: scrollAmount * direction, behavior: "smooth" });
     }
-
-    const videos = document.querySelectorAll(".tiktok-embed");
-    videos.forEach(video => {
-        video.addEventListener("mouseenter", () => {
-            videos.forEach(v => {
-                if (v !== video) {
-                    v.src = v.src; // Reinicia los demás videos para detener su reproducción
-                }
-            });
-        });
-    });
 });
 </script>
-
-
 
