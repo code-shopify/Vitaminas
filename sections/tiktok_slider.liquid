@@ -134,6 +134,7 @@
           {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
           <div class="tiktok-slide">
             <div class="with-border video-container">
+              <!-- Iframe con autoplay=0 inicialmente -->
               <iframe class="tiktok-embed video-{{ i }}"
                 src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
                 frameborder="0"
@@ -142,9 +143,9 @@
                 data-video>
               </iframe>
             </div>
-            <!-- Botones de control Play/Pause -->
+            <!-- Botones de control Play/Pause centrados -->
             <div class="pause-button hidden-button">❚❚</div>
-            <div class="play-button">▷</div>
+            <div class="play-button">▶</div>
           </div>
         {% endif %}
       {% endfor %}
@@ -226,6 +227,7 @@
 .tiktok-slider {
   display: flex;
   gap: 16px;
+  align-items: flex-start; /* Asegura que todas las tarjetas queden alineadas al tope */
 }
 
 /* Cada slide: ancho fijo para mostrar varias tarjetas en fila */
@@ -319,18 +321,19 @@
   right: 10px;
 }
 
-/* Botones de Play/Pause sobre cada slide */
+/* Botones de Play/Pause sobre cada slide, centrados */
 .play-button,
 .pause-button {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  background: rgba(0,0,0,0.6);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(0,0,0,0.5);
   color: #fff;
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
   z-index: 20;
   display: flex;
@@ -377,7 +380,9 @@
           document.querySelectorAll(".tiktok-embed").forEach(otherIframe => {
             if (otherIframe !== iframe) {
               const prevSrc = otherIframe.getAttribute("src");
-              otherIframe.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
+              if (prevSrc.includes("autoplay=1")) {
+                otherIframe.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
+              }
             }
           });
 
@@ -425,4 +430,5 @@
     };
   });
 {% endjavascript %}
+
 
