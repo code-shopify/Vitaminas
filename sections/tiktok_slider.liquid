@@ -135,8 +135,7 @@
         {% if video_url contains "/video/" %}
           {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
           <div class="tiktok-slide">
-            <!-- Se utiliza un contenedor sin marco -->
-            <div class="video-container">
+            <div class="with-border video-container">
               <iframe class="tiktok-embed video-{{ i }}"
                 src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
                 frameborder="0"
@@ -216,12 +215,12 @@
   margin: 0;
 }
 
-/* Carrusel: contenedor scrollable */
+/* Carrusel: ahora es el contenedor scrollable */
 .tiktok-carousel {
   overflow-x: scroll;
   scroll-behavior: smooth;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
 }
 .tiktok-carousel::-webkit-scrollbar {
   display: none;
@@ -243,15 +242,16 @@
   position: relative;
 }
 
-/* Contenedor de video sin marco */
-.video-container {
+/* Marco con borde degradado */
+.with-border {
+  padding: 2px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background: linear-gradient(to bottom, #00ffff, #ff2d55);
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
-  border: none;
-  background: none;
-  box-shadow: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Ajuste del TikTok */
@@ -268,12 +268,15 @@
   font-size: 16px;
   line-height: 1;
 }
+
 .star.full {
   color: gold;
 }
+
 .star.empty {
   color: #ccc;
 }
+
 .star.partial {
   position: relative;
   display: inline-block;
@@ -294,7 +297,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.6);
+  background: rgba(0, 0, 0, 0.6);
   color: white;
   border: none;
   border-radius: 50%;
@@ -324,47 +327,37 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Al cargar, guarda el src original en cada iframe
-  document.querySelectorAll(".tiktok-embed").forEach(function(iframe) {
-    iframe.dataset.originalSrc = iframe.getAttribute("src");
-  });
-
-  // Función para desplazar el contenedor scrollable
+  // Selecciona el contenedor scrollable (.tiktok-carousel)
   window.scrollSlider = function(direction) {
     const container = document.querySelector(".tiktok-carousel");
     const slide = container.querySelector(".tiktok-slide");
     if (slide) {
-      // Incluye el gap (8px) al ancho de la slide
+      // Se suma el gap (8px) al ancho de la slide
       const slideWidth = slide.offsetWidth + 8;
       container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
     }
   };
 
-  // Al hacer clic en el contenedor de video...
-  document.querySelectorAll(".video-container").forEach(function(container) {
+  const videoContainers = document.querySelectorAll(".video-container");
+  let currentPlaying = null;
+  
+  videoContainers.forEach((container) => {
     container.addEventListener("click", function(e) {
       e.preventDefault();
-      const clickedIframe = container.querySelector(".tiktok-embed");
-
-      // Recorre todos los iframes y reinicia (pausa) aquellos que no sean el clicado
-      document.querySelectorAll(".tiktok-embed").forEach(function(iframe) {
-        if (iframe !== clickedIframe) {
-          const originalSrc = iframe.dataset.originalSrc;
-          // Forzar la recarga agregando un parámetro dummy
-          const newSrc = originalSrc + (originalSrc.indexOf("&") >= 0 ? "&" : "?") + "reload=" + Date.now();
-          iframe.setAttribute("src", newSrc);
-        }
-      });
-
-      // Para el iframe clicado: activa autoplay reemplazando "autoplay=0" por "autoplay=1"
-      const originalSrc = clickedIframe.dataset.originalSrc;
-      let newSrc = originalSrc.replace("autoplay=0", "autoplay=1");
-      newSrc += (newSrc.indexOf("&") >= 0 ? "&" : "?") + "reload=" + Date.now();
-      clickedIframe.setAttribute("src", newSrc);
+      const iframe = container.querySelector(".tiktok-embed");
+      if (currentPlaying && currentPlaying !== iframe) {
+        let prevSrc = currentPlaying.getAttribute("src");
+        currentPlaying.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
+      }
+      if (iframe.getAttribute("src").indexOf("autoplay=1") === -1) {
+        iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
+      }
+      currentPlaying = iframe;
     });
   });
 });
 </script>
+
 
 
 
