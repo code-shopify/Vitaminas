@@ -327,10 +327,8 @@
 </style>
 
 
-// ... existing code ...
-
-<script>
-class VideoController {
+{% javascript %}
+    class VideoController {
     constructor() {
         if (VideoController.instance) {
             return VideoController.instance;
@@ -386,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 });
-</script>
+{% endjavascript %}
 
 // ... existing code ...
 
