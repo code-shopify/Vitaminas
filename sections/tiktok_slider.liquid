@@ -228,60 +228,54 @@
   .bottom-message { margin-top: 40px; font-size: 14px; color: #666; }
 </style>
 
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  window.scrollSlider = function(direction) {
-    const container = document.querySelector(".tiktok-carousel");
-    const slide = container.querySelector(".tiktok-slide");
-    if (slide) {
-      const slideWidth = slide.offsetWidth + 8; // Incluye el gap
-      container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
-    }
-  };
+  
+  // 🔄 Función para actualizar los iframes y detener videos en reproducción
+  function stopOtherVideos(exceptContainer) {
+    document.querySelectorAll(".video-container").forEach(function(container) {
+      if (container !== exceptContainer) {
+        const iframe = container.querySelector("iframe.tiktok-embed");
+        let src = iframe.getAttribute("src");
 
-  // Asignamos el evento al overlay para capturar el clic y gestionar la reproducción
-  const overlays = document.querySelectorAll(".video-overlay");
-  overlays.forEach(function(overlay) {
-    overlay.addEventListener("click", function(e) {
-      e.preventDefault();
+        // 🔄 Resetear el `src` para forzar la pausa del video
+        iframe.setAttribute("src", "");
+        iframe.setAttribute("src", src.replace("autoplay=1", "autoplay=0"));
+
+        // 🔄 Mostrar el overlay nuevamente
+        const overlay = container.querySelector(".video-overlay");
+        if (overlay) {
+          overlay.style.display = "block";
+        }
+      }
+    });
+  }
+
+  // 🎬 Manejar el clic en el overlay para reproducir videos
+  document.querySelectorAll(".video-overlay").forEach(function(overlay) {
+    overlay.addEventListener("click", function(event) {
+      event.preventDefault();
       
-      // Obtiene el contenedor del video clicado
-      const clickedContainer = overlay.closest(".video-container");
-      const clickedIframe = clickedContainer.querySelector("iframe.tiktok-embed");
-      let clickedSrc = clickedIframe.getAttribute("src");
+      const videoContainer = overlay.closest(".video-container");
+      const iframe = videoContainer.querySelector("iframe.tiktok-embed");
+      let src = iframe.getAttribute("src");
 
-      // Si el video no está reproduciéndose, activa autoplay
-      if (!clickedSrc.includes("autoplay=1")) {
-        clickedIframe.setAttribute("src", clickedSrc.replace("autoplay=0", "autoplay=1"));
+      // 🔄 Si el video no está reproduciéndose, activa autoplay
+      if (!src.includes("autoplay=1")) {
+        iframe.setAttribute("src", src.replace("autoplay=0", "autoplay=1"));
       }
 
-      // Oculta el overlay solo del video que se activó
+      // 🚀 Ocultar el overlay solo del video que se activó
       overlay.style.display = "none";
 
-      // Detiene los otros videos
-      document.querySelectorAll(".video-container").forEach(function(container) {
-        if (container !== clickedContainer) {
-          const iframe = container.querySelector("iframe.tiktok-embed");
-          let src = iframe.getAttribute("src");
-
-          // Si el video está en autoplay, lo detiene
-          if (src.includes("autoplay=1")) {
-            iframe.setAttribute("src", src.replace("autoplay=1", "autoplay=0"));
-          } else {
-            // Recarga el video para forzar la pausa en algunos navegadores
-            iframe.setAttribute("src", src);
-          }
-
-          // Muestra el overlay de los otros videos
-          const otherOverlay = container.querySelector(".video-overlay");
-          if (otherOverlay) {
-            otherOverlay.style.display = "block";
-          }
-        }
-      });
+      // 🚀 Detener otros videos en reproducción
+      stopOtherVideos(videoContainer);
     });
   });
+
 });
 </script>
+
 
 
