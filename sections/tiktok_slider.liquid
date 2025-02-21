@@ -234,7 +234,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentPlayingVideo = null;
   let isInitialPlay = true;
 
-  // 🛑 Función para detener y resetear video anterior
   const resetPreviousVideo = () => {
     if (currentPlayingVideo) {
       const videoContainer = currentPlayingVideo.closest('.video-container');
