@@ -201,10 +201,13 @@
         "image_box_1": "shopify://shop_images/Icono.png",
         "box_2": "Acompañamiento después de tu compra",
         "box_content_2": "Tips, consejos, respuestas a tus dudas y acompañamiento después de tu compra.",
+        "image_box_2": "shopify://shop_images/Icono_3.png",
         "box_3": "Formulario por especialistas por especialistas en nutrición.",
         "box_content_3": "Equipo de especialistas en nutrición detrás de la formulación de nuestros productos.",
+        "image_box_3": "shopify://shop_images/Icono_1.png",
         "box_4": "transparencia e integridad en nuestras formulas",
-        "box_content_4": "Lo que ves en la etiqueta es lo que tiene el producto, lo cumplidos. Trazabilidad de los ingredientes"
+        "box_content_4": "Lo que ves en la etiqueta es lo que tiene el producto, lo cumplidos. Trazabilidad de los ingredientes",
+        "image_box_4": "shopify://shop_images/Icono_2.png"
       }
     },
     "tiktok_slider_wHCVUD": {
