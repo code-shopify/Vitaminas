@@ -135,7 +135,8 @@
         {% if video_url contains "/video/" %}
           {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
           <div class="tiktok-slide">
-            <div class="with-border video-container">
+            <!-- Se elimina la clase "with-border" para quitar el marco -->
+            <div class="video-container">
               <iframe class="tiktok-embed video-{{ i }}"
                 src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
                 frameborder="0"
@@ -215,11 +216,11 @@
   margin: 0;
 }
 
-/* Carrusel: ahora es el contenedor scrollable */
+/* Carrusel: contenedor scrollable */
 .tiktok-carousel {
   overflow-x: scroll;
   scroll-behavior: smooth;
-  -ms-overflow-style: none;  /* IE and Edge */
+  -ms-overflow-style: none;  /* IE y Edge */
   scrollbar-width: none;     /* Firefox */
 }
 .tiktok-carousel::-webkit-scrollbar {
@@ -242,17 +243,7 @@
   position: relative;
 }
 
-/* Marco con borde degradado */
-.with-border {
-  padding: 2px;
-  border-radius: 6px;
-  border: 2px solid transparent;
-  background: linear-gradient(to bottom, #00ffff, #ff2d55);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
+/* Se eliminó el estilo del marco previamente aplicado a ".with-border" */
 
 /* Ajuste del TikTok */
 .tiktok-embed {
@@ -263,7 +254,7 @@
   object-fit: cover;
 }
 
-/* Estrellas */
+/* Estilos para las estrellas */
 .star {
   font-size: 16px;
   line-height: 1;
@@ -327,32 +318,40 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  // Selecciona el contenedor scrollable (.tiktok-carousel)
+  // Función para desplazar el slider
   window.scrollSlider = function(direction) {
     const container = document.querySelector(".tiktok-carousel");
     const slide = container.querySelector(".tiktok-slide");
     if (slide) {
-      // Se suma el gap (8px) al ancho de la slide
+      // Se incluye el gap (8px) al ancho de la slide
       const slideWidth = slide.offsetWidth + 8;
       container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
     }
   };
 
+  // Al hacer clic en un contenedor de video, se reinician todos los demás
   const videoContainers = document.querySelectorAll(".video-container");
-  let currentPlaying = null;
   
-  videoContainers.forEach((container) => {
+  videoContainers.forEach(container => {
     container.addEventListener("click", function(e) {
       e.preventDefault();
-      const iframe = container.querySelector(".tiktok-embed");
-      if (currentPlaying && currentPlaying !== iframe) {
-        let prevSrc = currentPlaying.getAttribute("src");
-        currentPlaying.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
+      const clickedIframe = container.querySelector(".tiktok-embed");
+      
+      // Recorre todos los iframes y para aquellos que NO sean el clicado:
+      document.querySelectorAll(".video-container .tiktok-embed").forEach(iframe => {
+        if (iframe !== clickedIframe) {
+          let src = iframe.getAttribute("src");
+          if (src.indexOf("autoplay=1") !== -1) {
+            iframe.setAttribute("src", src.replace("autoplay=1", "autoplay=0"));
+          }
+        }
+      });
+      
+      // Activa autoplay en el iframe clicado si aún no lo tiene
+      let currentSrc = clickedIframe.getAttribute("src");
+      if (currentSrc.indexOf("autoplay=1") === -1) {
+        clickedIframe.setAttribute("src", currentSrc.replace("autoplay=0", "autoplay=1"));
       }
-      if (iframe.getAttribute("src").indexOf("autoplay=1") === -1) {
-        iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
-      }
-      currentPlaying = iframe;
     });
   });
 });
