@@ -134,7 +134,7 @@
         {% if video_url contains "/video/" %}
           {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
           <div class="tiktok-slide">
-            <!-- Se agrega data-video-id para identificar el video de forma única -->
+            <!-- Se agrega data-video-id para identificar el video -->
             <div class="video-container" data-video-id="{{ video_id }}">
               <iframe class="tiktok-embed video-{{ i }}"
                 src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
@@ -143,7 +143,7 @@
                 scrolling="no"
                 data-video>
               </iframe>
-              <!-- Overlay para capturar el clic (el iframe no propaga eventos de clic) -->
+              <!-- Overlay para capturar el clic -->
               <div class="video-overlay"></div>
             </div>
           </div>
@@ -332,37 +332,36 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  // Se asigna el evento al overlay (ya que el iframe no detecta clics)
+  // Se asigna el evento al overlay para capturar el clic
   const overlays = document.querySelectorAll(".video-overlay");
   overlays.forEach(function(overlay) {
     overlay.addEventListener("click", function(e) {
       e.preventDefault();
-      // Obtiene el contenedor y el iframe clicado
-      const container = overlay.closest(".video-container");
-      const clickedVideoId = container.getAttribute("data-video-id");
-      const clickedIframe = container.querySelector("iframe.tiktok-embed");
+      // Guarda el contenedor clicado
+      const clickedContainer = overlay.closest(".video-container");
+      const clickedIframe = clickedContainer.querySelector("iframe.tiktok-embed");
 
-      // Activa autoplay en el iframe clicado solo si aún no lo tiene
+      // Activa autoplay en el iframe clicado (si no lo tenía)
       let clickedSrc = clickedIframe.getAttribute("src");
       if (!clickedSrc.includes("autoplay=1")) {
         clickedIframe.setAttribute("src", clickedSrc.replace("autoplay=0", "autoplay=1"));
       }
-      // Oculta el overlay del video clicado para no interferir en futuras interacciones
+      // Oculta el overlay del video clicado
       overlay.style.display = "none";
 
-      // Recorre todos los contenedores y recarga (o reinicia) aquellos que NO sean el seleccionado
+      // Recorre todos los contenedores y recarga únicamente aquellos que NO sean el clicado
       const allContainers = document.querySelectorAll(".video-container");
       allContainers.forEach(function(otherContainer) {
-        if (otherContainer.getAttribute("data-video-id") !== clickedVideoId) {
+        if (otherContainer !== clickedContainer) {
           const otherIframe = otherContainer.querySelector("iframe.tiktok-embed");
           let otherSrc = otherIframe.getAttribute("src");
+          // Si tiene autoplay=1, cámbialo a 0; de lo contrario, reasigna el src para forzar la recarga
           if (otherSrc.includes("autoplay=1")) {
             otherIframe.setAttribute("src", otherSrc.replace("autoplay=1", "autoplay=0"));
           } else {
-            // Reasigna el src para forzar la recarga
             otherIframe.setAttribute("src", otherSrc);
           }
-          // Asegura que el overlay en los otros videos esté visible
+          // Asegura que el overlay de los otros videos esté visible
           const otherOverlay = otherContainer.querySelector(".video-overlay");
           if (otherOverlay) {
             otherOverlay.style.display = "block";
