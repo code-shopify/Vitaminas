@@ -1,4 +1,4 @@
- {% schema %}
+{% schema %}
 {
   "name": "TikTok Slider",
   "settings": [
@@ -18,7 +18,7 @@
       "type": "text",
       "id": "title",
       "label": "Título principal",
-      "default": "Opiniones de Vitaminas"
+      "default": "Opinan de Vitatú"
     },
     {
       "type": "textarea",
@@ -90,13 +90,36 @@
 
 <div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
   
-  <!-- Contenido Superior -->
+  <!-- Sección Superior -->
   <div class="tiktok-slider-header">
-    <div class="rating-container">
-      <span class="rating-value">{{ section.settings.rating }}</span>
-      <span class="stars">★★★★★</span>
-      <span class="reviews"><a href="#">{{ section.settings.reviews }}</a></span>
+    <!-- Calificación y Reseñas -->
+    <div class="rating-reviews">
+      <div class="star-rating">
+        <div class="stars">
+          {% assign rating_val = section.settings.rating | plus: 0 %}
+          {% assign full_stars = rating_val | floor %}
+          {% assign fraction = rating_val | minus: full_stars %}
+          {% assign partial_percent = fraction | times: 100 %}
+          {% assign next_star = full_stars | plus: 1 %}
+          {% for star in (1..5) %}
+            {% if star <= full_stars %}
+              <span class="star full">&#9733;</span>
+            {% elsif star == next_star %}
+              {% if fraction > 0 %}
+                <span class="star partial" style="--fill: {{ partial_percent }}%;">&#9733;</span>
+              {% else %}
+                <span class="star empty">&#9733;</span>
+              {% endif %}
+            {% else %}
+              <span class="star empty">&#9733;</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <span class="rating-value">{{ rating_val }}</span>
+      </div>
+      <span class="reviews">{{ section.settings.reviews }}</span>
     </div>
+    
     <h2 class="slider-title">{{ section.settings.title }}</h2>
   </div>
 
@@ -112,7 +135,7 @@
         {% if video_url contains "/video/" %}
           {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
           <div class="tiktok-slide">
-            <div class="with-border">
+            <div class="with-border video-container">
               <iframe class="tiktok-embed video-{{ i }}"
                 src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
                 frameborder="0"
@@ -130,7 +153,7 @@
   <!-- Botón Derecho -->
   <button class="nav-button right-button" onclick="scrollSlider(1)">&#10095;</button>
 
-  <!-- Contenido Inferior -->
+  <!-- Mensaje Inferior -->
   <p class="bottom-message">{{ section.settings.bottom_message }}</p>
 
 </div>
@@ -139,22 +162,134 @@
 /* Contenedor principal */
 .tiktok-slider-container {
   text-align: center;
-  padding: 20px;
+  padding: 60px 20px;
   border-radius: 10px;
   position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Carrusel */
+/* Sección superior */
+.tiktok-slider-header {
+  margin-bottom: 40px;
+}
+
+/* Rating y reseñas */
+.rating-reviews {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* Agrupa estrellas y calificación numérica */
+.star-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Contenedor de estrellas */
+.stars {
+  display: flex;
+  gap: 2px;
+}
+
+/* Calificación numérica */
+.rating-value {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Reseñas */
+.reviews {
+  color: #999;
+}
+
+/* Título principal */
+.slider-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Carrusel: ahora es el contenedor scrollable */
 .tiktok-carousel {
-  overflow: hidden;
-  position: relative;
-  width: 100%;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.tiktok-carousel::-webkit-scrollbar {
+  display: none;
 }
 
+/* Contenedor interno de slides */
 .tiktok-slider {
   display: flex;
   gap: 8px;
-  transition: transform 0.3s ease-in-out;
+}
+
+/* Cada slide: se muestran 4.5 en pantalla */
+.tiktok-slide {
+  flex: 0 0 calc(100% / 4.5);
+  max-width: calc(100% / 4.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Marco con borde degradado */
+.with-border {
+  padding: 2px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background: linear-gradient(to bottom, #00ffff, #ff2d55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste del TikTok */
+.tiktok-embed {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
+}
+
+/* Estrellas */
+.star {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.star.full {
+  color: gold;
+}
+
+.star.empty {
+  color: #ccc;
+}
+
+.star.partial {
+  position: relative;
+  display: inline-block;
+  color: #ccc;
+}
+.star.partial::before {
+  content: "★";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--fill);
+  overflow: hidden;
+  color: gold;
 }
 
 /* Botones de navegación */
@@ -175,67 +310,51 @@
   align-items: center;
   z-index: 10;
 }
-
 .left-button {
   left: 10px;
 }
-
 .right-button {
   right: 10px;
 }
 
-/* Slides */
-.tiktok-slide {
-  flex: 0 0 calc(100% / 4.5);
-  max-width: calc(100% / 4.5);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-}
-
-/* Estilos del Marco */
-.with-border {
-  padding: 2px;
-  border-radius: 6px;
-  border: 2px solid transparent;
-  background: linear-gradient(to bottom, #00ffff, #ff2d55);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Ajuste del TikTok al cuadro */
-.tiktok-embed {
-  width: 100%;
-  height: 100%;
-  border-radius: 12px;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
+/* Mensaje inferior */
+.bottom-message {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #666;
 }
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    const slider = document.querySelector(".tiktok-slider");
-    let scrollAmount = slider.offsetWidth / 4.5;
-
-    function scrollSlider(direction) {
-        slider.scrollBy({ left: scrollAmount * direction, behavior: "smooth" });
+  // Selecciona el contenedor scrollable (.tiktok-carousel)
+  window.scrollSlider = function(direction) {
+    const container = document.querySelector(".tiktok-carousel");
+    const slide = container.querySelector(".tiktok-slide");
+    if (slide) {
+      // Se suma el gap (8px) al ancho de la slide
+      const slideWidth = slide.offsetWidth + 8;
+      container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
     }
+  };
 
-    const iframes = document.querySelectorAll(".tiktok-embed");
-
-    iframes.forEach((iframe, index) => {
-        iframe.addEventListener("click", () => {
-            iframes.forEach((otherIframe, otherIndex) => {
-                if (index !== otherIndex) {
-                    let src = otherIframe.src;
-                    otherIframe.src = src; // Reinicia el iframe para detener la reproducción
-                }
-            });
-        });
+  const videoContainers = document.querySelectorAll(".video-container");
+  let currentPlaying = null;
+  
+  videoContainers.forEach((container) => {
+    container.addEventListener("click", function(e) {
+      e.preventDefault();
+      const iframe = container.querySelector(".tiktok-embed");
+      if (currentPlaying && currentPlaying !== iframe) {
+        let prevSrc = currentPlaying.getAttribute("src");
+        currentPlaying.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
+      }
+      if (iframe.getAttribute("src").indexOf("autoplay=1") === -1) {
+        iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
+      }
+      currentPlaying = iframe;
     });
+  });
 });
 </script>
+
