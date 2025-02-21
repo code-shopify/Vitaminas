@@ -194,10 +194,11 @@
       "settings": {
         "header": "Calidad en cada ingrediente, diseñados pensando en ti.",
         "banner": "shopify://shop_images/5986c8f1a17c584df3afc44725981a64.png",
-        "background_box": "#FFBF80",
+        "background_box": "#ffbf80",
         "background_section": "#e5d4c9",
         "box_1": "Ingredientes con patentes",
         "box_content": "patente Quatrefolic (de folato)",
+        "image_box_1": "shopify://shop_images/Icono.png",
         "box_2": "Acompañamiento después de tu compra",
         "box_content_2": "Tips, consejos, respuestas a tus dudas y acompañamiento después de tu compra.",
         "box_3": "Formulario por especialistas por especialistas en nutrición.",
