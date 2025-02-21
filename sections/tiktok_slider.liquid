@@ -1,179 +1,134 @@
 {% schema %}
 {
-  "name": "Perfil TikTok",
+  "name": "Opiniones Producto",
   "settings": [
     {
       "type": "text",
-      "id": "username",
-      "label": "Nombre de usuario",
-      "default": "@alpharchive"
+      "id": "titulo_principal",
+      "label": "Título principal",
+      "default": "Opinan de Vitatú"
     },
     {
       "type": "text",
-      "id": "followers",
-      "label": "Seguidores",
-      "default": "10.8M"
+      "id": "pregunta_destacada",
+      "label": "Pregunta destacada",
+      "default": "¿Cómo se toma el Myo & D-Chirp Insilitol de Vitatú?"
     },
     {
-      "type": "text",
-      "id": "videos_count",
-      "label": "Número de videos",
-      "default": "12W"
+      "type": "textarea",
+      "id": "razon_principal",
+      "label": "Razón principal",
+      "default": "ESTA ES LA RAZÓN POR LA QUE EL MYO & D-CHIRP INOSTILO, ES EL SUPLEMENTO QUE HABÍA ESTADO BUSCANDO."
     },
     {
-      "type": "text",
-      "id": "hashtag",
-      "label": "Hashtag principal",
-      "default": "#sumise #beach"
+      "type": "textarea",
+      "id": "mensaje_legal",
+      "label": "Mensaje legal",
+      "default": "*EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIÉN LO RECOMIENDA Y DE QUIÉN LO USA. ESTE PRODUCTO NO ES UN MEDICAMENTO*"
     },
     {
-      "type": "text",
-      "id": "music",
-      "label": "Música",
-      "default": "magic - Mediasin & MAE.SUN"
+      "type": "color",
+      "id": "color_fondo",
+      "label": "Color de fondo",
+      "default": "#FFFFFF"
     },
     {
-      "type": "url",
-      "id": "video_url",
-      "label": "URL del video"
+      "type": "color",
+      "id": "color_texto",
+      "label": "Color del texto",
+      "default": "#333333"
+    },
+    {
+      "type": "color",
+      "id": "color_destacado",
+      "label": "Color destacado",
+      "default": "#000000"
     }
   ],
   "presets": [
     {
-      "name": "Perfil TikTok",
-      "category": "Contenido Social"
+      "name": "Opiniones Producto",
+      "category": "Texto"
     }
   ]
 }
 {% endschema %}
 
 <style>
-  .tiktok-profile-section {
-    max-width: 375px;
-    margin: 20px auto;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  .seccion-opiniones {
+    padding: 50px 20px;
+    background-color: {{ section.settings.color_fondo }};
+    color: {{ section.settings.color_texto }};
+    text-align: center;
+  }
+  
+  .contenedor-principal {
+    max-width: 800px;
+    margin: 0 auto;
   }
 
-  .profile-header {
-    display: flex;
-    align-items: center;
-    padding: 12px;
-    border-bottom: 1px solid #e6e6e6;
-  }
-
-  .profile-avatar {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: #ddd;
-    margin-right: 12px;
-  }
-
-  .profile-info {
-    flex-grow: 1;
-  }
-
-  .username {
+  .titulo-principal {
+    font-size: 32px;
     font-weight: 700;
-    margin-bottom: 2px;
+    margin-bottom: 30px;
+    color: {{ section.settings.color_destacado }};
   }
 
-  .stats {
-    display: flex;
-    gap: 15px;
-    color: #666;
-    font-size: 14px;
-  }
-
-  .video-container {
-    position: relative;
-    aspect-ratio: 9/16;
-  }
-
-  .tiktok-video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .video-meta {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 12px;
-    background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    color: white;
-  }
-
-  .hashtag {
+  .pregunta-destacada {
+    font-size: 24px;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 40px;
+    line-height: 1.4;
   }
 
-  .music-credit {
-    display: flex;
-    align-items: center;
+  .razon-principal {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 40px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+  }
+
+  .mensaje-legal {
     font-size: 14px;
+    margin-top: 50px;
+    color: {{ section.settings.color_texto | color_modify: 'alpha', 0.7 }};
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
   }
 
-  .music-icon {
-    width: 20px;
-    height: 20px;
-    margin-right: 8px;
-  }
-
-  .cta-buttons {
-    display: flex;
-    gap: 10px;
-    padding: 12px;
-  }
-
-  .cta-button {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    background: #f0f0f0;
-    font-weight: 500;
+  @media (max-width: 768px) {
+    .titulo-principal {
+      font-size: 28px;
+    }
+    
+    .pregunta-destacada {
+      font-size: 20px;
+    }
+    
+    .razon-principal {
+      font-size: 18px;
+    }
   }
 </style>
 
-<div class="tiktok-profile-section">
-  <!-- Encabezado de perfil -->
-  <div class="profile-header">
-    <div class="profile-avatar"></div>
-    <div class="profile-info">
-      <div class="username">{{ section.settings.username }}</div>
-      <div class="stats">
-        <span>{{ section.settings.followers }} seguidores</span>
-        <span>{{ section.settings.videos_count }} videos</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Contenedor de video -->
-  <div class="video-container">
-    <iframe 
-      class="tiktok-video"
-      src="{{ section.settings.video_url }}"
-      frameborder="0"
-      allowfullscreen
-    ></iframe>
+<div class="seccion-opiniones">
+  <div class="contenedor-principal">
+    <h1 class="titulo-principal">{{ section.settings.titulo_principal }}</h1>
     
-    <!-- Metadatos del video -->
-    <div class="video-meta">
-      <div class="hashtag">{{ section.settings.hashtag }}</div>
-      <div class="music-credit">
-        <svg class="music-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-        {{ section.settings.music }}
-      </div>
+    <div class="pregunta-destacada">
+      {{ section.settings.pregunta_destacada }}
     </div>
-  </div>
 
-  <!-- Botones de acción -->
-  <div class="cta-buttons">
-    <button class="cta-button">Ver perfil</button>
-    <button class="cta-button">Ver ahora</button>
+    <div class="razon-principal">
+      {{ section.settings.razon_principal }}
+    </div>
+
+    <div class="mensaje-legal">
+      {{ section.settings.mensaje_legal }}
+    </div>
   </div>
 </div>
