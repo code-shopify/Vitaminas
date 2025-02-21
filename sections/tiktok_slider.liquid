@@ -234,9 +234,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const iframes = document.querySelectorAll(".tiktok-embed");
   let lastPlayedIframe = null; // Guarda el último video reproducido
 
-  // 🔄 Función para detener solo el video anterior
+  // 🔄 Función para pausar solo el último video sin recargar el nuevo
   function stopLastVideo() {
     if (lastPlayedIframe) {
+      // Evita modificar `src`, solo pausa el autoplay
       let src = lastPlayedIframe.getAttribute("src");
       if (src.includes("autoplay=1")) {
         lastPlayedIframe.setAttribute("src", src.replace("autoplay=1", "autoplay=0"));
@@ -256,10 +257,10 @@ document.addEventListener("DOMContentLoaded", function () {
       // Si el video clicado es el mismo que se está reproduciendo, no hacer nada
       if (iframe === lastPlayedIframe) return;
 
-      // Detener el último video antes de reproducir el nuevo
+      // Pausar solo el video anterior sin recargar este
       stopLastVideo();
 
-      // Reproducir el nuevo video sin recargarlo
+      // Verificar si el video ya tiene `autoplay=1`, si no, activarlo
       let src = iframe.getAttribute("src");
       if (!src.includes("autoplay=1")) {
         iframe.setAttribute("src", src.replace("autoplay=0", "autoplay=1"));
@@ -285,6 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 });
 </script>
+
 
 
 
