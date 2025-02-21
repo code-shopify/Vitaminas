@@ -326,49 +326,58 @@
 }
 </style>
 
+
 <script>
-let videoActual = null; // Variable global para mantener referencia al video actual
-
-function reproducirVideo(videoElement) {
-    // Si hay un video reproduciéndose, lo pausamos
-    if (videoActual && videoActual !== videoElement) {
-        videoActual.pause();
+class VideoController {
+    constructor() {
+        if (VideoController.instance) {
+            return VideoController.instance;
+        }
+        VideoController.instance = this;
+        this.currentPlaying = null;
+        this.inicializarEventos();
     }
-    
-    // Reproducimos el nuevo video
-    videoElement.play();
-    
-    // Actualizamos la referencia al video actual
-    videoActual = videoElement;
+
+    inicializarEventos() {
+        const videoContainers = document.querySelectorAll(".video-container");
+        videoContainers.forEach((container) => {
+            container.addEventListener("click", (e) => {
+                e.preventDefault();
+                this.manejarReproduccion(container);
+            });
+        });
+    }
+
+    manejarReproduccion(container) {
+        const iframe = container.querySelector(".tiktok-embed");
+        
+        // Si hay un video reproduciéndose, lo pausamos
+        if (this.currentPlaying && this.currentPlaying !== iframe) {
+            const prevSrc = this.currentPlaying.getAttribute("src");
+            this.currentPlaying.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
+        }
+
+        // Reproducimos el nuevo video
+        if (iframe.getAttribute("src").indexOf("autoplay=1") === -1) {
+            iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
+            this.currentPlaying = iframe;
+        }
+    }
 }
-document.addEventListener("DOMContentLoaded", function () {
-  // Selecciona el contenedor scrollable (.tiktok-carousel)
-  window.scrollSlider = function(direction) {
-    const container = document.querySelector(".tiktok-carousel");
-    const slide = container.querySelector(".tiktok-slide");
-    if (slide) {
-      // Se suma el gap (8px) al ancho de la slide
-      const slideWidth = slide.offsetWidth + 8;
-      container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
-    }
-  };
 
-  const videoContainers = document.querySelectorAll(".video-container");
-  let currentPlaying = null;
-  
-  videoContainers.forEach((container) => {
-    container.addEventListener("click", function(e) {
-      e.preventDefault();
-      const iframe = container.querySelector(".tiktok-embed");
-      if (currentPlaying && currentPlaying !== iframe) {
-        let prevSrc = currentPlaying.getAttribute("src");
-        currentPlaying.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
-      }
-      if (iframe.getAttribute("src").indexOf("autoplay=1") === -1) {
-        iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
-      }
-      currentPlaying = iframe;
-    });
-  });
+document.addEventListener("DOMContentLoaded", function () {
+    // Inicializamos el controlador de video
+    const videoController = new VideoController();
+
+    // Función para el scroll del slider
+    window.scrollSlider = function(direction) {
+        const container = document.querySelector(".tiktok-carousel");
+        const slide = container.querySelector(".tiktok-slide");
+        if (slide) {
+            const slideWidth = slide.offsetWidth + 8;
+            container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
+        }
+    };
 });
 </script>
+
