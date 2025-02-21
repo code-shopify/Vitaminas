@@ -320,8 +320,8 @@
 }
 </style>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+{% javascript %}
+  document.addEventListener("DOMContentLoaded", function () {
   // Función para desplazar el slider
   window.scrollSlider = function(direction) {
     const container = document.querySelector(".tiktok-carousel");
@@ -371,6 +371,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 });
-</script>
-
+{% endjavascript %}
 
