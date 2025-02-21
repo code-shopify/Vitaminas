@@ -239,36 +239,40 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   };
 
-  // Asignamos el evento al overlay para capturar el clic
+  // Asignamos el evento al overlay para capturar el clic y gestionar la reproducción
   const overlays = document.querySelectorAll(".video-overlay");
   overlays.forEach(function(overlay) {
     overlay.addEventListener("click", function(e) {
       e.preventDefault();
-      // Obtiene el contenedor clicado y su data-video-id
+      
+      // Obtiene el contenedor del video clicado
       const clickedContainer = overlay.closest(".video-container");
-      const clickedVideoId = clickedContainer.getAttribute("data-video-id");
       const clickedIframe = clickedContainer.querySelector("iframe.tiktok-embed");
       let clickedSrc = clickedIframe.getAttribute("src");
 
-      // Si el iframe clicado no tiene autoplay activado, lo actualizamos
-      if (clickedSrc.indexOf("autoplay=1") === -1) {
+      // Si el video no está reproduciéndose, activa autoplay
+      if (!clickedSrc.includes("autoplay=1")) {
         clickedIframe.setAttribute("src", clickedSrc.replace("autoplay=0", "autoplay=1"));
       }
-      // Oculta el overlay del contenedor clicado
+
+      // Oculta el overlay solo del video que se activó
       overlay.style.display = "none";
 
-      // Recorre todos los contenedores; si su data-video-id es distinta, se recargan
+      // Detiene los otros videos
       document.querySelectorAll(".video-container").forEach(function(container) {
-        if (container.getAttribute("data-video-id") !== clickedVideoId) {
+        if (container !== clickedContainer) {
           const iframe = container.querySelector("iframe.tiktok-embed");
           let src = iframe.getAttribute("src");
-          if (src.indexOf("autoplay=1") !== -1) {
+
+          // Si el video está en autoplay, lo detiene
+          if (src.includes("autoplay=1")) {
             iframe.setAttribute("src", src.replace("autoplay=1", "autoplay=0"));
           } else {
-            // Reasigna src para forzar recarga
+            // Recarga el video para forzar la pausa en algunos navegadores
             iframe.setAttribute("src", src);
           }
-          // Asegura que el overlay de este contenedor esté visible
+
+          // Muestra el overlay de los otros videos
           const otherOverlay = container.querySelector(".video-overlay");
           if (otherOverlay) {
             otherOverlay.style.display = "block";
@@ -279,4 +283,5 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
+
 
