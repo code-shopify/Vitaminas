@@ -327,6 +327,8 @@
 </style>
 
 
+// ... existing code ...
+
 <script>
 class VideoController {
     constructor() {
@@ -360,7 +362,12 @@ class VideoController {
         // Reproducimos el nuevo video
         if (iframe.getAttribute("src").indexOf("autoplay=1") === -1) {
             iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
-            this.currentPlaying = iframe;
+            this.currentPlaying = iframe; // Actualizamos la referencia al video actual
+        } else {
+            // Si el video ya se está reproduciendo, lo pausamos
+            const prevSrc = iframe.getAttribute("src");
+            iframe.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
+            this.currentPlaying = null; // Reseteamos la referencia
         }
     }
 }
@@ -380,4 +387,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 });
 </script>
+
+// ... existing code ...
 
