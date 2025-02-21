@@ -92,7 +92,6 @@
   
   <!-- Sección Superior -->
   <div class="tiktok-slider-header">
-    <!-- Calificación y Reseñas -->
     <div class="rating-reviews">
       <div class="star-rating">
         <div class="stars">
@@ -119,7 +118,6 @@
       </div>
       <span class="reviews">{{ section.settings.reviews }}</span>
     </div>
-    
     <h2 class="slider-title">{{ section.settings.title }}</h2>
   </div>
 
@@ -135,7 +133,6 @@
         {% if video_url contains "/video/" %}
           {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
           <div class="tiktok-slide">
-            <!-- Se eliminó el contenedor con borde para mejorar la estética -->
             <div class="video-container">
               <iframe class="tiktok-embed video-{{ i }}"
                 src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
@@ -154,9 +151,7 @@
   <!-- Botón Derecho -->
   <button class="nav-button right-button" onclick="scrollSlider(1)">&#10095;</button>
 
-  <!-- Mensaje Inferior -->
   <p class="bottom-message">{{ section.settings.bottom_message }}</p>
-
 </div>
 
 <style>
@@ -169,13 +164,9 @@
   max-width: 1200px;
   margin: 0 auto;
 }
-
-/* Sección superior */
 .tiktok-slider-header {
   margin-bottom: 40px;
 }
-
-/* Rating y reseñas */
 .rating-reviews {
   display: flex;
   align-items: center;
@@ -184,39 +175,27 @@
   font-size: 14px;
   margin-bottom: 10px;
 }
-
-/* Agrupa estrellas y calificación numérica */
 .star-rating {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
-/* Contenedor de estrellas */
 .stars {
   display: flex;
   gap: 2px;
 }
-
-/* Calificación numérica */
 .rating-value {
   font-weight: bold;
   color: #333;
 }
-
-/* Reseñas */
 .reviews {
   color: #999;
 }
-
-/* Título principal */
 .slider-title {
   font-size: 32px;
   font-weight: 700;
   margin: 0;
 }
-
-/* Carrusel: contenedor scrollable */
 .tiktok-carousel {
   overflow-x: scroll;
   scroll-behavior: smooth;
@@ -226,14 +205,10 @@
 .tiktok-carousel::-webkit-scrollbar {
   display: none;
 }
-
-/* Contenedor interno de slides */
 .tiktok-slider {
   display: flex;
   gap: 8px;
 }
-
-/* Cada slide: se muestran 4.5 en pantalla */
 .tiktok-slide {
   flex: 0 0 calc(100% / 4.5);
   max-width: calc(100% / 4.5);
@@ -242,20 +217,16 @@
   align-items: center;
   position: relative;
 }
-
-/* Video container sin marco */
 .video-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Se quitan fondo, borde y box-shadow para mayor estética */
+  /* Sin borde ni fondo para mayor estética */
   padding: 0;
   border: none;
   background: none;
   box-shadow: none;
 }
-
-/* Ajuste del TikTok */
 .tiktok-embed {
   width: 100%;
   height: 100%;
@@ -263,21 +234,16 @@
   aspect-ratio: 9 / 16;
   object-fit: cover;
 }
-
-/* Estrellas */
 .star {
   font-size: 16px;
   line-height: 1;
 }
-
 .star.full {
   color: gold;
 }
-
 .star.empty {
   color: #ccc;
 }
-
 .star.partial {
   position: relative;
   display: inline-block;
@@ -292,8 +258,6 @@
   overflow: hidden;
   color: gold;
 }
-
-/* Botones de navegación */
 .nav-button {
   position: absolute;
   top: 50%;
@@ -317,8 +281,6 @@
 .right-button {
   right: 10px;
 }
-
-/* Mensaje inferior */
 .bottom-message {
   margin-top: 40px;
   font-size: 14px;
@@ -327,42 +289,54 @@
 </style>
 
 <script>
+// Función para actualizar o agregar un parámetro en la URL
+function updateURLParameter(url, param, paramVal) {
+  var newAdditionalURL = "";
+  var tempArray = url.split("?");
+  var baseURL = tempArray[0];
+  var additionalURL = tempArray[1];
+  var temp = "";
+  if (additionalURL) {
+    tempArray = additionalURL.split("&");
+    for (var i = 0; i < tempArray.length; i++){
+      if(tempArray[i].split('=')[0] != param){
+        newAdditionalURL += temp + tempArray[i];
+        temp = "&";
+      }
+    }
+  }
+  var rows_txt = temp + param + "=" + paramVal;
+  return baseURL + "?" + newAdditionalURL + rows_txt;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
-  // Función para desplazar el contenedor scrollable
+  // Función de scroll para desplazar el slider
   window.scrollSlider = function(direction) {
     const container = document.querySelector(".tiktok-carousel");
     const slide = container.querySelector(".tiktok-slide");
     if (slide) {
-      // Incluye el gap de 8px al ancho de la slide
+      // Se incluye el gap (8px) en el ancho de la slide
       const slideWidth = slide.offsetWidth + 8;
       container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
     }
   };
 
-  // Función para recargar (pausar) todos los videos excepto el clicado
+  // Al hacer clic en un video, se recargan (reinician) los demás
   const videoContainers = document.querySelectorAll(".video-container");
   videoContainers.forEach((container) => {
     container.addEventListener("click", function(e) {
       e.preventDefault();
-      const iframe = container.querySelector(".tiktok-embed");
-      // Recorre todos los iframes y recarga (pausa) los que no sean el clicado
-      document.querySelectorAll(".tiktok-embed").forEach((otherIframe) => {
-        if (otherIframe !== iframe) {
-          let src = otherIframe.getAttribute("src");
-          // Reemplaza autoplay=1 por autoplay=0 y recarga el iframe
-          if (src.indexOf("autoplay=1") !== -1) {
-            otherIframe.setAttribute("src", src.replace("autoplay=1", "autoplay=0"));
-          } else {
-            // Forzar recarga asignando el mismo src
-            otherIframe.setAttribute("src", src);
-          }
+      const clickedIframe = container.querySelector(".tiktok-embed");
+      // Recorre todos los iframes y para (recarga) los que NO sean el clicado
+      document.querySelectorAll(".tiktok-embed").forEach((iframe) => {
+        if (iframe !== clickedIframe) {
+          let src = iframe.getAttribute("src");
+          iframe.setAttribute("src", updateURLParameter(src, "autoplay", "0"));
         }
       });
-      // Activa autoplay en el iframe clicado
-      let currentSrc = iframe.getAttribute("src");
-      if (currentSrc.indexOf("autoplay=1") === -1) {
-        iframe.setAttribute("src", currentSrc.replace("autoplay=0", "autoplay=1"));
-      }
+      // Activa el video clicado con autoplay=1
+      let clickedSrc = clickedIframe.getAttribute("src");
+      clickedIframe.setAttribute("src", updateURLParameter(clickedSrc, "autoplay", "1"));
     });
   });
 });
