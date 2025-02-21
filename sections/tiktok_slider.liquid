@@ -92,7 +92,6 @@
   
   <!-- Sección Superior -->
   <div class="tiktok-slider-header">
-    <!-- Calificación y Reseñas -->
     <div class="rating-reviews">
       <div class="star-rating">
         <div class="stars">
@@ -141,7 +140,6 @@
                 frameborder="0"
                 allow="autoplay; fullscreen; picture-in-picture"
                 scrolling="no"
-                onclick="reproducirVideo(this)"
                 data-video>
               </iframe>
             </div>
@@ -216,12 +214,12 @@
   margin: 0;
 }
 
-/* Carrusel: ahora es el contenedor scrollable */
+/* Carrusel */
 .tiktok-carousel {
   overflow-x: scroll;
   scroll-behavior: smooth;
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .tiktok-carousel::-webkit-scrollbar {
   display: none;
@@ -233,7 +231,7 @@
   gap: 8px;
 }
 
-/* Cada slide: se muestran 4.5 en pantalla */
+/* Cada slide */
 .tiktok-slide {
   flex: 0 0 calc(100% / 4.5);
   max-width: calc(100% / 4.5);
@@ -255,7 +253,7 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Ajuste del TikTok */
+/* TikTok Embed */
 .tiktok-embed {
   width: 100%;
   height: 100%;
@@ -326,65 +324,65 @@
 }
 </style>
 
-
 {% javascript %}
-    class VideoController {
+  // Controlador para manejar la reproducción de videos en el slider
+  class VideoController {
     constructor() {
-        if (VideoController.instance) {
-            return VideoController.instance;
-        }
-        VideoController.instance = this;
-        this.currentPlaying = null;
-        this.inicializarEventos();
+      if (VideoController.instance) return VideoController.instance;
+      VideoController.instance = this;
+      this.currentPlaying = null;
+      this.inicializarEventos();
     }
-
+    
+    // Se asigna el evento click a cada contenedor de video
     inicializarEventos() {
-        const videoContainers = document.querySelectorAll(".video-container");
-        videoContainers.forEach((container) => {
-            container.addEventListener("click", (e) => {
-                e.preventDefault();
-                this.manejarReproduccion(container);
-            });
+      const videoContainers = document.querySelectorAll(".video-container");
+      videoContainers.forEach((container) => {
+        container.addEventListener("click", (e) => {
+          e.preventDefault();
+          this.manejarReproduccion(container);
         });
+      });
     }
-
+    
+    // Función que controla la reproducción: pausa el video actual si se reproduce otro
     manejarReproduccion(container) {
-        const iframe = container.querySelector(".tiktok-embed");
-        
-        // Si hay un video reproduciéndose, lo pausamos
-        if (this.currentPlaying && this.currentPlaying !== iframe) {
-            const prevSrc = this.currentPlaying.getAttribute("src");
-            this.currentPlaying.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
-        }
-
-        // Reproducimos el nuevo video
-        if (iframe.getAttribute("src").indexOf("autoplay=1") === -1) {
-            iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
-            this.currentPlaying = iframe; // Actualizamos la referencia al video actual
-        } else {
-            // Si el video ya se está reproduciendo, lo pausamos
-            const prevSrc = iframe.getAttribute("src");
-            iframe.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
-            this.currentPlaying = null; // Reseteamos la referencia
-        }
+      const iframe = container.querySelector(".tiktok-embed");
+      if (!iframe) return;
+      
+      // Si hay un video reproduciéndose y es diferente al actual, se pausa
+      if (this.currentPlaying && this.currentPlaying !== iframe) {
+        const prevSrc = this.currentPlaying.getAttribute("src");
+        this.currentPlaying.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
+      }
+      
+      // Se revisa si el iframe ya tiene autoplay activado
+      if (iframe.getAttribute("src").indexOf("autoplay=1") === -1) {
+        // Activamos autoplay en el nuevo video
+        iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
+        this.currentPlaying = iframe;
+      } else {
+        // Si ya se reproducía, se pausa
+        const prevSrc = iframe.getAttribute("src");
+        iframe.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
+        this.currentPlaying = null;
+      }
     }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Inicializamos el controlador de video
-    const videoController = new VideoController();
-
+  }
+  
+  document.addEventListener("DOMContentLoaded", function () {
+    // Inicializamos el controlador de videos
+    new VideoController();
+    
     // Función para el scroll del slider
     window.scrollSlider = function(direction) {
-        const container = document.querySelector(".tiktok-carousel");
-        const slide = container.querySelector(".tiktok-slide");
-        if (slide) {
-            const slideWidth = slide.offsetWidth + 8;
-            container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
-        }
+      const container = document.querySelector(".tiktok-carousel");
+      const slide = container.querySelector(".tiktok-slide");
+      if (slide) {
+        const slideWidth = slide.offsetWidth + 8;
+        container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
+      }
     };
-});
+  });
 {% endjavascript %}
-
-// ... existing code ...
 
