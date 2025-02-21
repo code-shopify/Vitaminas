@@ -135,7 +135,7 @@
         {% if video_url contains "/video/" %}
           {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
           <div class="tiktok-slide">
-            <!-- Se utiliza solo el contenedor 'video-container' sin marco -->
+            <!-- Se utiliza un contenedor sin marco -->
             <div class="video-container">
               <iframe class="tiktok-embed video-{{ i }}"
                 src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
@@ -243,7 +243,7 @@
   position: relative;
 }
 
-/* Video container sin marco */
+/* Contenedor de video sin marco */
 .video-container {
   display: flex;
   justify-content: center;
@@ -324,38 +324,48 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
+  // Al cargar, guarda el src original en cada iframe
+  document.querySelectorAll(".tiktok-embed").forEach(function(iframe) {
+    iframe.dataset.originalSrc = iframe.getAttribute("src");
+  });
+
   // Función para desplazar el contenedor scrollable
   window.scrollSlider = function(direction) {
     const container = document.querySelector(".tiktok-carousel");
     const slide = container.querySelector(".tiktok-slide");
     if (slide) {
-      // Suma el gap de 8px al ancho de la slide
+      // Incluye el gap (8px) al ancho de la slide
       const slideWidth = slide.offsetWidth + 8;
       container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
     }
   };
 
-  // Al hacer clic sobre el contenedor de video...
-  document.querySelectorAll(".video-container").forEach((container) => {
+  // Al hacer clic en el contenedor de video...
+  document.querySelectorAll(".video-container").forEach(function(container) {
     container.addEventListener("click", function(e) {
       e.preventDefault();
       const clickedIframe = container.querySelector(".tiktok-embed");
-      // Recarga (reinicia) todos los iframes distintos al clicado
-      document.querySelectorAll(".tiktok-embed").forEach((iframe) => {
+
+      // Recorre todos los iframes y reinicia (pausa) aquellos que no sean el clicado
+      document.querySelectorAll(".tiktok-embed").forEach(function(iframe) {
         if (iframe !== clickedIframe) {
-          // Reinicia el iframe asignándole el mismo src (lo que detiene la reproducción)
-          iframe.setAttribute("src", iframe.getAttribute("src"));
+          const originalSrc = iframe.dataset.originalSrc;
+          // Forzar la recarga agregando un parámetro dummy
+          const newSrc = originalSrc + (originalSrc.indexOf("&") >= 0 ? "&" : "?") + "reload=" + Date.now();
+          iframe.setAttribute("src", newSrc);
         }
       });
-      // Activa autoplay en el iframe clicado
-      let src = clickedIframe.getAttribute("src");
-      if (src.indexOf("autoplay=1") === -1) {
-        clickedIframe.setAttribute("src", src.replace("autoplay=0", "autoplay=1"));
-      }
+
+      // Para el iframe clicado: activa autoplay reemplazando "autoplay=0" por "autoplay=1"
+      const originalSrc = clickedIframe.dataset.originalSrc;
+      let newSrc = originalSrc.replace("autoplay=0", "autoplay=1");
+      newSrc += (newSrc.indexOf("&") >= 0 ? "&" : "?") + "reload=" + Date.now();
+      clickedIframe.setAttribute("src", newSrc);
     });
   });
 });
 </script>
+
 
 
 
