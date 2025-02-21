@@ -1,134 +1,56 @@
-{% schema %}
-{
-  "name": "Opiniones Producto",
-  "settings": [
-    {
-      "type": "text",
-      "id": "titulo_principal",
-      "label": "Título principal",
-      "default": "Opinan de Vitatú"
-    },
-    {
-      "type": "text",
-      "id": "pregunta_destacada",
-      "label": "Pregunta destacada",
-      "default": "¿Cómo se toma el Myo & D-Chirp Insilitol de Vitatú?"
-    },
-    {
-      "type": "textarea",
-      "id": "razon_principal",
-      "label": "Razón principal",
-      "default": "ESTA ES LA RAZÓN POR LA QUE EL MYO & D-CHIRP INOSTILO, ES EL SUPLEMENTO QUE HABÍA ESTADO BUSCANDO."
-    },
-    {
-      "type": "textarea",
-      "id": "mensaje_legal",
-      "label": "Mensaje legal",
-      "default": "*EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIÉN LO RECOMIENDA Y DE QUIÉN LO USA. ESTE PRODUCTO NO ES UN MEDICAMENTO*"
-    },
-    {
-      "type": "color",
-      "id": "color_fondo",
-      "label": "Color de fondo",
-      "default": "#FFFFFF"
-    },
-    {
-      "type": "color",
-      "id": "color_texto",
-      "label": "Color del texto",
-      "default": "#333333"
-    },
-    {
-      "type": "color",
-      "id": "color_destacado",
-      "label": "Color destacado",
-      "default": "#000000"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Opiniones Producto",
-      "category": "Texto"
-    }
-  ]
-}
-{% endschema %}
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const iframes = document.querySelectorAll(".tiktok-embed");
+  let lastPlayedIframe = null; // Guarda el último video reproducido
 
-<style>
-  .seccion-opiniones {
-    padding: 50px 20px;
-    background-color: {{ section.settings.color_fondo }};
-    color: {{ section.settings.color_texto }};
-    text-align: center;
-  }
-  
-  .contenedor-principal {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .titulo-principal {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 30px;
-    color: {{ section.settings.color_destacado }};
-  }
-
-  .pregunta-destacada {
-    font-size: 24px;
-    font-weight: 600;
-    margin-bottom: 40px;
-    line-height: 1.4;
-  }
-
-  .razon-principal {
-    font-size: 20px;
-    font-weight: 700;
-    margin: 40px 0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    line-height: 1.3;
-  }
-
-  .mensaje-legal {
-    font-size: 14px;
-    margin-top: 50px;
-    color: {{ section.settings.color_texto | color_modify: 'alpha', 0.7 }};
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.5;
-  }
-
-  @media (max-width: 768px) {
-    .titulo-principal {
-      font-size: 28px;
-    }
-    
-    .pregunta-destacada {
-      font-size: 20px;
-    }
-    
-    .razon-principal {
-      font-size: 18px;
+  // 🔄 Función para detener solo el video anterior
+  function stopLastVideo() {
+    if (lastPlayedIframe) {
+      let src = lastPlayedIframe.getAttribute("src");
+      if (src.includes("autoplay=1")) {
+        lastPlayedIframe.setAttribute("src", src.replace("autoplay=1", "autoplay=0"));
+      }
     }
   }
-</style>
 
-<div class="seccion-opiniones">
-  <div class="contenedor-principal">
-    <h1 class="titulo-principal">{{ section.settings.titulo_principal }}</h1>
-    
-    <div class="pregunta-destacada">
-      {{ section.settings.pregunta_destacada }}
-    </div>
+  // 🎬 Manejo de clics en los videos
+  document.querySelectorAll(".video-overlay").forEach((overlay) => {
+    overlay.addEventListener("click", function (event) {
+      event.preventDefault();
 
-    <div class="razon-principal">
-      {{ section.settings.razon_principal }}
-    </div>
+      // Obtener el iframe asociado al overlay
+      const videoContainer = overlay.closest(".video-container");
+      const iframe = videoContainer.querySelector("iframe.tiktok-embed");
 
-    <div class="mensaje-legal">
-      {{ section.settings.mensaje_legal }}
-    </div>
-  </div>
-</div>
+      // Si el video clicado es el mismo que se está reproduciendo, no hacer nada
+      if (iframe === lastPlayedIframe) return;
+
+      // Detener el último video antes de reproducir el nuevo
+      stopLastVideo();
+
+      // Reproducir el nuevo video sin recargarlo
+      let src = iframe.getAttribute("src");
+      if (!src.includes("autoplay=1")) {
+        iframe.setAttribute("src", src.replace("autoplay=0", "autoplay=1"));
+      }
+
+      // Ocultar el overlay del video en reproducción
+      overlay.style.display = "none";
+
+      // Guardar el iframe como el último reproducido
+      lastPlayedIframe = iframe;
+    });
+  });
+
+  // 🔄 Función para mover el slider con los botones
+  window.scrollSlider = function(direction) {
+    const container = document.querySelector(".tiktok-carousel");
+    const slide = container.querySelector(".tiktok-slide");
+
+    if (slide) {
+      const slideWidth = slide.offsetWidth + 8; // Incluye el gap entre slides
+      container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
+    }
+  };
+});
+</script>
