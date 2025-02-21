@@ -88,75 +88,34 @@
 }
 {% endschema %}
 
-<div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
-  <!-- Sección Superior -->
-  <div class="tiktok-slider-header">
-    <div class="rating-reviews">
-      <div class="star-rating">
-        <div class="stars">
-          {% assign rating_val = section.settings.rating | plus: 0 %}
-          {% assign full_stars = rating_val | floor %}
-          {% assign fraction = rating_val | minus: full_stars %}
-          {% assign partial_percent = fraction | times: 100 %}
-          {% assign next_star = full_stars | plus: 1 %}
-          {% for star in (1..5) %}
-            {% if star <= full_stars %}
-              <span class="star full">&#9733;</span>
-            {% elsif star == next_star %}
-              {% if fraction > 0 %}
-                <span class="star partial" style="--fill: {{ partial_percent }}%;">&#9733;</span>
-              {% else %}
-                <span class="star empty">&#9733;</span>
-              {% endif %}
-            {% else %}
-              <span class="star empty">&#9733;</span>
-            {% endif %}
-          {% endfor %}
-        </div>
-        <span class="rating-value">{{ rating_val }}</span>
+<div class="star-rating">
+  <div class="stars">
+    {% assign rating_val = section.settings.rating | plus: 0 %}
+    {% assign full_stars = rating_val | floor %}
+    {% assign empty_stars = 5 | minus: full_stars %}
+    {% assign fraction = rating_val | minus: full_stars %}
+
+    {% comment %} Estrellas llenas {% endcomment %}
+    {% for i in (1..full_stars) %}
+      <span class="star full">&#9733;</span>
+    {% endfor %}
+
+    {% comment %} Estrella parcial {% endcomment %}
+    {% if fraction > 0 %}
+      <div class="partial-star-container">
+        <span class="star partial-background">&#9733;</span>
+        <span class="star partial-fill" style="width: {{ fraction | times: 100 }}%">&#9733;</span>
       </div>
-      <span class="reviews">{{ section.settings.reviews }}</span>
-    </div>
-    <h2 class="slider-title">{{ section.settings.title }}</h2>
+      {% assign empty_stars = empty_stars | minus: 1 %}
+    {% endif %}
+
+    {% comment %} Estrellas vacías {% endcomment %}
+    {% for i in (1..empty_stars) %}
+      <span class="star empty">&#9733;</span>
+    {% endfor %}
   </div>
-
-  <!-- Botón Izquierdo -->
-  <button class="nav-button left-button" onclick="scrollSlider(-1)">&#10094;</button>
-
-  <!-- Carrusel de TikToks -->
-  <div class="tiktok-carousel">
-    <div class="tiktok-slider">
-      {% for i in (1..8) %}
-        {% capture video_var %}video_{{ i }}{% endcapture %}
-        {% assign video_url = section.settings[video_var] %}
-        {% if video_url contains "/video/" %}
-          {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
-          <div class="tiktok-slide">
-            <!-- Se asigna data-video-id para identificar de forma única el video -->
-            <div class="video-container" data-video-id="{{ video_id }}">
-              <iframe class="tiktok-embed video-{{ i }}"
-                src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
-                frameborder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                scrolling="no"
-                data-video>
-              </iframe>
-              <!-- Overlay para capturar el clic -->
-              <div class="video-overlay"></div>
-            </div>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-
-  <!-- Botón Derecho -->
-  <button class="nav-button right-button" onclick="scrollSlider(1)">&#10095;</button>
-
-  <!-- Mensaje Inferior -->
-  <p class="bottom-message">{{ section.settings.bottom_message }}</p>
+  <span class="rating-value">{{ rating_val }}</span>
 </div>
-
 <style>
   /* Contenedor principal */
   .tiktok-slider-container {
