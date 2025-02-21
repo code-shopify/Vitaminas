@@ -88,31 +88,34 @@
 }
 {% endschema %}
 
-<div class="stars">
-  {% assign rating_val = section.settings.rating | plus: 0 %}
-  {% assign full_stars = rating_val | floor %}
-  {% assign fraction = rating_val | minus: full_stars %}
-  {% assign partial_percent = fraction | times: 100 %}
-  {% assign next_star = full_stars | plus: 1 %}
+<div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
+  <!-- Sección de calificación y título -->
+  <div class="tiktok-slider-header">
+    <div class="rating-reviews">
+      <div class="star-rating">
+        <div class="stars">
+          {% assign rating_val = section.settings.rating | plus: 0 %}
+          {% assign full_stars = rating_val | floor %}
+          {% assign fraction = rating_val | minus: full_stars %}
+          {% assign partial_percent = fraction | times: 100 %}
+          {% assign next_star = full_stars | plus: 1 %}
 
-  {% for i in (1..5) %}
-    {% if i <= full_stars %}
-      <!-- Estrella llena -->
-      <span class="star full">&#9733;</span>
-    {% elsif i == next_star %}
-      {% if fraction > 0 %}
-        <!-- Estrella parcial -->
-        <span class="star partial" style="--fill: {{ partial_percent }}%;">&#9733;</span>
-      {% else %}
-        <!-- Estrella vacía -->
-        <span class="star empty">&#9733;</span>
-      {% endif %}
-    {% else %}
-      <!-- Estrella vacía -->
-      <span class="star empty">&#9733;</span>
-    {% endif %}
-  {% endfor %}
-</div>
+          {% for i in (1..5) %}
+            {% if i <= full_stars %}
+              <span class="star full">&#9733;</span>
+            {% elsif i == next_star and fraction > 0 %}
+              <span class="star partial" style="--fill: {{ partial_percent }}%;">&#9733;</span>
+            {% else %}
+              <span class="star empty">&#9733;</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <span class="rating-value">{{ rating_val }}</span>
+      </div>
+      <span class="reviews">{{ section.settings.reviews }}</span>
+    </div>
+    <h2 class="slider-title">{{ section.settings.title }}</h2>
+  </div>
 
   <!-- Botón Izquierdo -->
   <button class="nav-button left-button" onclick="scrollSlider(-1)">&#10094;</button>
@@ -126,7 +129,7 @@
         {% if video_url contains "/video/" %}
           {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
           <div class="tiktok-slide">
-            <div class="video-container" data-video-id="{{ video_id }}">
+            <div class="video-container">
               <iframe class="tiktok-embed video-{{ i }}"
                 src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
                 frameborder="0"
@@ -150,50 +153,25 @@
 </div>
 
 <style>
-  .stars {
-    display: flex;
-    gap: 5px;
-  }
-  .star {
-    font-size: 24px;
-    color: #ccc;
-    display: inline-block;
-    position: relative;
-  }
-  .star.full {
-    color: #FFD700;
-  }
-  .star.partial {
-    position: relative;
-    display: inline-block;
-    overflow: hidden;
-    background: linear-gradient(90deg, #FFD700 var(--fill, 50%), #ccc var(--fill, 50%));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
   .tiktok-carousel {
-    overflow-x: scroll;
+    display: flex;
+    overflow-x: auto;
     scroll-behavior: smooth;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
   }
-  .tiktok-carousel::-webkit-scrollbar { display: none; }
-  .tiktok-slider { display: flex; gap: 8px; }
+  .tiktok-slider {
+    display: flex;
+    gap: 10px;
+  }
+  .tiktok-slide {
+    flex: 0 0 24%;
+    max-width: 24%;
+    aspect-ratio: 9 / 16;
+  }
   .nav-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    cursor: pointer;
   }
-  .left-button { left: 10px; }
-  .right-button { right: 10px; }
 </style>
 
 <script>
