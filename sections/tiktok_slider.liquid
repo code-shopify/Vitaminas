@@ -90,7 +90,7 @@
 
 <div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
   
-  <!-- Sección Superior: Calificación, Reseñas y Título -->
+  <!-- Encabezado: Calificación, Reseñas y Título -->
   <div class="tiktok-slider-header">
     <div class="rating-reviews">
       <div class="star-rating">
@@ -124,7 +124,7 @@
   <!-- Botón de navegación Izquierdo -->
   <button class="nav-button left-button" onclick="scrollSlider(-1)">&#10094;</button>
 
-  <!-- Carrusel Horizontal de TikToks -->
+  <!-- Carrusel Horizontal de TikToks sin marco -->
   <div class="tiktok-carousel">
     <div class="tiktok-slider">
       {% for i in (1..8) %}
@@ -133,7 +133,7 @@
         {% if video_url contains "/video/" %}
           {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
           <div class="tiktok-slide">
-            <div class="with-border video-container">
+            <div class="video-container">
               <!-- Iframe con autoplay=0 inicialmente -->
               <iframe class="tiktok-embed video-{{ i }}"
                 src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
@@ -227,12 +227,12 @@
 .tiktok-slider {
   display: flex;
   gap: 16px;
-  align-items: flex-start; /* Asegura que todas las tarjetas queden alineadas al tope */
+  align-items: flex-start;
 }
 
 /* Cada slide: ancho fijo para mostrar varias tarjetas en fila */
 .tiktok-slide {
-  flex: 0 0 240px; /* Ajusta el ancho a tu gusto */
+  flex: 0 0 240px;
   max-width: 240px;
   display: flex;
   flex-direction: column;
@@ -240,27 +240,16 @@
   position: relative;
 }
 
-/* Marco degradado alrededor del iframe */
-.with-border {
-  position: relative;
-  width: 100%;
-  padding: 2px;
-  border-radius: 15px;
-  border: 2px solid transparent;
-  background: linear-gradient(to bottom, #00ffff, #ff2d55);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
 /* Contenedor para el video, mantiene relación de aspecto 9:16 */
 .video-container {
   width: 100%;
   position: relative;
-  padding-top: 177.78%; /* (16 / 9) * 100% = 177.78% */
+  padding-top: 177.78%;
   border-radius: 15px;
   overflow: hidden;
 }
 
-/* Ajuste del iframe dentro del contenedor con posición absoluta */
+/* Ajuste del iframe dentro del contenedor */
 .video-container iframe {
   position: absolute;
   top: 0;
@@ -268,6 +257,7 @@
   width: 100%;
   height: 100%;
   border-radius: 15px;
+  border: none; /* Sin borde */
 }
 
 /* Estrellas */
@@ -341,7 +331,7 @@
   justify-content: center;
 }
 .pause-button {
-  display: none; /* Oculto por defecto */
+  display: none;
 }
 .hidden-button {
   opacity: 0;
@@ -357,7 +347,7 @@
 </style>
 
 {% javascript %}
-  // Controlador para manejar la reproducción de iframes
+  // Controlador para manejar la reproducción de iframes mediante recarga
   class VideoController {
     constructor() {
       if (VideoController.instance) return VideoController.instance;
@@ -368,15 +358,14 @@
     
     initEvents() {
       const slides = document.querySelectorAll(".tiktok-slide");
-      
       slides.forEach(slide => {
         const playBtn = slide.querySelector(".play-button");
         const pauseBtn = slide.querySelector(".pause-button");
         const iframe = slide.querySelector(".tiktok-embed");
         
-        // Al hacer clic en Play
+        // Al hacer clic en Play:
         playBtn.addEventListener("click", () => {
-          // 1) Pausar cualquier otro video en reproducción
+          // Pausar (recargar) otros videos
           document.querySelectorAll(".tiktok-embed").forEach(otherIframe => {
             if (otherIframe !== iframe) {
               const prevSrc = otherIframe.getAttribute("src");
@@ -385,22 +374,21 @@
               }
             }
           });
-
-          // 2) Iniciar reproducción del video actual
+          
+          // Iniciar reproducción recargando el iframe con autoplay=1
           const currentSrc = iframe.getAttribute("src");
           if (!currentSrc.includes("autoplay=1")) {
             iframe.setAttribute("src", currentSrc.replace("autoplay=0", "autoplay=1"));
           }
-
-          // 3) Actualizar botones
+          
+          // Actualizar botones
           playBtn.style.display = "none";
           pauseBtn.style.display = "flex";
           this.currentPlaying = iframe;
         });
         
-        // Al hacer clic en Pause
+        // Al hacer clic en Pause:
         pauseBtn.addEventListener("click", () => {
-          // Pausar el video actual
           const currentSrc = iframe.getAttribute("src");
           iframe.setAttribute("src", currentSrc.replace("autoplay=1", "autoplay=0"));
           
@@ -422,13 +410,10 @@
       const container = document.querySelector(".tiktok-carousel");
       const slide = container.querySelector(".tiktok-slide");
       if (slide) {
-        // Ancho de cada slide + gap
+        // Ancho de cada slide + espacio (gap)
         const slideWidth = slide.offsetWidth + 16;
-        // Desplaza la vista a la izq o der según 'direction'
         container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
       }
     };
   });
 {% endjavascript %}
-
-
