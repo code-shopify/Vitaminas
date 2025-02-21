@@ -231,51 +231,46 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  
-  // 🔄 Función para actualizar los iframes y detener videos en reproducción
-  function stopOtherVideos(exceptContainer) {
-    document.querySelectorAll(".video-container").forEach(function(container) {
-      if (container !== exceptContainer) {
-        const iframe = container.querySelector("iframe.tiktok-embed");
+  const iframes = document.querySelectorAll(".tiktok-embed");
+
+  // Función para detener otros videos
+  function stopOtherVideos(exceptIframe) {
+    iframes.forEach((iframe) => {
+      if (iframe !== exceptIframe) {
+        // Bloquear la reproducción al cambiar el iframe a "autoplay=0"
         let src = iframe.getAttribute("src");
-
-        // 🔄 Resetear el `src` para forzar la pausa del video
-        iframe.setAttribute("src", "");
-        iframe.setAttribute("src", src.replace("autoplay=1", "autoplay=0"));
-
-        // 🔄 Mostrar el overlay nuevamente
-        const overlay = container.querySelector(".video-overlay");
-        if (overlay) {
-          overlay.style.display = "block";
+        if (src.includes("autoplay=1")) {
+          iframe.setAttribute("src", src.replace("autoplay=1", "autoplay=0"));
         }
       }
     });
   }
 
-  // 🎬 Manejar el clic en el overlay para reproducir videos
-  document.querySelectorAll(".video-overlay").forEach(function(overlay) {
-    overlay.addEventListener("click", function(event) {
+  // Agregamos eventos a los overlays para iniciar los videos
+  document.querySelectorAll(".video-overlay").forEach((overlay) => {
+    overlay.addEventListener("click", function (event) {
       event.preventDefault();
-      
+
+      // Obtener el iframe asociado al overlay
       const videoContainer = overlay.closest(".video-container");
       const iframe = videoContainer.querySelector("iframe.tiktok-embed");
-      let src = iframe.getAttribute("src");
 
-      // 🔄 Si el video no está reproduciéndose, activa autoplay
+      // Modificar `src` para iniciar reproducción si no está en autoplay
+      let src = iframe.getAttribute("src");
       if (!src.includes("autoplay=1")) {
         iframe.setAttribute("src", src.replace("autoplay=0", "autoplay=1"));
       }
 
-      // 🚀 Ocultar el overlay solo del video que se activó
+      // Ocultar el overlay del video en reproducción
       overlay.style.display = "none";
 
-      // 🚀 Detener otros videos en reproducción
-      stopOtherVideos(videoContainer);
+      // Pausar otros videos
+      stopOtherVideos(iframe);
     });
   });
-
 });
 </script>
+
 
 
 
