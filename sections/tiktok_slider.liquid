@@ -231,59 +231,55 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const iframes = document.querySelectorAll(".tiktok-embed");
-  let lastPlayedIframe = null;
-  let isFirstPlay = true; // Nueva bandera para identificar el primer click
+  let currentPlayingVideo = null;
+  let isInitialPlay = true;
 
-  // 🔄 Función mejorada para reiniciar video anterior
-  function stopLastVideo() {
-    if (lastPlayedIframe) {
-      const videoContainer = lastPlayedIframe.closest(".video-container");
-      const overlay = videoContainer.querySelector(".video-overlay");
+  // 🛑 Función para detener y resetear video anterior
+  const resetPreviousVideo = () => {
+    if (currentPlayingVideo) {
+      const videoContainer = currentPlayingVideo.closest('.video-container');
+      const overlay = videoContainer.querySelector('.video-overlay');
       
-      // Reiniciar src del iframe para forzar recarga
-      const originalSrc = lastPlayedIframe.getAttribute("src").replace("autoplay=1", "autoplay=0");
-      lastPlayedIframe.setAttribute("src", originalSrc);
+      // Resetear iframe completamente
+      const originalSrc = currentPlayingVideo.src.replace("autoplay=1", "autoplay=0");
+      currentPlayingVideo.src = originalSrc;
       
-      // Mostrar overlay nuevamente
-      overlay.style.display = "block";
+      // Restaurar overlay
+      overlay.style.display = 'block';
     }
-  }
+  };
 
-  // 🎬 Manejo de clics ajustado
-  document.querySelectorAll(".video-overlay").forEach((overlay) => {
-    overlay.addEventListener("click", function (event) {
-      event.preventDefault();
-      const videoContainer = this.closest(".video-container");
-      const iframe = videoContainer.querySelector("iframe.tiktok-embed");
+  // ▶️ Controlador de clic para overlays
+  document.querySelectorAll('.video-overlay').forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      const videoContainer = e.currentTarget.closest('.video-container');
+      const iframe = videoContainer.querySelector('iframe');
+      
+      // Evitar acción si es el mismo video
+      if (iframe === currentPlayingVideo) return;
 
-      // Si es el mismo video, no hacer nada
-      if (iframe === lastPlayedIframe) return;
-
-      // Si NO es el primer click, detener video anterior
-      if (!isFirstPlay) {
-        stopLastVideo();
+      // Manejar primer click diferente
+      if (!isInitialPlay) {
+        resetPreviousVideo();
       } else {
-        isFirstPlay = false;
+        isInitialPlay = false;
       }
 
-      // Reproducir nuevo video
-      const newSrc = iframe.getAttribute("src").replace("autoplay=0", "autoplay=1");
-      iframe.setAttribute("src", newSrc);
-      this.style.display = "none";
-      lastPlayedIframe = iframe;
+      // Iniciar nuevo video
+      iframe.src = iframe.src.replace("autoplay=0", "autoplay=1");
+      e.currentTarget.style.display = 'none';
+      currentPlayingVideo = iframe;
     });
   });
 
-  // 🔄 Función de scroll se mantiene igual
-  window.scrollSlider = function(direction) {
-    const container = document.querySelector(".tiktok-carousel");
-    const slide = container.querySelector(".tiktok-slide");
-    if (slide) {
-      const slideWidth = slide.offsetWidth + 8;
-      container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
-    }
+  // 🎚️ Función de scroll mejorada
+  window.scrollSlider = (direction) => {
+    const carousel = document.querySelector('.tiktok-carousel');
+    const slideWidth = carousel.querySelector('.tiktok-slide').offsetWidth + 8;
+    carousel.scrollBy({
+      left: slideWidth * direction,
+      behavior: 'smooth'
+    });
   };
 });
 </script>
-
