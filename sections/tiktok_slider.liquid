@@ -153,62 +153,95 @@
 </div>
 
 <style>
+  .tiktok-slider-container {
+    text-align: center;
+    padding: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+  
+  .tiktok-slider-header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .rating-reviews {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .star {
+    font-size: 20px;
+    color: #ccc;
+  }
+
+  .star.full {
+    color: #FFD700;
+  }
+
   .tiktok-carousel {
     display: flex;
     overflow-x: auto;
     scroll-behavior: smooth;
+    gap: 10px;
+    padding: 20px 0;
   }
+
   .tiktok-slider {
     display: flex;
     gap: 10px;
   }
+
   .tiktok-slide {
-    flex: 0 0 24%;
-    max-width: 24%;
+    flex: 0 0 23%;
+    max-width: 23%;
     aspect-ratio: 9 / 16;
+    border-radius: 10px;
+    overflow: hidden;
   }
+
   .nav-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  .left-button {
+    left: -20px;
+  }
+
+  .right-button {
+    right: -20px;
+  }
+
+  .bottom-message {
+    font-size: 14px;
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
   }
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const iframes = document.querySelectorAll(".tiktok-embed");
-  let lastPlayedIframe = null;
-
-  function stopLastVideo() {
-    if (lastPlayedIframe) {
-      let src = lastPlayedIframe.getAttribute("src");
-      if (src.includes("autoplay=1")) {
-        lastPlayedIframe.setAttribute("src", src.replace("autoplay=1", "autoplay=0"));
-      }
-    }
-  }
-
-  document.querySelectorAll(".video-overlay").forEach((overlay) => {
-    overlay.addEventListener("click", function (event) {
-      event.preventDefault();
-
-      const videoContainer = overlay.closest(".video-container");
-      const iframe = videoContainer.querySelector("iframe.tiktok-embed");
-
-      if (iframe === lastPlayedIframe) return;
-
-      stopLastVideo();
-      let src = iframe.getAttribute("src");
-      iframe.setAttribute("src", src.replace("autoplay=0", "autoplay=1"));
-
-      overlay.style.display = "none";
-      lastPlayedIframe = iframe;
-    });
-  });
-
   window.scrollSlider = function(direction) {
     document.querySelector(".tiktok-carousel").scrollBy({ left: 300 * direction, behavior: "smooth" });
   };
 });
 </script>
-
