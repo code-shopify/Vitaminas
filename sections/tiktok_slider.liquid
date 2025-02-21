@@ -116,75 +116,40 @@
   </div>
   <span class="rating-value">{{ rating_val }}</span>
 </div>
+
 <style>
-  /* Contenedor principal */
-  .tiktok-slider-container {
-    text-align: center;
-    padding: 60px 20px;
-    border-radius: 10px;
-    position: relative;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .tiktok-slider-header { margin-bottom: 40px; }
-  .rating-reviews { display: flex; align-items: center; justify-content: center; gap: 15px; font-size: 14px; margin-bottom: 10px; }
-  .star-rating { display: flex; align-items: center; gap: 8px; }
-  .stars { display: flex; gap: 2px; }
-  .rating-value { font-weight: bold; color: #333; }
-  .reviews { color: #999; }
-  .slider-title { font-size: 32px; font-weight: 700; margin: 0; }
-  .tiktok-carousel {
-    overflow-x: scroll;
-    scroll-behavior: smooth;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .tiktok-carousel::-webkit-scrollbar { display: none; }
-  .tiktok-slider { display: flex; gap: 8px; }
-  .tiktok-slide {
-    flex: 0 0 calc(100% / 4.5);
-    max-width: calc(100% / 4.5);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-  }
-  .video-container { position: relative; }
-  .video-overlay {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    cursor: pointer;
-    z-index: 5;
-    background: transparent;
-  }
-  .tiktok-embed {
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-    aspect-ratio: 9 / 16;
-    object-fit: cover;
-  }
-  .nav-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.6);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10;
-  }
-  .left-button { left: 10px; }
-  .right-button { right: 10px; }
-  .bottom-message { margin-top: 40px; font-size: 14px; color: #666; }
+.star-rating .stars {
+  display: flex;
+  position: relative;
+}
+
+.star {
+  color: #e0e0e0; /* Color base para estrellas vacías */
+  font-size: 24px;
+  position: relative;
+}
+
+.star.full {
+  color: #ffd700; /* Color para estrellas completas */
+}
+
+.partial-star-container {
+  position: relative;
+  display: inline-block;
+}
+
+.partial-background {
+  color: #e0e0e0; /* Fondo gris para la parte no llena */
+}
+
+.partial-fill {
+  color: #ffd700; /* Color dorado para la parte llena */
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
 </style>
 
 
