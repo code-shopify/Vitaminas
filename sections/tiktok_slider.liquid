@@ -141,6 +141,7 @@
                 frameborder="0"
                 allow="autoplay; fullscreen; picture-in-picture"
                 scrolling="no"
+                onclick="reproducirVideo(this)"
                 data-video>
               </iframe>
             </div>
@@ -326,6 +327,20 @@
 </style>
 
 <script>
+let videoActual = null; // Variable global para mantener referencia al video actual
+
+function reproducirVideo(videoElement) {
+    // Si hay un video reproduciéndose, lo pausamos
+    if (videoActual && videoActual !== videoElement) {
+        videoActual.pause();
+    }
+    
+    // Reproducimos el nuevo video
+    videoElement.play();
+    
+    // Actualizamos la referencia al video actual
+    videoActual = videoElement;
+}
 document.addEventListener("DOMContentLoaded", function () {
   // Selecciona el contenedor scrollable (.tiktok-carousel)
   window.scrollSlider = function(direction) {
@@ -357,4 +372,3 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 </script>
-
