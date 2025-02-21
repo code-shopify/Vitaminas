@@ -92,7 +92,6 @@
   
   <!-- Sección Superior -->
   <div class="tiktok-slider-header">
-    <!-- Calificación y Reseñas -->
     <div class="rating-reviews">
       <div class="star-rating">
         <div class="stars">
@@ -135,7 +134,6 @@
         {% if video_url contains "/video/" %}
           {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
           <div class="tiktok-slide">
-            <!-- Se elimina la clase "with-border" para quitar el marco -->
             <div class="video-container">
               <iframe class="tiktok-embed video-{{ i }}"
                 src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
@@ -144,6 +142,8 @@
                 scrolling="no"
                 data-video>
               </iframe>
+              <!-- Overlay para capturar el clic y activar la reproducción -->
+              <div class="video-overlay"></div>
             </div>
           </div>
         {% endif %}
@@ -156,7 +156,6 @@
 
   <!-- Mensaje Inferior -->
   <p class="bottom-message">{{ section.settings.bottom_message }}</p>
-
 </div>
 
 <style>
@@ -185,31 +184,26 @@
   margin-bottom: 10px;
 }
 
-/* Agrupa estrellas y calificación numérica */
 .star-rating {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-/* Contenedor de estrellas */
 .stars {
   display: flex;
   gap: 2px;
 }
 
-/* Calificación numérica */
 .rating-value {
   font-weight: bold;
   color: #333;
 }
 
-/* Reseñas */
 .reviews {
   color: #999;
 }
 
-/* Título principal */
 .slider-title {
   font-size: 32px;
   font-weight: 700;
@@ -220,20 +214,18 @@
 .tiktok-carousel {
   overflow-x: scroll;
   scroll-behavior: smooth;
-  -ms-overflow-style: none;  /* IE y Edge */
-  scrollbar-width: none;     /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .tiktok-carousel::-webkit-scrollbar {
   display: none;
 }
 
-/* Contenedor interno de slides */
 .tiktok-slider {
   display: flex;
   gap: 8px;
 }
 
-/* Cada slide: se muestran 4.5 en pantalla */
 .tiktok-slide {
   flex: 0 0 calc(100% / 4.5);
   max-width: calc(100% / 4.5);
@@ -243,7 +235,21 @@
   position: relative;
 }
 
-/* Se eliminó el estilo del marco previamente aplicado a ".with-border" */
+/* La clase video-container se posiciona para que el overlay cubra al iframe */
+.video-container {
+  position: relative;
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  z-index: 5;
+  background: transparent;
+}
 
 /* Ajuste del TikTok */
 .tiktok-embed {
@@ -308,7 +314,6 @@
   right: 10px;
 }
 
-/* Mensaje inferior */
 .bottom-message {
   margin-top: 40px;
   font-size: 14px;
@@ -323,41 +328,52 @@ document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector(".tiktok-carousel");
     const slide = container.querySelector(".tiktok-slide");
     if (slide) {
-      // Se incluye el gap (8px) al ancho de la slide
-      const slideWidth = slide.offsetWidth + 8;
+      const slideWidth = slide.offsetWidth + 8; // Incluye el gap
       container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
     }
   };
 
-  // Al hacer clic en un contenedor de video, se reinician todos los demás
-  const videoContainers = document.querySelectorAll(".video-container");
-  
-  videoContainers.forEach(container => {
-    container.addEventListener("click", function(e) {
+  // Se asigna el evento al overlay para capturar el clic (ya que el iframe no propaga clicks)
+  const overlays = document.querySelectorAll(".video-overlay");
+  overlays.forEach(function(overlay) {
+    overlay.addEventListener("click", function(e) {
       e.preventDefault();
-      const clickedIframe = container.querySelector(".tiktok-embed");
-      
-      // Recorre todos los iframes y para aquellos que NO sean el clicado:
-      document.querySelectorAll(".video-container .tiktok-embed").forEach(iframe => {
-        if (iframe !== clickedIframe) {
-          let src = iframe.getAttribute("src");
-          if (src.indexOf("autoplay=1") !== -1) {
-            iframe.setAttribute("src", src.replace("autoplay=1", "autoplay=0"));
+      // Obtiene el contenedor y el iframe clicado
+      const container = overlay.closest(".video-container");
+      const clickedIframe = container.querySelector("iframe.tiktok-embed");
+
+      // Activa autoplay en el iframe clicado (cambiando autoplay=0 por autoplay=1)
+      let clickedSrc = clickedIframe.getAttribute("src");
+      if (!clickedSrc.includes("autoplay=1")) {
+        clickedIframe.setAttribute("src", clickedSrc.replace("autoplay=0", "autoplay=1"));
+      }
+
+      // Oculta el overlay del video clicado para permitir interacción posterior
+      overlay.style.display = "none";
+
+      // Para cada otro contenedor de video, se fuerza la recarga (autoplay=0)
+      const allContainers = document.querySelectorAll(".video-container");
+      allContainers.forEach(function(otherContainer) {
+        if (otherContainer !== container) {
+          const otherIframe = otherContainer.querySelector("iframe.tiktok-embed");
+          let otherSrc = otherIframe.getAttribute("src");
+          if (otherSrc.includes("autoplay=1")) {
+            otherIframe.setAttribute("src", otherSrc.replace("autoplay=1", "autoplay=0"));
+          } else {
+            // Opcional: reasigna el src para forzar la recarga
+            otherIframe.setAttribute("src", otherSrc);
+          }
+          // Asegura que el overlay en los otros videos esté visible
+          const otherOverlay = otherContainer.querySelector(".video-overlay");
+          if (otherOverlay) {
+            otherOverlay.style.display = "block";
           }
         }
       });
-      
-      // Activa autoplay en el iframe clicado si aún no lo tiene
-      let currentSrc = clickedIframe.getAttribute("src");
-      if (currentSrc.indexOf("autoplay=1") === -1) {
-        clickedIframe.setAttribute("src", currentSrc.replace("autoplay=0", "autoplay=1"));
-      }
     });
   });
 });
 </script>
-
-
 
 
 
