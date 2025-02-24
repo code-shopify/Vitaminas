@@ -95,14 +95,16 @@
       {% assign rating_val = section.settings.rating | plus: 0 %}
       {% assign full_stars = rating_val | floor %}
       {% assign fraction = rating_val | minus: full_stars %}
-      {% assign partial_percent = fraction | times: 100 %}
       {% assign next_star = full_stars | plus: 1 %}
       
       {% for star in (1..5) %}
         {% if star <= full_stars %}
           <span class="star full">★</span>
         {% elsif star == next_star and fraction > 0 %}
-          <span class="star partial" style="background: linear-gradient(90deg, gold {{ partial_percent }}%, #ccc {{ partial_percent }}%);">★</span>
+          <span class="star partial">
+            <span class="half-star" style="width: {{ fraction | times: 100 }}%;">★</span>
+            <span class="empty-star">★</span>
+          </span>
         {% else %}
           <span class="star empty">★</span>
         {% endif %}
@@ -152,15 +154,25 @@
 .star {
   font-size: 20px;
   color: #ccc;
+  position: relative;
 }
 .star.full {
   color: gold;
 }
 .star.partial {
-  background-clip: text;
-  color: transparent;
+  position: relative;
+  display: inline-block;
 }
-.star.empty {
+.half-star {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  color: gold;
+  display: inline-block;
+}
+.empty-star {
+  display: inline-block;
   color: #ccc;
 }
 
