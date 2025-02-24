@@ -51,7 +51,7 @@
 <div class="container-fluid py-5" style="background-color: {{ section.settings.background_color }};">
   <div class="container text-center">
     
-    <!-- Estrellas y título -->
+    <!-- ⭐ Estrellas y título -->
     <div class="tiktok-slider-header">
       <div class="rating-reviews d-flex justify-content-center align-items-center">
         <div class="star-rating d-flex align-items-center">
@@ -74,7 +74,7 @@
       <h2 class="slider-title mt-3">{{ section.settings.title }}</h2>
     </div>
 
-    <!-- Slider -->
+    <!-- 🎥 Slider -->
     <div class="slider-wrapper">
       <button class="slider-btn left-btn" onclick="scrollSlider(-1)">◀</button>
       <div class="slider-container">
@@ -101,14 +101,14 @@
       <button class="slider-btn right-btn" onclick="scrollSlider(1)">▶</button>
     </div>
 
-    <!-- Mensaje inferior -->
+    <!-- 📢 Mensaje inferior -->
     <p class="bottom-message mt-4">{{ section.settings.bottom_message }}</p>
 
   </div>
 </div>
 
 <style>
-/* Estilos del slider */
+/* 🌟 Estilos del slider */
 .slider-wrapper {
   display: flex;
   align-items: center;
@@ -127,10 +127,10 @@
   transition: transform 0.5s ease;
 }
 
-/* Tamaño y ajuste de los videos */
+/* 📱 Tamaño y ajuste de los videos */
 .slide {
   flex: 0 0 auto;
-  width: 300px;
+  width: 250px;
   margin: 0 10px;
 }
 
@@ -152,9 +152,9 @@
   border-radius: 15px;
 }
 
-/* Botones de navegación */
+/* 🎛️ Botones de navegación */
 .slider-btn {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
   color: black;
   border: none;
   border-radius: 50%;
@@ -185,7 +185,7 @@
   background: rgba(255, 255, 255, 1);
 }
 
-/* Estilos de estrellas */
+/* ⭐ Estilos de estrellas */
 .star-rating {
   display: flex;
   align-items: center;
@@ -222,7 +222,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     let position = 0;
     const slides = document.querySelector(".slider");
-    const slideWidth = 320;
+    const slideWidth = 270;
     const maxPosition = slideWidth * (slides.children.length - 5);
   
     window.scrollSlider = function(direction) {
@@ -232,5 +232,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 });
 </script>
+
 
 
