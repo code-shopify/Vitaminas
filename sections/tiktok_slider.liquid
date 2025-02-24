@@ -159,27 +159,28 @@
 </div>
 
 {% style %}
-  /* Contenedor principal */
+/* Contenedor principal */
 .tiktok-slider-container {
   text-align: center;
   padding: 60px 20px;
   border-radius: 10px;
   position: relative;
- 
   margin: 0 auto;
 }
 
-/* Carrusel: permite desplazamiento horizontal */
+/* Carrusel */
 .tiktok-carousel {
-  width: 160rem; /* Reducimos el ancho total */
+  width: clamp(100%, 120rem, 95vw); /* Ajuste dinámico */
   overflow-x: auto;
   scroll-behavior: smooth;
-  -ms-overflow-style: none; /* IE y Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   display: flex;
-  justify-content: center; /* Mantiene el contenido alineado */
-  margin: auto; /* Centra el carrusel */
-  padding: 10px 0; /* Añadimos un pequeño espacio arriba y abajo */
+  justify-content: center;
+  align-items: center;
+  position: relative; /* Asegura que los botones se ubiquen correctamente */
+  margin: auto;
+  padding: 10px 40px; /* Espaciado extra para botones */
 }
 
 .tiktok-carousel::-webkit-scrollbar {
@@ -189,13 +190,14 @@
 /* Contenedor de slides */
 .tiktok-slider {
   display: flex;
-  gap: 8px;
-  justify-content: center; /* Mantiene los videos alineados */
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Ajuste de cada slide */
 .tiktok-slide {
-  flex: 0 0 min(22%, calc(100% / 4.2)); /* Se adapta mejor a diferentes pantallas */
+  flex: 0 0 calc(100% / 3.5); /* Aumentamos el tamaño */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -205,43 +207,14 @@
 
 /* Ajuste del iframe de TikTok */
 .tiktok-embed {
-  width: 28rem; /* Reducimos el tamaño en escritorio */
+  width: 32rem; /* Aumentamos el tamaño */
   height: 100%;
   border-radius: 15px;
   aspect-ratio: 9 / 16;
   object-fit: cover;
 }
 
-/* Estrellas */
-.star {
-  font-size: 16px;
-  line-height: 1;
-}
-
-.star.full {
-  color: gold;
-}
-
-.star.empty {
-  color: #ccc;
-}
-
-.star.partial {
-  position: relative;
-  display: inline-block;
-  color: #ccc;
-}
-.star.partial::before {
-  content: "★";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: var(--fill);
-  overflow: hidden;
-  color: gold;
-}
-
-/* Botones de navegación */
+/* Botones de navegación dentro del carrusel */
 .nav-button {
   position: absolute;
   top: 50%;
@@ -250,45 +223,46 @@
   color: white;
   border: none;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
+  width: 45px;
+  height: 45px;
+  font-size: 22px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 10;
 }
+
 .left-button {
-  left: 10px;
+  left: 0; /* Se alinean dentro del carrusel */
 }
+
 .right-button {
-  right: 10px;
+  right: 0;
 }
 
 /* Ajustes Responsivos */
 @media (max-width: 1024px) {
   .tiktok-slide {
-    flex: 0 0 calc(90% / 3); /* En tabletas mostramos 3 videos */
-    max-width: calc(90% / 3);
+    flex: 0 0 calc(100% / 2.8); /* Ajustamos para tablets */
   }
   .tiktok-embed {
-    width: 20rem; /* Reducimos más el tamaño */
+    width: 26rem; /* Reducimos el tamaño */
   }
 }
 
 @media (max-width: 768px) {
   .tiktok-slide {
-    flex: 0 0 calc(90% / 2.5); /* En móviles mostramos 2.5 videos */
-    max-width: calc(90% / 2.5);
+    flex: 0 0 calc(100% / 2); /* En móviles mostramos 2 videos */
   }
   .tiktok-embed {
-    width: 15rem; /* Reducimos tamaño en móviles */
+    width: 18rem; /* Reducimos tamaño en móviles */
   }
   .nav-button {
     display: none; /* Ocultamos los botones en móviles */
   }
 }
+
 {% endstyle %}
 
 <script>
