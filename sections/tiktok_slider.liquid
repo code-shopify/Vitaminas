@@ -67,6 +67,16 @@
       "type": "url",
       "id": "video_6",
       "label": "TikTok Video 6"
+    },
+    {
+      "type": "url",
+      "id": "video_7",
+      "label": "TikTok Video 7"
+    },
+    {
+      "type": "url",
+      "id": "video_8",
+      "label": "TikTok Video 8"
     }
   ],
   "presets": [
@@ -108,11 +118,17 @@
       <h2 class="slider-title mt-3">{{ section.settings.title }}</h2>
     </div>
 
+    <!-- Botones de navegación (solo en móviles y tabletas) -->
+    <div class="d-flex justify-content-between d-md-none mt-3">
+      <button class="btn btn-dark" onclick="scrollSlider(-1)">◀</button>
+      <button class="btn btn-dark" onclick="scrollSlider(1)">▶</button>
+    </div>
+
     <!-- Carrusel de TikTok -->
     <div class="row justify-content-center mt-4">
       <div class="col-12">
         <div class="d-flex overflow-auto tiktok-carousel">
-          {% for i in (1..6) %}
+          {% for i in (1..8) %}
             {% capture video_var %}video_{{ i }}{% endcapture %}
             {% assign video_url = section.settings[video_var] %}
             {% if video_url contains "/video/" %}
@@ -140,7 +156,31 @@
 </div>
 
 <style>
-/* Estrellas */
+/* Ajuste del tamaño correcto del video */
+.tiktok-slide {
+  flex: 0 0 auto;
+  width: 250px; /* Ajusta el ancho según el formato 9:16 */
+}
+
+/* Mantener el aspecto 9:16 con bordes visibles */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 177.77%;
+  border-radius: 15px; /* Bordes visibles */
+  overflow: hidden;
+}
+
+/* Ajustar el iframe correctamente */
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Ajustes de las estrellas */
 .star {
   font-size: 20px;
 }
@@ -168,76 +208,19 @@
   overflow: hidden;
   color: gold;
 }
-
-/* Ajustes del slider */
-.tiktok-carousel {
-  scroll-behavior: smooth;
-  white-space: nowrap;
-  display: flex;
-  gap: 15px;
-  padding-bottom: 10px;
-}
-
-.tiktok-slide {
-  flex: 0 0 auto;
-  width: 200px;
-}
-
-/* Ajustar videos */
-.video-container {
-  position: relative;
-  width: 100%;
-  padding-top: 177.77%;
-}
-
-.video-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-
-/* Mensaje inferior */
-.bottom-message {
-  font-size: 14px;
-  color: #666;
-}
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-    class VideoController {
-        constructor() {
-            if (VideoController.instance) {
-                return VideoController.instance;
+    function scrollSlider(direction) {
+        const container = document.querySelector(".tiktok-carousel");
+        if (container) {
+            const slide = container.querySelector(".tiktok-slide");
+            if (slide) {
+                const slideWidth = slide.offsetWidth + 15; // Se ajusta con margen
+                container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
             }
-            VideoController.instance = this;
-            this.currentPlaying = null;
-            this.inicializarEventos();
-        }
-
-        inicializarEventos() {
-            const videoContainers = document.querySelectorAll(".video-container");
-            videoContainers.forEach((container) => {
-                container.addEventListener("click", (e) => {
-                    e.preventDefault();
-                    this.manejarReproduccion(container);
-                });
-            });
-        }
-
-        manejarReproduccion(container) {
-            const iframe = container.querySelector(".tiktok-embed");
-            if (this.currentPlaying && this.currentPlaying !== iframe) {
-                const prevSrc = this.currentPlaying.getAttribute("src");
-                this.currentPlaying.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
-            }
-            iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
-            this.currentPlaying = iframe;
         }
     }
-
-    new VideoController();
 });
 </script>
