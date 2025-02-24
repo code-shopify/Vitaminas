@@ -78,111 +78,127 @@
 }
 {% endschema %}
 
-<div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
-  
-  <!-- Sección de estrellas y título -->
-  <div class="tiktok-slider-header">
-    <div class="rating-reviews">
-      <div class="star-rating">
-        <div class="stars">
-          {% assign rating_val = section.settings.rating | plus: 0 %}
-          {% assign full_stars = rating_val | floor %}
-          {% assign fraction = rating_val | minus: full_stars %}
-          {% assign partial_percent = fraction | times: 100 %}
-          {% assign next_star = full_stars | plus: 1 %}
-          {% for star in (1..5) %}
-            {% if star <= full_stars %}
-              <span class="star full">&#9733;</span>
-            {% elsif star == next_star and fraction > 0 %}
-              <span class="star partial" style="--fill: {{ partial_percent }}%;">&#9733;</span>
-            {% else %}
-              <span class="star empty">&#9733;</span>
-            {% endif %}
-          {% endfor %}
-        </div>
-        <span class="rating-value">{{ rating_val }}</span>
-      </div>
-      <span class="reviews">{{ section.settings.reviews }}</span>
-    </div>
-    <h2 class="slider-title">{{ section.settings.title }}</h2>
-  </div>
-
-  <!-- Carrusel de TikTok -->
-  <div class="tiktok-carousel">
-    <div class="tiktok-slider">
-      {% for i in (1..6) %}
-        {% capture video_var %}video_{{ i }}{% endcapture %}
-        {% assign video_url = section.settings[video_var] %}
-        {% if video_url contains "/video/" %}
-          {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
-          <div class="tiktok-slide">
-            <div class="video-container">
-              <iframe class="tiktok-embed"
-                src="https://www.tiktok.com/embed/{{ video_id }}?autoplay=0"
-                frameborder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                scrolling="no">
-              </iframe>
-            </div>
+<div class="tiktok-slider-wrapper">
+  <div class="tiktok-slider-container">
+    
+    <!-- Sección de estrellas y título -->
+    <div class="tiktok-slider-header">
+      <div class="rating-reviews">
+        <div class="star-rating">
+          <div class="stars">
+            {% assign rating_val = section.settings.rating | plus: 0 %}
+            {% assign full_stars = rating_val | floor %}
+            {% assign fraction = rating_val | minus: full_stars %}
+            {% assign partial_percent = fraction | times: 100 %}
+            {% assign next_star = full_stars | plus: 1 %}
+            {% for star in (1..5) %}
+              {% if star <= full_stars %}
+                <span class="star full">&#9733;</span>
+              {% elsif star == next_star and fraction > 0 %}
+                <span class="star partial" style="--fill: {{ partial_percent }}%;">&#9733;</span>
+              {% else %}
+                <span class="star empty">&#9733;</span>
+              {% endif %}
+            {% endfor %}
           </div>
-        {% endif %}
-      {% endfor %}
+          <span class="rating-value">{{ rating_val }}</span>
+        </div>
+        <span class="reviews">{{ section.settings.reviews }}</span>
+      </div>
+      <h2 class="slider-title">{{ section.settings.title }}</h2>
     </div>
+
+    <!-- Carrusel de TikTok -->
+    <div class="tiktok-carousel">
+      <div class="tiktok-slider">
+        {% for i in (1..6) %}
+          {% capture video_var %}video_{{ i }}{% endcapture %}
+          {% assign video_url = section.settings[video_var] %}
+          {% if video_url contains "/video/" %}
+            {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
+            <div class="tiktok-slide">
+              <div class="video-container">
+                <iframe class="tiktok-embed"
+                  src="https://www.tiktok.com/embed/{{ video_id }}?autoplay=0"
+                  frameborder="0"
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  scrolling="no">
+                </iframe>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Mensaje inferior -->
+    <p class="bottom-message">{{ section.settings.bottom_message }}</p>
+
   </div>
-
-  <!-- Mensaje inferior -->
-  <p class="bottom-message">{{ section.settings.bottom_message }}</p>
-
 </div>
 
 <style>
-/* Contenedor principal */
+/* Extender el contenedor al 100% del ancho */
+.tiktok-slider-wrapper {
+  width: 100vw;
+  background-color: {{ section.settings.background_color }};
+  padding: 50px 0;
+}
+
+/* Contenedor interno */
 .tiktok-slider-container {
-  text-align: center;
-  padding: 60px 20px;
-  border-radius: 10px;
-  position: relative;
-  max-width: 90%;
+  max-width: 1200px;
   margin: 0 auto;
+  text-align: center;
 }
 
 /* Carrusel */
 .tiktok-carousel {
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-  white-space: nowrap;
   display: flex;
+  overflow-x: auto;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
+  padding: 20px 0;
+  scroll-behavior: smooth;
 }
 
-.tiktok-slider {
-  display: flex;
-  gap: 10px;
-}
-
-/* Videos */
+/* Ajuste del tamaño de los videos */
 .tiktok-slide {
   flex: 0 0 auto;
-  width: 20%;
+  width: 18%;
   max-width: 220px;
 }
 
-/* Ajuste para pantallas grandes */
-@media (min-width: 1200px) {
+/* Mantener aspecto 9:16 */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 177.77%;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Adaptación para pantallas grandes */
+@media (min-width: 1600px) {
   .tiktok-slide {
-    width: 18%;
+    width: 15%;
   }
 }
 
-/* Ajuste para tabletas */
+/* Adaptación a tabletas */
 @media (max-width: 1024px) {
   .tiktok-slide {
     width: 30%;
   }
 }
 
-/* Ajuste para móviles */
+/* Adaptación a móviles */
 @media (max-width: 767px) {
   .tiktok-slide {
     width: 60%;
@@ -220,7 +236,7 @@
 
 /* Espaciado entre slider y texto inferior */
 .bottom-message {
-  margin-top: 40px;
+  margin-top: 50px;
   font-size: 14px;
   color: #666;
   padding-bottom: 30px;
