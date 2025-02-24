@@ -197,7 +197,7 @@
       "settings": {
         "header": "Calidad en cada ingrediente, diseñados pensando en ti.",
         "banner": "shopify://shop_images/5986c8f1a17c584df3afc44725981a64.png",
-        "background_box": "#ffbf80",
+        "background_box": "#e5d4c9",
         "background_section": "#ffbf80",
         "box_1": "Ingredientes con patentes",
         "box_content": "patente Quatrefolic (de folato)",
@@ -215,22 +215,7 @@
     },
     "tiktok_slider_wHCVUD": {
       "type": "tiktok_slider",
-      "settings": {
-        "rating": "3.5",
-        "reviews": "1,450 reviews",
-        "title": "Opiniones de Vitaminas",
-        "bottom_message": "*EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIÉN LO RECOMIENDA Y DE QUIÉN LO USA, ESTE PRODUCTO NO ES UN MEDICAMENTO*",
-        "background_color": "#fef8f0",
-        "text_color": "#333333",
-        "video_1": "https://www.tiktok.com/@ayharchive/video/7435638325232307498?is_from_webapp=1&sender_device=pc&web_id=7473579874578794039",
-        "video_2": "https://www.tiktok.com/@ayharchive/video/7435638325232307498?is_from_webapp=1&sender_device=pc&web_id=7473579874578794039",
-        "video_3": "https://www.tiktok.com/@ayharchive/video/7435638325232307498?is_from_webapp=1&sender_device=pc&web_id=7473579874578794039",
-        "video_4": "https://www.tiktok.com/@ayharchive/video/7435638325232307498?is_from_webapp=1&sender_device=pc&web_id=7473579874578794039",
-        "video_5": "https://www.tiktok.com/@ayharchive/video/7435638325232307498?is_from_webapp=1&sender_device=pc&web_id=7473579874578794039",
-        "video_6": "https://www.tiktok.com/@ayharchive/video/7435638325232307498?is_from_webapp=1&sender_device=pc&web_id=7473579874578794039",
-        "video_7": "https://www.tiktok.com/@ayharchive/video/7435638325232307498?is_from_webapp=1&sender_device=pc&web_id=7473579874578794039",
-        "video_8": "https://www.tiktok.com/@ayharchive/video/7435638325232307498?is_from_webapp=1&sender_device=pc&web_id=7473579874578794039"
-      }
+      "settings": {}
     },
     "video_featured_ab8iGh": {
       "type": "video_principal",
