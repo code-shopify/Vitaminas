@@ -120,7 +120,7 @@
 
     <!-- Controles de navegación -->
     <div class="d-flex justify-content-between align-items-center my-3">
-      <button class="btn btn-dark nav-button left-button" onclick="scrollSlider(-1)">◀</button>
+      <button class="btn nav-button left-button" onclick="scrollSlider(-1)">◀</button>
       <div class="tiktok-carousel-container">
         <div class="d-flex overflow-auto tiktok-carousel">
           {% for i in (1..8) %}
@@ -131,7 +131,7 @@
               <div class="tiktok-slide mx-2">
                 <div class="video-container">
                   <iframe class="tiktok-embed"
-                    src="https://www.tiktok.com/embed/{{ video_id }}"
+                    src="https://www.tiktok.com/embed/{{ video_id }}?autoplay=0&controls=0"
                     frameborder="0"
                     allow="autoplay; fullscreen; picture-in-picture"
                     scrolling="no">
@@ -142,7 +142,7 @@
           {% endfor %}
         </div>
       </div>
-      <button class="btn btn-dark nav-button right-button" onclick="scrollSlider(1)">▶</button>
+      <button class="btn nav-button right-button" onclick="scrollSlider(1)">▶</button>
     </div>
 
     <!-- Mensaje inferior -->
@@ -155,10 +155,10 @@
 /* Ajuste del tamaño correcto del video */
 .tiktok-slide {
   flex: 0 0 auto;
-  width: 340px; /* Ajuste más grande para formato 9:16 */
+  width: 300px; /* Ajuste para formato 9:16 */
 }
 
-/* Mantener el aspecto 9:16 y bordes visibles */
+/* Mantener el aspecto 9:16 y eliminar etiquetas */
 .video-container {
   position: relative;
   width: 100%;
@@ -168,7 +168,6 @@
   background: #000;
 }
 
-/* Ajustar el iframe correctamente */
 .video-container iframe {
   position: absolute;
   top: 0;
@@ -176,12 +175,13 @@
   width: 100%;
   height: 100%;
   border-radius: 15px;
+  pointer-events: none;
 }
 
-/* Ajustes de los botones */
+/* Botones de navegación */
 .nav-button {
-  background: rgba(0, 0, 0, 0.7);
-  color: white;
+  background: rgba(255, 255, 255, 0.7);
+  color: black;
   border: none;
   border-radius: 50%;
   width: 50px;
@@ -195,7 +195,36 @@
 }
 
 .nav-button:hover {
-  background: rgba(0, 0, 0, 1);
+  background: rgba(255, 255, 255, 1);
+}
+
+/* Ajuste de estrellas */
+.star {
+  font-size: 20px;
+}
+
+.star.full {
+  color: gold;
+}
+
+.star.empty {
+  color: #ccc;
+}
+
+.star.partial {
+  position: relative;
+  display: inline-block;
+  color: #ccc;
+}
+
+.star.partial::before {
+  content: "★";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--fill);
+  overflow: hidden;
+  color: gold;
 }
 </style>
 
