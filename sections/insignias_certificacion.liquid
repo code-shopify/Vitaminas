@@ -17,7 +17,7 @@
             <div class="position-absolute top-0 start-50 translate-middle box">
               <img src="{{ section.settings.image_box_1|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
             </div>
-            <div class="lh-sm box" >
+            <div class="lh-sm box">
               <p class="fw-bold">{{ section.settings.box_1 }}</p>
               <p>{{ section.settings.box_content }}</p>
             </div>
@@ -89,21 +89,22 @@
     @media (max-width: 768px) {
     .banner-img {
       width: 100%;
-      height: 100%; 
+      height: 100%;
       background-image: none;
       background-color: {{ section.settings.background_section }};
       background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), #E5D4C9);
     }
-      .titulo{
+    .titulo{
+
     font-size: 2rem;
-    text-align: center;
+    text-align: center !important;
+    text:
     }
 
     p {
       font-size: 16px;
     }
   }
-  
 {% endstyle %}
 {% schema %}
 {
