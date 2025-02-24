@@ -115,6 +115,8 @@
 
   <h2 class="slider-title">{{ section.settings.title }}</h2>
 
+  <!-- Botones de navegación solo en escritorio -->
+  <button class="nav-button left-button" onclick="scrollSlider(-1)">&lt;</button>
   <div class="tiktok-carousel">
     <div class="tiktok-slider">
       {% for i in (1..8) %}
@@ -136,6 +138,7 @@
       {% endfor %}
     </div>
   </div>
+  <button class="nav-button right-button" onclick="scrollSlider(1)">&gt;</button>
 
   <p class="bottom-message">{{ section.settings.bottom_message }}</p>
 </div>
@@ -180,6 +183,7 @@
 .tiktok-carousel {
   overflow-x: auto;
   scroll-behavior: smooth;
+  display: flex;
 }
 .tiktok-slider {
   display: flex;
@@ -188,26 +192,53 @@
 
 /* Video Containers */
 .video-container {
-  width: 100%;
-  max-width: 180px;
-  height: 290px;
+  width: 36rem;
+  height: 567px;
   overflow: hidden;
   border-radius: 10px;
 }
 
-.tiktok-embed {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-/* Responsive */
+/* Resoluciones móviles */
 @media (max-width: 767px) {
+  .tiktok-carousel {
+    overflow-x: scroll;
+  }
+  .tiktok-slider {
+    display: flex;
+    gap: 8px;
+  }
   .video-container {
     max-width: 154px;
     height: 248px;
   }
+  .nav-button {
+    display: none; /* Ocultar botones en móviles */
+  }
+}
+
+/* Botones de navegación */
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+.left-button {
+  left: 10px;
+}
+.right-button {
+  right: 10px;
 }
 </style>
 
