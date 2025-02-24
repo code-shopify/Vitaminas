@@ -152,10 +152,46 @@
 </div>
 
 <style>
+/* Contenedor general del slider */
+.tiktok-carousel-container {
+  width: 100%;
+  max-width: 1200px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+
+/* Mostrar máximo 5 videos en resoluciones grandes */
+@media (min-width: 1025px) {
+  .tiktok-carousel {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+}
+
+/* Mostrar entre 2 y 3 videos en tablets */
+@media (max-width: 1024px) and (min-width: 768px) {
+  .tiktok-carousel {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+/* Mostrar 1 video en móviles */
+@media (max-width: 767px) {
+  .tiktok-carousel {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 10px;
+  }
+}
+
 /* Ajuste del tamaño correcto del video */
 .tiktok-slide {
   flex: 0 0 auto;
-  width: 300px; /* Ajuste para formato 9:16 */
+  width: 300px;
 }
 
 /* Mantener el aspecto 9:16 */
@@ -197,35 +233,6 @@
 .nav-button:hover {
   background: rgba(255, 255, 255, 1);
 }
-
-/* Ajuste de estrellas */
-.star {
-  font-size: 20px;
-}
-
-.star.full {
-  color: gold;
-}
-
-.star.empty {
-  color: #ccc;
-}
-
-.star.partial {
-  position: relative;
-  display: inline-block;
-  color: #ccc;
-}
-
-.star.partial::before {
-  content: "★";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: var(--fill);
-  overflow: hidden;
-  color: gold;
-}
 </style>
 
 <script>
@@ -242,6 +249,5 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 </script>
-
 
 
