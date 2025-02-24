@@ -89,6 +89,7 @@
 {% endschema %}
 
 <div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
+  
   <div class="rating-container">
     <span class="rating-value">{{ section.settings.rating }}</span>
     <div class="stars">
@@ -115,8 +116,8 @@
 
   <h2 class="slider-title">{{ section.settings.title }}</h2>
 
-  <!-- Botones de navegación solo en escritorio -->
   <button class="nav-button left-button" onclick="scrollSlider(-1)">&lt;</button>
+  
   <div class="tiktok-carousel">
     <div class="tiktok-slider">
       {% for i in (1..8) %}
@@ -124,27 +125,23 @@
         {% assign video_url = section.settings[video_var] %}
         {% if video_url contains "/video/" %}
           {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
-          <div class="tiktok-slide">
-            <div class="video-container">
-              <iframe class="tiktok-embed"
-                src="https://www.tiktok.com/embed/{{ video_id }}?autoplay=1&mute=0"
-                frameborder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                scrolling="no">
-              </iframe>
-            </div>
-          </div>
+          <iframe class="tiktok-embed"
+            src="https://www.tiktok.com/embed/{{ video_id }}?autoplay=1&mute=0"
+            frameborder="0"
+            allow="autoplay; fullscreen; picture-in-picture"
+            scrolling="no">
+          </iframe>
         {% endif %}
       {% endfor %}
     </div>
   </div>
+  
   <button class="nav-button right-button" onclick="scrollSlider(1)">&gt;</button>
 
   <p class="bottom-message">{{ section.settings.bottom_message }}</p>
 </div>
 
 <style>
-/* Estrellas */
 .rating-container {
   display: flex;
   align-items: center;
@@ -179,7 +176,6 @@
   color: #ccc;
 }
 
-/* Slider */
 .tiktok-carousel {
   overflow-x: auto;
   scroll-behavior: smooth;
@@ -189,16 +185,12 @@
   display: flex;
   gap: 10px;
 }
-
-/* Video Containers */
-.video-container {
+.tiktok-embed {
   width: 36rem;
   height: 567px;
-  overflow: hidden;
   border-radius: 10px;
 }
 
-/* Resoluciones móviles */
 @media (max-width: 767px) {
   .tiktok-carousel {
     overflow-x: scroll;
@@ -207,7 +199,7 @@
     display: flex;
     gap: 8px;
   }
-  .video-container {
+  .tiktok-embed {
     max-width: 154px;
     height: 248px;
   }
@@ -216,7 +208,6 @@
   }
 }
 
-/* Botones de navegación */
 .nav-button {
   position: absolute;
   top: 50%;
@@ -246,7 +237,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     let position = 0;
     const slides = document.querySelector(".tiktok-slider");
-    const slideWidth = document.querySelector(".tiktok-slide").offsetWidth + 10;
+    const slideWidth = document.querySelector(".tiktok-embed").offsetWidth + 10;
 
     window.scrollSlider = function(direction) {
         position += direction * slideWidth;
@@ -254,5 +245,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 });
 </script>
+
 
 
