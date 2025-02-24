@@ -1,6 +1,6 @@
-  <div class="t4s-section-inner vitatu-section;">
+  <div class="">
 <div
-  class="banner-img "
+  class="t4s-section-inner vitatu-section; banner-img "
   style="background-image:url('{{ section.settings.banner| image_url: width: 1441, height:688}}');"
 >
     <div class="text-dark p-5">
@@ -68,13 +68,14 @@
 </div>
 {% style %}
       .banner-img {
-        width:100%;
+        width:100%
         max-width: 1441px;
-        max-height: 688px;
+        height:100vh;
+        min-height: 688px;
         height: 100vh;
         margin: auto;
-        background-size: contain;
-        background-position:center;
+        background-size: cover;
+        background-position:center top;
         background-repeat: no-repeat;
       }
     @media (max-width: 1200px) {
