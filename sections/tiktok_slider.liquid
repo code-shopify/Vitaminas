@@ -153,74 +153,21 @@
 </div>
 
 <style>
-/* ⭐ Estilos de estrellas corregidos */
-.star-rating {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-
-.stars {
-  display: flex;
-  flex-direction: row;
-  gap: 2px;
-}
-
-.star {
-  font-size: 20px;
-  display: inline-block;
-  position: relative;
-  color: #ccc;
-}
-
-.star.full {
-  color: gold;
-}
-
-.star.partial {
-  position: relative;
-  color: gold;
-  overflow: hidden;
-  display: inline-block;
-  width: var(--fill, 50%);
-}
-
-.star.partial::after {
-  content: "★";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: var(--fill, 50%);
-  overflow: hidden;
-  color: gold;
-}
-
-/* 📌 Ajuste del slider para que los videos sean horizontales */
-.slider-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-}
-
-.slider-container {
+/* 📌 Ajuste de los contenedores individuales de TikTok */
+.video-container {
   width: 100%;
+  max-width: 270px;
+  height: 480px; /* Tamaño ajustado para mostrar el video completo */
   overflow: hidden;
+  position: relative;
+  border-radius: 15px;
 }
 
-.slider {
-  display: flex;
-  transition: transform 0.5s ease;
-  flex-wrap: nowrap;
-}
-
-/* 📌 Ajuste de los videos */
-.slide {
-  flex: 0 0 auto;
-  width: 250px;
-  margin: 0 10px;
+.tiktok-embed {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
 }
 
 /* 🎮 Botones de navegación */
@@ -250,8 +197,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     let position = 0;
     const slides = document.querySelector(".slider");
-    const slideWidth = 270;
-  
+    const slideWidth = 280; // Se ajustó para que los videos se vean completos
+
     window.scrollSlider = function(direction) {
         position += direction * slideWidth;
         slides.style.transform = `translateX(-${position}px)`;
