@@ -39,10 +39,6 @@
       "default": "#333333"
     },
     {
-      "type": "header",
-      "content": "Configuración de Videos TikTok"
-    },
-    {
       "type": "url",
       "id": "video_1",
       "label": "TikTok Video 1"
@@ -92,132 +88,122 @@
 }
 {% endschema %}
 
-<div class="container-fluid py-5" style="background-color: {{ section.settings.background_color }};">
-  <div class="container text-center">
-    
-    <div class="tiktok-slider-header">
-      <div class="rating-reviews d-flex align-items-center justify-content-center">
-        <span class="rating-value me-2">{{ section.settings.rating }}</span>
-        <div class="stars d-flex">
-          {% assign rating_val = section.settings.rating | plus: 0 %}
-          {% assign full_stars = rating_val | floor %}
-          {% assign fraction = rating_val | minus: full_stars %}
-          {% assign partial_percent = fraction | times: 100 %}
-          {% assign next_star = full_stars | plus: 1 %}
-          {% for star in (1..5) %}
-            <span class="star {% if star <= full_stars %}full{% elsif star == next_star and fraction > 0 %}partial{% else %}empty{% endif %}" {% if star == next_star and fraction > 0 %} style="--fill: {{ partial_percent }}%;"{% endif %}>
-              ★
-            </span>
-          {% endfor %}
-        </div>
-        <span class="reviews ms-2">{{ section.settings.reviews }}</span>
-      </div>
-      <h2 class="slider-title mt-3">{{ section.settings.title }}</h2>
+<div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
+  <div class="rating-container">
+    <span class="rating-value">{{ section.settings.rating }}</span>
+    <div class="stars">
+      {% assign rating_val = section.settings.rating | plus: 0 %}
+      {% assign full_stars = rating_val | floor %}
+      {% assign fraction = rating_val | minus: full_stars %}
+      {% assign partial_percent = fraction | times: 100 %}
+      {% assign next_star = full_stars | plus: 1 %}
+      
+      {% for star in (1..5) %}
+        {% if star <= full_stars %}
+          <span class="star full">★</span>
+        {% elsif star == next_star and fraction > 0 %}
+          <span class="star partial" style="background: linear-gradient(90deg, gold {{ partial_percent }}%, #ccc {{ partial_percent }}%);">★</span>
+        {% else %}
+          <span class="star empty">★</span>
+        {% endif %}
+      {% endfor %}
     </div>
-
-    <div class="slider-wrapper">
-      <button class="slider-btn left-btn d-none d-md-block" onclick="scrollSlider(-1)">◀</button>
-      <div class="slider-container">
-        <div class="slider">
-          {% for i in (1..8) %}
-            {% capture video_var %}video_{{ i }}{% endcapture %}
-            {% assign video_url = section.settings[video_var] %}
-            {% if video_url contains "/video/" %}
-              {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
-              <div class="slide">
-                <div class="video-container">
-                  <iframe class="tiktok-embed"
-                    src="https://www.tiktok.com/embed/{{ video_id }}?autoplay=1&mute=0"
-                    frameborder="0"
-                    allow="autoplay; fullscreen; picture-in-picture"
-                    scrolling="no">
-                  </iframe>
-                </div>
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-      <button class="slider-btn right-btn d-none d-md-block" onclick="scrollSlider(1)">▶</button>
-    </div>
-
-    <p class="bottom-message mt-4">{{ section.settings.bottom_message }}</p>
+    <span class="reviews">{{ section.settings.reviews }}</span>
   </div>
+
+  <h2 class="slider-title">{{ section.settings.title }}</h2>
+
+  <div class="tiktok-carousel">
+    <div class="tiktok-slider">
+      {% for i in (1..8) %}
+        {% capture video_var %}video_{{ i }}{% endcapture %}
+        {% assign video_url = section.settings[video_var] %}
+        {% if video_url contains "/video/" %}
+          {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
+          <div class="tiktok-slide">
+            <div class="video-container">
+              <iframe class="tiktok-embed"
+                src="https://www.tiktok.com/embed/{{ video_id }}?autoplay=1&mute=0"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                scrolling="no">
+              </iframe>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  <p class="bottom-message">{{ section.settings.bottom_message }}</p>
 </div>
 
 <style>
+/* Estrellas */
+.rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.stars {
+  display: flex;
+}
+.star {
+  font-size: 20px;
+  color: #ccc;
+}
+.star.full {
+  color: gold;
+}
+.star.partial {
+  background-clip: text;
+  color: transparent;
+}
+.star.empty {
+  color: #ccc;
+}
+
+/* Slider */
+.tiktok-carousel {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+.tiktok-slider {
+  display: flex;
+  gap: 10px;
+}
+
+/* Video Containers */
 .video-container {
   width: 100%;
-  max-width: 300px;
-  height: 500px;
+  max-width: 180px;
+  height: 290px;
   overflow: hidden;
-  position: relative;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 
 .tiktok-embed {
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  border-radius: 15px;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 10;
-  background: rgba(255, 255, 255, 0.9);
-  color: black;
-  border: none;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  font-size: 24px;
-  cursor: pointer;
-}
-.left-btn {
-  left: 10px;
-}
-.right-btn {
-  right: 10px;
-}
-
-.slider-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  position: relative;
-}
-
-.slider-container {
-  width: 90%;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-}
-
-.slider {
-  display: flex;
-  gap: 15px;
-}
-
-@media (min-width: 1025px) {
-  .slide { flex: 0 0 calc(100% / 4.5); }
-}
-@media (max-width: 1024px) and (min-width: 768px) {
-  .slide { flex: 0 0 calc(100% / 2); }
-}
+/* Responsive */
 @media (max-width: 767px) {
-  .slide { flex: 0 0 calc(100% / 2); }
+  .video-container {
+    max-width: 154px;
+    height: 248px;
+  }
 }
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     let position = 0;
-    const slides = document.querySelector(".slider");
-    const slideWidth = document.querySelector(".slide").offsetWidth;
+    const slides = document.querySelector(".tiktok-slider");
+    const slideWidth = document.querySelector(".tiktok-slide").offsetWidth + 10;
 
     window.scrollSlider = function(direction) {
         position += direction * slideWidth;
@@ -225,4 +211,5 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 });
 </script>
+
 
