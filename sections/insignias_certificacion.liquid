@@ -1,6 +1,7 @@
-  <div style="width: 1441px;height: 688px;">
+  <div class="t4s-section-inner vitatu-section;">
 <div
-  class="t4s-section-inner vitatu-section; banner-img" style="background-image: url('{{ section.settings.banner | image_url }}');"
+  class="banner-img "
+  style="background-image:url('{{ section.settings.banner| image_url: width: 1441, height:688}}');"
 >
     <div class="text-dark p-5">
       <header class="fw-bold text-start" style="font-size: 45px;">
@@ -67,34 +68,38 @@
 </div>
 {% style %}
       .banner-img {
+        width:100%;
         max-width: 1441px;
         max-height: 688px;
+        height: 100vh;
         margin: auto;
-        background-size: cover;
-        background-position:center center;
+        background-size: contain;
+        background-position:center;
         background-repeat: no-repeat;
       }
-    /*---------------- Custom CSS for only tablet -------------------*/
-  @media (min-width: 768px) and (max-width: 1024px) {
-    .contenedor-ejemplo {
-      height: 100px;
-    }
-
-    .imagenes {
-      width: 50%;
-    }
-
-    .clase-texto {
-      width: 50%;
+    @media (max-width: 1200px) {
+    .banner-img {
+      height: 80vh;
     }
   }
 
-  /*---------------- Custom CSS for only mobile -------------------*/
-  @media (max-width: 767px) {
-    .texto-final {
-      font-size: 13px !important;
+  @media (max-width: 992px) {
+    .banner-img {
+      height: 70vh;
     }
+  }
 
+  @media (max-width: 768px) {
+    .banner-img {
+      height: 60vh;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .banner-img {
+      height: 50vh;
+    }
+  }
 {% endstyle %}
 {% schema %}
 {
