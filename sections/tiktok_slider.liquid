@@ -1,178 +1,25 @@
-{% schema %}
-{
-  "name": "TikTok Video Gallery",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Título principal",
-      "default": "Opinan de Vitató"
-    },
-    {
-      "type": "range",
-      "id": "rating",
-      "label": "Calificación",
-      "min": 1,
-      "max": 5,
-      "step": 0.5,
-      "default": 4.5
-    },
-    {
-      "type": "color",
-      "id": "star_color",
-      "label": "Color de estrellas",
-      "default": "#FFD700"
-    },
-    {
-      "type": "header",
-      "content": "Configuración de videos"
-    },
-    {
-      "type": "range",
-      "id": "visible_videos",
-      "label": "Videos visibles",
-      "min": 1,
-      "max": 4,
-      "step": 0.5,
-      "default": 2.5
-    },
-    {
-      "type": "text",
-      "id": "video_urls",
-      "label": "URLs de TikTok (separadas por comas)",
-      "info": "Ejemplo: url1,url2,url3"
-    }
-  ],
-  "presets": [
-    {
-      "name": "Galería TikTok",
-      "category": "Video"
-    }
-  ]
-}
-{% endschema %}
-
-<style>
-.rating-stars {
-  display: inline-block;
-  font-size: 0;
-  position: relative;
-}
-
-.star-wrapper {
-  display: inline-block;
-  position: relative;
-  font-size: 24px;
-}
-
-.star-background,
-.star-filled {
-  display: inline-block;
-}
-
-.star-filled {
-  position: absolute;
-  top: 0;
-  left: 0;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.video-slider {
-  position: relative;
-  padding: 0 40px;
-}
-
-.video-item {
-  padding: 15px;
-  transition: transform 0.3s ease;
-}
-
-.slider-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 1;
-  background: rgba(0,0,0,0.5);
-  border: none;
-  color: white;
-  padding: 10px 15px;
-  cursor: pointer;
-}
-
-.prev-btn { left: 0; }
-.next-btn { right: 0; }
-
-.tiktok-embed {
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-</style>
-
-<div class="container py-5">
-  <div class="text-center mb-4">
-    <h1 class="mb-3">{{ section.settings.title }}</h1>
-    
-    <div class="rating-stars">
-      <div class="star-wrapper">
-        <div class="star-background" style="color: {{ section.settings.star_color | default: '#FFD700' }}80;">
-          {% for i in (1..5) %}★{% endfor %}
-        </div>
-        <div class="star-filled" style="width: {{ section.settings.rating | times: 20 }}%; color: {{ section.settings.star_color | default: '#FFD700' }};">
-          {% for i in (1..5) %}★{% endfor %}
-        </div>
+<!-- ⭐ Estrellas y título -->
+<div class="tiktok-slider-header">
+  <div class="rating-reviews d-flex justify-content-center align-items-center">
+    <div class="star-rating d-flex align-items-center">
+      <div class="stars d-flex">
+        {% assign rating_val = section.settings.rating | plus: 0 %}
+        {% assign full_stars = rating_val | floor %}
+        {% assign fraction = rating_val | minus: full_stars %}
+        {% assign partial_percent = fraction | times: 100 %}
+        {% assign next_star = full_stars | plus: 1 %}
+        {% for star in (1..5) %}
+          <span class="star 
+            {% if star <= full_stars %}full{% elsif star == next_star and fraction > 0 %}partial{% else %}empty{% endif %}" 
+            {% if star == next_star and fraction > 0 %} style="--fill: {{ partial_percent }}%;"{% endif %}>
+            ★
+          </span>
+        {% endfor %}
       </div>
+      <span class="rating-value ms-2">{{ rating_val }}</span>
     </div>
+    <span class="reviews ms-2">{{ section.settings.reviews }}</span>
   </div>
-
-  <div class="video-slider">
-    <button class="slider-btn prev-btn">‹</button>
-    <div class="row flex-nowrap overflow-hidden" id="video-slider-track">
-      {% assign urls = section.settings.video_urls | split: ',' %}
-      {% for url in urls %}
-        <div class="video-item" style="width: calc(100% / {{ section.settings.visible_videos }} - 30px);">
-          <blockquote class="tiktok-embed" data-url="{{ url | strip }}">
-            <section></section>
-          </blockquote>
-        </div>
-      {% endfor %}
-    </div>
-    <button class="slider-btn next-btn">›</button>
-  </div>
+  <h2 class="slider-title mt-3">{{ section.settings.title }}</h2>
 </div>
-
-<script src="https://www.tiktok.com/embed.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const sliderTrack = document.getElementById('video-slider-track');
-  const prevBtn = document.querySelector('.prev-btn');
-  const nextBtn = document.querySelector('.next-btn');
-  const itemWidth = document.querySelector('.video-item').offsetWidth + 30;
-  let position = 0;
-
-  function updateButtons() {
-    prevBtn.disabled = position >= 0;
-    nextBtn.disabled = position <= -(itemWidth * ({{ urls.size }} - {{ section.settings.visible_videos }}));
-  }
-
-  prevBtn.addEventListener('click', () => {
-    position += itemWidth;
-    position = Math.min(position, 0);
-    sliderTrack.style.transform = `translateX(${position}px)`;
-    updateButtons();
-  });
-
-  nextBtn.addEventListener('click', () => {
-    position -= itemWidth;
-    position = Math.max(position, -itemWidth * ({{ urls.size }} - {{ section.settings.visible_videos }}));
-    sliderTrack.style.transform = `translateX(${position}px)`;
-    updateButtons();
-  });
-
-  // Inicializar embeds de TikTok
-  window.tiktokEmbed();
-  updateButtons();
-});
-</script>
 
