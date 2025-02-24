@@ -18,7 +18,7 @@
       "type": "text",
       "id": "title",
       "label": "Título principal",
-      "default": "Opiniones de Vitaminas"
+      "default": "Reseñas de Vitatú"
     },
     {
       "type": "textarea",
@@ -30,7 +30,7 @@
       "type": "color",
       "id": "background_color",
       "label": "Color de fondo",
-      "default": "#FEF8F0"
+      "default": "#FFFFFF"
     },
     {
       "type": "color",
@@ -94,22 +94,21 @@
 
 <div class="container-fluid py-5" style="background-color: {{ section.settings.background_color }};">
   <div class="container text-center">
+    
     <div class="tiktok-slider-header">
-      <div class="rating-reviews d-flex justify-content-center align-items-center">
-        <div class="star-rating d-flex align-items-center">
-          <div class="stars d-flex">
-            {% assign rating_val = section.settings.rating | plus: 0 %}
-            {% assign full_stars = rating_val | floor %}
-            {% assign fraction = rating_val | minus: full_stars %}
-            {% assign partial_percent = fraction | times: 100 %}
-            {% assign next_star = full_stars | plus: 1 %}
-            {% for star in (1..5) %}
-              <span class="star {% if star <= full_stars %}full{% elsif star == next_star and fraction > 0 %}partial{% else %}empty{% endif %}" {% if star == next_star and fraction > 0 %} style="--fill: {{ partial_percent }}%;"{% endif %}>
-                ★
-              </span>
-            {% endfor %}
-          </div>
-          <span class="rating-value ms-2">{{ rating_val }}</span>
+      <div class="rating-reviews d-flex align-items-center justify-content-center">
+        <span class="rating-value me-2">{{ section.settings.rating }}</span>
+        <div class="stars d-flex">
+          {% assign rating_val = section.settings.rating | plus: 0 %}
+          {% assign full_stars = rating_val | floor %}
+          {% assign fraction = rating_val | minus: full_stars %}
+          {% assign partial_percent = fraction | times: 100 %}
+          {% assign next_star = full_stars | plus: 1 %}
+          {% for star in (1..5) %}
+            <span class="star {% if star <= full_stars %}full{% elsif star == next_star and fraction > 0 %}partial{% else %}empty{% endif %}" {% if star == next_star and fraction > 0 %} style="--fill: {{ partial_percent }}%;"{% endif %}>
+              ★
+            </span>
+          {% endfor %}
         </div>
         <span class="reviews ms-2">{{ section.settings.reviews }}</span>
       </div>
@@ -117,7 +116,7 @@
     </div>
 
     <div class="slider-wrapper">
-      <button class="slider-btn left-btn" onclick="scrollSlider(-1)">◀</button>
+      <button class="slider-btn left-btn d-none d-md-block" onclick="scrollSlider(-1)">◀</button>
       <div class="slider-container">
         <div class="slider">
           {% for i in (1..8) %}
@@ -139,7 +138,7 @@
           {% endfor %}
         </div>
       </div>
-      <button class="slider-btn right-btn" onclick="scrollSlider(1)">▶</button>
+      <button class="slider-btn right-btn d-none d-md-block" onclick="scrollSlider(1)">▶</button>
     </div>
 
     <p class="bottom-message mt-4">{{ section.settings.bottom_message }}</p>
@@ -194,24 +193,23 @@
 
 .slider-container {
   width: 90%;
-  overflow: hidden;
+  overflow-x: auto;
+  scroll-behavior: smooth;
 }
 
 .slider {
   display: flex;
   gap: 15px;
-  transition: transform 0.5s ease;
 }
 
 @media (min-width: 1025px) {
-  .slider { flex-wrap: nowrap; }
   .slide { flex: 0 0 calc(100% / 4.5); }
 }
 @media (max-width: 1024px) and (min-width: 768px) {
-  .slide { flex: 0 0 calc(100% / 3); }
+  .slide { flex: 0 0 calc(100% / 2); }
 }
 @media (max-width: 767px) {
-  .slide { flex: 0 0 calc(100% / 1.5); }
+  .slide { flex: 0 0 calc(100% / 2); }
 }
 </style>
 
