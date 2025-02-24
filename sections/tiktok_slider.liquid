@@ -171,13 +171,18 @@
 
 /* Carrusel: permite desplazamiento horizontal */
 .tiktok-carousel {
+  width: 70%; /* Reducimos el ancho total */
+  max-width: 1100px; /* Limitamos el tamaño máximo */
   overflow-x: auto;
   scroll-behavior: smooth;
   -ms-overflow-style: none; /* IE y Edge */
   scrollbar-width: none; /* Firefox */
   display: flex;
-  justify-content: center; /* Mantiene los videos centrados */
+  justify-content: center; /* Mantiene el contenido alineado */
+  margin: auto; /* Centra el carrusel */
+  padding: 10px 0; /* Añadimos un pequeño espacio arriba y abajo */
 }
+
 .tiktok-carousel::-webkit-scrollbar {
   display: none;
 }
