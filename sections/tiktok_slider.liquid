@@ -37,46 +37,6 @@
       "id": "text_color",
       "label": "Color del texto",
       "default": "#333333"
-    },
-    {
-      "type": "url",
-      "id": "video_1",
-      "label": "TikTok Video 1"
-    },
-    {
-      "type": "url",
-      "id": "video_2",
-      "label": "TikTok Video 2"
-    },
-    {
-      "type": "url",
-      "id": "video_3",
-      "label": "TikTok Video 3"
-    },
-    {
-      "type": "url",
-      "id": "video_4",
-      "label": "TikTok Video 4"
-    },
-    {
-      "type": "url",
-      "id": "video_5",
-      "label": "TikTok Video 5"
-    },
-    {
-      "type": "url",
-      "id": "video_6",
-      "label": "TikTok Video 6"
-    },
-    {
-      "type": "url",
-      "id": "video_7",
-      "label": "TikTok Video 7"
-    },
-    {
-      "type": "url",
-      "id": "video_8",
-      "label": "TikTok Video 8"
     }
   ],
   "presets": [
@@ -93,9 +53,9 @@
     
     <!-- Sección de estrellas y título -->
     <div class="tiktok-slider-header">
-      <div class="rating-reviews d-flex justify-content-center align-items-center">
-        <div class="star-rating">
-          <div class="stars">
+      <div class="rating-reviews d-flex justify-content-center align-items-center flex-column">
+        <div class="star-rating d-flex align-items-center">
+          <div class="stars d-flex">
             {% assign rating_val = section.settings.rating | plus: 0 %}
             {% assign full_stars = rating_val | floor %}
             {% assign fraction = rating_val | minus: full_stars %}
@@ -209,10 +169,13 @@
   top: 50%;
   transform: translateY(-50%);
   transition: 0.3s;
+  opacity: 1;
 }
 
 .left-btn {
   left: 10px;
+  opacity: 1;
+  z-index: 10;
 }
 
 .right-btn {
@@ -224,6 +187,19 @@
 }
 
 /* Estilos de estrellas */
+.star-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.stars {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}
+
 .star {
   font-size: 20px;
   display: inline-block;
