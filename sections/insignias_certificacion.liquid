@@ -1,8 +1,8 @@
-  <div class="t4s-section-inner vitatu-section contenedor">
-<div
-  class="banner-img"
-  style="background-image:url('{{ section.settings.banner| image_url: width: 1441, height:688}}');"
->
+<div class="t4s-section-inner vitatu-section contenedor">
+  <div
+    class="banner-img"
+    style="background-image:url('{{ section.settings.banner| image_url: width: 1441, height:688}}');"
+  >
     <div class="text-dark p-5">
       <header class="fw-bold text-start" style="font-size: 45px;">
         {{ section.settings.header }}
@@ -67,33 +67,33 @@
   </div>
 </div>
 {% style %}
-      .banner-img {
-        width:100%;
-        max-width: 1441px;
-        height:100%;
-        min-height: 688px;
-        margin: auto;
-        background-size: cover;
-        background-position:center ;
-        background-repeat: no-repeat;
-      }
-  .img-fluid {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-  .contenedor{
-    overflow:hidden;
-    widht:1441px;
-    height:688px;
-  }
-  @media (max-width: 768px) {
   .banner-img {
-    background-image: none;
-    background-color: {{ section.settings.background_section }}; /* Color dinámico */
+    width: 100%;
+    height: 688px; /* Altura fija o ajustable según tu diseño */
+    background-color: #E5D4C9; /* Color de fondo por defecto */
+    background-image: url('{{ section.settings.banner | image_url: width: 1441, height: 688 }}');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: auto;
   }
-}
-}
+    .img-fluid {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+    .contenedor{
+      overflow:hidden;
+      widht:1441px;
+      height:688px;
+    }
+    @media (max-width: 768px) {
+    .banner-img {
+      background-image: none;
+      background-color: {{ section.settings.background_section }};
+    }
+  }
+  }
 {% endstyle %}
 {% schema %}
 {
