@@ -183,6 +183,7 @@
   color: gold;
   overflow: hidden;
   display: inline-block;
+  width: var(--fill, 50%);
 }
 
 .star.partial::after {
@@ -194,6 +195,55 @@
   overflow: hidden;
   color: gold;
 }
+
+/* 📌 Ajuste del slider para que los videos sean horizontales */
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease;
+  flex-wrap: nowrap;
+}
+
+/* 📌 Ajuste de los videos */
+.slide {
+  flex: 0 0 auto;
+  width: 250px;
+  margin: 0 10px;
+}
+
+/* 🎮 Botones de navegación */
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
+  color: black;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  cursor: pointer;
+}
+.left-btn {
+  left: 10px;
+}
+.right-btn {
+  right: 10px;
+}
 </style>
 
 <script>
@@ -201,11 +251,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let position = 0;
     const slides = document.querySelector(".slider");
     const slideWidth = 270;
-    const maxPosition = slideWidth * (slides.children.length - 5);
   
     window.scrollSlider = function(direction) {
         position += direction * slideWidth;
-        position = Math.max(0, Math.min(position, maxPosition));
         slides.style.transform = `translateX(-${position}px)`;
     };
 });
