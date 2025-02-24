@@ -51,9 +51,9 @@
 <div class="container-fluid py-5" style="background-color: {{ section.settings.background_color }};">
   <div class="container text-center">
     
-    <!-- Sección de estrellas y título -->
+    <!-- Estrellas y título -->
     <div class="tiktok-slider-header">
-      <div class="rating-reviews d-flex justify-content-center align-items-center flex-column">
+      <div class="rating-reviews d-flex justify-content-center align-items-center">
         <div class="star-rating d-flex align-items-center">
           <div class="stars d-flex">
             {% assign rating_val = section.settings.rating | plus: 0 %}
@@ -170,12 +170,11 @@
   transform: translateY(-50%);
   transition: 0.3s;
   opacity: 1;
+  z-index: 10;
 }
 
 .left-btn {
   left: 10px;
-  opacity: 1;
-  z-index: 10;
 }
 
 .right-btn {
@@ -233,4 +232,5 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 });
 </script>
+
 
