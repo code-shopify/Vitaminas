@@ -242,3 +242,62 @@
   padding-bottom: 30px;
 }
 </style>
+
+<script>
+class VideoController {
+    constructor() {
+        if (VideoController.instance) {
+            return VideoController.instance;
+        }
+        VideoController.instance = this;
+        this.currentPlaying = null;
+        this.inicializarEventos();
+    }
+
+    inicializarEventos() {
+        const videoContainers = document.querySelectorAll(".video-container");
+        videoContainers.forEach((container) => {
+            container.addEventListener("click", (e) => {
+                e.preventDefault();
+                this.manejarReproduccion(container);
+            });
+        });
+    }
+
+    manejarReproduccion(container) {
+        const iframe = container.querySelector(".tiktok-embed");
+        
+        // Si hay un video reproduciéndose, lo pausamos
+        if (this.currentPlaying && this.currentPlaying !== iframe) {
+            const prevSrc = this.currentPlaying.getAttribute("src");
+            this.currentPlaying.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
+        }
+
+        // Reproducimos el nuevo video
+        if (iframe.getAttribute("src").indexOf("autoplay=1") === -1) {
+            iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
+            this.currentPlaying = iframe; // Actualizamos la referencia al video actual
+        } else {
+            // Si el video ya se está reproduciendo, lo pausamos
+            const prevSrc = iframe.getAttribute("src");
+            iframe.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
+            this.currentPlaying = null; // Reseteamos la referencia
+        }
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Inicializamos el controlador de video
+    const videoController = new VideoController();
+
+    // Función para el scroll del slider
+    window.scrollSlider = function(direction) {
+        const container = document.querySelector(".tiktok-carousel");
+        const slide = container.querySelector(".tiktok-slide");
+        if (slide) {
+            const slideWidth = slide.offsetWidth + 8;
+            container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
+        }
+    };
+});
+</script>
