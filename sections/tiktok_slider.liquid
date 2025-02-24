@@ -37,6 +37,50 @@
       "id": "text_color",
       "label": "Color del texto",
       "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Configuración de Videos TikTok"
+    },
+    {
+      "type": "url",
+      "id": "video_1",
+      "label": "TikTok Video 1"
+    },
+    {
+      "type": "url",
+      "id": "video_2",
+      "label": "TikTok Video 2"
+    },
+    {
+      "type": "url",
+      "id": "video_3",
+      "label": "TikTok Video 3"
+    },
+    {
+      "type": "url",
+      "id": "video_4",
+      "label": "TikTok Video 4"
+    },
+    {
+      "type": "url",
+      "id": "video_5",
+      "label": "TikTok Video 5"
+    },
+    {
+      "type": "url",
+      "id": "video_6",
+      "label": "TikTok Video 6"
+    },
+    {
+      "type": "url",
+      "id": "video_7",
+      "label": "TikTok Video 7"
+    },
+    {
+      "type": "url",
+      "id": "video_8",
+      "label": "TikTok Video 8"
     }
   ],
   "presets": [
@@ -48,10 +92,11 @@
 }
 {% endschema %}
 
+<!-- 🔹 Contenedor Principal -->
 <div class="container-fluid py-5" style="background-color: {{ section.settings.background_color }};">
   <div class="container text-center">
     
-    <!-- ⭐ Estrellas y título -->
+    <!-- ⭐ Sección de estrellas y título -->
     <div class="tiktok-slider-header">
       <div class="rating-reviews d-flex justify-content-center align-items-center">
         <div class="star-rating d-flex align-items-center">
@@ -108,7 +153,7 @@
 </div>
 
 <style>
-/* 🌟 Estilos del slider */
+/* 🎛️ Estilos del Slider */
 .slider-wrapper {
   display: flex;
   align-items: center;
@@ -127,7 +172,7 @@
   transition: transform 0.5s ease;
 }
 
-/* 📱 Tamaño y ajuste de los videos */
+/* 📱 Ajuste de los videos */
 .slide {
   flex: 0 0 auto;
   width: 250px;
@@ -152,7 +197,7 @@
   border-radius: 15px;
 }
 
-/* 🎛️ Botones de navegación */
+/* 🎮 Botones de navegación */
 .slider-btn {
   background: rgba(255, 255, 255, 0.9);
   color: black;
@@ -184,38 +229,6 @@
 .slider-btn:hover {
   background: rgba(255, 255, 255, 1);
 }
-
-/* ⭐ Estilos de estrellas */
-.star-rating {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-
-.stars {
-  display: flex;
-  flex-direction: row;
-  gap: 2px;
-}
-
-.star {
-  font-size: 20px;
-  display: inline-block;
-  position: relative;
-  color: #ccc;
-}
-
-.star.full {
-  color: gold;
-}
-
-.star.partial {
-  color: transparent;
-  background: linear-gradient(to right, gold var(--fill, 50%), #ccc var(--fill, 50%));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 </style>
 
 <script>
@@ -232,7 +245,6 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 });
 </script>
-
 
 
 
