@@ -156,8 +156,8 @@
 /* 📌 Ajuste de los contenedores individuales de TikTok */
 .video-container {
   width: 100%;
-  max-width: 270px;
-  height: 480px; /* Tamaño ajustado para mostrar el video completo */
+  max-width: 280px;
+  height: 500px; /* Ajustado para mostrar el video completo */
   overflow: hidden;
   position: relative;
   border-radius: 15px;
@@ -166,7 +166,7 @@
 .tiktok-embed {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 15px;
 }
 
@@ -191,13 +191,33 @@
 .right-btn {
   right: 10px;
 }
+
+/* 🔹 Arreglar la alineación horizontal del slider */
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.slider-container {
+  width: 90%;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  gap: 15px;
+  transition: transform 0.5s ease;
+}
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     let position = 0;
     const slides = document.querySelector(".slider");
-    const slideWidth = 280; // Se ajustó para que los videos se vean completos
+    const slideWidth = 295; // Ajustado para que los videos se vean completos
 
     window.scrollSlider = function(direction) {
         position += direction * slideWidth;
@@ -205,3 +225,4 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 });
 </script>
+
