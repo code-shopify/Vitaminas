@@ -1,181 +1,3 @@
-<div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
-  
-  <!-- Sección de estrellas y título -->
-  <div class="tiktok-slider-header">
-    <div class="rating-reviews">
-      <div class="star-rating">
-        <div class="stars">
-          {% assign rating_val = section.settings.rating | plus: 0 %}
-          {% assign full_stars = rating_val | floor %}
-          {% assign fraction = rating_val | minus: full_stars %}
-          {% assign partial_percent = fraction | times: 100 %}
-          {% assign next_star = full_stars | plus: 1 %}
-          {% for star in (1..5) %}
-            {% if star <= full_stars %}
-              <span class="star full">&#9733;</span>
-            {% elsif star == next_star and fraction > 0 %}
-              <span class="star partial" style="--fill: {{ partial_percent }}%;">&#9733;</span>
-            {% else %}
-              <span class="star empty">&#9733;</span>
-            {% endif %}
-          {% endfor %}
-        </div>
-        <span class="rating-value">{{ rating_val }}</span>
-      </div>
-      <span class="reviews">{{ section.settings.reviews }}</span>
-    </div>
-    <h2 class="slider-title">{{ section.settings.title }}</h2>
-  </div>
-
-  <!-- Botón de navegación izquierda -->
-  <button class="nav-button left-button" onclick="scrollSlider(-1)">&#10094;</button>
-
-  <!-- Carrusel de TikTok -->
-  <div class="tiktok-carousel">
-    <div class="tiktok-slider">
-      {% for i in (1..8) %}
-        {% capture video_var %}video_{{ i }}{% endcapture %}
-        {% assign video_url = section.settings[video_var] %}
-        {% if video_url contains "/video/" %}
-          {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
-          <div class="tiktok-slide">
-            <div class="with-border video-container">
-              <iframe class="tiktok-embed video-{{ i }}"
-                src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
-                frameborder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                scrolling="no"
-                data-video>
-              </iframe>
-            </div>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-
-  <!-- Botón de navegación derecha -->
-  <button class="nav-button right-button" onclick="scrollSlider(1)">&#10095;</button>
-
-  <!-- Mensaje inferior -->
-  <p class="bottom-message">{{ section.settings.bottom_message }}</p>
-
-</div>
-
-{% style %}
-  /* Contenedor principal */
-.tiktok-slider-container {
-  text-align: center;
-  padding: 60px 20px;
-  border-radius: 10px;
-  position: relative;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-/* Sección superior */
-.tiktok-slider-header {
-  margin-bottom: 40px;
-}
-
-/* Rating y reseñas */
-.rating-reviews {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-/* Carrusel - ocultar barra de desplazamiento */
-.tiktok-carousel {
-  overflow-x: scroll;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.tiktok-carousel::-webkit-scrollbar {
-  display: none;
-}
-
-/* Contenedor interno de videos */
-.tiktok-slider {
-  display: flex;
-  gap: 8px;
-}
-
-/* Estilos de cada video */
-.tiktok-slide {
-  flex: 0 0 22%;
-  max-width: 22%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Adaptaciones por tamaño de pantalla */
-@media (max-width: 1024px) { /* Tablets */
-  .tiktok-slide {
-    flex: 0 0 40%;
-    max-width: 40%;
-  }
-}
-
-@media (max-width: 767px) { /* Móviles */
-  .tiktok-slide {
-    flex: 0 0 80%;
-    max-width: 80%;
-  }
-}
-
-/* Marco de cada video */
-.with-border {
-  padding: 2px;
-  border-radius: 15px;
-  border: 2px solid transparent;
-  background: linear-gradient(to bottom, #00ffff, #ff2d55);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Iframe TikTok */
-.tiktok-embed {
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
-}
-
-/* Botones de navegación */
-.nav-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
-.left-button {
-  left: 10px;
-}
-.right-button {
-  right: 10px;
-}
-{% endstyle %}
-
 {% schema %}
 {
   "name": "TikTok Slider",
@@ -196,7 +18,7 @@
       "type": "text",
       "id": "title",
       "label": "Título principal",
-      "default": "Opinan de Vitatú"
+      "default": "Opiniones de Vitaminas"
     },
     {
       "type": "textarea",
@@ -245,16 +67,6 @@
       "type": "url",
       "id": "video_6",
       "label": "TikTok Video 6"
-    },
-    {
-      "type": "url",
-      "id": "video_7",
-      "label": "TikTok Video 7"
-    },
-    {
-      "type": "url",
-      "id": "video_8",
-      "label": "TikTok Video 8"
     }
   ],
   "presets": [
@@ -266,54 +78,151 @@
 }
 {% endschema %}
 
-{% javascript %}
-  class VideoController {
-    constructor() {
-        if (VideoController.instance) {
-            return VideoController.instance;
-        }
-        VideoController.instance = this;
-        this.currentPlaying = null;
-        this.inicializarEventos();
-    }
+<div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
+  
+  <!-- Sección de estrellas y título -->
+  <div class="tiktok-slider-header">
+    <div class="rating-reviews">
+      <div class="star-rating">
+        <div class="stars">
+          {% assign rating_val = section.settings.rating | plus: 0 %}
+          {% assign full_stars = rating_val | floor %}
+          {% assign fraction = rating_val | minus: full_stars %}
+          {% assign partial_percent = fraction | times: 100 %}
+          {% assign next_star = full_stars | plus: 1 %}
+          {% for star in (1..5) %}
+            {% if star <= full_stars %}
+              <span class="star full">&#9733;</span>
+            {% elsif star == next_star and fraction > 0 %}
+              <span class="star partial" style="--fill: {{ partial_percent }}%;">&#9733;</span>
+            {% else %}
+              <span class="star empty">&#9733;</span>
+            {% endif %}
+          {% endfor %}
+        </div>
+        <span class="rating-value">{{ rating_val }}</span>
+      </div>
+      <span class="reviews">{{ section.settings.reviews }}</span>
+    </div>
+    <h2 class="slider-title">{{ section.settings.title }}</h2>
+  </div>
 
-    inicializarEventos() {
-        const videoContainers = document.querySelectorAll(".video-container");
-        videoContainers.forEach((container) => {
-            container.addEventListener("click", (e) => {
-                e.preventDefault();
-                this.manejarReproduccion(container);
-            });
-        });
-    }
+  <!-- Carrusel de TikTok -->
+  <div class="tiktok-carousel">
+    <div class="tiktok-slider">
+      {% for i in (1..6) %}
+        {% capture video_var %}video_{{ i }}{% endcapture %}
+        {% assign video_url = section.settings[video_var] %}
+        {% if video_url contains "/video/" %}
+          {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
+          <div class="tiktok-slide">
+            <div class="video-container">
+              <iframe class="tiktok-embed"
+                src="https://www.tiktok.com/embed/{{ video_id }}?autoplay=0"
+                frameborder="0"
+                allow="autoplay; fullscreen; picture-in-picture"
+                scrolling="no">
+              </iframe>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 
-    manejarReproduccion(container) {
-        const iframe = container.querySelector(".tiktok-embed");
-        if (this.currentPlaying && this.currentPlaying !== iframe) {
-            const prevSrc = this.currentPlaying.getAttribute("src");
-            this.currentPlaying.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
-        }
-        if (iframe.getAttribute("src").indexOf("autoplay=1") === -1) {
-            iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
-            this.currentPlaying = iframe;
-        } else {
-            const prevSrc = iframe.getAttribute("src");
-            iframe.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
-            this.currentPlaying = null;
-        }
-    }
+  <!-- Mensaje inferior -->
+  <p class="bottom-message">{{ section.settings.bottom_message }}</p>
+
+</div>
+
+<style>
+/* Contenedor principal */
+.tiktok-slider-container {
+  text-align: center;
+  padding: 60px 20px;
+  border-radius: 10px;
+  position: relative;
+  max-width: 90%;
+  margin: 0 auto;
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    new VideoController();
-    window.scrollSlider = function(direction) {
-        const container = document.querySelector(".tiktok-carousel");
-        const slide = container.querySelector(".tiktok-slide");
-        if (slide) {
-            const slideWidth = slide.offsetWidth + 8;
-            container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
-        }
-    };
-});
+/* Carrusel */
+.tiktok-carousel {
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
 
-{% endjavascript %}
+.tiktok-slider {
+  display: flex;
+  gap: 10px;
+}
+
+/* Videos */
+.tiktok-slide {
+  flex: 0 0 auto;
+  width: 20%;
+  max-width: 220px;
+}
+
+/* Ajuste para pantallas grandes */
+@media (min-width: 1200px) {
+  .tiktok-slide {
+    width: 18%;
+  }
+}
+
+/* Ajuste para tabletas */
+@media (max-width: 1024px) {
+  .tiktok-slide {
+    width: 30%;
+  }
+}
+
+/* Ajuste para móviles */
+@media (max-width: 767px) {
+  .tiktok-slide {
+    width: 60%;
+  }
+}
+
+/* Estrellas */
+.star {
+  font-size: 20px;
+}
+
+.star.full {
+  color: gold;
+}
+
+.star.empty {
+  color: #ccc;
+}
+
+.star.partial {
+  position: relative;
+  display: inline-block;
+  color: #ccc;
+}
+
+.star.partial::before {
+  content: "★";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--fill);
+  overflow: hidden;
+  color: gold;
+}
+
+/* Espaciado entre slider y texto inferior */
+.bottom-message {
+  margin-top: 40px;
+  font-size: 14px;
+  color: #666;
+  padding-bottom: 30px;
+}
+</style>
