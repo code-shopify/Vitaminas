@@ -88,8 +88,8 @@
 }
 {% endschema %}
 
-<div class="container-fluid tiktok-slider-wrapper" style="background-color: {{ section.settings.background_color }};">
-  <div class="container text-center py-5">
+<div class="container-fluid py-5" style="background-color: {{ section.settings.background_color }};">
+  <div class="container text-center">
     
     <!-- Sección de estrellas y título -->
     <div class="tiktok-slider-header">
@@ -114,17 +114,17 @@
       <h2 class="slider-title mt-3">{{ section.settings.title }}</h2>
     </div>
 
-    <!-- Controles de navegación -->
-    <div class="d-flex justify-content-between align-items-center my-3">
-      <button class="btn nav-button left-button" onclick="scrollSlider(-1)">◀</button>
-      <div class="tiktok-carousel-container">
-        <div class="tiktok-carousel">
+    <!-- Slider -->
+    <div class="slider-wrapper">
+      <button class="slider-btn left-btn" onclick="scrollSlider(-1)">◀</button>
+      <div class="slider-container">
+        <div class="slider">
           {% for i in (1..8) %}
             {% capture video_var %}video_{{ i }}{% endcapture %}
             {% assign video_url = section.settings[video_var] %}
             {% if video_url contains "/video/" %}
               {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
-              <div class="tiktok-slide">
+              <div class="slide">
                 <div class="video-container">
                   <iframe class="tiktok-embed"
                     src="https://www.tiktok.com/embed/{{ video_id }}?autoplay=1&mute=0"
@@ -138,7 +138,7 @@
           {% endfor %}
         </div>
       </div>
-      <button class="btn nav-button right-button" onclick="scrollSlider(1)">▶</button>
+      <button class="slider-btn right-btn" onclick="scrollSlider(1)">▶</button>
     </div>
 
     <!-- Mensaje inferior -->
@@ -148,50 +148,32 @@
 </div>
 
 <style>
-/* Contenedor general del slider */
-.tiktok-carousel-container {
+/* Estilos del slider */
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.slider-container {
   width: 100%;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
+  overflow: hidden;
 }
 
-/* Mostrar máximo 5 videos en resoluciones grandes */
-@media (min-width: 1025px) {
-  .tiktok-carousel {
-    display: flex;
-    gap: 10px;
-    max-width: calc(300px * 5);
-    overflow: hidden;
-  }
+.slider {
+  display: flex;
+  transition: transform 0.5s ease;
 }
 
-/* Mostrar entre 2 y 3 videos en tablets */
-@media (max-width: 1024px) and (min-width: 768px) {
-  .tiktok-carousel {
-    display: flex;
-    gap: 10px;
-    max-width: calc(300px * 3);
-    overflow: hidden;
-  }
-}
-
-/* Mostrar 1 video en móviles */
-@media (max-width: 767px) {
-  .tiktok-carousel {
-    display: flex;
-    gap: 10px;
-    max-width: 300px;
-    overflow: hidden;
-  }
-}
-
-/* Ajuste del tamaño correcto del video */
-.tiktok-slide {
+/* Tamaño y ajuste de los videos */
+.slide {
   flex: 0 0 auto;
   width: 300px;
+  margin: 0 10px;
 }
 
-/* Ajuste del iframe */
 .video-container {
   position: relative;
   width: 100%;
@@ -211,7 +193,7 @@
 }
 
 /* Botones de navegación */
-.nav-button {
+.slider-btn {
   background: rgba(255, 255, 255, 0.8);
   color: black;
   border: none;
@@ -223,22 +205,38 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   transition: 0.3s;
 }
 
-.nav-button:hover {
+.left-btn {
+  left: 10px;
+}
+
+.right-btn {
+  right: 10px;
+}
+
+.slider-btn:hover {
   background: rgba(255, 255, 255, 1);
 }
 </style>
 
 <script>
-function scrollSlider(direction) {
-  const container = document.querySelector(".tiktok-carousel-container");
-  if (container) {
-    const slideWidth = 310;
-    container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
-  }
-}
+document.addEventListener("DOMContentLoaded", function () {
+    let position = 0;
+    const slides = document.querySelector(".slider");
+    const slideWidth = 320;
+  
+    window.scrollSlider = function(direction) {
+        position += direction * slideWidth;
+        position = Math.max(position, 0);
+        position = Math.min(position, slideWidth * (slides.children.length - 5));
+        slides.style.transform = `translateX(-${position}px)`;
+    };
+});
 </script>
 
 
