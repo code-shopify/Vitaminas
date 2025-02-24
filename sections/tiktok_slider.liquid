@@ -1,25 +1,212 @@
-<!-- ⭐ Estrellas y título -->
-<div class="tiktok-slider-header">
-  <div class="rating-reviews d-flex justify-content-center align-items-center">
-    <div class="star-rating d-flex align-items-center">
-      <div class="stars d-flex">
-        {% assign rating_val = section.settings.rating | plus: 0 %}
-        {% assign full_stars = rating_val | floor %}
-        {% assign fraction = rating_val | minus: full_stars %}
-        {% assign partial_percent = fraction | times: 100 %}
-        {% assign next_star = full_stars | plus: 1 %}
-        {% for star in (1..5) %}
-          <span class="star 
-            {% if star <= full_stars %}full{% elsif star == next_star and fraction > 0 %}partial{% else %}empty{% endif %}" 
-            {% if star == next_star and fraction > 0 %} style="--fill: {{ partial_percent }}%;"{% endif %}>
-            ★
-          </span>
-        {% endfor %}
+{% schema %}
+{
+  "name": "TikTok Slider",
+  "settings": [
+    {
+      "type": "text",
+      "id": "rating",
+      "label": "Calificación (Ejemplo: 4.8)",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "reviews",
+      "label": "Número de reseñas",
+      "default": "1,450 reviews"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título principal",
+      "default": "Opiniones de Vitaminas"
+    },
+    {
+      "type": "textarea",
+      "id": "bottom_message",
+      "label": "Mensaje inferior",
+      "default": "*EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIÉN LO RECOMIENDA Y DE QUIÉN LO USA, ESTE PRODUCTO NO ES UN MEDICAMENTO*"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#FEF8F0"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Configuración de Videos TikTok"
+    },
+    {
+      "type": "url",
+      "id": "video_1",
+      "label": "TikTok Video 1"
+    },
+    {
+      "type": "url",
+      "id": "video_2",
+      "label": "TikTok Video 2"
+    },
+    {
+      "type": "url",
+      "id": "video_3",
+      "label": "TikTok Video 3"
+    },
+    {
+      "type": "url",
+      "id": "video_4",
+      "label": "TikTok Video 4"
+    },
+    {
+      "type": "url",
+      "id": "video_5",
+      "label": "TikTok Video 5"
+    },
+    {
+      "type": "url",
+      "id": "video_6",
+      "label": "TikTok Video 6"
+    },
+    {
+      "type": "url",
+      "id": "video_7",
+      "label": "TikTok Video 7"
+    },
+    {
+      "type": "url",
+      "id": "video_8",
+      "label": "TikTok Video 8"
+    }
+  ],
+  "presets": [
+    {
+      "name": "TikTok Slider",
+      "category": "Multimedia"
+    }
+  ]
+}
+{% endschema %}
+
+<!-- 🔹 Contenedor Principal -->
+<div class="container-fluid py-5" style="background-color: {{ section.settings.background_color }};">
+  <div class="container text-center">
+    
+    <!-- ⭐ Sección de estrellas y título -->
+    <div class="tiktok-slider-header">
+      <div class="rating-reviews d-flex justify-content-center align-items-center">
+        <div class="star-rating d-flex align-items-center">
+          <div class="stars d-flex">
+            {% assign rating_val = section.settings.rating | plus: 0 %}
+            {% assign full_stars = rating_val | floor %}
+            {% assign fraction = rating_val | minus: full_stars %}
+            {% assign partial_percent = fraction | times: 100 %}
+            {% assign next_star = full_stars | plus: 1 %}
+            {% for star in (1..5) %}
+              <span class="star {% if star <= full_stars %}full{% elsif star == next_star and fraction > 0 %}partial{% else %}empty{% endif %}" {% if star == next_star and fraction > 0 %} style="--fill: {{ partial_percent }}%;"{% endif %}>
+                ★
+              </span>
+            {% endfor %}
+          </div>
+          <span class="rating-value ms-2">{{ rating_val }}</span>
+        </div>
+        <span class="reviews ms-2">{{ section.settings.reviews }}</span>
       </div>
-      <span class="rating-value ms-2">{{ rating_val }}</span>
+      <h2 class="slider-title mt-3">{{ section.settings.title }}</h2>
     </div>
-    <span class="reviews ms-2">{{ section.settings.reviews }}</span>
+
+    <!-- 🎥 Slider -->
+    <div class="slider-wrapper">
+      <button class="slider-btn left-btn" onclick="scrollSlider(-1)">◀</button>
+      <div class="slider-container">
+        <div class="slider">
+          {% for i in (1..8) %}
+            {% capture video_var %}video_{{ i }}{% endcapture %}
+            {% assign video_url = section.settings[video_var] %}
+            {% if video_url contains "/video/" %}
+              {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
+              <div class="slide">
+                <div class="video-container">
+                  <iframe class="tiktok-embed"
+                    src="https://www.tiktok.com/embed/{{ video_id }}?autoplay=1&mute=0"
+                    frameborder="0"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    scrolling="no">
+                  </iframe>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+      <button class="slider-btn right-btn" onclick="scrollSlider(1)">▶</button>
+    </div>
+
+    <!-- 📢 Mensaje inferior -->
+    <p class="bottom-message mt-4">{{ section.settings.bottom_message }}</p>
+
   </div>
-  <h2 class="slider-title mt-3">{{ section.settings.title }}</h2>
 </div>
 
+<style>
+/* ⭐ Estilos de estrellas corregidos */
+.star-rating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.stars {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+}
+
+.star {
+  font-size: 20px;
+  display: inline-block;
+  position: relative;
+  color: #ccc;
+}
+
+.star.full {
+  color: gold;
+}
+
+.star.partial {
+  position: relative;
+  color: gold;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.star.partial::after {
+  content: "★";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--fill, 50%);
+  overflow: hidden;
+  color: gold;
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    let position = 0;
+    const slides = document.querySelector(".slider");
+    const slideWidth = 270;
+    const maxPosition = slideWidth * (slides.children.length - 5);
+  
+    window.scrollSlider = function(direction) {
+        position += direction * slideWidth;
+        position = Math.max(0, Math.min(position, maxPosition));
+        slides.style.transform = `translateX(-${position}px)`;
+    };
+});
+</script>
