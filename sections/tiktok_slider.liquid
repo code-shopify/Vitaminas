@@ -131,7 +131,7 @@
               <div class="tiktok-slide mx-2">
                 <div class="video-container">
                   <iframe class="tiktok-embed"
-                    src="https://www.tiktok.com/embed/{{ video_id }}?autoplay=0&controls=0"
+                    src="https://www.tiktok.com/embed/{{ video_id }}?autoplay=1&mute=0"
                     frameborder="0"
                     allow="autoplay; fullscreen; picture-in-picture"
                     scrolling="no">
@@ -158,7 +158,7 @@
   width: 300px; /* Ajuste para formato 9:16 */
 }
 
-/* Mantener el aspecto 9:16 y eliminar etiquetas */
+/* Mantener el aspecto 9:16 */
 .video-container {
   position: relative;
   width: 100%;
@@ -168,6 +168,7 @@
   background: #000;
 }
 
+/* Ajustar el iframe correctamente */
 .video-container iframe {
   position: absolute;
   top: 0;
@@ -175,7 +176,6 @@
   width: 100%;
   height: 100%;
   border-radius: 15px;
-  pointer-events: none;
 }
 
 /* Botones de navegación */
