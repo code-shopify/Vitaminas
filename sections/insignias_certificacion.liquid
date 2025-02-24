@@ -66,15 +66,17 @@
   </div>
 {% style %}
       .banner-img {
-        width:100%
-        max-width: 1441px;
-        height:100vh;
-        min-height: 688px;
-        height: 100%;
-        margin: auto;
-        background-size: cover;
-        background-position:center top;
-        background-repeat: no-repeat;
+.banner-img {
+    width: 100%;
+    max-width: 1441px;
+    height: 100vh; /* Ocupa toda la pantalla */
+    min-height: 688px; /* Nunca será menor de 688px */
+    margin: auto;
+    background-size: contain; /* Prueba con cover si prefieres que no se corte */
+    background-position: center top; /* Ajusta la imagen */
+    background-repeat: no-repeat;
+}
+
       }
     @media (max-width: 1200px) {
     .banner-img {
