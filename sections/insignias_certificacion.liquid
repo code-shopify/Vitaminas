@@ -76,29 +76,27 @@
         background-position:center center;
         background-repeat: no-repeat;
       }
-    @media (max-width: 1200px) {
-    .banner-img {
-      height: 80vh;
+    /*---------------- Custom CSS for only tablet -------------------*/
+  @media (min-width: 768px) and (max-width: 1024px) {
+    .contenedor-ejemplo {
+      height: 100px;
+    }
+
+    .imagenes {
+      width: 50%;
+    }
+
+    .clase-texto {
+      width: 50%;
     }
   }
 
-  @media (max-width: 992px) {
-    .banner-img {
-      height: 70vh;
+  /*---------------- Custom CSS for only mobile -------------------*/
+  @media (max-width: 767px) {
+    .texto-final {
+      font-size: 13px !important;
     }
-  }
 
-  @media (max-width: 768px) {
-    .banner-img {
-      height: 60vh;
-    }
-  }
-
-  @media (max-width: 576px) {
-    .banner-img {
-      height: 50vh;
-    }
-  }
 {% endstyle %}
 {% schema %}
 {
