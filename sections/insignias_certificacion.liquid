@@ -14,48 +14,48 @@
             class="position-relative col-3 rounded-5"
             style="background-color:{{ section.settings.background_box}}; padding-top:45px; width: 20%;"
           >
-            <div class="position-absolute top-0 start-50 translate-middle">
+            <div class="position-absolute top-0 start-50 translate-middle box">
               <img src="{{ section.settings.image_box_1|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
             </div>
-            <div class="lh-sm">
+            <div class="lh-sm box">
               <p class="fw-bold">{{ section.settings.box_1 }}</p>
               <p>{{ section.settings.box_content }}</p>
             </div>
           </div>
           <div
-            class="position-relative col-3 rounded-5"
+            class="position-relative col-3 rounded-5 box"
             style="background-color:{{ section.settings.background_box}}; padding-top: 45px; width: 20%;"
           >
-            <div class="position-absolute top-0 start-50 translate-middle">
+            <div class="position-absolute top-0 start-50 translate-middle box">
               <img src="{{ section.settings.image_box_2|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
             </div>
-            <div class="lh-sm">
+            <div class="lh-sm box">
               <p class="fw-bold">{{ section.settings.box_2 }}</p>
               <p>{{ section.settings.box_content_2 }}</p>
             </div>
           </div>
         </div>
-        <div class="row gap-4 gy-4">
+        <div class="row gap-4 gy-4 box">
           <div
-            class="position-relative col-3 rounded-5"
+            class="position-relative col-3 rounded-5 box"
             style="background-color:{{ section.settings.background_box}}; padding-top:45px;width: 20%;"
           >
-            <div class="position-absolute top-0 start-50 translate-middle">
+            <div class="position-absolute top-0 start-50 translate-middle ox">
               <img src="{{ section.settings.image_box_3|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
             </div>
-            <div class="lh-sm">
+            <div class="lh-sm box">
               <p class="fw-bold">{{ section.settings.box_3 }}</p>
               <p>{{ section.settings.box_content_3 }}</p>
             </div>
           </div>
           <div
-            class="position-relative col-3 rounded-5"
+            class="position-relative col-3 rounded-5 box"
             style="background-color:{{ section.settings.background_box}};padding-top:45px;width: 20%;"
           >
-            <div class="position-absolute top-0 start-50 translate-middle">
+            <div class="position-absolute top-0 start-50 translate-middle box">
               <img src="{{ section.settings.image_box_4|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
             </div>
-            <div class="lh-sm">
+            <div class="lh-sm box">
               <p class="fw-bold">{{ section.settings.box_4 }}</p>
               <p>{{ section.settings.box_content_4 }}</p>
             </div>
@@ -66,34 +66,42 @@
   </div>
 </div>
 {% style %}
-  .banner-img {
-    width: 100%;
-    height: 688px; /* Altura fija o ajustable según tu diseño */
-    background-color: #E5D4C9; /* Color de fondo por defecto */
-    background-image: url('{{ section.settings.banner | image_url: width: 1441, height: 688 }}');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin: auto;
-  }
-    .img-fluid {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-    .contenedor{
-      overflow:hidden;
-      widht:1441px;
-      height:688px;
-    }
-    @media (max-width: 768px) {
     .banner-img {
-      background-image: none;
-      background-color: {{ section.settings.background_section }};
-      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), #E5D4C9);
+      width: 100%;
+      height: 688px; /* Altura fija o ajustable según tu diseño */
+      background-color: #E5D4C9; /* Color de fondo por defecto */
+      background-image: url('{{ section.settings.banner | image_url: width: 1441, height: 688 }}');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin: auto;
     }
-  }
-  }
+      .img-fluid {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+      .contenedor{
+        overflow:hidden;
+        widht:1441px;
+        height:688px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+        gap: 20px; /* Espacio entre elementos */
+        padding: 20px;
+      }
+      @media (max-width: 768px) {
+      .banner-img {
+        background-image: none;
+        background-color: {{ section.settings.background_section }};
+        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), #E5D4C9);
+      }
+    }
+  .titulo {
+  grid-column: span 2; /* El título ocupa dos columnas */
+  text-align: center;
+}
+
 {% endstyle %}
 {% schema %}
 {
