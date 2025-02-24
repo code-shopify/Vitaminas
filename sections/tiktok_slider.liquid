@@ -18,7 +18,7 @@
       "type": "text",
       "id": "title",
       "label": "Título principal",
-      "default": "Opiniones de Vitaminas"
+      "default": "Opinan de Vitatú"
     },
     {
       "type": "textarea",
@@ -118,16 +118,11 @@
       <h2 class="slider-title mt-3">{{ section.settings.title }}</h2>
     </div>
 
-    <!-- Botones de navegación (solo en móviles y tabletas) -->
-    <div class="d-flex justify-content-between d-md-none mt-3">
-      <button class="btn btn-dark" onclick="scrollSlider(-1)">◀</button>
-      <button class="btn btn-dark" onclick="scrollSlider(1)">▶</button>
-    </div>
-
-    <!-- Carrusel de TikTok -->
-    <div class="row justify-content-center mt-4">
-      <div class="col-12">
-        <div class="d-flex overflow-auto tiktok-carousel">
+    <!-- Controles de navegación -->
+    <div class="d-flex justify-content-between align-items-center my-3">
+      <button class="btn btn-dark nav-button left-button" onclick="scrollSlider(-1)">◀</button>
+      <div class="tiktok-carousel-container">
+        <div class="d-flex overflow-hidden tiktok-carousel">
           {% for i in (1..8) %}
             {% capture video_var %}video_{{ i }}{% endcapture %}
             {% assign video_url = section.settings[video_var] %}
@@ -147,6 +142,7 @@
           {% endfor %}
         </div>
       </div>
+      <button class="btn btn-dark nav-button right-button" onclick="scrollSlider(1)">▶</button>
     </div>
 
     <!-- Mensaje inferior -->
@@ -156,22 +152,21 @@
 </div>
 
 <style>
-/* Ajuste del tamaño correcto del video */
+/* Ajustar tamaño del video y contenedor */
 .tiktok-slide {
   flex: 0 0 auto;
-  width: 250px; /* Ajusta el ancho según el formato 9:16 */
+  width: 280px; /* Ajuste para formato 9:16 */
 }
 
-/* Mantener el aspecto 9:16 con bordes visibles */
+/* Mantener el aspecto 9:16 y bordes visibles */
 .video-container {
   position: relative;
   width: 100%;
   padding-top: 177.77%;
-  border-radius: 15px; /* Bordes visibles */
+  border-radius: 15px;
   overflow: hidden;
 }
 
-/* Ajustar el iframe correctamente */
 .video-container iframe {
   position: absolute;
   top: 0;
@@ -180,7 +175,31 @@
   height: 100%;
 }
 
-/* Ajustes de las estrellas */
+/* Carrusel */
+.tiktok-carousel-container {
+  width: 85%;
+  overflow-x: auto;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+}
+
+/* Ocultar scrollbar */
+.tiktok-carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Botones de navegación */
+.nav-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 20px;
+}
+
+/* Ajustes de estrellas */
 .star {
   font-size: 20px;
 }
@@ -213,7 +232,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     function scrollSlider(direction) {
-        const container = document.querySelector(".tiktok-carousel");
+        const container = document.querySelector(".tiktok-carousel-container");
         if (container) {
             const slide = container.querySelector(".tiktok-slide");
             if (slide) {
@@ -224,3 +243,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 </script>
+
