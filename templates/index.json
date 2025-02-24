@@ -167,6 +167,9 @@
       "type": "ejemplo",
       "settings": {
         "texto": "Productos elaborados en instalaciones con las siguientes certificaciones y registros:",
+        "imagen_1": "shopify://shop_images/BPM.png",
+        "imagen_2": "shopify://shop_images/HACCP.png",
+        "imagen_3": "shopify://shop_images/Group.png",
         "background_color": "#f0e6ff"
       }
     },
