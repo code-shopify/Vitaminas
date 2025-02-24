@@ -91,7 +91,7 @@
 <div class="container-fluid py-5" style="background-color: {{ section.settings.background_color }};">
   <div class="container text-center">
     
-    <!-- Estrellas y título -->
+    <!-- Sección de estrellas y título -->
     <div class="tiktok-slider-header">
       <div class="rating-reviews d-flex justify-content-center align-items-center">
         <div class="star-rating">
@@ -102,7 +102,7 @@
             {% assign partial_percent = fraction | times: 100 %}
             {% assign next_star = full_stars | plus: 1 %}
             {% for star in (1..5) %}
-              <span class="star {% if star <= full_stars %}full{% elsif star == next_star and fraction > 0 %}partial{% else %}empty{% endif %}" style="--fill: {{ partial_percent }}%;">
+              <span class="star {% if star <= full_stars %}full{% elsif star == next_star and fraction > 0 %}partial{% else %}empty{% endif %}" style="width: {{ partial_percent }}%">
                 ★
               </span>
             {% endfor %}
@@ -222,6 +222,25 @@
 .slider-btn:hover {
   background: rgba(255, 255, 255, 1);
 }
+
+/* Estilos de estrellas */
+.star {
+  font-size: 20px;
+  display: inline-block;
+  position: relative;
+  color: #ccc;
+}
+
+.star.full {
+  color: gold;
+}
+
+.star.partial {
+  color: transparent;
+  background: linear-gradient(to right, gold var(--fill, 50%), #ccc var(--fill, 50%));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 </style>
 
 <script>
@@ -229,13 +248,14 @@ document.addEventListener("DOMContentLoaded", function () {
     let position = 0;
     const slides = document.querySelector(".slider");
     const slideWidth = 320;
+    const maxPosition = slideWidth * (slides.children.length - 5);
   
     window.scrollSlider = function(direction) {
         position += direction * slideWidth;
-        position = Math.max(position, 0);
-        position = Math.min(position, slideWidth * (slides.children.length - 5));
+        position = Math.max(0, Math.min(position, maxPosition));
         slides.style.transform = `translateX(-${position}px)`;
     };
 });
 </script>
+
 
