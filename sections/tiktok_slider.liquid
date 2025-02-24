@@ -102,7 +102,7 @@
             {% assign partial_percent = fraction | times: 100 %}
             {% assign next_star = full_stars | plus: 1 %}
             {% for star in (1..5) %}
-              <span class="star {% if star <= full_stars %}full{% elsif star == next_star and fraction > 0 %}partial{% else %}empty{% endif %}" data-fill="{{ partial_percent }}%">
+              <span class="star {% if star <= full_stars %}full{% elsif star == next_star and fraction > 0 %}partial{% else %}empty{% endif %}" style="--fill: {{ partial_percent }}%;">
                 ★
               </span>
             {% endfor %}
@@ -124,7 +124,7 @@
             {% assign video_url = section.settings[video_var] %}
             {% if video_url contains "/video/" %}
               {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
-              <div class="tiktok-slide mx-2">
+              <div class="tiktok-slide">
                 <div class="video-container">
                   <iframe class="tiktok-embed"
                     src="https://www.tiktok.com/embed/{{ video_id }}?autoplay=1&mute=0"
@@ -148,48 +148,50 @@
 </div>
 
 <style>
-/* Ajuste del tamaño correcto del video */
-.tiktok-slide {
-  flex: 0 0 auto;
-  width: 280px;
-}
-
-/* Contenedor de videos */
+/* Contenedor general del slider */
 .tiktok-carousel-container {
-  overflow-x: auto;
+  width: 100%;
+  overflow-x: hidden;
   scroll-behavior: smooth;
-  max-width: 100%;
 }
 
-/* Control de cantidad de videos según la resolución */
+/* Mostrar máximo 5 videos en resoluciones grandes */
 @media (min-width: 1025px) {
   .tiktok-carousel {
     display: flex;
     gap: 10px;
-    max-width: calc(280px * 5);
+    max-width: calc(300px * 5);
     overflow: hidden;
   }
 }
 
+/* Mostrar entre 2 y 3 videos en tablets */
 @media (max-width: 1024px) and (min-width: 768px) {
   .tiktok-carousel {
     display: flex;
     gap: 10px;
-    max-width: calc(280px * 3);
+    max-width: calc(300px * 3);
     overflow: hidden;
   }
 }
 
+/* Mostrar 1 video en móviles */
 @media (max-width: 767px) {
   .tiktok-carousel {
     display: flex;
     gap: 10px;
-    max-width: 280px;
+    max-width: 300px;
     overflow: hidden;
   }
 }
 
-/* Ajustar el iframe correctamente */
+/* Ajuste del tamaño correcto del video */
+.tiktok-slide {
+  flex: 0 0 auto;
+  width: 300px;
+}
+
+/* Ajuste del iframe */
 .video-container {
   position: relative;
   width: 100%;
@@ -227,35 +229,16 @@
 .nav-button:hover {
   background: rgba(255, 255, 255, 1);
 }
-
-/* Estilo de estrellas */
-.star {
-  font-size: 20px;
-}
-
-.star.full {
-  color: gold;
-}
-
-.star.empty {
-  color: #ccc;
-}
-
-.star.partial {
-  color: gold;
-  background: linear-gradient(90deg, gold var(--fill, 0%), #ccc var(--fill, 0%));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 </style>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    function scrollSlider(direction) {
-        const container = document.querySelector(".tiktok-carousel-container");
-        container.scrollBy({ left: 300 * direction, behavior: "smooth" });
-    }
-});
+function scrollSlider(direction) {
+  const container = document.querySelector(".tiktok-carousel-container");
+  if (container) {
+    const slideWidth = 310;
+    container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
+  }
+}
 </script>
 
 
