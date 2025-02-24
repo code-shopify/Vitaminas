@@ -1,103 +1,93 @@
-  <div class="t4s-section-inner vitatu-section;">
 <div
-  class="banner-img "
-  style="background-image:url('{{ section.settings.banner| image_url: width: 1441, height:688}}');"
+  class="t4s-section-inner vitatu-section;"
+  style="width: 100vw; min-height:688px; background-image:url('{{ section.settings.banner| image_url: width: auto, height: auto}}'); background-size:cover;"
 >
+  <div class="t4s-container h-100">
     <div class="text-dark p-5">
       <header class="fw-bold text-start" style="font-size: 45px;">
         {{ section.settings.header }}
       </header>
     </div>
     <div class="container text-dark text-center">
-      <div class="row gap-5">
-        <div class="row gap-4 gy-4">
-          <div
-            class="position-relative col-3 rounded-5"
-            style="background-color:{{ section.settings.background_box}}; padding-top:45px; width: 20%;"
-          >
-            <div class="position-absolute top-0 start-50 translate-middle">
-              <img src="{{ section.settings.image_box_1|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+        <div class="row gap-5">
+          <div class="row gap-4 gy-4">
+            <div
+              class="position-relative col-3 rounded-5"
+              style="background-color:{{ section.settings.background_box}}; padding-top:45px; width: 18%;"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle">
+                <img src="{{ section.settings.image_box_1|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_1 }}</p>
+                <p>{{ section.settings.box_content }}</p>
+              </div>
             </div>
-            <div class="lh-sm">
-              <p class="fw-bold">{{ section.settings.box_1 }}</p>
-              <p>{{ section.settings.box_content }}</p>
-            </div>
-          </div>
-          <div
-            class="position-relative col-3 rounded-5"
-            style="background-color:{{ section.settings.background_box}}; padding-top: 45px; width: 20%;"
-          >
-            <div class="position-absolute top-0 start-50 translate-middle">
-              <img src="{{ section.settings.image_box_2|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
-            </div>
-            <div class="lh-sm">
-              <p class="fw-bold">{{ section.settings.box_2 }}</p>
-              <p>{{ section.settings.box_content_2 }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="row gap-4 gy-4">
-          <div
-            class="position-relative col-3 rounded-5"
-            style="background-color:{{ section.settings.background_box}}; padding-top:45px;width: 20%;"
-          >
-            <div class="position-absolute top-0 start-50 translate-middle">
-              <img src="{{ section.settings.image_box_3|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
-            </div>
-            <div class="lh-sm">
-              <p class="fw-bold">{{ section.settings.box_3 }}</p>
-              <p>{{ section.settings.box_content_3 }}</p>
+            <div
+              class="position-relative col-3 rounded-5"
+              style="background-color:{{ section.settings.background_box}}; padding-top: 45px width: 18%;"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle">
+                <img src="{{ section.settings.image_box_2|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_2 }}</p>
+                <p>{{ section.settings.box_content_2 }}</p>
+              </div>
             </div>
           </div>
-          <div
-            class="position-relative col-3 rounded-5"
-            style="background-color:{{ section.settings.background_box}};padding-top:45px;width: 20%;"
-          >
-            <div class="position-absolute top-0 start-50 translate-middle">
-              <img src="{{ section.settings.image_box_4|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+          <div class="row gap-4 gy-4">
+            <div class="position-relative col-3 rounded-5" style="background-color:{{ section.settings.background_box}}; padding-top:45pxwidth: 18%;">
+              <div class="position-absolute top-0 start-50 translate-middle">
+                <img src="{{ section.settings.image_box_3|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_3 }}</p>
+                <p>{{ section.settings.box_content_3 }}</p>
+              </div>
             </div>
-            <div class="lh-sm">
-              <p class="fw-bold">{{ section.settings.box_4 }}</p>
-              <p>{{ section.settings.box_content_4 }}</p>
+            <div class="position-relative col-3 rounded-5" style="background-color:{{ section.settings.background_box}};padding-top:45pxwidth: 18%;">
+              <div class="position-absolute top-0 start-50 translate-middle">
+                <img src="{{ section.settings.image_box_4|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_4 }}</p>
+                <p>{{ section.settings.box_content_4 }}</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 {% style %}
-      .banner-img {
-        width:100%;
-        max-width: 1441px;
-        max-height: 688px;
-        height: 100vh;
-        margin: auto;
-        background-size: contain;
-        background-position:center;
-        background-repeat: no-repeat;
-      }
-    @media (max-width: 1200px) {
+  .banner-img {
+    width: 10%;
+    max-height: 300px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 1200px) {
     .banner-img {
-      height: 80vh;
+      max-height: 400px;
     }
   }
 
   @media (max-width: 992px) {
     .banner-img {
-      height: 70vh;
+      max-height: 350px;
     }
   }
 
   @media (max-width: 768px) {
     .banner-img {
-      height: 60vh;
+      max-height: 300px;
     }
   }
 
   @media (max-width: 576px) {
     .banner-img {
-      height: 50vh;
+      max-height: 250px;
     }
   }
 {% endstyle %}
