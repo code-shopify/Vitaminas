@@ -326,7 +326,9 @@
         "video_WFyH4R",
         "video_qJGQpF"
       ],
-      "settings": {}
+      "settings": {
+        "background_color": "#f59c20"
+      }
     }
   },
   "order": [
