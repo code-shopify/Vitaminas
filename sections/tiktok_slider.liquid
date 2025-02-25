@@ -345,48 +345,122 @@ display: flex;
    Media queries responsivas
    ========================= */
 /* Para pantallas extra pequeñas (≤ 480px) - SOLO 1 video a la vez */
+/* 🌟 Extra pequeñas (≤ 480px) - 1 video a la vez, más grande y con espacio */
 @media (max-width: 480px) {
-  .tiktok-slider {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-  .tiktok-slide {
-    flex: 0 0 100%; /* Muestra solo 1 video por pantalla */
-    max-width: 100%;
+  .tiktok-slider-container {
+    padding: 20px 10px;
   }
 
   .tiktok-carousel {
     padding: 10px;
   }
 
+  .tiktok-slider {
+    gap: 15px; /* Aumenta el espacio entre slides */
+  }
+
+  .tiktok-slide {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
   .tiktok-embed, .shopify-video {
-    height: 250px; /* Reduce el tamaño del video */
+    width: 95%;
+    height: 320px; /* Aumenta el tamaño del video */
   }
 
   .with-border {
-    padding: 5px;
-    width: 90%; /* Ajusta el ancho del video */
+    width: 95%;
+    padding: 8px; /* Ajusta el borde para que no sea tan grande */
   }
 
   .slider-title {
-    font-size: 20px; /* Reduce el tamaño del título */
+    font-size: 20px;
   }
 
   .rating-reviews {
     flex-direction: column;
     gap: 8px;
   }
+
+  .nav-button {
+    display: none; /* Oculta navegación en móviles pequeños */
+  }
 }
 
-  @media (min-width: 768px) and (max-width: 1023px) {
-    
+/* 🌟 Móviles (≤ 767px) - 1 video a la vez, con más espacio */
+@media (max-width: 767px) {
+  .tiktok-slider-container {
+    padding: 30px 10px;
+  }
+
+  .tiktok-carousel {
+    padding: 15px;
+  }
+
+  .tiktok-slider {
+    gap: 20px; /* Aumenta la separación entre los videos */
+  }
+
   .tiktok-slide {
-    flex: 0 0 calc(100% / 2.5); /* Muestra ~2.5 slides en tablets */
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .tiktok-embed, .shopify-video {
+    width: 95%;
+    height: 350px; /* Hace el video más grande para mejor visualización */
+  }
+
+  .with-border {
+    width: 95%;
+    padding: 10px; /* Ajusta el borde dinámicamente */
   }
 
   .slider-title {
-    font-size: 28px;
+    font-size: 22px;
+    margin-bottom: 15px;
+  }
+
+  .rating-reviews {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-button {
+    display: none;
+  }
+}
+
+/* 🌟 Tablets (768px - 1023px) - Muestra 2 videos */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .tiktok-slider-container {
+    padding: 40px 15px;
+  }
+
+  .tiktok-slider {
+    gap: 25px;
+  }
+
+  .tiktok-slide {
+    flex: 0 0 calc(100% / 2);
+    max-width: calc(100% / 2);
+  }
+
+  .tiktok-embed, .shopify-video {
+    width: 90%;
+    height: 380px;
+  }
+
+  .with-border {
+    width: 90%;
+    padding: 12px;
+  }
+
+  .slider-title {
+    font-size: 26px;
   }
 
   .rating-value, .reviews {
@@ -394,36 +468,77 @@ display: flex;
   }
 
   .nav-button {
-    display: none; /* Oculta los botones de navegación en tablets */
+    display: none;
   }
 }
-  @media (min-width: 1024px) and (max-width: 1366px) {
+
+/* 🌟 Laptops (1024px - 1366px) - Muestra 3 videos */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .tiktok-slider-container {
+    padding: 50px 20px;
+  }
+
+  .tiktok-slider {
+    gap: 30px;
+  }
+
   .tiktok-slide {
-    flex: 0 0 calc(100% / 4); /* Muestra 4 slides en laptops */
+    flex: 0 0 calc(100% / 3);
+    max-width: calc(100% / 3);
+  }
+
+  .tiktok-embed, .shopify-video {
+    width: 85%;
+    height: 400px;
+  }
+
+  .with-border {
+    width: 85%;
+    padding: 15px;
   }
 
   .slider-title {
-    font-size: 30px;
+    font-size: 28px;
   }
 
   .rating-value, .reviews {
     font-size: 20px;
   }
 }
+
+/* 🌟 Pantallas grandes (≥ 1367px) - Muestra 4 videos */
 @media (min-width: 1367px) {
+  .tiktok-slider-container {
+    padding: 60px 20px;
+  }
+
+  .tiktok-slider {
+    gap: 35px;
+  }
+
   .tiktok-slide {
-    flex: 0 0 calc(100% / 4.5); /* Muestra 4.5 slides en pantallas grandes */
+    flex: 0 0 calc(100% / 4);
+    max-width: calc(100% / 4);
+  }
+
+  .tiktok-embed, .shopify-video {
+    width: 80%;
+    height: 450px;
+  }
+
+  .with-border {
+    width: 80%;
+    padding: 18px;
   }
 
   .slider-title {
-    font-size: 36px;
+    font-size: 32px;
   }
 
   .rating-value, .reviews {
     font-size: 22px;
   }
 }
-
 
 
 </style>
