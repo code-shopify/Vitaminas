@@ -267,7 +267,7 @@
     }
     .contenido{
       font-size:13px;
-      
+      line-height: inherit;
     }
     @media (max-width: 1025px) {
     .logos {
@@ -286,7 +286,7 @@
             {% if section.settings.icono_izq != blank %}
               <img src="{{ section.settings.icono_izq | img_url: '45x45' }}" alt="icon" class="me-2">
             {% endif %}
-            <p class="mb-0 lh-sm">
+            <p class="mb-0">
               <span class="fw-bold contenido">{{ section.settings.titulo_izq }}</span>
                 <span class="contenido">
                   {{section.settings.texto_abajo_izq}}
@@ -299,9 +299,9 @@
             {% if section.settings.icono_der != blank %}
               <img src="{{ section.settings.icono_der | img_url: '45x45' }}" alt="icon" class="me-2">
             {% endif %}
-            <p class="mb-0 lh-sm">
+            <p class="mb-0">
               <span class="fw-bold contenido">{{ section.settings.titulo_der }}</span>
-              <span class="lh-sm contenido" >{{ section.settings.texto_abajo_der}}</span>
+              <span class="contenido" >{{ section.settings.texto_abajo_der}}</span>
             </p>
           </div>
         </div>
