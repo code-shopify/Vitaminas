@@ -79,9 +79,76 @@
       <div class="swiper-button-prev"></div>
     </div>
   </div>
+  
+  <!-- Mensaje Inferior -->
+  <p class="bottom-message">{{ section.settings.bottom_message }}</p>
+</div>
+  </div>
 </div>
 
 <style>
+  .rating-reviews {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .star-rating {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .stars {
+    display: flex;
+    gap: 2px;
+  }
+  
+  .star {
+    font-size: 30px;
+    line-height: 1;
+  }
+  
+  .star.full {
+    color: gold;
+  }
+  
+  .star.empty {
+    color: #ccc;
+  }
+  
+  .star.partial {
+    position: relative;
+    display: inline-block;
+    color: #ccc;
+  }
+  
+  .star.partial::before {
+    content: "★";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--fill);
+    overflow: hidden;
+    color: gold;
+  }
+  
+  .slider-title {
+    font-size: 30px;
+    font-weight: 700;
+    margin: 0;
+  }
+  
+  .bottom-message {
+    margin-top: 62px;
+    font-size: 14px;
+    color: #666;
+    padding: 22px;
+  }
+
 
   .slider-containerv8 {
     position: relative;
@@ -374,12 +441,42 @@
 {
   "name": "movie slider",
   "settings": [
-            {
-          "type": "color",
-          "id": "background_color",
-          "label": "Color de fondo",
-          "default": "#FEF8F0"
-        },
+     {
+      "type": "text",
+      "id": "rating",
+      "label": "Calificación (Ejemplo: 4.8)",
+      "default": "4.8"
+    },
+    {
+      "type": "text",
+      "id": "reviews",
+      "label": "Número de reseñas",
+      "default": "1,450 reviews"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título principal",
+      "default": "Opinan de Vitatú"
+    },
+    {
+      "type": "textarea",
+      "id": "bottom_message",
+      "label": "Mensaje inferior",
+      "default": "*EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIÉN LO RECOMIENDA Y DE QUIÉN LO USA, ESTE PRODUCTO NO ES UN MEDICAMENTO*"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Color de fondo",
+      "default": "#FEF8F0"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#333333"
+    },
   ],
   "blocks": [
     {
