@@ -374,6 +374,25 @@ display: flex;
   }
 }
 
+  @media (min-width: 768px) and (max-width: 1023px) {
+  .tiktok-slide {
+    flex: 0 0 calc(100% / 2.5); /* Muestra ~2.5 slides en tablets */
+    max-width: calc(100% / 2.5);
+  }
+
+  .slider-title {
+    font-size: 28px;
+  }
+
+  .rating-value, .reviews {
+    font-size: 18px;
+  }
+
+  .nav-button {
+    display: none; /* Oculta los botones de navegación en tablets */
+  }
+}
+
 
 </style>
 
