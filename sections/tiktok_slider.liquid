@@ -97,41 +97,44 @@
     margin: 0 !important;
   }
 </style>
-
-<div class="tiktok-slider-container " style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
-  
-  <!-- Sección Superior -->
-  <div class="tiktok-slider-header">
-    <!-- Calificación y Reseñas -->
-    <div class="rating-reviews">
-      <div class="star-rating">
-        <div class="stars">
-          {% assign rating_val = section.settings.rating | plus: 0 %}
-          {% assign full_stars = rating_val | floor %}
-          {% assign fraction = rating_val | minus: full_stars %}
-          {% assign partial_percent = fraction | times: 100 %}
-          {% assign next_star = full_stars | plus: 1 %}
-          {% for star in (1..5) %}
-            {% if star <= full_stars %}
-              <span class="star full">&#9733;</span>
-            {% elsif star == next_star %}
-              {% if fraction > 0 %}
-                <span class="star partial" style="--fill: {{ partial_percent }}%;">&#9733;</span>
-              {% else %}
-                <span class="star empty">&#9733;</span>
-              {% endif %}
-            {% else %}
-              <span class="star empty">&#9733;</span>
-            {% endif %}
-          {% endfor %}
+<div class="t4s-section-inner t4s-container-wrap">
+  <div class="t4s-container"> 
+    <div class="tiktok-slider-container " style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
+      
+      <!-- Sección Superior -->
+      <div class="tiktok-slider-header">
+        <!-- Calificación y Reseñas -->
+        <div class="rating-reviews">
+          <div class="star-rating">
+            <div class="stars">
+              {% assign rating_val = section.settings.rating | plus: 0 %}
+              {% assign full_stars = rating_val | floor %}
+              {% assign fraction = rating_val | minus: full_stars %}
+              {% assign partial_percent = fraction | times: 100 %}
+              {% assign next_star = full_stars | plus: 1 %}
+              {% for star in (1..5) %}
+                {% if star <= full_stars %}
+                  <span class="star full">&#9733;</span>
+                {% elsif star == next_star %}
+                  {% if fraction > 0 %}
+                    <span class="star partial" style="--fill: {{ partial_percent }}%;">&#9733;</span>
+                  {% else %}
+                    <span class="star empty">&#9733;</span>
+                  {% endif %}
+                {% else %}
+                  <span class="star empty">&#9733;</span>
+                {% endif %}
+              {% endfor %}
+            </div>
+            <span class="rating-value">{{ rating_val }}</span>
+          </div>
+          <span class="reviews">{{ section.settings.reviews }}</span>
         </div>
-        <span class="rating-value">{{ rating_val }}</span>
+        
+        <h2 class="slider-title">{{ section.settings.title }}</h2>
       </div>
-      <span class="reviews">{{ section.settings.reviews }}</span>
     </div>
-    
-    <h2 class="slider-title">{{ section.settings.title }}</h2>
-  </div>
+  </div
 
   <!-- Botón Izquierdo -->
   <button class="nav-button left-button" onclick="scrollSlider(-1)">&#10094;</button>
