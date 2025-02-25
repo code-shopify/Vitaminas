@@ -1,327 +1,369 @@
+<div class="t4s-section-inner t4s-container-wrap">
+  <div class="t4s-container"> 
+    <div class="slider-containerv8 swiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <div class="slidev8">
+              <div class="with-borderv8">
+                {% if block.settings.video_url contains "cdn.shopify.com" %}
+                  <video 
+                    class="shopify-videov8"
+                    loop
+                    playsinline
+                    preload="auto">
+                    <source src="{{ block.settings.video_url }}" type="video/mp4">
+                  </video>
+                {% else %}
+                  <p>URL no válida. Asegúrate de ingresar una URL de video de Shopify.</p>
+                {% endif %}
+              </div>
+              
+              {% if block.settings.featured_product != blank %}
+                <div class="product-boxv8">
+                  <a href="{{ block.settings.featured_product.url }}" class="product-linkv8">
+                    <img src="{{ block.settings.featured_product.featured_image | img_url: '150x150' }}" alt="{{ block.settings.featured_product.title }}">
+                    <div class="product-info">
+                      <span class="product-title">{{ block.settings.featured_product.title }}</span>
+                      <span class="product-price">
+                        {{ block.settings.featured_product.price | money }}
+                        {% if block.settings.featured_product.compare_at_price > block.settings.featured_product.price %}
+                          <span class="product-old-price">{{ block.settings.featured_product.compare_at_price | money }}</span>
+                        {% endif %}
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Botones de navegación -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Sustituye tu <style> actual por este -->
+<style>
+  .slider-containerv8 {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px 0;
+  }
+
+  /* Ajuste para que se vean varias tarjetas con más separación, 
+     imitando el estilo de la segunda imagen */
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slidev8 {
+    /* Ajuste de ancho máximo para que las tarjetas sean más estrechas 
+       y se vean más columnas en pantallas grandes */
+    max-width: 280px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    margin: 0 auto;
+  }
+
+  /* Borde degradado (rojo y azul) */
+  .with-borderv8 {
+    position: relative;
+    padding: 3px; /* Ajuste del padding para que el marco sea más sutil */
+    border-radius: 10px;
+    background: linear-gradient(0deg, #fe2d52, #28ffff);
+    z-index: 2;
+  }
+
+  /* Ajuste del video para que sea vertical (similar a TikTok) 
+     y mantener el borde */
+  .shopify-videov8 {
+    width: 100%;
+    /* Eliminamos height fija y usamos aspect-ratio para que sea vertical */
+    aspect-ratio: 9/16; 
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  /* Overlay para el botón de play/pausa */
+  .video-overlayv8 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 63, 161, 0.22);
+    transition: background 0.3s ease;
+    border-radius: 10px; /* Ajuste al mismo radio del video */
+  }  
+  
+  .video-overlayv8.playing {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  .play-iconv8 {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+  }
+
+  .play-iconv8::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 20px;
+    border-color: transparent transparent transparent #000;
+    margin-left: 4px;
+  }
+
+  .video-overlayv8.playing .play-iconv8 {
+    opacity: 0;
+  }
+
+  /* Caja de producto */
+  .product-boxv8 {
+    display: flex;
+    align-items: center;
+    background: #fbfbfb;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+    width: 100%;
+    max-width: 280px;
+    text-align: left;
+  }
+
+  .product-linkv8 {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    flex-grow: 1;
+  }
+
+  .product-linkv8 img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .product-title {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.2;
+  }
+
+  .product-price {
+    font-size: 12px;
+    font-weight: bold;
+    color: #f05454;
+  }
+
+  .product-old-price {
+    font-size: 12px;
+    text-decoration: line-through;
+    color: #888;
+    margin-left: 5px;
+  }
+
+  /* Botones Swiper */
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    color: #000;
+  }
+
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .swiper-button-next {
+    right: 0;
+  }
+
+  .swiper-button-prev {
+    left: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 767px) {
+    .slider-containerv8 {
+      padding: 10px;
+    }
+
+    .slidev8 {
+      max-width: 250px;
+    }
+
+    .shopify-videov8 {
+      /* Mantener la relación de aspecto en pantallas pequeñas */
+      aspect-ratio: 9/16; 
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      width: 30px;
+      height: 30px;
+    }
+
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+      font-size: 14px;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const videos = document.querySelectorAll('.shopify-videov8');
+    
+    videos.forEach(video => {
+      const overlay = document.createElement('div');
+      overlay.className = 'video-overlayv8';
+      
+      const playIcon = document.createElement('div');
+      playIcon.className = 'play-iconv8';
+      overlay.appendChild(playIcon);
+      
+      video.parentElement.appendChild(overlay);
+      
+      overlay.addEventListener('click', () => {
+        videos.forEach(v => {
+          if (v !== video) {
+            v.pause();
+            v.muted = true;
+            v.parentElement.querySelector('.video-overlayv8').classList.remove('playing');
+          }
+        });
+        
+        if (video.paused) {
+          video.play();
+          video.muted = false;
+          overlay.classList.add('playing');
+        } else {
+          video.pause();
+          overlay.classList.remove('playing');
+        }
+      });
+    });
+
+    new Swiper(".swiper", {
+      slidesPerView: 1,
+      spaceBetween: 5,
+      speed: 500,
+      loop: true,
+      loopedSlides: 8,
+      watchOverflow: true,
+      allowTouchMove: true,
+      preventInteractionOnTransition: false,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+        hideOnClick: false,
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 5,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 5,
+        }
+      },
+      on: {
+        init: function() {
+          this.update();
+        },
+        slideChange: function () {
+          videos.forEach(video => {
+            video.pause();
+            video.muted = true;
+            video.parentElement.querySelector('.video-overlayv8').classList.remove('playing');
+          });
+        },
+        beforeDestroy: function () {
+          videos.forEach(video => {
+            video.pause();
+          });
+        }
+      }
+    });
+  });
+</script>
+
 {% schema %}
 {
-  "name": "TikTok Slider",
-  "settings": [
+  "name": "Video Swiper Slider",
+  "settings": [],
+  "blocks": [
     {
-      "type": "text",
-      "id": "rating",
-      "label": "Calificación (Ejemplo: 4.8)",
-      "default": "4.8"
-    },
-    {
-      "type": "text",
-      "id": "reviews",
-      "label": "Número de reseñas",
-      "default": "1,450 reviews"
-    },
-    {
-      "type": "text",
-      "id": "title",
-      "label": "Título principal",
-      "default": "Opinan de Vitatú"
-    },
-    {
-      "type": "textarea",
-      "id": "bottom_message",
-      "label": "Mensaje inferior",
-      "default": "*EL CONSUMO DE ESTE PRODUCTO ES RESPONSABILIDAD DE QUIÉN LO RECOMIENDA Y DE QUIÉN LO USA, ESTE PRODUCTO NO ES UN MEDICAMENTO*"
-    },
-    {
-      "type": "color",
-      "id": "background_color",
-      "label": "Color de fondo",
-      "default": "#FEF8F0"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": "Color del texto",
-      "default": "#333333"
-    },
-    {
-      "type": "url",
-      "id": "video_1",
-      "label": "TikTok Video 1"
-    },
-    {
-      "type": "url",
-      "id": "video_2",
-      "label": "TikTok Video 2"
-    },
-    {
-      "type": "url",
-      "id": "video_3",
-      "label": "TikTok Video 3"
-    },
-    {
-      "type": "url",
-      "id": "video_4",
-      "label": "TikTok Video 4"
-    },
-    {
-      "type": "url",
-      "id": "video_5",
-      "label": "TikTok Video 5"
-    },
-    {
-      "type": "url",
-      "id": "video_6",
-      "label": "TikTok Video 6"
-    },
-    {
-      "type": "url",
-      "id": "video_7",
-      "label": "TikTok Video 7"
-    },
-    {
-      "type": "url",
-      "id": "video_8",
-      "label": "TikTok Video 8"
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "URL del video de Shopify",
+          "info": "Ingresa la URL del video de Shopify. Ejemplo: https://cdn.shopify.com/videos/..."
+        },
+        {
+          "type": "product",
+          "id": "featured_product",
+          "label": "Seleccionar producto"
+        }
+      ]
     }
   ],
+  "max_blocks": 7,
   "presets": [
     {
-      "name": "TikTok Slider",
-      "category": "Multimedia"
+      "name": "TikTok Swiper Slider",
+      "category": "Custom"
     }
   ]
 }
 {% endschema %}
 
-<div class="tiktok-slider-container" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
-  
-  <!-- Sección Superior -->
-  <div class="tiktok-slider-header">
-    <!-- Calificación y Reseñas -->
-    <div class="rating-reviews">
-      <div class="star-rating">
-        <div class="stars">
-          {% assign rating_val = section.settings.rating | plus: 0 %}
-          {% assign full_stars = rating_val | floor %}
-          {% assign fraction = rating_val | minus: full_stars %}
-          {% assign partial_percent = fraction | times: 100 %}
-          {% assign next_star = full_stars | plus: 1 %}
-          {% for star in (1..5) %}
-            {% if star <= full_stars %}
-              <span class="star full">&#9733;</span>
-            {% elsif star == next_star %}
-              {% if fraction > 0 %}
-                <span class="star partial" style="--fill: {{ partial_percent }}%;">&#9733;</span>
-              {% else %}
-                <span class="star empty">&#9733;</span>
-              {% endif %}
-            {% else %}
-              <span class="star empty">&#9733;</span>
-            {% endif %}
-          {% endfor %}
-        </div>
-        <span class="rating-value">{{ rating_val }}</span>
-      </div>
-      <span class="reviews">{{ section.settings.reviews }}</span>
-    </div>
-    
-    <h2 class="slider-title">{{ section.settings.title }}</h2>
-  </div>
-
-  <!-- Botón Izquierdo -->
-  <button class="nav-button left-button" onclick="scrollSlider(-1)">&#10094;</button>
-
-  <!-- Carrusel de TikToks -->
-  <div class="tiktok-carousel">
-    <div class="tiktok-slider">
-      {% for i in (1..8) %}
-        {% capture video_var %}video_{{ i }}{% endcapture %}
-        {% assign video_url = section.settings[video_var] %}
-        {% if video_url contains "/video/" %}
-          {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
-          <div class="tiktok-slide">
-            <div class="with-border video-container">
-              <iframe class="tiktok-embed video-{{ i }}"
-                src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
-                frameborder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                scrolling="no"
-                data-video>
-              </iframe>
-            </div>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-
-  <!-- Botón Derecho -->
-  <button class="nav-button right-button" onclick="scrollSlider(1)">&#10095;</button>
-
-  <!-- Mensaje Inferior -->
-  <p class="bottom-message">{{ section.settings.bottom_message }}</p>
-
-</div>
-
-{% style %}
-/* Contenedor principal */
-.tiktok-slider-container {
-  text-align: center;
-  padding: 60px 20px;
-  border-radius: 10px;
-  position: relative;
-  margin: 0 auto;
-}
-
-/* Carrusel */
-.tiktok-carousel {
-  width: clamp(100%, 120rem, 95vw); /* Ajuste dinámico */
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative; /* Asegura que los botones se ubiquen correctamente */
-  margin: auto;
-  padding: 10px 40px; /* Espaciado extra para botones */
-}
-
-.tiktok-carousel::-webkit-scrollbar {
-  display: none;
-}
-
-/* Contenedor de slides */
-.tiktok-slider {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Ajuste de cada slide */
-.tiktok-slide {
-  flex: 0 0 calc(100% / 3.5); /* Aumentamos el tamaño */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-/* Ajuste del iframe de TikTok */
-.tiktok-embed {
-  width: 32rem; /* Aumentamos el tamaño */
-  height: 100%;
-  border-radius: 15px;
-  aspect-ratio: 9 / 16;
-  object-fit: cover;
-}
-
-/* Botones de navegación dentro del carrusel */
-.nav-button {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  font-size: 22px;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-}
-
-.left-button {
-  left: 0; /* Se alinean dentro del carrusel */
-}
-
-.right-button {
-  right: 0;
-}
-
-/* Ajustes Responsivos */
-@media (max-width: 1024px) {
-  .tiktok-slide {
-    flex: 0 0 calc(100% / 2.8); /* Ajustamos para tablets */
-  }
-  .tiktok-embed {
-    width: 26rem; /* Reducimos el tamaño */
-  }
-}
-
-@media (max-width: 768px) {
-  .tiktok-slide {
-    flex: 0 0 calc(100% / 2); /* En móviles mostramos 2 videos */
-  }
-  .tiktok-embed {
-    width: 18rem; /* Reducimos tamaño en móviles */
-  }
-  .nav-button {
-    display: none; /* Ocultamos los botones en móviles */
-  }
-}
-
-{% endstyle %}
-
-<script>
-class VideoController {
-    constructor() {
-        if (VideoController.instance) {
-            return VideoController.instance;
-        }
-        VideoController.instance = this;
-        this.currentPlaying = null;
-        this.inicializarEventos();
-    }
-
-    inicializarEventos() {
-        const videoContainers = document.querySelectorAll(".video-container");
-        videoContainers.forEach((container) => {
-            container.addEventListener("click", (e) => {
-                e.preventDefault();
-                this.manejarReproduccion(container);
-            });
-        });
-    }
-
-    manejarReproduccion(container) {
-        const iframe = container.querySelector(".tiktok-embed");
-        
-        // Si hay un video reproduciéndose, lo pausamos
-        if (this.currentPlaying && this.currentPlaying !== iframe) {
-            const prevSrc = this.currentPlaying.getAttribute("src");
-            this.currentPlaying.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
-        }
-
-        // Reproducimos el nuevo video
-        if (iframe.getAttribute("src").indexOf("autoplay=1") === -1) {
-            iframe.setAttribute("src", iframe.getAttribute("src").replace("autoplay=0", "autoplay=1"));
-            this.currentPlaying = iframe; // Actualizamos la referencia al video actual
-        } else {
-            // Si el video ya se está reproduciendo, lo pausamos
-            const prevSrc = iframe.getAttribute("src");
-            iframe.setAttribute("src", prevSrc.replace("autoplay=1", "autoplay=0"));
-            this.currentPlaying = null; // Reseteamos la referencia
-        }
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    // Inicializamos el controlador de video
-    const videoController = new VideoController();
-
-    // Función para el scroll del slider
-    window.scrollSlider = function(direction) {
-        const container = document.querySelector(".tiktok-carousel");
-        const slide = container.querySelector(".tiktok-slide");
-        if (slide) {
-            const slideWidth = slide.offsetWidth + 8;
-            container.scrollBy({ left: slideWidth * direction, behavior: "smooth" });
-        }
-    };
-});
-</script>
 
 
