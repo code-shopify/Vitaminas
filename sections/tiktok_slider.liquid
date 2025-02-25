@@ -344,7 +344,7 @@ display: flex;
 /* =========================
    Media queries responsivas
    ========================= */
-@media (max-width: 480px) {
+@media (max-width: 774px) {
   .tiktok-slide {
     flex: 0 0 100%; /* Muestra solo 1 video por pantalla */
     max-width: 100%;
@@ -372,37 +372,6 @@ display: flex;
     gap: 8px;
   }
 }
-
-@media (max-width: 764px) {
-  .tiktok-slider-container {
-    padding: 30px 10px;
-  }
-
-  .slider-title {
-    font-size: 24px;
-  }
-
-  .rating-reviews {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .star-rating {
-    flex-direction: row;
-    justify-content: center;
-  }
-
-  .tiktok-slide {
-    flex: 0 0 calc(100% / 1.5); /* Muestra ~1.5 slides en pantallas pequeñas */
-    max-width: calc(100% / 1.5);
-  }
-
-  .nav-button {
-    display: none; /* Oculta los botones de navegación en móviles */
-  }
-  
-}
-
 
 @media (min-width: 765px) and (max-width: 1023px) {
   .tiktok-slide {
