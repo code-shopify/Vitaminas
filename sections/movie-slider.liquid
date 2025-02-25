@@ -5,6 +5,7 @@
     <!-- Calificación y Reseñas -->
     <div class="rating-reviews">
       <div class="star-rating">
+        <span class="rating-value">{{ rating_val }}</span>
         <div class="stars">
           {% assign rating_val = section.settings.rating | plus: 0 %}
           {% assign full_stars = rating_val | floor %}
@@ -25,7 +26,6 @@
             {% endif %}
           {% endfor %}
         </div>
-        <span class="rating-value">{{ rating_val }}</span>
       </div>
       <span class="reviews">{{ section.settings.reviews }}</span>
     </div>
