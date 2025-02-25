@@ -286,9 +286,9 @@
             {% if section.settings.icono_izq != blank %}
               <img src="{{ section.settings.icono_izq | img_url: '45x45' }}" alt="icon" class="me-2">
             {% endif %}
-            <p class="mb-0 lh-sm text-dark">
-              <span class="fw-bold contenido" style="font-size: 13px;">{{ section.settings.titulo_izq }}</span>
-                <span class="contenido" style="font-size: 13px;">
+            <p class="mb-0 lh-sm">
+              <span class="fw-bold contenido">{{ section.settings.titulo_izq }}</span>
+                <span class="contenido">
                   {{section.settings.texto_abajo_izq}}
                 </span> 
             </p>
