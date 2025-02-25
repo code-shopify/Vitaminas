@@ -343,7 +343,14 @@
 {% schema %}
 {
   "name": "movie slider",
-  "settings": [],
+  "settings": [
+            {
+          "type": "color",
+          "id": "background_color",
+          "label": "Color de fondo",
+          "default": "#FEF8F0"
+        },
+  ],
   "blocks": [
     {
       "type": "video",
@@ -354,12 +361,6 @@
           "id": "video_url",
           "label": "URL del video de Shopify",
           "info": "Ingresa la URL del video de Shopify. Ejemplo: https://cdn.shopify.com/videos/..."
-        },
-        {
-          "type": "color",
-          "id": "background_color",
-          "label": "Color de fondo",
-          "default": "#FEF8F0"
         },
         {
           "type": "product",
