@@ -1,6 +1,363 @@
-{% schema %}
-  {
-    "name": "Section name",
-    "settings": []
+<div class="t4s-section-inner t4s-container-wrap">
+  <div class="t4s-container"> 
+    <div class="slider-containerv8 swiper">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="swiper-slide">
+            <div class="slidev8">
+              <div class="with-borderv8">
+                {% if block.settings.video_url contains "cdn.shopify.com" %}
+                  <video 
+                    class="shopify-videov8"
+                    loop
+                    playsinline
+                    preload="auto">
+                    <source src="{{ block.settings.video_url }}" type="video/mp4">
+                  </video>
+                {% else %}
+                  <p>URL no válida. Asegúrate de ingresar una URL de video de Shopify.</p>
+                {% endif %}
+              </div>
+              
+            
+              {% if block.settings.featured_product != blank %}
+                <div class="product-boxv8">
+                  <a href="{{ block.settings.featured_product.url }}" class="product-linkv8">
+                    <img src="{{ block.settings.featured_product.featured_image | img_url: '150x150' }}" alt="{{ block.settings.featured_product.title }}">
+                    <div class="product-info">
+                      <span class="product-title">{{ block.settings.featured_product.title }}</span>
+                      <span class="product-price">
+                        {{ block.settings.featured_product.price | money }}
+                        {% if block.settings.featured_product.compare_at_price > block.settings.featured_product.price %}
+                          <span class="product-old-price">{{ block.settings.featured_product.compare_at_price | money }}</span>
+                        {% endif %}
+                      </span>
+                    </div>
+                  </a>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Botones de navegación -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .slider-containerv8 {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    padding: 20px 0;
   }
+
+  .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .slidev8 {
+    flex: 0 0 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .video-overlayv8 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 63, 161, 0.22);
+    transition: background 0.3s ease;
+    border-radius: 1rem;
+  }  
+  
+
+  .video-overlayv8.playing {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  .play-iconv8 {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+  }
+
+  .play-iconv8::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 20px;
+    border-color: transparent transparent transparent #000;
+    margin-left: 4px;
+  }
+
+  .video-overlayv8.playing .play-iconv8 {
+    opacity: 0;
+  }
+
+  .with-borderv8 {
+    position: relative;
+    padding: 4px;
+    border-radius: 10px;
+    background: linear-gradient(0deg, #fe2d52, #28ffff);
+    z-index: 2;
+  }
+
+  .shopify-videov8 {
+    width: 100%;
+    height: 500px;
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  .product-boxv8 {
+    display: flex;
+    align-items: center;
+    background: #fbfbfb;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.22);
+    width: 100%;
+    max-width: 280px;
+    text-align: left;
+    border-radius: 10px;
+  }
+
+  .product-linkv8 {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    flex-grow: 1;
+  }
+
+  .product-linkv8 img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+
+  .product-info {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .product-title {
+    font-size: 12px;
+    color: #333;
+    line-height: 1.2;
+  }
+
+  .product-price {
+    font-size: 12px;
+    font-weight: bold;
+    color: #f05454;
+  }
+
+  .product-old-price {
+    font-size: 12px;
+    text-decoration: line-through;
+    color: #888;
+    margin-left: 5px;
+  }
+
+  /* Swiper styles */
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    color: #000;
+  }
+
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .swiper-button-next {
+    right: 0;
+  }
+
+  .swiper-button-prev {
+    left: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 767px) {
+    .slider-containerv8 {
+      padding: 10px;
+    }
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+    }
+
+    .slidev8 {
+      max-width: 250px;
+    }
+
+    .shopify-videov8 {
+      height: 400px;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      width: 30px;
+      height: 30px;
+    }
+
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+      font-size: 14px;
+    }
+  }
+</style>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const videos = document.querySelectorAll('.shopify-videov8');
+    
+    videos.forEach(video => {
+      const overlay = document.createElement('div');
+      overlay.className = 'video-overlayv8';
+      
+      const playIcon = document.createElement('div');
+      playIcon.className = 'play-iconv8';
+      overlay.appendChild(playIcon);
+      
+      video.parentElement.appendChild(overlay);
+      
+      overlay.addEventListener('click', () => {
+        videos.forEach(v => {
+          if (v !== video) {
+            v.pause();
+            v.muted = true;
+            v.parentElement.querySelector('.video-overlayv8').classList.remove('playing');
+          }
+        });
+        
+        if (video.paused) {
+          video.play();
+          video.muted = false;
+          overlay.classList.add('playing');
+        } else {
+          video.pause();
+          overlay.classList.remove('playing');
+        }
+      });
+    });
+
+    new Swiper(".swiper", {
+      slidesPerView: 1,
+      spaceBetween: 5,
+      speed: 500,
+      loop: true,
+      loopedSlides: 8,
+      watchOverflow: true,
+      allowTouchMove: true,
+      preventInteractionOnTransition: false,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+        pauseOnMouseEnter: true
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+        hideOnClick: false,
+      },
+      breakpoints: {
+        768: {
+          slidesPerView: 2,
+          spaceBetween: 5,
+        },
+        1024: {
+          slidesPerView: 4,
+          spaceBetween: 5,
+        }
+      },
+      on: {
+        init: function() {
+          this.update();
+        },
+        slideChange: function () {
+          videos.forEach(video => {
+            video.pause();
+            video.muted = true;
+            video.parentElement.querySelector('.video-overlayv8').classList.remove('playing');
+          });
+        },
+        beforeDestroy: function () {
+          videos.forEach(video => {
+            video.pause();
+          });
+        }
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Video slider",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "video",
+      "name": "Video",
+      "settings": [
+        {
+          "type": "url",
+          "id": "video_url",
+          "label": "URL del video de Shopify",
+          "info": "Ingresa la URL del video de Shopify. Ejemplo: https://cdn.shopify.com/videos/..."
+        },
+        {
+          "type": "product",
+          "id": "featured_product",
+          "label": "Seleccionar producto"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 10,
+  "presets": [
+    {
+      "name": "video-slider",
+      "category": "Custom"
+    }
+  ]
+}
 {% endschema %}
