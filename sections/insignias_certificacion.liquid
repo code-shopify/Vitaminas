@@ -2,58 +2,60 @@
   <div
     class="container banner-img"
   >
-    <div class="text-dark p-5">
-      <header class="fw-bold text-start titulo">
-        {{ section.settings.header }}
-      </header>
-    </div>
-    <div class="container text-dark text-center">
-      <div class="row gap-5 tabla">
-        <div class="row gap-4 gy-4 box">
-          <div
-            class="position-relative col-3 rounded-5 columna"
-          >
-            <div class="position-absolute top-0 start-50 translate-middle columna-img">
-              <img src="{{ section.settings.image_box_1|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+    <div>
+      <div class="text-dark p-5">
+        <header class="fw-bold text-start titulo">
+          {{ section.settings.header }}
+        </header>
+      </div>
+      <div class="container text-dark text-center">
+        <div class="row gap-5 tabla">
+          <div class="row gap-4 gy-4 box">
+            <div
+              class="position-relative col-3 rounded-5 columna"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                <img src="{{ section.settings.image_box_1|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_1 }}</p>
+                <p>{{ section.settings.box_content }}</p>
+              </div>
             </div>
-            <div class="lh-sm">
-              <p class="fw-bold">{{ section.settings.box_1 }}</p>
-              <p>{{ section.settings.box_content }}</p>
-            </div>
-          </div>
-          <div
-            class="position-relative col-3 rounded-5 columna"
-          >
-            <div class="position-absolute top-0 start-50 translate-middle columna-img">
-              <img src="{{ section.settings.image_box_2|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
-            </div>
-            <div class="lh-sm">
-              <p class="fw-bold">{{ section.settings.box_2 }}</p>
-              <p>{{ section.settings.box_content_2 }}</p>
-            </div>
-          </div>
-        </div>
-        <div class="row gap-4 gy-4 box">
-          <div
-            class="position-relative col-3 rounded-5 columna"
-          >
-            <div class="position-absolute top-0 start-50 translate-middle columna-img">
-              <img src="{{ section.settings.image_box_3|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
-            </div>
-            <div class="lh-sm">
-              <p class="fw-bold">{{ section.settings.box_3 }}</p>
-              <p>{{ section.settings.box_content_3 }}</p>
+            <div
+              class="position-relative col-3 rounded-5 columna"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                <img src="{{ section.settings.image_box_2|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_2 }}</p>
+                <p>{{ section.settings.box_content_2 }}</p>
+              </div>
             </div>
           </div>
-          <div
-            class="position-relative col-3 rounded-5 columna"
-          >
-            <div class="position-absolute top-0 start-50 translate-middle columna-img">
-              <img src="{{ section.settings.image_box_4|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+          <div class="row gap-4 gy-4 box">
+            <div
+              class="position-relative col-3 rounded-5 columna"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                <img src="{{ section.settings.image_box_3|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_3 }}</p>
+                <p>{{ section.settings.box_content_3 }}</p>
+              </div>
             </div>
-            <div class="lh-sm">
-              <p class="fw-bold">{{ section.settings.box_4 }}</p>
-              <p>{{ section.settings.box_content_4 }}</p>
+            <div
+              class="position-relative col-3 rounded-5 columna"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                <img src="{{ section.settings.image_box_4|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_4 }}</p>
+                <p>{{ section.settings.box_content_4 }}</p>
+              </div>
             </div>
           </div>
         </div>
@@ -99,7 +101,7 @@
       max-height: 1063px;
       height:auto;
       margin-bottom: 50px;
-      background-image:none; 
+      background-image:none;
       background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), {{section.settings.background_section}});
     }
     .titulo{
@@ -110,9 +112,9 @@
     .columna{
       width: min-content;
     }
-    
+
       .tabla{
-        
+
       }
       .box{
         justify-content:center;
