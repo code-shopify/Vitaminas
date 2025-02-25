@@ -288,7 +288,7 @@
         
       }
       .contenido{
-        
+        font-size: 10px;
       }
       .logos{
         
@@ -303,7 +303,7 @@
             {% if section.settings.icono_izq != blank %}
               <img src="{{ section.settings.icono_izq | img_url: '45x45' }}" alt="icon" class="me-2">
             {% endif %}
-            <spanp class="mb-0">
+            <span class="mb-0">
               <p class="fw-bold contenido">{{ section.settings.titulo_izq }}</p>
                 <p class="contenido">
                   {{section.settings.texto_abajo_izq}}
