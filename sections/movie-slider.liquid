@@ -4,6 +4,7 @@
   <div class="tiktok-slider-header">
     <!-- Calificación y Reseñas -->
     <div class="rating-reviews">
+      <span class="rating-value">{{ rating_val }}</span>
       <div class="star-rating">
         <div class="stars">
           {% assign rating_val = section.settings.rating | plus: 0 %}
@@ -25,7 +26,6 @@
             {% endif %}
           {% endfor %}
         </div>
-        <span class="rating-value">{{ rating_val }}</span>
       </div>
       <span class="reviews">{{ section.settings.reviews }}</span>
     </div>
