@@ -88,7 +88,7 @@
 }
 {% endschema %}
 
-<!-- Forzamos a que los contenedores externos ocupen el 100% del ancho -->
+<!-- Forzamos que los contenedores externos ocupen el 100% del ancho -->
 <style>
   .t4s-section-inner.t4s-container-wrap,
   .t4s-container {
@@ -150,7 +150,6 @@
               {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
               <div class="tiktok-slide">
                 <div class="with-border video-container">
-                  <!-- Se inserta el iframe; posteriormente se usará el overlay para controlarlo -->
                   <iframe class="tiktok-embed video-{{ i }}"
                     src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1"
                     frameborder="0"
@@ -264,13 +263,23 @@
   background: linear-gradient(0deg, #fe2d52, #28ffff);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 100%;
+  /* Se fija una altura mínima para que no colapse al pausar el video */
+  min-height: 300px;
   position: relative;
   overflow: hidden;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+/* Ajuste del iframe de TikTok */
+.tiktok-embed {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  aspect-ratio: 9 / 16;
+  object-fit: cover;
 }
 
 /* Overlay para captar clics y simular play/pause */
@@ -397,12 +406,11 @@
 <script>
 /**
  * VideoController:
- * - Al cargar la página, se guarda el HTML original (el iframe) en cada contenedor.
- * - Se añade un overlay sobre cada video para captar el clic.
- * - Al hacer clic en el overlay:
- *     - Si el video no se está reproduciendo, se inserta el iframe (simulando "play").
- *     - Si ya se está reproduciendo, se elimina el iframe (simulando "pause").
- *     - Además, se pausa cualquier otro video reproduciéndose.
+ * - Al cargar, guarda el src original de cada iframe en dataset.originalSrc.
+ * - Se añade un único overlay a cada contenedor para capturar clics.
+ * - Al hacer clic, si el video NO se está reproduciendo, se restablece el src original para "reproducir".
+ *   Si ya se está reproduciendo, se pausa asignando "about:blank" al src.
+ * - Además, se pausa cualquier otro video que esté reproduciéndose.
  */
 class VideoController {
   constructor() {
@@ -415,21 +423,20 @@ class VideoController {
   initializeEvents() {
     const containers = document.querySelectorAll(".video-container");
     containers.forEach((container) => {
-      // Guarda el HTML original (del iframe) para reinsertarlo cuando se requiera reproducir.
+      // Eliminar cualquier overlay duplicado
+      container.querySelectorAll('.video-overlay').forEach(el => el.remove());
       const iframe = container.querySelector('.tiktok-embed');
       if (iframe) {
-        container.dataset.originalHtml = iframe.outerHTML;
+        // Guarda el src original para poder restablecerlo al reproducir
+        container.dataset.originalSrc = iframe.getAttribute("src");
       }
-      // Añade el overlay si no existe.
-      let overlay = container.querySelector('.video-overlay');
-      if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.className = 'video-overlay';
-        const playIcon = document.createElement('div');
-        playIcon.className = 'play-icon';
-        overlay.appendChild(playIcon);
-        container.appendChild(overlay);
-      }
+      // Crea y añade el overlay
+      const overlay = document.createElement('div');
+      overlay.className = 'video-overlay';
+      const playIcon = document.createElement('div');
+      playIcon.className = 'play-icon';
+      overlay.appendChild(playIcon);
+      container.appendChild(overlay);
       overlay.addEventListener('click', (e) => {
         e.preventDefault();
         this.handleVideo(container);
@@ -438,44 +445,39 @@ class VideoController {
   }
 
   handleVideo(container) {
-    // Pausa el video que estuviera reproduciéndose en otro contenedor.
+    // Si hay otro contenedor reproduciendo, se pausa
     if (this.currentPlayingContainer && this.currentPlayingContainer !== container) {
       this.pauseVideo(this.currentPlayingContainer);
     }
-    // Si el contenedor ya está reproduciendo, se pausa.
-    if (container.dataset.playing === "true") {
-      this.pauseVideo(container);
-      this.currentPlayingContainer = null;
-    } else {
-      // Reproduce el video reinsertando el iframe.
-      const overlay = container.querySelector('.video-overlay');
-      // Asegura que no exista un iframe anterior.
-      const existingIframe = container.querySelector('.tiktok-embed');
-      if (existingIframe) {
-        existingIframe.remove();
-      }
-      if (container.dataset.originalHtml) {
-        container.insertAdjacentHTML('afterbegin', container.dataset.originalHtml);
+    const iframe = container.querySelector('.tiktok-embed');
+    const overlay = container.querySelector('.video-overlay');
+    // Si el video NO está reproduciéndose, "reproduce" restableciendo el src
+    if (container.dataset.playing !== "true") {
+      if (iframe) {
+        iframe.setAttribute("src", container.dataset.originalSrc);
       }
       container.dataset.playing = "true";
-      if (overlay) {
-        overlay.classList.add("playing");
-      }
+      overlay.classList.add("playing");
       this.currentPlayingContainer = container;
+    } else {
+      // Si ya se reproduce, "pausa" asignando un src en blanco
+      if (iframe) {
+        iframe.setAttribute("src", "about:blank");
+      }
+      container.dataset.playing = "false";
+      overlay.classList.remove("playing");
+      this.currentPlayingContainer = null;
     }
   }
 
   pauseVideo(container) {
-    // Elimina el iframe para detener la reproducción.
     const iframe = container.querySelector('.tiktok-embed');
+    const overlay = container.querySelector('.video-overlay');
     if (iframe) {
-      iframe.remove();
+      iframe.setAttribute("src", "about:blank");
     }
     container.dataset.playing = "false";
-    const overlay = container.querySelector('.video-overlay');
-    if (overlay) {
-      overlay.classList.remove("playing");
-    }
+    overlay.classList.remove("playing");
   }
 
   pauseAll() {
@@ -489,7 +491,7 @@ class VideoController {
 document.addEventListener("DOMContentLoaded", function () {
   const videoController = new VideoController();
 
-  // Función para desplazar el carrusel con las flechas y pausar cualquier video reproduciéndose.
+  // Función para desplazar el carrusel y pausar cualquier video reproduciéndose
   window.scrollSlider = function(direction) {
     const container = document.querySelector(".tiktok-carousel");
     const slide = container.querySelector(".tiktok-slide");
@@ -501,7 +503,6 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 });
 </script>
-
 
 
 
