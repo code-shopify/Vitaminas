@@ -1,4 +1,4 @@
-<div class="t4s-section-inner t4s-container-wrap background_color">
+<div class="t4s-section-inner t4s-container-wrap background_color" style="background-color: {{ section.settings.background_color }}; color: {{ section.settings.text_color }};">
   <div class="t4s-container"> 
     <div class="slider-containerv8 swiper">
       <div class="swiper-wrapper">
@@ -49,9 +49,7 @@
 </div>
 
 <style>
-  .background_color{
-    background-color: {{ section.settings.background_color }};
-  }
+
   .slider-containerv8 {
     position: relative;
     width: 100%;
