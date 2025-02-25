@@ -157,6 +157,7 @@
         "video_UNLRjL",
         "video_7QAXmg"
       ],
+      "disabled": true,
       "settings": {
         "custom-class": "",
         "section_title": "+30,000 personas opinan de Vitatú",
@@ -261,6 +262,70 @@
         "use_cus_css": false,
         "code_cus_css": ""
       }
+    },
+    "movie_slider_YBGrYq": {
+      "type": "movie-slider",
+      "blocks": {
+        "video_zwPRhP": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/0196336f65c24216a0c7277258ed9441.mp4",
+            "featured_product": "ashwaganddha-450-mg-100-caps-swanson"
+          }
+        },
+        "video_FBARyU": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/0196336f65c24216a0c7277258ed9441.mp4",
+            "featured_product": "ashwaganddha-450-mg-100-caps-swanson"
+          }
+        },
+        "video_QeTThw": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/0196336f65c24216a0c7277258ed9441.mp4",
+            "featured_product": "ashwaganddha-450-mg-100-caps-swanson"
+          }
+        },
+        "video_B3Pzkj": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/0196336f65c24216a0c7277258ed9441.mp4",
+            "featured_product": "ashwaganddha-450-mg-100-caps-swanson"
+          }
+        },
+        "video_cdzghf": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/0196336f65c24216a0c7277258ed9441.mp4",
+            "featured_product": "ashwaganddha-450-mg-100-caps-swanson"
+          }
+        },
+        "video_WFyH4R": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/0196336f65c24216a0c7277258ed9441.mp4",
+            "featured_product": "ashwaganddha-450-mg-100-caps-swanson"
+          }
+        },
+        "video_qJGQpF": {
+          "type": "video",
+          "settings": {
+            "video_url": "https://cdn.shopify.com/videos/c/o/v/0196336f65c24216a0c7277258ed9441.mp4",
+            "featured_product": "ashwaganddha-450-mg-100-caps-swanson"
+          }
+        }
+      },
+      "block_order": [
+        "video_zwPRhP",
+        "video_FBARyU",
+        "video_QeTThw",
+        "video_B3Pzkj",
+        "video_cdzghf",
+        "video_WFyH4R",
+        "video_qJGQpF"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -271,6 +336,7 @@
     "foot_iconos_XrxNFp",
     "insignias_certificacion_y68P3L",
     "tiktok_slider_wHCVUD",
-    "video_featured_ab8iGh"
+    "video_featured_ab8iGh",
+    "movie_slider_YBGrYq"
   ]
 }
