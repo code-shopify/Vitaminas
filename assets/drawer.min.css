@@ -179,7 +179,7 @@ button.t4s-drawer__close:hover {
     width: 450px;
   }
 }
-@media screen and (min-width: 640) {
+@media screen and (min-width: 640px) {
   .t4s-drawer {
     width: auto;
   }
