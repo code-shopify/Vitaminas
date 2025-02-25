@@ -64,13 +64,9 @@
 {% style %}
   .banner-img {
     width: 100%;
-    height: 688px;
-    background-color: {{section.settings.background_section}}}
+    height: 688px; /* Altura fija o ajustable según tu diseño */
+    background-color: {{section.settings.background_section}}};
     background: linear-gradient(to bottom, rgba(255, 255, 255, 1), #E5D4C9);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    margin: auto;
   }
     .img-fluid {
     width: 100%;
@@ -105,7 +101,7 @@
       margin-bottom: 50px;
       background-image: none;
       background-color: {{ section.settings.background_section }};
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 1), #E5D4C9);
+      background-color: linear-gradient(to bottom, rgba(255, 255, 255, 1), #E5D4C9);
     }
     .titulo{
       font-size: 30px !important;
