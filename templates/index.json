@@ -216,6 +216,7 @@
     },
     "tiktok_slider_wHCVUD": {
       "type": "tiktok_slider",
+      "disabled": true,
       "settings": {
         "rating": "3.5",
         "reviews": "1,450 reviews",
