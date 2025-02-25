@@ -265,23 +265,30 @@
       height:71px;
       background-color: {{section.settings.background_color}};
     }
+    .contenido{
+      font-size:13px;
+      
+    }
     @media (max-width: 1025px) {
     .logos {
       width: 150px;
+      }
+      .logos_columna{
+        
       }
     }
   </style>
   <div class="t4s-drawer__bottom">
     <div class="container my-4 caja">
-      <div class="row g-3 logos">
+      <div class="row g-3 logos text-dark">
         <div class="col-md-6">
           <div class="d-flex align-items-center p-3 rounded logos_columna">
             {% if section.settings.icono_izq != blank %}
               <img src="{{ section.settings.icono_izq | img_url: '45x45' }}" alt="icon" class="me-2">
             {% endif %}
             <p class="mb-0 lh-sm text-dark">
-              <span class="fw-bold" style="font-size: 13px;">{{ section.settings.titulo_izq }}</span>
-                <span style="font-size: 13px;">
+              <span class="fw-bold contenido" style="font-size: 13px;">{{ section.settings.titulo_izq }}</span>
+                <span class="contenido" style="font-size: 13px;">
                   {{section.settings.texto_abajo_izq}}
                 </span> 
             </p>
@@ -292,9 +299,9 @@
             {% if section.settings.icono_der != blank %}
               <img src="{{ section.settings.icono_der | img_url: '45x45' }}" alt="icon" class="me-2">
             {% endif %}
-            <p class="mb-0 lh-sm text-dark">
-              <span class="fw-bold" style="font-size: 13px;">{{ section.settings.titulo_der }}</span>
-              <span class="text-dark lh-sm" style="font-size: 13px;">{{ section.settings.texto_abajo_der}}</span>
+            <p class="mb-0 lh-sm">
+              <span class="fw-bold contenido" style="">{{ section.settings.titulo_der }}</span>
+              <span class="lh-sm contenido" style="font-size: 13px;">{{ section.settings.texto_abajo_der}}</span>
             </p>
           </div>
         </div>
