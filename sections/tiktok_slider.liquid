@@ -344,6 +344,35 @@ display: flex;
 /* =========================
    Media queries responsivas
    ========================= */
+@media (max-width: 480px) {
+  .tiktok-slide {
+    flex: 0 0 100%; /* Muestra solo 1 video por pantalla */
+    max-width: 100%;
+  }
+
+  .tiktok-carousel {
+    padding: 10px;
+  }
+
+  .tiktok-embed, .shopify-video {
+    height: 250px; /* Reduce el tamaño del video */
+  }
+
+  .with-border {
+    padding: 5px;
+    width: 90%; /* Ajusta el ancho del video */
+  }
+
+  .slider-title {
+    font-size: 20px; /* Reduce el tamaño del título */
+  }
+
+  .rating-reviews {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
 @media (max-width: 767px) {
   .tiktok-slider-container {
     padding: 30px 10px;
