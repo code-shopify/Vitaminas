@@ -344,176 +344,30 @@ display: flex;
 /* =========================
    Media queries responsivas
    ========================= */
-/* Para pantallas extra pequeñas (≤ 480px) - SOLO 1 video a la vez */
-/* 🌟 Extra pequeñas (≤ 480px) - 1 video a la vez, más grande y con espacio */
-/* 🌟 Extra pequeñas (≤ 480px) - 1 video, mayor tamaño y espacio */
-@media (max-width: 480px) {
-  .tiktok-slider-container {
-    padding: 20px 10px;
-  }
-
-  .tiktok-carousel {
-    padding: 10px;
-  }
-
-  .tiktok-slider {
-    gap: 25px; /* Mayor espacio entre videos */
-  }
-
-  .tiktok-slide {
-    flex: 0 0 100%;
-    max-width: 100%;
-    margin-bottom: 25px; /* Más espacio entre videos */
-  }
-
-  .tiktok-embed, .shopify-video {
-    width: 98%;
-    height: 350px; /* Aumenta el tamaño para mejor visualización */
-  }
-
-  .with-border {
-    width: 98%;
-    padding: 10px; /* Ajusta automáticamente según el video */
-  }
-
-  .slider-title {
-    font-size: 20px;
-  }
-
-  .rating-reviews {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .nav-button {
-    display: none; /* Oculta navegación en móviles pequeños */
-  }
-}
-
-/* 🌟 Móviles (≤ 767px) - 1 video con más espacio */
 @media (max-width: 767px) {
   .tiktok-slider-container {
     padding: 30px 10px;
   }
-
-  .tiktok-carousel {
-    padding: 15px;
-  }
-
-  .tiktok-slider {
-    gap: 30px; /* Más separación entre videos */
-  }
-
+  /* En pantallas pequeñas mostramos ~1.5 slides */
   .tiktok-slide {
-    flex: 0 0 100%;
-    max-width: 100%;
-    margin-bottom: 30px; /* Separa más los videos */
+    flex: 0 0 calc(100% / 1.5);
+    max-width: calc(100% / 1.5);
   }
-
-  .tiktok-embed, .shopify-video {
-    width: 98%;
-    height: 380px; /* Mayor altura para mejor visualización */
-  }
-
-  .with-border {
-    width: 98%;
-    padding: 12px; /* Ajuste del borde */
-  }
-
-  .slider-title {
-    font-size: 22px;
-    margin-bottom: 15px;
-  }
-
-  .rating-reviews {
-    flex-direction: column;
-    gap: 12px;
-  }
-
   .nav-button {
     display: none;
   }
 }
 
-/* 🌟 Tablets (768px - 1023px) - 2 videos con mejor separación */
 @media (min-width: 768px) and (max-width: 1023px) {
-  .tiktok-slider-container {
-    padding: 40px 15px;
-  }
-
-  .tiktok-slider {
-    gap: 35px; /* Aumenta el espacio entre videos */
-  }
-
+  /* En pantallas medianas mostramos ~2.5 slides */
   .tiktok-slide {
-    flex: 0 0 calc(100% / 2);
-    max-width: calc(100% / 2);
-    margin-bottom: 20px;
+    flex: 0 0 calc(100% / 2.5);
+    max-width: calc(100% / 2.5);
   }
-
-  .tiktok-embed, .shopify-video {
-    width: 92%;
-    height: 400px;
-  }
-
-  .with-border {
-    width: 92%;
-    padding: 14px;
-  }
-
-  .slider-title {
-    font-size: 26px;
-  }
-
-  .rating-value, .reviews {
-    font-size: 18px;
-  }
-
-  .nav-button {
+    .nav-button {
     display: none;
   }
 }
-
-/* 🌟 Laptops (1024px - 1366px) - 3 videos con ajustes mínimos */
-@media (min-width: 1024px) and (max-width: 1366px) {
-  .tiktok-slider-container {
-    padding: 50px 20px;
-  }
-
-  .tiktok-slider {
-    gap: 35px; /* Pequeño ajuste en la separación */
-  }
-
-  .tiktok-slide {
-    flex: 0 0 calc(100% / 3);
-    max-width: calc(100% / 3);
-  }
-
-  .tiktok-embed, .shopify-video {
-    width: 85%;
-    height: 420px;
-  }
-
-  .with-border {
-    width: 85%;
-    padding: 16px;
-  }
-
-  .slider-title {
-    font-size: 28px;
-  }
-
-  .rating-value, .reviews {
-    font-size: 20px;
-  }
-}
-
-/* 🌟 Pantallas grandes (≥ 1367px) - Muestra 4 videos sin cambios */
-@media (min-width: 1367px) {
-  /* Sin cambios porque ya es óptimo */
-}
-
-
 </style>
 
 <script>
