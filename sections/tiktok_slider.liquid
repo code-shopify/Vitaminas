@@ -344,8 +344,13 @@ display: flex;
 /* =========================
    Media queries responsivas
    ========================= */
-/* ✅ Para pantallas extra pequeñas (≤ 480px) - SOLO 1 video a la vez */
+/* Para pantallas extra pequeñas (≤ 480px) - SOLO 1 video a la vez */
 @media (max-width: 480px) {
+  .tiktok-slider {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
   .tiktok-slide {
     flex: 0 0 100%; /* Muestra solo 1 video por pantalla */
     max-width: 100%;
@@ -375,6 +380,7 @@ display: flex;
 }
 
   @media (min-width: 768px) and (max-width: 1023px) {
+    
   .tiktok-slide {
     flex: 0 0 calc(100% / 2.5); /* Muestra ~2.5 slides en tablets */
   }
