@@ -344,36 +344,46 @@ display: flex;
 /* =========================
    Media queries responsivas
    ========================= */
+/* ✅ Para pantallas extra pequeñas (≤ 480px) - SOLO 1 video a la vez */
 @media (max-width: 480px) {
-  .tiktok-slide {
-    flex: 0 0 100%; /* Muestra solo 1 video por pantalla */
-    max-width: 100%;
+  .tiktok-slider-container {
+    padding: 20px 10px;
   }
 
   .tiktok-carousel {
     padding: 10px;
   }
 
+  .tiktok-slide {
+    flex: 0 0 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+  }
+
   .tiktok-embed, .shopify-video {
-    height: 250px; /* Reduce el tamaño del video */
+    height: 250px; /* Ajuste para que los videos no se junten */
+    width: 90%;
   }
 
   .with-border {
-    padding: 5px;
-    width: 90%; /* Ajusta el ancho del video */
+    width: 90%;
   }
 
   .slider-title {
-    font-size: 20px; /* Reduce el tamaño del título */
+    font-size: 20px;
   }
 
   .rating-reviews {
     flex-direction: column;
     gap: 8px;
   }
+
+  .nav-button {
+    display: none; /* Oculta navegación en móviles pequeños */
+  }
 }
 
-
+/* ✅ Para pantallas móviles (≤ 767px) - 1 video a la vez, con más espacio */
 @media (max-width: 767px) {
   .tiktok-slider-container {
     padding: 30px 10px;
@@ -389,49 +399,95 @@ display: flex;
     gap: 10px;
   }
 
-  .star-rating {
-    flex-direction: row;
-    justify-content: center;
-  }
-
   .tiktok-carousel {
     padding: 15px;
   }
 
   .tiktok-slide {
-    flex: 0 0 100%; /* Muestra solo 1 video por pantalla */
+    flex: 0 0 100%;
     max-width: 100%;
-    margin-bottom: 15px; /* Agrega espacio entre los videos */
+    margin-bottom: 20px; /* Más espacio entre videos */
   }
 
   .tiktok-embed, .shopify-video {
-    height: 280px; /* Reduce la altura para mejorar la visualización */
-    width: 90%; /* Ajusta el ancho del video */
+    height: 280px;
+    width: 90%;
   }
 
   .with-border {
-    padding: 5px;
-    width: 90%; /* Mantiene el video alineado y con buen tamaño */
+    width: 90%;
   }
 
   .nav-button {
-    display: none; /* Oculta los botones de navegación en móviles */
+    display: none;
   }
 }
 
-@media (min-width: 1367px) {
+/* ✅ Para tablets (768px - 1023px) - Muestra 2 videos */
+@media (min-width: 768px) and (max-width: 1023px) {
   .tiktok-slide {
-    flex: 0 0 calc(100% / 4.5); /* Muestra 4.5 slides en pantallas grandes */
+    flex: 0 0 calc(100% / 2);
+    max-width: calc(100% / 2);
+    margin-bottom: 15px;
+  }
+
+  .tiktok-embed, .shopify-video {
+    height: 320px;
   }
 
   .slider-title {
-    font-size: 36px;
+    font-size: 26px;
+  }
+
+  .rating-value, .reviews {
+    font-size: 18px;
+  }
+
+  .nav-button {
+    display: none;
+  }
+}
+
+/* ✅ Para laptops (1024px - 1366px) - Muestra 3 videos */
+@media (min-width: 1024px) and (max-width: 1366px) {
+  .tiktok-slide {
+    flex: 0 0 calc(100% / 3);
+    max-width: calc(100% / 3);
+  }
+
+  .tiktok-embed, .shopify-video {
+    height: 350px;
+  }
+
+  .slider-title {
+    font-size: 28px;
+  }
+
+  .rating-value, .reviews {
+    font-size: 20px;
+  }
+}
+
+/* ✅ Para pantallas grandes (≥ 1367px) - Muestra 4 videos */
+@media (min-width: 1367px) {
+  .tiktok-slide {
+    flex: 0 0 calc(100% / 4);
+    max-width: calc(100% / 4);
+  }
+
+  .tiktok-embed, .shopify-video {
+    height: 400px;
+  }
+
+  .slider-title {
+    font-size: 32px;
   }
 
   .rating-value, .reviews {
     font-size: 22px;
   }
 }
+
 
 </style>
 
