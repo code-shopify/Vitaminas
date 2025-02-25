@@ -392,6 +392,33 @@ display: flex;
     display: none; /* Oculta los botones de navegación en tablets */
   }
 }
+  @media (min-width: 1024px) and (max-width: 1366px) {
+  .tiktok-slide {
+    flex: 0 0 calc(100% / 4); /* Muestra 4 slides en laptops */
+  }
+
+  .slider-title {
+    font-size: 30px;
+  }
+
+  .rating-value, .reviews {
+    font-size: 20px;
+  }
+}
+@media (min-width: 1367px) {
+  .tiktok-slide {
+    flex: 0 0 calc(100% / 4.5); /* Muestra 4.5 slides en pantallas grandes */
+  }
+
+  .slider-title {
+    font-size: 36px;
+  }
+
+  .rating-value, .reviews {
+    font-size: 22px;
+  }
+}
+
 
 
 </style>
