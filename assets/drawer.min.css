@@ -174,7 +174,7 @@ button.t4s-drawer__close:hover {
   visibility: visible;
 }
 
-@media screen and (max-width: 641px) {
+@media screen and (min-width: 641px) {
   .t4s-drawer {
     width: 450px;
   }
