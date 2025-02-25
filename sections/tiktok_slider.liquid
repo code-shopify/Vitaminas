@@ -133,44 +133,44 @@
         
         <h2 class="slider-title">{{ section.settings.title }}</h2>
       </div>
+
+
+      <!-- Botón Izquierdo -->
+      <button class="nav-button left-button" onclick="scrollSlider(-1)">&#10094;</button>
+    
+      <!-- Carrusel de TikToks -->
+      <div class="tiktok-carousel">
+        <div class="tiktok-slider">
+          {% for i in (1..8) %}
+            {% capture video_var %}video_{{ i }}{% endcapture %}
+            {% assign video_url = section.settings[video_var] %}
+            {% if video_url contains "/video/" %}
+              {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
+              <div class="tiktok-slide">
+                <div class="with-border video-container">
+                  <iframe class="tiktok-embed video-{{ i }}"
+                    src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
+                    frameborder="0"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    scrolling="no"
+                    data-video>
+                  </iframe>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    
+      <!-- Botón Derecho -->
+      <button class="nav-button right-button" onclick="scrollSlider(1)">&#10095;</button>
+    
+      <!-- Mensaje Inferior -->
+      <p class="bottom-message">{{ section.settings.bottom_message }}</p>
+    
+    </div>
     </div>
   </div
-
-  <!-- Botón Izquierdo -->
-  <button class="nav-button left-button" onclick="scrollSlider(-1)">&#10094;</button>
-
-  <!-- Carrusel de TikToks -->
-  <div class="tiktok-carousel">
-    <div class="tiktok-slider">
-      {% for i in (1..8) %}
-        {% capture video_var %}video_{{ i }}{% endcapture %}
-        {% assign video_url = section.settings[video_var] %}
-        {% if video_url contains "/video/" %}
-          {% assign video_id = video_url | split: "/video/" | last | split: "?" | first %}
-          <div class="tiktok-slide">
-            <div class="with-border video-container">
-              <iframe class="tiktok-embed video-{{ i }}"
-                src="https://www.tiktok.com/embed/{{ video_id }}?embedId=1&autoplay=0&muted=0"
-                frameborder="0"
-                allow="autoplay; fullscreen; picture-in-picture"
-                scrolling="no"
-                data-video>
-              </iframe>
-            </div>
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-  </div>
-
-  <!-- Botón Derecho -->
-  <button class="nav-button right-button" onclick="scrollSlider(1)">&#10095;</button>
-
-  <!-- Mensaje Inferior -->
-  <p class="bottom-message">{{ section.settings.bottom_message }}</p>
-
-</div>
-
 <style>
 /* Contenedor principal */
 .tiktok-slider-container {
