@@ -271,7 +271,7 @@
     <div class="container my-4">
       <div class="row g-3 logos">
         <div class="col-md-6">
-          <div class="d-flex align-items-center p-3 rounded logos_columna" style="width: 199px; height: 71px; background-color: {{ section.settings.background_color }};">
+          <div class="d-flex align-items-center p-3 rounded logos_columna">
             {% if section.settings.icono_izq != blank %}
               <img src="{{ section.settings.icono_izq | img_url: '45x45' }}" alt="icon" class="me-2">
             {% endif %}
@@ -284,7 +284,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="d-flex align-items-center p-3 rounded logos_columna" style="width: 199px; height: 71px; background-color: {{ section.settings.background_color }};">
+          <div class="d-flex align-items-center p-3 rounded logos_columna">
             {% if section.settings.icono_der != blank %}
               <img src="{{ section.settings.icono_der | img_url: '45x45' }}" alt="icon" class="me-2">
             {% endif %}
