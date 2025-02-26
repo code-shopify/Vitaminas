@@ -1,106 +1,190 @@
 <div class="t4s-section-inner vitatu-section conten">
-  <div class="breadcrumbs">
-    <a href="/">Home</a> &gt; <span>{{ section.settings.header }}</span>
-  </div>
-  <div class="stats-text">
-    {{ section.settings.stats_text }}
-  </div>
-  <div class="container banner-img">
-    <div class="text-dark p-5">
-      <header class="fw-bold text-start titulo">
-        {{ section.settings.header }}
-      </header>
-      <p class="subheader">{{ section.settings.subheader }}</p>
+  <div
+    class="container banner-img"
+  >
+    <div class="container">
+      <div class="text-dark p-5">
+        <header class="fw-bold text-start titulo">
+          {{ section.settings.header }}
+        </header>
+      </div>
+      <div class="container text-dark text-center">
+        <div class="row gap-5 p-4 tabla">
+          <div class="row gap-4 gy-4 box">
+            <div
+              class="position-relative col-3 rounded-5 columna"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                <img src="{{ section.settings.image_box_1|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_1 }}</p>
+                <p>{{ section.settings.box_content }}</p>
+              </div>
+            </div>
+            <div
+              class="position-relative col-3 rounded-5 columna"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                <img src="{{ section.settings.image_box_2|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_2 }}</p>
+                <p>{{ section.settings.box_content_2 }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row gap-4 gy-4 box">
+            <div
+              class="position-relative col-3 rounded-5 columna"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                <img src="{{ section.settings.image_box_3|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_3 }}</p>
+                <p>{{ section.settings.box_content_3 }}</p>
+              </div>
+            </div>
+            <div
+              class="position-relative col-3 rounded-5 columna"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                <img src="{{ section.settings.image_box_4|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_4 }}</p>
+                <p>{{ section.settings.box_content_4 }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="container text-dark text-center box">
-      <div class="columna">
-        <div class="columna-img">
-          <img src="{{ section.settings.image_box_1 | img_url:'50x50' }}" alt="icon_top">
-        </div>
-        <p class="fw-bold">{{ section.settings.box_1 }}</p>
-      </div>
-      <div class="columna">
-        <div class="columna-img">
-          <img src="{{ section.settings.image_box_2 | img_url:'50x50' }}" alt="icon_top">
-        </div>
-        <p class="fw-bold">{{ section.settings.box_2 }}</p>
-      </div>
-      <div class="columna">
-        <div class="columna-img">
-          <img src="{{ section.settings.image_box_3 | img_url:'50x50' }}" alt="icon_top">
-        </div>
-        <p class="fw-bold">{{ section.settings.box_3 }}</p>
-      </div>
-      <div class="columna">
-        <div class="columna-img">
-          <img src="{{ section.settings.image_box_4 | img_url:'50x50' }}" alt="icon_top">
-        </div>
-        <p class="fw-bold">{{ section.settings.box_4 }}</p>
-      </div>
+    <div class="imagen-derecha">
+         <img src="{{ section.settings.banner | img_url: '600x600' }}" alt="Persona">
     </div>
   </div>
 </div>
 {% style %}
-.conten {
-  background-color: {{ section.settings.background_section }};
-  padding: 2rem 1rem;
-}
-.breadcrumbs {
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
-.stats-text {
-  font-weight: bold;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-.banner-img {
-  width: 100%;
-  height: auto;
-}
-.titulo {
-  font-size: 2.5rem;
-  margin-bottom: 0.5rem;
-  text-transform: uppercase;
-}
-.subheader {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 1.5rem;
-}
-.box {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-.columna {
-  background-color: {{ section.settings.background_box }};
-  text-align: center;
-  width: auto;
-  padding: 1rem;
-  border-radius: 0.5rem;
-}
-.columna-img {
-  margin: 0 auto 0.5rem auto;
-  width: 50px;
-  height: 50px;
-}
-.columna-img img {
-  width: 100%;
-  height: auto;
-}
-@media (max-width: 768px) {
-  .titulo {
-    font-size: 1.8rem;
+  .banner-img {
+    width: 100%;
+    height: 688px;
+    background-image: linear-gradient(to right, rgba(255, 255, 255, 1), {{section.settings.background_section}});
   }
-  .subheader {
-    font-size: 1rem;
+    .img-fluid {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
-  .columna {
+  .imagen-derecha img{
+  width: min-content;
+  height: auto;
+  object-fit: cover;
+}
+
+  .titulo{
+    font-size: 45px;
+    line-height: 1.2;
+    word-wrap: break-word
+  }
+  .columna{
+    background-color: {{section.settings.background_box}};
+    padding-top:45px;
+    width: 20%;
+  }
+  .columna-img{
+    width:100px;
+    height:100px;
+  }
+  @media (max-width: 1334px){
+    .conten{
+      width:100%;
+      height:100%
+    }
+    .titulo{
+      font-size: 39px;
+    }
+  }
+  @media (max-width: 1024px) {
+  .banner-img {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .contenido {
     width: 100%;
   }
+  .imagen-derecha {
+    width: 60%;
+    max-width: 300px;
+  }
 }
+  @media(max-width:994px){
+    .conten{
+      width:100%;
+      height:100%
+    }
+    .titulo{
+      font-size: 23px;
+    }
+  }
+
+    @media (max-width: 768px) {
+    .conten{
+      width:390px;
+      height:1063px;
+    }
+    .banner-img {
+      width:100%;
+      height:auto;
+      margin-bottom: 50px;
+      background-image:none;
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), {{section.settings.background_section}});
+    }
+    .titulo{
+      font-size: 30px !important;
+      text-align: center !important;
+      width: 100% !important
+    }
+    .columna{
+      width: min-content;
+    }
+
+      .box{
+        justify-content:center;
+      }
+        .imagen-derecha {
+    width: 80%;
+    max-width: 250px;
+  }
+  }
+  @media (max-width: 576px) {
+    .banner-img{
+      width:100%;
+      height:auto;
+      margin-bottom: 50px;
+      background-image:none;
+      background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), {{section.settings.background_section}});
+    }
+    .titulo {
+        font-size: 1.5rem; 
+    }
+    .columna {
+        padding: 20px;
+    }
+    .tabla{
+      
+    }
+    .box{
+      justify-content: center;
+    }
+}
+  @media (max-width: 480px) {
+  .imagen-derecha {
+    width: 100%;
+    max-width: 200px;
+  }
 {% endstyle %}
 {% schema %}
 {
@@ -109,76 +193,84 @@
     {
       "type": "text",
       "id": "header",
-      "label": "Título principal",
-      "default": "BEST SELLERS"
+      "label": "Titulo"
     },
     {
-      "type": "text",
-      "id": "subheader",
-      "label": "Subtítulo",
-      "default": "Calidad en cada ingrediente, diseñados pensando en ti."
-    },
-    {
-      "type": "text",
-      "id": "stats_text",
-      "label": "Texto de estadísticas",
-      "default": "+100,000 satisfacciones con su compra"
-    },
-    {
-      "type": "color",
-      "id": "background_section",
-      "label": "Color de fondo de la sección",
-      "default": "#F9EFDC"
+      "type":"image_picker",
+      "id":"banner",
+      "label":"Imagen del banner"
     },
     {
       "type": "color",
       "id": "background_box",
-      "label": "Color de fondo de las cajas",
-      "default": "#FFFFFF"
+      "label": "Color del Fondo de todas las cajas:",
+      "default":"#FFBF80"
+    },
+    {
+      "type":"color",
+      "id":"background_section",
+      "label":"Color del fondo:",
+      "default": "#E5D4C9"
     },
     {
       "type": "text",
       "id": "box_1",
-      "label": "Texto caja 1",
-      "default": "Formulado por especialistas en nutrición"
+      "label": "Titulo de texto:"
+    },
+    {
+      "type": "text",
+      "id": "box_content",
+      "label": "Contenido del texto:"
     },
     {
       "type": "image_picker",
       "id": "image_box_1",
-      "label": "Icono caja 1"
+      "label": "Imagen del la Caja:",
     },
     {
       "type": "text",
       "id": "box_2",
-      "label": "Texto caja 2",
-      "default": "Integridad en nuestras fórmulas"
+      "label": "Titulo de texto:"
+    },
+    {
+      "type": "text",
+      "id": "box_content_2",
+      "label": "Contenido del texto:"
     },
     {
       "type": "image_picker",
       "id": "image_box_2",
-      "label": "Icono caja 2"
+      "label": "Imagen del la Caja:",
     },
     {
       "type": "text",
       "id": "box_3",
-      "label": "Texto caja 3",
-      "default": "Hecho de Origen Español"
+      "label": "Titulo de texto:"
+    },
+    {
+      "type": "text",
+      "id": "box_content_3",
+      "label": "Contenido del texto:"
     },
     {
       "type": "image_picker",
       "id": "image_box_3",
-      "label": "Icono caja 3"
+      "label": "Imagen del la Caja:",
     },
     {
       "type": "text",
       "id": "box_4",
-      "label": "Texto caja 4",
-      "default": "Seguimiento y acompañamiento post compra"
+      "label": "Titulo de texto:"
     },
     {
+      "type": "text",
+      "id": "box_content_4",
+      "label": "Contenido del texto:"
+    },
+        {
       "type": "image_picker",
       "id": "image_box_4",
-      "label": "Icono caja 4"
+      "label": "Imagen del la Caja:",
     }
   ],
   "presets": [
@@ -188,5 +280,3 @@
   ]
 }
 {% endschema %}
-
-
