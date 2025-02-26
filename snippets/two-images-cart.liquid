@@ -1,36 +1,31 @@
-
-<div class="container my-4 info-box p-0">
+<div class="container my-4 info-box">
   <div class="row g-3 align-items-stretch text-dark d-flex">
     <!-- Columna Izquierda -->
-    <div class="col-12 col-md-6 d-flex h-100 p-0">
-      <div class="d-flex flex-column justify-content-center p-2 rounded info-box__item h-100">
-        <div class="d-flex align-items-center">
-          <div class="info-box__icon">
-            {% if section.settings.icono_izq != blank %}
-              <img src="{{ section.settings.icono_izq | img_url: '45x45' }}" alt="icono izquierda">
-            {% endif %}
-          </div>
-          <div class="info-box__content">
-            <p class="fw-bold info-box__title m-1">{{ section.settings.titulo_izq }}</p>
-            <p class="info-box__text m-0">{{ section.settings.texto_abajo_izq }}</p> 
-          </div>
+    <div class="col-12 col-md-6 d-flex h-100">
+      <div class="d-flex align-items-center p-3 rounded info-box__item h-100 w-100">
+        <div class="info-box__icon">
+          {% if section.settings.icono_izq != blank %}
+            <img src="{{ section.settings.icono_izq | img_url: '45x45' }}" alt="icono izquierda">
+          {% endif %}
+        </div>
+        <div class="info-box__content">
+          <p class="fw-bold info-box__title m-1">{{ section.settings.titulo_izq }}</p>
+          <p class="info-box__text m-0">{{ section.settings.texto_abajo_izq }}</p> 
         </div>
       </div>
     </div>
 
     <!-- Columna Derecha -->
-    <div class="col-12 col-md-6 d-flex h-100 p-0">
-      <div class="d-flex flex-column justify-content-center p-2 rounded info-box__item h-100">
-        <div class="d-flex align-items-center">
-          <div class="info-box__icon">
-            {% if section.settings.icono_der != blank %}
-              <img src="{{ section.settings.icono_der | img_url: '45x45' }}" alt="icono derecha">
-            {% endif %}
-          </div>
-          <div class="info-box__content">
-            <p class="fw-bold m-1 info-box__title">{{ section.settings.titulo_der }}</p>
-            <p class="info-box__text m-0">{{ section.settings.texto_abajo_der }}</p>
-          </div>
+    <div class="col-12 col-md-6 d-flex h-100">
+      <div class="d-flex align-items-center p-3 rounded info-box__item h-100 w-100">
+        <div class="info-box__icon">
+          {% if section.settings.icono_der != blank %}
+            <img src="{{ section.settings.icono_der | img_url: '45x45' }}" alt="icono derecha">
+          {% endif %}
+        </div>
+        <div class="info-box__content">
+          <p class="fw-bold info-box__title m-1">{{ section.settings.titulo_der }}</p>
+          <p class="info-box__text m-0">{{ section.settings.texto_abajo_der }}</p>
         </div>
       </div>
     </div>
@@ -41,23 +36,26 @@
 
   /* Ajustes generales */
 .info-box {
-  max-width: 600px;
+  max-width: 720px; /* Se ajusta el ancho para que no se vea comprimido */
+  width: 100%;
 }
 
 /* Caja principal */
 .info-box__item {
   background-color: {{ section.settings.background_color }};
   width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 /* Icono */
 .info-box__icon {
-  width: 50px; /* Ajusta el tamaño del contenedor del icono */
+  width: 50px; 
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-right: 10px; /* Espacio entre la imagen y el texto */
+  margin-right: 10px;
 }
 
 /* Imagen dentro del icono */
@@ -68,9 +66,11 @@
 
 /* Texto */
 .info-box__content {
-  flex: 1; /* Para que el contenido ocupe el espacio restante */
+  flex: 1;
+  text-align: left;
 }
 
+/* Ajustes en títulos y texto */
 .info-box__title {
   font-size: 14px;
 }
@@ -80,29 +80,29 @@
   line-height: 1.4;
 }
 
-/* Responsive: En móvil, todo se adapta */
+/* Responsive */
 @media (max-width: 768px) {
-
   
-  .info-box__content {
-  text-align: left;
-}
+  .info-box {
+    max-width: 100%;
+  }
 
+  .info-box__item {
+    flex-direction: row; /* Se mantiene horizontal en móvil */
+    padding: 10px;
+  }
 
-
-  /* Ajuste en móvil para mejor alineación */
   .info-box__icon {
-    width: 5rem;
-    height: 5rem;
+    width: 40px;
+    height: 40px;
   }
 
   .info-box__title {
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .info-box__text {
     font-size: 11px;
   }
 }
-
 </style>
