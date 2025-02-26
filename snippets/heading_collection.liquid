@@ -1,136 +1,79 @@
-<div class="page-head t4s-pr t4s-oh page_bg_img">
-  <div class="t4s-container t4s-pr t4s-z-100">
-    <nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs">
-      <ul class="breadcrumbs__list">
-        <li class="breadcrumbs__item">
-          <a href="{{ routes.root_url }}" class="t4s-dib">{{ 'general.breadcrumb.home' | t }}</a>
-          <svg class="t4s-icon-arrow" viewBox="0 0 100 100">
-            <path d="M 10,50 L 60,100 L 70,90 L 30,50 L 70,10 L 60,0 Z" transform="translate(100, 100) rotate(180)" />
-          </svg>
-        </li>
-        {%- if current_tags -%}
-          <li class="breadcrumbs__item">
-            {{ collection.title | link_to: collection.url }}
-            <svg class="t4s-icon-arrow" viewBox="0 0 100 100">
-              <path d="M 10,50 L 60,100 L 70,90 L 30,50 L 70,10 L 60,0 Z" transform="translate(100, 100) rotate(180)" />
-            </svg>
-          </li>
-          <li class="breadcrumbs__item" aria-current="page">{{ current_tags | join: ", " }}</li>
-        {%- else -%}
-          <li class="breadcrumbs__item" aria-current="page">{{ collection.title }}</li>
-        {%- endif -%}
-      </ul>
-    </nav>
-
-    <p class="best-sellers-subtitle">+100,000 satisfacciones con su compra</p>
-    <h1 class="best-sellers-title">BEST SELLERS</h1>
-    <p class="best-sellers-desc">Calidad en cada ingrediente, diseñados pensando en ti</p>
-
-    <div class="best-sellers-icons">
-      <div class="icon-box">
-        <div class="icon-circle">
-          <img src="{{ 'Capa_1.png' | asset_url }}" alt="Formulado por especialistas en nutrición">
-        </div>
-        <p>Formulado por especialistas en nutrición</p>
-      </div>
-      <div class="icon-box">
-        <div class="icon-circle">
-          <img src="{{ 'Capa_2.png' | asset_url }}" alt="Integridad en nuestra fórmula">
-        </div>
-        <p>Integridad en nuestra fórmula</p>
-      </div>
-      <div class="icon-box">
-        <div class="icon-circle">
-          <img src="{{ 'header_icon_3.png' | asset_url }}" alt="Hecho en Origen Español">
-        </div>
-        <p>Hecho en Origen Español</p>
-      </div>
-      <div class="icon-box">
-        <div class="icon-circle">
-          <img src="{{ 'header_icon_4.png' | asset_url }}" alt="Seguimiento y acompañamiento post compra">
-        </div>
-        <p>Seguimiento y acompañamiento post compra</p>
-      </div>
-    </div>
+<!-- Estructura de ejemplo para que el icono aparezca sobre un círculo verde y el texto a la derecha -->
+<div class="icon-circle-text">
+  <!-- Contenedor del ícono con el círculo -->
+  <div class="icon-wrapper">
+    <!-- Círculo de fondo -->
+    <span class="icon-bg-circle"></span>
+    <!-- Imagen del ícono -->
+    <img src="{{ 'tu-icono.png' | asset_url }}" alt="Ejemplo de icono" />
+    <!-- (Opcional) Estrellita arriba del ícono -->
+    <!-- <span class="icon-star"></span> -->
   </div>
+
+  <!-- Texto al lado derecho -->
+  <h2 class="icon-title">Inositol de Origen Español</h2>
 </div>
 
 {% style %}
-.best-sellers-subtitle {
-  text-align: center;
-  font-size: 14px;
-  color: #555;
-  margin: 0 0 5px;
-}
-.best-sellers-title {
-  text-align: center;
-  font-size: 32px;
-  font-weight: 700;
-  margin: 0 0 10px;
-}
-.best-sellers-desc {
-  text-align: center;
-  font-size: 16px;
-  color: #555;
-  margin: 0 0 20px;
-}
-.best-sellers-icons {
+/* Contenedor principal en fila */
+.icon-circle-text {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-.icon-box {
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  width: 200px;
-  text-align: center;
+  gap: 10px; /* Espacio entre ícono y texto */
+  padding: 10px 0; /* Margen vertical */
+  /* Si deseas un color de fondo para todo el bloque, descomenta:
+  background-color: #fef8ed; 
+  */
 }
-.icon-circle {
-  width: 60px;
-  height: 60px;
-  background-color: #CDE8B3; /* Ajusta el color verde deseado */
+
+/* Contenedor relativo del ícono */
+.icon-wrapper {
+  position: relative;
+  width: 50px;  /* Ajusta a tu gusto */
+  height: 50px; /* Ajusta a tu gusto */
+}
+
+/* Círculo verde de fondo */
+.icon-bg-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;  /* Debe coincidir con el contenedor */
+  height: 50px; /* Debe coincidir con el contenedor */
+  background-color: #cde8b3; /* Ajusta el color del círculo */
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
+  z-index: 0; /* Detrás del ícono */
 }
-.icon-circle img {
-  width: 30px; /* Ajusta si quieres el ícono más grande o más pequeño */
+
+/* Imagen del ícono */
+.icon-wrapper img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 25px;  /* Ajusta el tamaño del ícono */
   height: auto;
+  transform: translate(-50%, -50%); /* Centra la imagen */
+  z-index: 1;
 }
-.icon-box p {
+
+/* (Opcional) Estrellita encima del ícono, si la quieres */
+.icon-star {
+  position: absolute;
+  top: -5px;  /* Ajusta posición */
+  right: -5px; /* Ajusta posición */
+  width: 12px;
+  height: 12px;
+  background: url("{{ 'estrella.png' | asset_url }}") no-repeat center / contain;
+  z-index: 2;
+}
+
+/* Texto a la derecha del ícono */
+.icon-title {
+  font-size: 20px; /* Ajusta tamaño de texto */
+  font-weight: 700;
   margin: 0;
-  font-size: 14px;
-  color: #444;
-  line-height: 1.4em;
-}
-.breadcrumbs {
-  margin: 20px auto 0;
-  text-align: center;
-}
-.breadcrumbs__list {
-  list-style: none;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-}
-.breadcrumbs__item {
-  margin: 0 5px;
-}
-.breadcrumbs__item a {
-  text-decoration: none;
-  color: #444;
-}
-.t4s-icon-arrow {
-  width: 10px;
-  height: 10px;
-  margin-left: 5px;
+  color: #000; /* Ajusta color */
 }
 {% endstyle %}
+
 
