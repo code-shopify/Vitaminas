@@ -2,7 +2,7 @@
   <div class="row g-3 align-items-stretch text-dark d-flex">
     <!-- Columna Izquierda -->
     <div class="col-12 col-md-6 d-flex h-100">
-      <div class="d-flex align-items-center p-3 rounded info-box__item h-100 w-100">
+      <div class="d-flex align-items-center p-2 rounded info-box__item h-100 w-100">
         <div class="info-box__icon">
           {% if section.settings.icono_izq != blank %}
             <img src="{{ section.settings.icono_izq | img_url: '45x45' }}" alt="icono izquierda">
@@ -17,7 +17,7 @@
 
     <!-- Columna Derecha -->
     <div class="col-12 col-md-6 d-flex h-100">
-      <div class="d-flex align-items-center p-3 rounded info-box__item h-100 w-100">
+      <div class="d-flex align-items-center p-2 rounded info-box__item h-100 w-100">
         <div class="info-box__icon">
           {% if section.settings.icono_der != blank %}
             <img src="{{ section.settings.icono_der | img_url: '45x45' }}" alt="icono derecha">
