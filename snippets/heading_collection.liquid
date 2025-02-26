@@ -1,6 +1,5 @@
 <div class="page-head t4s-pr t4s-oh page_bg_img">
   <div class="t4s-container t4s-pr t4s-z-100">
-
     <nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs">
       <ul class="breadcrumbs__list">
         <li class="breadcrumbs__item">
@@ -29,19 +28,27 @@
 
     <div class="best-sellers-icons">
       <div class="icon-box">
-        <img src="{{ 'Capa_1.png' | asset_url }}"  alt="Formulado por especialistas en nutrición">
+        <div class="icon-circle">
+          <img src="{{ 'Capa_1.png' | asset_url }}" alt="Formulado por especialistas en nutrición">
+        </div>
         <p>Formulado por especialistas en nutrición</p>
       </div>
       <div class="icon-box">
-        <img src="{{ 'Capa_2.png' | asset_url }}" alt="Integridad en nuestra fórmula">
+        <div class="icon-circle">
+          <img src="{{ 'Capa_2.png' | asset_url }}" alt="Integridad en nuestra fórmula">
+        </div>
         <p>Integridad en nuestra fórmula</p>
       </div>
       <div class="icon-box">
-        <img src="{{ 'header_icon_3.png' | asset_url }}" alt="Hecho en Origen Español">
+        <div class="icon-circle">
+          <img src="{{ 'header_icon_3.png' | asset_url }}" alt="Hecho en Origen Español">
+        </div>
         <p>Hecho en Origen Español</p>
       </div>
       <div class="icon-box">
-        <img src="{{ 'header_icon_4.png' | asset_url }}" alt="Seguimiento y acompañamiento post compra">
+        <div class="icon-circle">
+          <img src="{{ 'header_icon_4.png' | asset_url }}" alt="Seguimiento y acompañamiento post compra">
+        </div>
         <p>Seguimiento y acompañamiento post compra</p>
       </div>
     </div>
@@ -83,9 +90,19 @@
   width: 200px;
   text-align: center;
 }
-.icon-box img {
-  max-width: 60px;
+.icon-circle {
+  width: 60px;
+  height: 60px;
+  background-color: #CDE8B3; /* Ajusta el color verde deseado */
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 10px;
+}
+.icon-circle img {
+  width: 30px; /* Ajusta si quieres el ícono más grande o más pequeño */
+  height: auto;
 }
 .icon-box p {
   margin: 0;
@@ -116,3 +133,4 @@
   margin-left: 5px;
 }
 {% endstyle %}
+
