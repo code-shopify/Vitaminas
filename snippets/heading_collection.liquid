@@ -1,64 +1,144 @@
 {%- if se_bks.size > 0 -%}
-<div class="page-head t4s-pr t4s-oh page_bg_img {{ se_stts.content_align }}"> 
-   <div class="t4s-container t4s-pr t4s-z-100">
+<div class="page-head {{ se_stts.content_align }}"> 
+   <div class="t4s-container">
+      <nav class="breadcrumbs">
+          <a href="{{ routes.root_url }}">Home</a> / <span>{{ collection.title }}</span>
+      </nav>
+      
       {%- for block in se_bks -%}  
-      	{%- assign bk_stts = block.settings -%}
+        {%- assign bk_stts = block.settings -%}
         {%- case block.type -%}
+
             {%- when '1' -%} 
               {%- assign general_block = true -%}
-              <h1 data-lh="{{ bk_stts.text_lh_mb }}" data-lh-md="{{ bk_stts.text_lh }}" data-lh-lg="{{ bk_stts.text_lh }}" class="title-head t4s-bl-item t4s-animation-none t4s-text-bl t4s-fnt-fm-{{ bk_stts.fontf }} t4s-font-italic-{{ bk_stts.font_italic }} t4s-uppercase-{{ bk_stts.font_uppercase }} t4s-hidden-mobile-{{ bk_stts.hidden_mobile }} t4s-br-mb-{{ bk_stts.remove_br_tag }} t4s-text-shadow-{{ bk_stts.text_shadow }}" id="b_{{ block.id }}" {%- render 'bk_cus_style', type: 'custom_text', bk_stts: bk_stts, ani_delay: ani_delay -%}>{{ collection.title }}</h1>
+              <h1 class="title-head">{{ collection.title }}</h1>
             
             {%- when '2' -%}
                {%- liquid
                if bk_stts.content == blank
-               	continue
+                   continue
                endif
                assign general_block = true -%}
-              <div data-lh="{{ bk_stts.text_lh_mb }}" data-lh-md="{{ bk_stts.text_lh }}" data-lh-lg="{{ bk_stts.text_lh }}" class="desc-head t4s-bl-item t4s-animation-none t4s-text-bl t4s-fnt-fm-{{ bk_stts.fontf }} t4s-font-italic-{{ bk_stts.font_italic }} t4s-uppercase-{{ bk_stts.font_uppercase }} t4s-hidden-mobile-{{ bk_stts.hidden_mobile }} t4s-br-mb-{{ bk_stts.remove_br_tag }} t4s-text-shadow-{{ bk_stts.text_shadow }}" id="b_{{ block.id }}" {%- render 'bk_cus_style', type: 'custom_text', bk_stts: bk_stts, ani_delay: ani_delay -%}>{{ block.settings.content }}</div>
+              <div class="desc-head">{{ block.settings.content }}</div>
             
             {%- when '3' -%}
-              <nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs" style="--brc-cl:{{ bk_stts.breadcrumb_color }};--brc_mgb:{{ bk_stts.brc_mgb }}px;"> 
-                  <ul class="breadcrumbs__list">
-                     <li class="breadcrumbs__item">
-                          <a href="{{ routes.root_url }}" class="t4s-dib">{{ 'general.breadcrumb.home' | t }}</a> <svg class="t4s-icon-arrow" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg>
-                      </li>
-                      {%- if current_tags -%}
-                      <li class="breadcrumbs__item">
-                          {{ collection.title | link_to: collection.url }} <svg class="t4s-icon-arrow" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg>
-                      </li>
-                      <li class="breadcrumbs__item" aria-current="page">{{ current_tags | join: ", " }}</li>
-                      {%- else -%} 
-                      <li class="breadcrumbs__item" aria-current="page">{{ collection.title }}</li>
-                      {%- endif -%}
-                  </ul>
-              </nav> 
-			      {%- when '4' -%}
+              <div class="features">
+                  <div class="feature-item">
+                      <img src="{{ 'icon-1.png' | asset_url }}" alt="Especialistas en nutrición">
+                      <span>Formulado por especialistas en nutrición</span>
+                  </div>
+                  <div class="feature-item">
+                      <img src="{{ 'icon-2.png' | asset_url }}" alt="Integridad en fórmulas">
+                      <span>Integridad en nuestras fórmulas</span>
+                  </div>
+                  <div class="feature-item">
+                      <img src="{{ 'icon-3.png' | asset_url }}" alt="Inositol">
+                      <span>Inositol de Origen Español</span>
+                  </div>
+                  <div class="feature-item">
+                      <img src="{{ 'icon-4.png' | asset_url }}" alt="Acompañamiento post compra">
+                      <span>Seguimiento y acompañamiento post compra</span>
+                  </div>
+              </div>
+
+            {%- when '4' -%}
                {%- liquid
                assign cl_des = collection.description
                if cl_des == blank
-               	continue
+                   continue
                endif
                assign general_block = true
               -%}
               {%- capture view_more -%}
-                  {%- if bk_stts.view_more and bk_stts.viewm_txt != blank and collection.description != blank -%}<a href="#t4s-desc-collection" class="t4s-cl-des-viewm" data-go-id data-no-instant>{{ bk_stts.viewm_txt }}</a>{% endif -%}
+                  {%- if bk_stts.view_more and bk_stts.viewm_txt != blank -%}
+                      <a href="#t4s-desc-collection" class="t4s-cl-des-viewm">{{ bk_stts.viewm_txt }}</a>
+                  {%- endif -%}
               {%- endcapture -%}
-              <div data-lh="{{ bk_stts.text_lh_mb }}" data-lh-md="{{ bk_stts.text_lh }}" data-lh-lg="{{ bk_stts.text_lh }}" class="desc-head t4s-bl-item t4s-animation-none t4s-text-bl t4s-fnt-fm-{{ bk_stts.fontf }} t4s-font-italic-{{ bk_stts.font_italic }} t4s-uppercase-{{ bk_stts.font_uppercase }} t4s-hidden-mobile-{{ bk_stts.hidden_mobile }} t4s-br-mb-{{ bk_stts.remove_br_tag }} t4s-text-shadow-{{ bk_stts.text_shadow }}{% if bk_stts.design_des == "show_all" %} t4s-rte{% endif %}" id="b_{{ block.id }}" {%- render 'bk_cus_style', type: 'custom_text', bk_stts: bk_stts, ani_delay: ani_delay -%}>
-                  {%- if bk_stts.design_des == "show_all" -%}{{ cl_des }}{%- else -%}{{- cl_des | strip_html | truncatewords: bk_stts.length -}}<br>{{ view_more }}{%- endif -%}
+              <div class="desc-head">
+                  {%- if bk_stts.design_des == "show_all" -%}
+                      {{ cl_des }}
+                  {%- else -%}
+                      {{- cl_des | strip_html | truncatewords: bk_stts.length -}}<br>{{ view_more }}
+                  {%- endif -%}
               </div>
-     
+
         {%- endcase -%} 
       {%- endfor -%}
+      
+      <img src="{{ 'background-decor.png' | asset_url }}" class="background-decor" alt="Decoración de fondo">
    </div>
 </div> 
 {%- endif -%}
+
 {%- if general_block -%}
     {{ 'general-block.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
 
+{% style %}
+  .page-head {
+    background-color: #F8F0E5; /* Color de fondo */
+    padding: 40px 0;
+    text-align: center;
+    position: relative;
+}
 
+.page-head .breadcrumbs {
+    text-align: left;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
 
+.page-head .breadcrumbs a {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+}
 
+.page-head .breadcrumbs a:hover {
+    text-decoration: underline;
+}
 
+.page-head .title-head {
+    font-size: 36px;
+    font-weight: bold;
+    color: #000;
+    margin-bottom: 10px;
+}
 
+.page-head .desc-head {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+}
 
+.page-head .features {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.page-head .features .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #000;
+}
+
+.page-head .features .feature-item img {
+    width: 30px; /* Ajusta el tamaño de los íconos */
+    height: auto;
+}
+
+.page-head .background-decor {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 250px; /* Ajusta el tamaño de la imagen decorativa */
+    opacity: 0.2;
+}
+{% endstyle %}
