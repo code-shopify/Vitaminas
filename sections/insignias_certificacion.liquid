@@ -3,68 +3,68 @@
     class="banner-img"
   >
     <div class="container" style="padding: 15px;">
-      <div class="contenido text-dark">
-        <header class="fw-bold text-start titulo">
-          {{ section.settings.header }}
-        </header>
-        <div class="container text-dark text-center">
-          <div class="row gap-5 p-4 tabla">
-            <div class="row gap-4 gy-4 box">
-              <div
-                class="position-relative col-3 rounded-5 columna"
-              >
-                <div class="position-absolute top-0 start-50 translate-middle columna-img">
-                  <img src="{{ section.settings.image_box_1|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
-                </div>
-                <div class="lh-sm">
-                  <p class="fw-bold">{{ section.settings.box_1 }}</p>
-                  <p>{{ section.settings.box_content }}</p>
-                </div>
+    <div class="contenido text-dark">
+      <header class="fw-bold text-start titulo">
+        {{ section.settings.header }}
+      </header>
+      <div class="container text-dark text-center">
+        <div class="row gap-5 p-4 tabla">
+          <div class="row gap-4 gy-4 box">
+            <div
+              class="position-relative col-3 rounded-5 columna"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                <img src="{{ section.settings.image_box_1|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
               </div>
-              <div
-                class="position-relative col-3 rounded-5 columna"
-              >
-                <div class="position-absolute top-0 start-50 translate-middle columna-img">
-                  <img src="{{ section.settings.image_box_2|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
-                </div>
-                <div class="lh-sm">
-                  <p class="fw-bold">{{ section.settings.box_2 }}</p>
-                  <p>{{ section.settings.box_content_2 }}</p>
-                </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_1 }}</p>
+                <p>{{ section.settings.box_content }}</p>
               </div>
             </div>
-            <div class="row gap-4 gy-4 box">
-              <div
-                class="position-relative col-3 rounded-5 columna"
-              >
-                <div class="position-absolute top-0 start-50 translate-middle columna-img">
-                  <img src="{{ section.settings.image_box_3|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
-                </div>
-                <div class="lh-sm">
-                  <p class="fw-bold">{{ section.settings.box_3 }}</p>
-                  <p>{{ section.settings.box_content_3 }}</p>
-                </div>
+            <div
+              class="position-relative col-3 rounded-5 columna"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                <img src="{{ section.settings.image_box_2|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
               </div>
-              <div
-                class="position-relative col-3 rounded-5 columna"
-              >
-                <div class="position-absolute top-0 start-50 translate-middle columna-img">
-                  <img src="{{ section.settings.image_box_4|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
-                </div>
-                <div class="lh-sm">
-                  <p class="fw-bold">{{ section.settings.box_4 }}</p>
-                  <p>{{ section.settings.box_content_4 }}</p>
-                </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_2 }}</p>
+                <p>{{ section.settings.box_content_2 }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="row gap-4 gy-4 box">
+            <div
+              class="position-relative col-3 rounded-5 columna"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                <img src="{{ section.settings.image_box_3|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_3 }}</p>
+                <p>{{ section.settings.box_content_3 }}</p>
+              </div>
+            </div>
+            <div
+              class="position-relative col-3 rounded-5 columna"
+            >
+              <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                <img src="{{ section.settings.image_box_4|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+              </div>
+              <div class="lh-sm">
+                <p class="fw-bold">{{ section.settings.box_4 }}</p>
+                <p>{{ section.settings.box_content_4 }}</p>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="imagen-derecha">
-      <img src="{{ section.settings.banner | img_url: '600x600' }}" alt="Persona">
-    </div>
+      <div class="imagen-derecha">
+        <img src="{{ section.settings.banner | img_url: '600x600' }}" alt="Persona">
+      </div>
   </div>
+</div>
 </div>
 {% style %}
     .banner-img {
@@ -78,6 +78,11 @@
       height: 100%;
       object-fit: cover;
     }
+    .imagen-derecha img{
+    width: min-content;
+    height: auto;
+    object-fit: cover;
+  }
     .imagen-derecha {
     width: 35%;
     max-width: 400px;
@@ -101,9 +106,7 @@
       width: 60%;
       display: contents;
     }
-    .box{
-      justify-content: space-around;
-    }
+
 
     @media (max-width: 1334px){
       .conten{
@@ -185,7 +188,7 @@
         justify-content: center;
       }
       .columna-img{
-
+      
     }
   }
     @media (max-width: 375px) {
