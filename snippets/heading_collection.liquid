@@ -49,22 +49,12 @@
      
         {%- endcase -%} 
       {%- endfor -%}
-         <div class="reviews">
-        <img class="users" alt="Usuarios satisfechos">
-        <span class=text_1>+100,000 satisfechos con su compra</span>
-    </div>
    </div>
 </div> 
 {%- endif -%}
 {%- if general_block -%}
     {{ 'general-block.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
-{% style %}
-  .text_1{
-    font-size:12px;
-    color:white;
-  }
-{% endstyle %}
 
 
 
