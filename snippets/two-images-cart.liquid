@@ -1,78 +1,74 @@
- <div class="container my-4 caja">
-      <div class="row g-3 logos text-dark lh-sm">
-        <div class="col-md-6">
-          <div class="d-flex align-items-center p-3 rounded logos_columna">
-            {% if section.settings.icono_izq != blank %}
-              <img src="{{ section.settings.icono_izq | img_url: '45x45' }}" alt="icon" class="me-2">
-            {% endif %}
-            <span class="mb-0">
-              <p class="fw-bold contenido">{{ section.settings.titulo_izq }}</p>
-                <p class="contenido">
-                  {{section.settings.texto_abajo_izq}}
-                </p> 
-            </span>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="d-flex align-items-center p-3 rounded logos_columna">
-            {% if section.settings.icono_der != blank %}
-              <img src="{{ section.settings.icono_der | img_url: '45x45' }}" alt="icon" class="me-2">
-            {% endif %}
-            <span class="mb-0">
-              <p class="fw-bold contenido">{{ section.settings.titulo_der }}</p>
-              <p class="contenido" >{{ section.settings.texto_abajo_der}}</p>
-            </span>
-          </div>
+<div class="container my-4 info-box">
+  <div class="row g-3 align-items-center text-dark">
+    <!-- Columna Izquierda -->
+    <div class="col-md-6">
+      <div class="d-flex align-items-center p-3 rounded info-box__item">
+        {% if section.settings.icono_izq != blank %}
+          <img src="{{ section.settings.icono_izq | img_url: '45x45' }}" alt="icono izquierda" class="me-2">
+        {% endif %}
+        <div>
+          <p class="fw-bold info-box__title">{{ section.settings.titulo_izq }}</p>
+          <p class="info-box__text">{{ section.settings.texto_abajo_izq }}</p> 
         </div>
       </div>
     </div>
 
+    <!-- Columna Derecha -->
+    <div class="col-md-6">
+      <div class="d-flex align-items-center p-3 rounded info-box__item">
+        {% if section.settings.icono_der != blank %}
+          <img src="{{ section.settings.icono_der | img_url: '45x45' }}" alt="icono derecha" class="me-2">
+        {% endif %}
+        <div>
+          <p class="fw-bold info-box__title">{{ section.settings.titulo_der }}</p>
+          <p class="info-box__text">{{ section.settings.texto_abajo_der }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-      <style>
-    .caja{
-      widht:412px;
-      height:88px;
-    }
-    .logos{
-      widht:412px;
-      height:88px;
-    }
-    .logos_columna{
-      width:192px;
-      height:71px;
-      background-color: {{section.settings.background_color}};
-    }
-    .contenido{
-      font-size:12px;
-      line-height: inherit;
-    }
-    @media (max-width: 1024px) {
-    .logos {
-        width: 54%;
-        flex-wrap: nowrap;
-      }
-      .contenido{
-        font-size: 11px;
-      }
-    }
-    @media (max-width: 505px){
-      .logos_columna{
-        width: 92%;
-      }
-    }
-    @media(max-width:497px){
-      .contenido{
-        font-size: 10px;
-      }
-    }
-    @media(max-width:450px){
-      .logos{
-        flex-direction: column;
-        width: auto;
-        height: auto;
-      }
-      .caja{
-        height:auto;
-      }
-    }
-  </style>
+<style>
+/* Estilos generales */
+.info-box {
+  max-width: 600px; /* Ajusta el ancho máximo del contenedor */
+}
+
+/* Elementos internos */
+.info-box__item {
+  background-color: {{ section.settings.background_color }};
+  width: 100%;
+  max-width: 280px; /* Controla el tamaño de cada caja */
+}
+
+/* Textos */
+.info-box__title {
+  font-size: 14px;
+}
+
+.info-box__text {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .info-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .info-box__item {
+    max-width: 92%;
+  }
+}
+
+@media (max-width: 480px) {
+  .info-box__title {
+    font-size: 12px;
+  }
+  .info-box__text {
+    font-size: 11px;
+  }
+}
+</style>
