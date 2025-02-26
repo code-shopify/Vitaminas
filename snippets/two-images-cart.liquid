@@ -1,31 +1,31 @@
-<div class="container-fluid my-4 info-box p-0">
-  <div class="row g-3 align-items-stretch text-dark d-flex p-0">
+<div class="container my-4 info-box">
+  <div class="row g-3 align-items-stretch text-dark d-flex">
     <!-- Columna Izquierda -->
-    <div class="col-12 col-md-6 d-flex h-100 p-0">
-      <div class="d-flex align-items-center p-2 rounded info-box__item h-100 w-100">
+    <div class="col-12 col-md-6 d-flex h-100">
+      <div class="d-flex align-items-center p-3 rounded info-box__item h-100 w-100">
         <div class="info-box__icon">
           {% if section.settings.icono_izq != blank %}
             <img src="{{ section.settings.icono_izq | img_url: '45x45' }}" alt="icono izquierda">
           {% endif %}
         </div>
         <div class="info-box__content">
-          <p class="fw-bold info-box__title">{{ section.settings.titulo_izq }}</p>
-          <p class="info-box__text">{{ section.settings.texto_abajo_izq }}</p> 
+          <p class="fw-bold info-box__title m-1">{{ section.settings.titulo_izq }}</p>
+          <p class="info-box__text m-0">{{ section.settings.texto_abajo_izq }}</p> 
         </div>
       </div>
     </div>
 
     <!-- Columna Derecha -->
-    <div class="col-12 col-md-6 d-flex h-100 p-0">
-      <div class="d-flex align-items-center p-2 rounded info-box__item h-100 w-100">
+    <div class="col-12 col-md-6 d-flex h-100">
+      <div class="d-flex align-items-center p-3 rounded info-box__item h-100 w-100">
         <div class="info-box__icon">
           {% if section.settings.icono_der != blank %}
             <img src="{{ section.settings.icono_der | img_url: '45x45' }}" alt="icono derecha">
           {% endif %}
         </div>
         <div class="info-box__content">
-          <p class="fw-bold info-box__title">{{ section.settings.titulo_der }}</p>
-          <p class="info-box__text">{{ section.settings.texto_abajo_der }}</p>
+          <p class="fw-bold info-box__title m-1">{{ section.settings.titulo_der }}</p>
+          <p class="info-box__text m-0">{{ section.settings.texto_abajo_der }}</p>
         </div>
       </div>
     </div>
@@ -34,11 +34,10 @@
 
 <style>
 
-/* Se elimina el padding del contenedor */
+  /* Ajustes generales */
 .info-box {
-  max-width: 720px;
+  max-width: 720px; /* Se ajusta el ancho para que no se vea comprimido */
   width: 100%;
-  padding: 0;
 }
 
 /* Caja principal */
@@ -47,7 +46,6 @@
   width: 100%;
   display: flex;
   align-items: center;
-  padding: 10px; /* Ajuste mínimo para evitar que el texto esté pegado al borde */
 }
 
 /* Icono */
@@ -72,25 +70,26 @@
   text-align: left;
 }
 
-/* Ajustes en títulos y texto usando em para escalabilidad */
+/* Ajustes en títulos y texto */
 .info-box__title {
-  font-size: 1.2em; /* Se ajusta dinámicamente */
+  font-size: 14px;
 }
 
 .info-box__text {
-  font-size: 1em;
+  font-size: 12px;
   line-height: 1.4;
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-
+  
   .info-box {
     max-width: 100%;
   }
 
   .info-box__item {
     flex-direction: row; /* Se mantiene horizontal en móvil */
+    padding: 10px;
   }
 
   .info-box__icon {
@@ -99,11 +98,11 @@
   }
 
   .info-box__title {
-    font-size: 1.1em;
+    font-size: 13px;
   }
 
   .info-box__text {
-    font-size: 0.9em;
+    font-size: 11px;
   }
 }
 </style>
