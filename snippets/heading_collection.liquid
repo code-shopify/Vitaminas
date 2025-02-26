@@ -1,6 +1,6 @@
-
 <div class="page-head t4s-pr t4s-oh page_bg_img">
   <div class="t4s-container t4s-pr t4s-z-100">
+
     <nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs">
       <ul class="breadcrumbs__list">
         <li class="breadcrumbs__item">
@@ -28,29 +28,40 @@
     <p class="best-sellers-desc">Calidad en cada ingrediente, diseñados pensando en ti</p>
 
     <div class="best-sellers-icons">
-      <div class="icon-box">
-        <div class="icon-circle">
+      <div class="icon-circle-text">
+        <div class="icon-wrapper">
+          <span class="icon-bg-circle"></span>
+          <!-- <span class="icon-star"></span>  Descomenta si deseas una estrella -->
           <img src="{{ 'Capa_1.png' | asset_url }}" alt="Formulado por especialistas en nutrición">
         </div>
-        <p>Formulado por especialistas en nutrición</p>
+        <h2 class="icon-title">Formulado por especialistas en nutrición</h2>
       </div>
-      <div class="icon-box">
-        <div class="icon-circle">
+
+      <div class="icon-circle-text">
+        <div class="icon-wrapper">
+          <span class="icon-bg-circle"></span>
+          <!-- <span class="icon-star"></span> -->
           <img src="{{ 'Capa_2.png' | asset_url }}" alt="Integridad en nuestra fórmula">
         </div>
-        <p>Integridad en nuestra fórmula</p>
+        <h2 class="icon-title">Integridad en nuestra fórmula</h2>
       </div>
-      <div class="icon-box">
-        <div class="icon-circle">
+
+      <div class="icon-circle-text">
+        <div class="icon-wrapper">
+          <span class="icon-bg-circle"></span>
+          <!-- <span class="icon-star"></span> -->
           <img src="{{ 'header_icon_3.png' | asset_url }}" alt="Hecho en Origen Español">
         </div>
-        <p>Hecho en Origen Español</p>
+        <h2 class="icon-title">Hecho en Origen Español</h2>
       </div>
-      <div class="icon-box">
-        <div class="icon-circle">
+
+      <div class="icon-circle-text">
+        <div class="icon-wrapper">
+          <span class="icon-bg-circle"></span>
+          <!-- <span class="icon-star"></span> -->
           <img src="{{ 'header_icon_4.png' | asset_url }}" alt="Seguimiento y acompañamiento post compra">
         </div>
-        <p>Seguimiento y acompañamiento post compra</p>
+        <h2 class="icon-title">Seguimiento y acompañamiento post compra</h2>
       </div>
     </div>
   </div>
@@ -79,37 +90,53 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: flex-start;
   gap: 20px;
   max-width: 1200px;
   margin: 0 auto;
 }
-.icon-box {
+.icon-circle-text {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  width: 200px;
-  text-align: center;
+  gap: 10px;
 }
-.icon-circle {
-  width: 60px;
-  height: 60px;
-  background-color: #DEE25D; /* Ajusta el color verde deseado */
+.icon-wrapper {
+  position: relative;
+  width: 50px;
+  height: 50px;
+}
+.icon-bg-circle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 50px;
+  background-color: #cde8b3;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
+  z-index: 0;
 }
-.icon-circle img {
-  width: 30px; /* Ajusta si quieres el ícono más grande o más pequeño */
+.icon-wrapper img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 25px;
   height: auto;
+  transform: translate(-50%, -50%);
+  z-index: 1;
 }
-.icon-box p {
+.icon-star {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 14px;
+  height: 14px;
+  background: url("{{ 'estrella.png' | asset_url }}") no-repeat center / contain;
+  z-index: 2;
+}
+.icon-title {
+  font-size: 18px;
+  font-weight: 700;
   margin: 0;
-  font-size: 14px;
-  color: #444;
-  line-height: 1.4em;
+  color: #000;
 }
 .breadcrumbs {
   margin: 20px auto 0;
@@ -134,3 +161,4 @@
   margin-left: 5px;
 }
 {% endstyle %}
+
