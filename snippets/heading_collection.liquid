@@ -69,6 +69,19 @@
 </div>
 
 {% style %}
+  .big-flower {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px; /* ajusta según tu diseño */
+  height: 300px; /* ajusta según tu diseño */
+  background: url("{{ 'header_icon_background.png' | asset_url }}") no-repeat center / contain;
+  pointer-events: none; /* para que no bloquee clics */
+  z-index: 0; /* detrás del contenido */
+}
+.page-head {
+  position: relative; /* para que .big-flower se posicione dentro */
+}
 .best-sellers-subtitle {
   text-align: center;
   font-size: 14px;
