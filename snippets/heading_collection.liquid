@@ -49,28 +49,16 @@
      
         {%- endcase -%} 
       {%- endfor -%}
+         <div class="reviews">
+        <img class="users" alt="Usuarios satisfechos">
+        <span>+100,000 satisfechos con su compra</span>
+    </div>
    </div>
 </div> 
 {%- endif -%}
 {%- if general_block -%}
     {{ 'general-block.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
-
-{% style %}
-  .image{
-position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: auto;
-    height: auto;
-    max-height: 50%;
-    overflow: hidden;
-    object-fit: cover;    
-  }
-
-{% endstyle %}
-
 
 
 
