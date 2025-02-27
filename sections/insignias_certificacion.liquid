@@ -3,7 +3,7 @@
     <div
       class="container banner-img"
     >
-      <div class="container flex_padre" style="padding: 15px;width:50%;">
+      <div class="container flex_padre">
         <div class="contenido text-dark">
           <header class="fw-bold text-start titulo">
             {{ section.settings.header }}
@@ -211,10 +211,16 @@
        .titulo{
          
        }
+       .flex_padre{
+         
+       }
    }
      @media (max-width: 375px) {
        .banner-img{
 
+       }
+       .flex_padre{
+         width:100%
        }
      .imagen-derecha {
        width: 100%;
