@@ -1,6 +1,6 @@
-<div class="t4s-section-inner vitatu-section back-color">
+<div class="t4s-section-inner vitatu-section back">
   <div
-    class="banner-img"
+    class="container banner-img"
   >
     <div class="container" style="padding: 15px;">
     <div class="contenido text-dark">
@@ -67,12 +67,10 @@
 </div>
 </div>
 {% style %}
-    .back-color{
+    .banner-img {
       width: 100%;
       height: auto;
-      background-image: linear-gradient(to right, rgba(255, 0, 0, 1), {{section.settings.background_section}});
-    }
-    .banner-img {
+      background-image: linear-gradient(to right, rgba(255, 255, 255, 1), {{section.settings.background_section}});
       display: flex;
     }
     .img-fluid {
@@ -88,7 +86,7 @@
       font-size: 45px;
       line-height: 1.2;
       word-wrap: break-word;
-    }
+     }
     .columna{
       background-color: {{section.settings.background_box}};
       padding-top:45px;
