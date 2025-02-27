@@ -1,228 +1,229 @@
-  <div class="t4s-section-inner vitatu-section">
-    <div class="color_back">
-  <div
-    class="container banner-img"
-  >
-    <div class="container" style="padding: 15px;">
-    <div class="contenido text-dark">
-      <header class="fw-bold text-start titulo">
-        {{ section.settings.header }}
-      </header>
-      <div class="container text-dark text-center">
-        <div class="row gap-5 tabla">
-          <div class="row gap-4 gy-4 box">
-            <div
-              class="position-relative col-3 rounded-5 columna"
-            >
-              <div class="position-absolute top-0 start-50 translate-middle columna-img">
-                <img src="{{ section.settings.image_box_1|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+<div class="t4s-section-inner vitatu-section">
+  <div class="color_back">
+    <div
+      class="container banner-img"
+    >
+      <div class="container" style="padding: 15px;">
+        <div class="contenido text-dark">
+          <header class="fw-bold text-start titulo">
+            {{ section.settings.header }}
+          </header>
+          <div class="container text-dark text-center">
+            <div class="row gap-5 tabla">
+              <div class="row gap-4 gy-4 box">
+                <div
+                  class="position-relative col-3 rounded-5 columna"
+                >
+                  <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                    <img src="{{ section.settings.image_box_1|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+                  </div>
+                  <div class="lh-sm">
+                    <p class="fw-bold">{{ section.settings.box_1 }}</p>
+                    <p>{{ section.settings.box_content }}</p>
+                  </div>
+                </div>
+                <div
+                  class="position-relative col-3 rounded-5 columna"
+                >
+                  <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                    <img src="{{ section.settings.image_box_2|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+                  </div>
+                  <div class="lh-sm">
+                    <p class="fw-bold">{{ section.settings.box_2 }}</p>
+                    <p>{{ section.settings.box_content_2 }}</p>
+                  </div>
+                </div>
               </div>
-              <div class="lh-sm">
-                <p class="fw-bold">{{ section.settings.box_1 }}</p>
-                <p>{{ section.settings.box_content }}</p>
-              </div>
-            </div>
-            <div
-              class="position-relative col-3 rounded-5 columna"
-            >
-              <div class="position-absolute top-0 start-50 translate-middle columna-img">
-                <img src="{{ section.settings.image_box_2|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
-              </div>
-              <div class="lh-sm">
-                <p class="fw-bold">{{ section.settings.box_2 }}</p>
-                <p>{{ section.settings.box_content_2 }}</p>
-              </div>
-            </div>
-          </div>
-          <div class="row gap-4 gy-4 box">
-            <div
-              class="position-relative col-3 rounded-5 columna"
-            >
-              <div class="position-absolute top-0 start-50 translate-middle columna-img">
-                <img src="{{ section.settings.image_box_3|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
-              </div>
-              <div class="lh-sm">
-                <p class="fw-bold">{{ section.settings.box_3 }}</p>
-                <p>{{ section.settings.box_content_3 }}</p>
-              </div>
-            </div>
-            <div
-              class="position-relative col-3 rounded-5 columna"
-            >
-              <div class="position-absolute top-0 start-50 translate-middle columna-img">
-                <img src="{{ section.settings.image_box_4|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
-              </div>
-              <div class="lh-sm">
-                <p class="fw-bold">{{ section.settings.box_4 }}</p>
-                <p>{{ section.settings.box_content_4 }}</p>
+              <div class="row gap-4 gy-4 box">
+                <div
+                  class="position-relative col-3 rounded-5 columna"
+                >
+                  <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                    <img src="{{ section.settings.image_box_3|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+                  </div>
+                  <div class="lh-sm">
+                    <p class="fw-bold">{{ section.settings.box_3 }}</p>
+                    <p>{{ section.settings.box_content_3 }}</p>
+                  </div>
+                </div>
+                <div
+                  class="position-relative col-3 rounded-5 columna"
+                >
+                  <div class="position-absolute top-0 start-50 translate-middle columna-img">
+                    <img src="{{ section.settings.image_box_4|img_url:'100x100'}};" class="img-fluid" alt="icon_top">
+                  </div>
+                  <div class="lh-sm">
+                    <p class="fw-bold">{{ section.settings.box_4 }}</p>
+                    <p>{{ section.settings.box_content_4 }}</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-     <div class="imagen-derecha">
+      <div class="imagen-derecha">
         <img src="{{ section.settings.banner | img_url: '600x600' }}" alt="Persona">
       </div>
-</div>
-</div>
+    </div>
   </div>
+</div>
 {% style %}
-  .color_back{
-    background-image: linear-gradient(to right, rgba(255, 255, 255, 1), {{section.settings.background_section}});
-  }
-    .banner-img {
-      width: 100%;
-      height: auto;
-      display: flex;
-      max-width:1441px;
-      min-height: 688px;
-    }
-    .img-fluid {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .imagen-derecha {
-      align-content: center;
-      transform: scale(1.9);
-      right: 18%;
-      position: relative;
-      top: 4%;
-    }
-
-    .titulo{
-      font-size: 44px;
-      line-height: 1.2;
-      word-wrap: break-word;
-      width: 70%;
-      padding-bottom: 15px;
+   .color_back{
+     background-image: linear-gradient(to right, rgba(255, 255, 255, 1), {{section.settings.background_section}});
+   }
+     .banner-img {
+       width: 100%;
+       height: auto;
+       display: flex;
+       max-width:1441px;
+       min-height: 688px;
      }
-    .columna{
-      background-color: {{section.settings.background_box}};
-      padding-top:45px;
-      width: 30%;
-    }
-    .columna-img{
-      width:100px;
-      height:100px;
-    }
-    .contenido {
-      width: 60%;
-      display: contents;
-    }
-    .box{
-      justify-content:flex-start;
-      margin-left: 2%;
-    }
+     .imagen-derecha {
+       align-content: center;
+       transform: scale(1.9);
+       right: 18%;
+       position: relative;
+       top: 4%;
+     }
+     .imagen-derecha img {
+       width: 100%;
+       height: auto; /* Mantiene la proporción */
+       max-height: 500px; /* Ajusta según necesidad */
+       object-fit: contain; /* Evita cortes en la imagen */
+     }
 
-    @media (max-width: 1334px){
-      .conten{
-        width:100%;
-        height:100%
+     .titulo{
+       font-size: 44px;
+       line-height: 1.2;
+       word-wrap: break-word;
+       width: 70%;
+       padding-bottom: 15px;
       }
-      .titulo{
-        font-size: 39px;
-      }
-    }
-    @media (max-width: 1024px) {
-    .banner-img {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .contenido {
-      width: 100%;
-    }
-    .imagen-derecha {
-      width: 60%;
-      max-width: 300px;
-    }
-    .box{
-        justify-content:center;
-        margin-left:0;
-    }
-    .titulo{
-	font-size: 39px;
-	align-content: center !important;
-	padding-left: 15%;
-	width: 85%;
-    }
-  }
-    @media(max-width:994px){
-      .conten{
-        width:100%;
-        height:100%
-      }
-      .titulo{
-        font-size: 34px;
-      }
-      .columna{
-        width: 35%;
-      }
-    }
+     .columna{
+       background-color: {{section.settings.background_box}};
+       padding-top:45px;
+       width: 30%;
+     }
+     .columna-img{
+       width:100px;
+       height:100px;
+     }
+     .contenido {
+       width: 60%;
+       display: contents;
+     }
+     .box{
+       justify-content:flex-start;
+       margin-left: 2%;
+     }
 
-      @media (max-width: 860px) {
-      .conten{
-        width:390px;
-        height:1063px;
-      }
-      .color_back{
-        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), {{section.settings.background_section}});        
-      }
-      .banner-img {
-        width:100%;
-        height:auto;
-        margin-bottom: 50px;
-      }
-      .titulo{
-        font-size: 30px !important;
-        text-align: center !important;
-        width: 100% !important
-        padding-left:0;
-      }
-      .columna{
-        width: 45%;
-      }
+     @media (max-width: 1334px){
+       .conten{
+         width:100%;
+         height:100%
+       }
+       .titulo{
+         font-size: 39px;
+       }
+     }
+     @media (max-width: 1024px) {
+     .banner-img {
+       flex-direction: column;
+       align-items: center;
+       text-align: center;
+     }
+     .contenido {
+       width: 100%;
+     }
+     .imagen-derecha {
+       width: 60%;
+       max-width: 300px;
+     }
+     .box{
+         justify-content:center;
+         margin-left:0;
+     }
+     .titulo{
+  font-size: 39px;
+  align-content: center !important;
+  padding-left: 15%;
+  width: 85%;
+     }
+   }
+     @media(max-width:994px){
+       .conten{
+         width:100%;
+         height:100%
+       }
+       .titulo{
+         font-size: 34px;
+       }
+       .columna{
+         width: 35%;
+       }
+     }
 
-      .box{
-        justify-content:center;
-        margin-left:0;
-      }
-        .imagen-derecha {
-      width: 80%;
-      max-width: 250px;
-      }
-    }
-    @media (max-width: 576px) {
-      .banner-img{
-        width:100%;
-        height:auto;
-        margin-bottom: 50px;
-      }
-      .box{
-        justify-content: center;
-        margin-left:0;
-      }
-      .columna{
-        
-      }
-  }
-    @media (max-width: 375px) {
-      .banner-img{
-        
-      }
-    .imagen-derecha {
-      width: 100%;
-      max-width: 200px;
-    }
-    .columna{
-      width: 47%;
-    }
-      .box{
-        
-      }
+       @media (max-width: 860px) {
+       .conten{
+         width:390px;
+         height:1063px;
+       }
+       .color_back{
+         background-image: linear-gradient(to bottom, rgba(255, 255, 255, 1), {{section.settings.background_section}});
+       }
+       .banner-img {
+         width:100%;
+         height:auto;
+         margin-bottom: 50px;
+       }
+       .titulo{
+         font-size: 30px !important;
+         text-align: center !important;
+         width: 100% !important
+         padding-left:0;
+       }
+       .columna{
+         width: 45%;
+       }
+
+       .box{
+         justify-content:center;
+         margin-left:0;
+       }
+         .imagen-derecha {
+       width: 80%;
+       max-width: 250px;
+       }
+     }
+     @media (max-width: 576px) {
+       .banner-img{
+         width:100%;
+         height:auto;
+         margin-bottom: 50px;
+       }
+       .box{
+         justify-content: center;
+         margin-left:0;
+       }
+       .columna{
+
+       }
+   }
+     @media (max-width: 375px) {
+       .banner-img{
+
+       }
+     .imagen-derecha {
+       width: 100%;
+       max-width: 200px;
+     }
+     .columna{
+       width: 47%;
+     }
+       .box{
+
+       }
 {% endstyle %}
 {% schema %}
 {
