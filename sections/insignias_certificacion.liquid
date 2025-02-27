@@ -3,7 +3,7 @@
     <div
       class="container banner-img"
     >
-      <div class="container" style="padding: 15px;width:50%;">
+      <div class="container flex_padre" style="padding: 15px;width:50%;">
         <div class="contenido text-dark">
           <header class="fw-bold text-start titulo">
             {{ section.settings.header }}
@@ -73,6 +73,10 @@
      
      background-image: linear-gradient(to right, rgba(255, 255, 255, 1), {{section.settings.background_section}});
    }
+  .flex_padre{
+    width:50%
+    padding:15px;
+  }
      .banner-img {
        width: 100%;
        height: auto;
