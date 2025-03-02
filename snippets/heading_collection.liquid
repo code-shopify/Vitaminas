@@ -1,178 +1,57 @@
-<div class="page-head t4s-pr t4s-oh page_bg_img">
- <div class="big-flower"></div>
-  <div class="t4s-container t4s-pr t4s-z-100">
-
-    <nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs">
-      <ul class="breadcrumbs__list">
-        <li class="breadcrumbs__item">
-          <a href="{{ routes.root_url }}" class="t4s-dib">{{ 'general.breadcrumb.home' | t }}</a>
-          <svg class="t4s-icon-arrow" viewBox="0 0 100 100">
-            <path d="M 10,50 L 60,100 L 70,90 L 30,50 L 70,10 L 60,0 Z" transform="translate(100, 100) rotate(180)" />
-          </svg>
-        </li>
-        {%- if current_tags -%}
-          <li class="breadcrumbs__item">
-            {{ collection.title | link_to: collection.url }}
-            <svg class="t4s-icon-arrow" viewBox="0 0 100 100">
-              <path d="M 10,50 L 60,100 L 70,90 L 30,50 L 70,10 L 60,0 Z" transform="translate(100, 100) rotate(180)" />
-            </svg>
-          </li>
-          <li class="breadcrumbs__item" aria-current="page">{{ current_tags | join: ", " }}</li>
-        {%- else -%}
-          <li class="breadcrumbs__item" aria-current="page">{{ collection.title }}</li>
-        {%- endif -%}
-      </ul>
-    </nav>
-
-    <p class="best-sellers-subtitle">+100,000 satisfacciones con su compra</p>
-    <h1 class="best-sellers-title">BEST SELLERS</h1>
-    <p class="best-sellers-desc">Calidad en cada ingrediente, diseñados pensando en ti</p>
-
-    <div class="best-sellers-icons">
-      <div class="icon-circle-text">
-        <div class="icon-wrapper">
-          <span class="icon-bg-circle"></span>
-          <!-- <span class="icon-star"></span>  Descomenta si deseas una estrella -->
-          <img src="{{ 'Capa_1.png' | asset_url }}" alt="Formulado por especialistas en nutrición">
-        </div>
-        <h2 class="icon-title">Formulado por <br>especialistas en nutrición</h2>
-      </div>
-
-      <div class="icon-circle-text">
-        <div class="icon-wrapper">
-          <span class="icon-bg-circle"></span>
-          <!-- <span class="icon-star"></span> -->
-          <img src="{{ 'Capa_2.png' | asset_url }}" alt="Integridad en nuestra fórmula">
-        </div>
-        <h2 class="icon-title">Integridad en<br> nuestra fórmula</h2>
-      </div>
-
-      <div class="icon-circle-text">
-        <div class="icon-wrapper">
-          <span class="icon-bg-circle"></span>
-          <!-- <span class="icon-star"></span> -->
-          <img src="{{ 'header_icon_3.png' | asset_url }}" alt="Hecho en Origen Español">
-        </div>
-        <h2 class="icon-title">Inositol de origen<br> Español</h2>
-      </div>
-
-      <div class="icon-circle-text">
-        <div class="icon-wrapper">
-          <span class="icon-bg-circle"></span>
-          <!-- <span class="icon-star"></span> -->
-          <img src="{{ 'header_icon_4.png' | asset_url }}" alt="Seguimiento y acompañamiento post compra">
-        </div>
-        <h2 class="icon-title">Seguimiento y acompañamiento<br> post compra</h2>
-      </div>
-    </div>
-  </div>
-</div>
-
-{% style %}
-  .big-flower {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 300px; /* ajusta según tu diseño */
-  height: 300px; /* ajusta según tu diseño */
-  background: url("{{ 'header_icon_background.png' | asset_url }}") no-repeat center / contain;
-  pointer-events: none; /* para que no bloquee clics */
-  z-index: 0; /* detrás del contenido */
-}
-.page-head {
-  position: relative; /* para que .big-flower se posicione dentro */
-}
-.best-sellers-subtitle {
-  text-align: center;
-  font-size: 14px;
-  color: #555;
-  margin: 0 0 5px;
-}
-.best-sellers-title {
-  text-align: center;
-  font-size: 32px;
-  font-weight: 700;
-  margin: 0 0 10px;
-}
-.best-sellers-desc {
-  text-align: center;
-  font-size: 16px;
-  color: #555;
-  margin: 0 0 20px;
-}
-.best-sellers-icons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 20px;
-  max-width: 1200px;
-
-}
-.icon-circle-text {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.icon-wrapper {
-  position: relative;
-  width: 50px;
-  height: 50px;
-}
-.icon-bg-circle {
-  position: absolute;
-  top: 7px;
-  left: 9%;
-  width: 40px;
-  height: 50px;
-  background-color: #DEE25D;
-  border-radius: 50%;
-  z-index: 0;
-}
-.icon-wrapper img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 25px;
-  height: auto;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-}
-.icon-star {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  width: 14px;
-  height: 14px;
-  background: url("{{ 'estrella.png' | asset_url }}") no-repeat center / contain;
-  z-index: 2;
-}
-.icon-title {
-  font-size: 12px;
-  font-weight: 700;
-  margin: 0;
-  color: #000;
-}
-.breadcrumbs {
-  margin: 20px auto 0;
-  text-align: center;
-}
-.breadcrumbs__list {
-  list-style: none;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-}
-.breadcrumbs__item {
-  margin: 0 5px;
-}
-.breadcrumbs__item a {
-  text-decoration: none;
-  color: #444;
-}
-.t4s-icon-arrow {
-  width: 10px;
-  height: 10px;
-  margin-left: 5px;
-}
-{% endstyle %}
-
+{%- if se_bks.size > 0 -%}
+<div class="page-head t4s-pr t4s-oh page_bg_img {{ se_stts.content_align }}"> 
+   <div class="t4s-container t4s-pr t4s-z-100">
+      {%- for block in se_bks -%}  
+      	{%- assign bk_stts = block.settings -%}
+        {%- case block.type -%}
+            {%- when '1' -%} 
+              {%- assign general_block = true -%}
+              <h1 data-lh="{{ bk_stts.text_lh_mb }}" data-lh-md="{{ bk_stts.text_lh }}" data-lh-lg="{{ bk_stts.text_lh }}" class="title-head t4s-bl-item t4s-animation-none t4s-text-bl t4s-fnt-fm-{{ bk_stts.fontf }} t4s-font-italic-{{ bk_stts.font_italic }} t4s-uppercase-{{ bk_stts.font_uppercase }} t4s-hidden-mobile-{{ bk_stts.hidden_mobile }} t4s-br-mb-{{ bk_stts.remove_br_tag }} t4s-text-shadow-{{ bk_stts.text_shadow }}" id="b_{{ block.id }}" {%- render 'bk_cus_style', type: 'custom_text', bk_stts: bk_stts, ani_delay: ani_delay -%}>{{ collection.title }}</h1>
+            
+            {%- when '2' -%}
+               {%- liquid
+               if bk_stts.content == blank
+               	continue
+               endif
+               assign general_block = true -%}
+              <div data-lh="{{ bk_stts.text_lh_mb }}" data-lh-md="{{ bk_stts.text_lh }}" data-lh-lg="{{ bk_stts.text_lh }}" class="desc-head t4s-bl-item t4s-animation-none t4s-text-bl t4s-fnt-fm-{{ bk_stts.fontf }} t4s-font-italic-{{ bk_stts.font_italic }} t4s-uppercase-{{ bk_stts.font_uppercase }} t4s-hidden-mobile-{{ bk_stts.hidden_mobile }} t4s-br-mb-{{ bk_stts.remove_br_tag }} t4s-text-shadow-{{ bk_stts.text_shadow }}" id="b_{{ block.id }}" {%- render 'bk_cus_style', type: 'custom_text', bk_stts: bk_stts, ani_delay: ani_delay -%}>{{ block.settings.content }}</div>
+            
+            {%- when '3' -%}
+              <nav class="breadcrumbs" role="navigation" aria-label="breadcrumbs" style="--brc-cl:{{ bk_stts.breadcrumb_color }};--brc_mgb:{{ bk_stts.brc_mgb }}px;"> 
+                  <ul class="breadcrumbs__list">
+                     <li class="breadcrumbs__item">
+                          <a href="{{ routes.root_url }}" class="t4s-dib">{{ 'general.breadcrumb.home' | t }}</a> <svg class="t4s-icon-arrow" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg>
+                      </li>
+                      {%- if current_tags -%}
+                      <li class="breadcrumbs__item">
+                          {{ collection.title | link_to: collection.url }} <svg class="t4s-icon-arrow" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg>
+                      </li>
+                      <li class="breadcrumbs__item" aria-current="page">{{ current_tags | join: ", " }}</li>
+                      {%- else -%} 
+                      <li class="breadcrumbs__item" aria-current="page">{{ collection.title }}</li>
+                      {%- endif -%}
+                  </ul>
+              </nav> 
+			      {%- when '4' -%}
+               {%- liquid
+               assign cl_des = collection.description
+               if cl_des == blank
+               	continue
+               endif
+               assign general_block = true
+              -%}
+              {%- capture view_more -%}
+                  {%- if bk_stts.view_more and bk_stts.viewm_txt != blank and collection.description != blank -%}<a href="#t4s-desc-collection" class="t4s-cl-des-viewm" data-go-id data-no-instant>{{ bk_stts.viewm_txt }}</a>{% endif -%}
+              {%- endcapture -%}
+              <div data-lh="{{ bk_stts.text_lh_mb }}" data-lh-md="{{ bk_stts.text_lh }}" data-lh-lg="{{ bk_stts.text_lh }}" class="desc-head t4s-bl-item t4s-animation-none t4s-text-bl t4s-fnt-fm-{{ bk_stts.fontf }} t4s-font-italic-{{ bk_stts.font_italic }} t4s-uppercase-{{ bk_stts.font_uppercase }} t4s-hidden-mobile-{{ bk_stts.hidden_mobile }} t4s-br-mb-{{ bk_stts.remove_br_tag }} t4s-text-shadow-{{ bk_stts.text_shadow }}{% if bk_stts.design_des == "show_all" %} t4s-rte{% endif %}" id="b_{{ block.id }}" {%- render 'bk_cus_style', type: 'custom_text', bk_stts: bk_stts, ani_delay: ani_delay -%}>
+                  {%- if bk_stts.design_des == "show_all" -%}{{ cl_des }}{%- else -%}{{- cl_des | strip_html | truncatewords: bk_stts.length -}}<br>{{ view_more }}{%- endif -%}
+              </div>
+     
+        {%- endcase -%} 
+      {%- endfor -%}
+   </div>
+</div> 
+{%- endif -%}
+{%- if general_block -%}
+    {{ 'general-block.css' | asset_url | stylesheet_tag }}
+{%- endif -%}

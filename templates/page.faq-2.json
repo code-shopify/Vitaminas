@@ -1,29 +1,5 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "main": {
-      "type": "main-page",
-      "disabled": true,
-      "settings": {
-        "layout": "t4s-se-container",
-        "cl_bg": "",
-        "cl_bg_gradient": "",
-        "mg": "60px,,60px,",
-        "pd": "",
-        "mg_tb": "",
-        "pd_tb": "",
-        "mg_mb": ",,30px,",
-        "pd_mb": ""
-      }
-    },
     "heading": {
       "type": "heading-template",
       "blocks": {
@@ -32,8 +8,8 @@
           "settings": {
             "heading": "FAQ",
             "fontf": "inherit",
-            "text_cl": "#ffffff",
-            "text_fs": 39,
+            "text_cl": "#fff",
+            "text_fs": 20,
             "text_lh": 20,
             "text_fw": 500,
             "text_ls": 0,
@@ -42,7 +18,7 @@
             "text_shadow": false,
             "text_mgb": 15,
             "hidden_mobile": false,
-            "text_fs_mb": 39,
+            "text_fs_mb": 20,
             "text_lh_mb": 20,
             "text_ls_mb": 0,
             "text_mgb_mobile": 10
@@ -50,7 +26,6 @@
         },
         "ceaf2fff-8462-4040-83d5-7f7019d65b8d": {
           "type": "3",
-          "disabled": true,
           "settings": {
             "breadcrumb_color": "#f2f2f2",
             "brc_mgb": 5
@@ -62,8 +37,7 @@
         "ceaf2fff-8462-4040-83d5-7f7019d65b8d"
       ],
       "settings": {
-        "heading_fullwidth": false,
-        "use_specify_image": true,
+        "image": "shopify:\/\/shop_images\/bg-heading.jpg",
         "parallax": false,
         "color": "#000000",
         "overlay": 54,
@@ -77,6 +51,19 @@
         "bg_size": "cover",
         "use_cus_css": false,
         "code_cus_css": ".SectionID {\nbackground-color:red\n}"
+      }
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "layout": "t4s-container-wrap",
+        "cl_bg": "",
+        "cl_bg_gradient": "",
+        "mg": "60px,,60px,",
+        "pd": "",
+        "mg_mb": ",,30px,",
+        "pd_mb": ""
       }
     },
     "sidebar-page": {
@@ -112,72 +99,64 @@
           "type": "accor_item",
           "settings": {
             "icon": "none",
-            "title": "¿Una vez hecho mi pedido cuando se envía?",
-            "content": "<p>Tu pedido se procesa en un plazo de 24 a 48 horas hábiles después de la confirmación de pago. Una vez enviado, recibirás un correo con la información de rastreo.</p>"
+            "title": "Do I need to open an account in order to shop with you?",
+            "content": "<p>No, you don’t need to. You can make purchases and check out as a guest everytime.<\/p><p>However, by setting up an account with us, it will allow you to order without having to enter your details every time you shop with us. You can sign up right now, or you can first start shopping and create your account before you check out at the shopping cart page.<\/p>"
           }
         },
         "1652148258305a99c1-1": {
           "type": "accor_item",
           "settings": {
             "icon": "none",
-            "title": "¿Cuales son los tiempos de entrega que manejan?",
-            "content": "<p>Los tiempos de entrega varían según la ubicación y el método de envío seleccionado. Generalmente, los envíos nacionales tardan entre 2 y 7 días hábiles.</p>"
+            "title": "How do I \/create an account?",
+            "content": "<p>Please click on “Login\/Register” followed by ‘Create An Account’ and fill in your personal particulars.<\/p>"
           }
         },
         "1652148258305a99c1-2": {
           "type": "accor_item",
           "settings": {
             "icon": "none",
-            "title": "¿Una vez hecha mi compra, como puedo hacer seguimiento de mi pedido?",
-            "content": "<p>Recibirás un correo con el número de rastreo y un enlace para seguir tu pedido en tiempo real.</p>"
+            "title": "How do I order?",
+            "content": "<p>Shop for the items you want and add it to your shopping cart. When you have finished, you can proceed to your shopping cart and check out. Check and ensure that all information is correct before confirming your purchases and payment.<\/p>"
           }
         },
         "0c4e86da-f870-4d3c-abce-b988cae18d6c": {
           "type": "accor_item",
           "settings": {
             "icon": "none",
-            "title": "Si me suscribo, ¿Puedo cancelar cuando yo quiera la suscripción?",
-            "content": "<p>Sí, puedes cancelar tu suscripción en cualquier momento desde tu cuenta o contactando a nuestro equipo de atención al cliente.</p>"
+            "title": "How do I pay for my orders?",
+            "content": "<p>We accept payments via Paypal and all major credit and debit cards such as Mastercard, VISA and American Express.<\/p>"
           }
         },
         "cb973ab0-b192-4c97-b7ba-6b8acbf93e5f": {
           "type": "accor_item",
           "settings": {
             "icon": "none",
-            "title": "¿En que otra tienda puedo adquirir los productos?",
-            "content": "<p>Nuestros productos están disponibles exclusivamente en nuestra tienda en línea. Para más información, consulta nuestras redes sociales.</p>"
+            "title": "Can I amend and cancel my order?",
+            "content": "<p>Unfortunately we are unable to cancel an order once it has been placed. This will allow us to pack your orders efficiently and to minimize errors. It is advisable to check your order before placing it.<\/p>"
           }
         },
         "f9fbcebb-a809-4cca-8806-c102d1de1c0b": {
           "type": "accor_item",
           "settings": {
             "icon": "none",
-            "title": "¿Hacen envíos internacionales?",
-            "content": "<p>Por el momento, solo realizamos envíos dentro de [país]. Estamos trabajando para expandir nuestras opciones de envío.</p>"
+            "title": "I have a discount code, how can I use it?",
+            "content": "<p>Unfortunately we are unable to cancel an order once it has been placed. This will allow us to pack your orders efficiently and to minimize errors. It is advisable to check your order before placing it.<\/p>"
           }
         },
         "9aa601e3-a39f-431e-aaa9-de35ae6945fb": {
           "type": "accor_item",
           "settings": {
             "icon": "none",
-            "title": "¿Qué métodos de pago manejean?",
-            "content": "<p>Aceptamos tarjetas de crédito y débito (Visa, Mastercard, American Express), PayPal, Mercado Pago y pagos en efectivo a través de Oxxo.</p>"
+            "title": "How will I know if my order is confirmed?",
+            "content": "<p>After you have placed your order, you will receive an acknowledgement e-mail from us to confirm that your orders have been received. However, do note that orders will only be shipped when your credit card payment has been approved and billing and delivery address is verified. Alternatively, you may check the status of your order in “My Account” if you are a registered user.<\/p>"
           }
         },
         "15f6d610-63c6-4503-8a7f-4a1774dcf9ed": {
           "type": "accor_item",
           "settings": {
             "icon": "none",
-            "title": "¿Qué certificaciones tiene la planta de producción?",
-            "content": "<p>Nuestra planta de producción cuenta con certificaciones como [GMP, ISO, FDA, u otras certificaciones relevantes].</p>"
-          }
-        },
-        "accor_item_Gm9qC8": {
-          "type": "accor_item",
-          "settings": {
-            "icon": "none",
-            "title": "¿Qué quiere decir que los ingredientes son con patente y no con genéricos?",
-            "content": "<p>Los ingredientes patentados han sido investigados y desarrollados con respaldo científico, garantizando su calidad y efectividad en comparación con los genéricos.</p>"
+            "title": "I have problems adding items to my shopping cart?",
+            "content": "<p>You will be able to add the items as long as it is available. There could be an instance where the item is in someone else’s shopping cart hence the status of the items is reflected as “Temporarily Unavailable”.<\/p>"
           }
         }
       },
@@ -189,12 +168,7 @@
         "cb973ab0-b192-4c97-b7ba-6b8acbf93e5f",
         "f9fbcebb-a809-4cca-8806-c102d1de1c0b",
         "9aa601e3-a39f-431e-aaa9-de35ae6945fb",
-        "15f6d610-63c6-4503-8a7f-4a1774dcf9ed",
-        "accor_item_Gm9qC8"
-      ],
-      "custom_css": [
-        ".t4s-tabs.t4s-type-accordion.t4s-text-start.t4s-tabs-enabled.t4s-tabs-accordion-enabled {border: 1px solid;}",
-        ".t4s-tab-wrapper {border-bottom: 0.5px solid;}"
+        "15f6d610-63c6-4503-8a7f-4a1774dcf9ed"
       ],
       "settings": {
         "design_heading": "1",
@@ -204,24 +178,20 @@
         "top_subheading": "",
         "tophead_mb": 30,
         "accor_des": "1",
-        "title_cl": "#222222",
-        "bg_title_cl": "#fff",
-        "title_active_cl": "#222222",
-        "bg_title_active_cl": "#fff",
-        "content_cl": "#222222",
-        "bg_content_cl": "#ffffff",
+        "title_cl": "#222",
+        "bg_title_cl": "#f6f6f8",
+        "title_active_cl": "#000",
+        "bg_title_active_cl": "#f6f6f8",
+        "content_cl": "#878787",
+        "bg_content_cl": "#fff",
         "content_align": "t4s-text-start",
-        "auto_active": true,
-        "layout": "t4s-cus-width",
-        "custom_width": 820,
+        "layout": "t4s-container-wrap",
+        "custom_width": 1000,
         "cl_bg": "",
         "cl_bg_gradient": "",
-        "image_bg": "shopify://shop_images/WhatsApp_Image_2025-02-13_at_12.31.46_PM.jpg",
-        "mg": "80px,px,80px,px",
+        "mg": ",,80px,",
         "pd": "",
-        "mg_tb": "",
-        "pd_tb": "",
-        "mg_mb": "30px,20px,40px,20px",
+        "mg_mb": ",,30px,",
         "pd_mb": "",
         "use_cus_css": false,
         "code_cus_css": ".SectionID {\nbackground-color:red\n}"
@@ -229,8 +199,8 @@
     }
   },
   "order": [
-    "main",
     "heading",
+    "main",
     "sidebar-page",
     "165214825814e830e7"
   ]

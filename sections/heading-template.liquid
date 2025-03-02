@@ -27,7 +27,6 @@
     {%- when 'search' -%}
         {%- render 'heading_search', se_stts: se_stts, se_bks: se_bks -%}
     {%- else -%} 
-        <p>TEst!</p>
         {%- render 'heading_page', se_stts: se_stts, se_bks: se_bks -%}
   {%- endcase -%}
 </div>
@@ -35,7 +34,7 @@
   .t4s-heading-fullwidth_true .t4s-container {
     width: 100%;
     max-width: 100%;
-  },
+  }
 </style>
 {%- schema -%}
   {
@@ -775,4 +774,3 @@
     }
   }
 {% endschema %}
-

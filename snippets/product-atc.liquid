@@ -10,11 +10,11 @@
    <a href="{{ pr_url }}" class="t4s-pr-item-btn t4s-pr-addtocart" rel="nofollow"><span class="t4s-svg-pr-icon"><svg viewBox="0 0 24 24"><use xlink:href="#t4s-icon-link"></use></svg></span><span class="t4s-text-pr">{{ 'products.product_card.read_more' | t }}</span></a>
 
 {%- elsif isGrouped -%}
-   <a href="{{ pr_url }}" class="t4s-pr-item-btn t4s-pr-addtocart" rel="nofollow"><span class="t4s-svg-pr-icon"></span><span class="t4s-text-pr">{{ 'products.product_card.view' | t }}</span></a>
+   <a href="{{ pr_url }}" class="t4s-pr-item-btn t4s-pr-addtocart" rel="nofollow"><span class="t4s-svg-pr-icon"><svg viewBox="0 0 24 24"><use xlink:href="#t4s-icon-atc"></use></svg></span><span class="t4s-text-pr">{{ 'products.product_card.view' | t }}</span></a>
 
 {%- elsif isDefault -%}
    {%- capture capture_btn_atc -%}
-     <a href="{{ pr_url }}"class="t4s-pr-item-btn t4s-pr-addtocart" data-variant-id="{{ current_variant.id }}" data-action-atc rel="nofollow"><span class="t4s-svg-pr-icon"></span><span class="t4s-text-pr">{% if isPreoder %}{{ 'products.product.pre_order' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endif %}</span></a>
+     <a href="{{ pr_url }}"class="t4s-pr-item-btn t4s-pr-addtocart" data-variant-id="{{ current_variant.id }}" data-action-atc rel="nofollow"><span class="t4s-svg-pr-icon"><svg viewBox="0 0 24 24"><use xlink:href="#t4s-icon-atc"></use></svg></span><span class="t4s-text-pr">{% if isPreoder %}{{ 'products.product.pre_order' | t }}{% else %}{{ 'products.product.add_to_cart' | t }}{% endif %}</span></a>
    {%- endcapture -%}
    
    {%- if settings.show_qty -%}
@@ -30,9 +30,9 @@
    
 
 {%- elsif settings.enable_quickshop -%}
-   <a href="{{ pr_url }}"class="t4s-pr-item-btn t4s-pr-addtocart" rel="nofollow" data-action-quickshop data-id="{{ pid }}"><span class="t4s-svg-pr-icon"></span><span class="t4s-text-pr">{{ 'products.product_card.quick_shop' | t }}</span></a>
+   <a href="{{ pr_url }}"class="t4s-pr-item-btn t4s-pr-addtocart" rel="nofollow" data-action-quickshop data-id="{{ pid }}"><span class="t4s-svg-pr-icon"><svg viewBox="0 0 24 24"><use xlink:href="#t4s-icon-atc"></use></svg></span><span class="t4s-text-pr">{{ 'products.product_card.quick_shop' | t }}</span></a>
 
 {%- else -%}
-   <a href="{{ pr_url }}"class="t4s-pr-item-btn t4s-pr-addtocart" rel="nofollow"><span class="t4s-svg-pr-icon"></span><span class="t4s-text-pr">{{ 'products.product_card.select_option' | t }}</span></a>
+   <a href="{{ pr_url }}"class="t4s-pr-item-btn t4s-pr-addtocart" rel="nofollow"><span class="t4s-svg-pr-icon"><svg viewBox="0 0 24 24"><use xlink:href="#t4s-icon-atc"></use></svg></span><span class="t4s-text-pr">{{ 'products.product_card.select_option' | t }}</span></a>
 
 {%- endif -%}
