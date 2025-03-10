@@ -713,7 +713,7 @@
           "cl_hc": "#ffffff",
           "sticky_header": true,
           "scroll_header": true,
-          "bgnavst": "#ffffff",
+          "bgnavst": "#d0e3ff",
           "opnavst": 100,
           "clnavst": "#222222",
           "clnavst_hover": "#56cfe1",
