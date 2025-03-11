@@ -450,7 +450,7 @@
           "announcement-bar-2"
         ],
         "settings": {
-          "show_announcement": true,
+          "show_announcement": false,
           "design": "slider",
           "effect": "1",
           "au_time": 3.5,
@@ -521,7 +521,7 @@
           "top-bar-2"
         ],
         "settings": {
-          "show_topbar": true,
+          "show_topbar": false,
           "topbar_transparent": false,
           "height": 45,
           "fontsize": 12,
